@@ -3,16 +3,16 @@
 namespace Tests\Integration\BAAS;
 
 use Tests\TestCase;
-use WeDevBr\Celcoin\Enums\BAASWebhookEnum;
+use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
 use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
-class CreateRegisterWebhooksTypeTest extends TestCase
+class RegisterWebhooksIntanceEnumTest extends TestCase
 {
 
     /**
      * @return void
      */
-    public function testSuccessCreateEnum()
+    public function testSuccessInstanceCreateRegisterWebhooksWithEnumString()
     {
         $webhook = new RegisterWebhooks([
             'entity' => 'pix-payment-out',
@@ -24,6 +24,6 @@ class CreateRegisterWebhooksTypeTest extends TestCase
             ]
         ]);
 
-        $this->assertTrue($webhook->entity instanceof BAASWebhookEnum);
+        $this->assertTrue($webhook->entity instanceof EntityWebhookBAASEnum);
     }
 }

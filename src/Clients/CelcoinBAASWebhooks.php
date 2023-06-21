@@ -4,8 +4,9 @@ namespace WeDevBr\Celcoin\Clients;
 
 use Illuminate\Support\Facades\Validator;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
-use WeDevBr\Celcoin\Rules\DDA\RegisterWebhooks as DDARegisterWebhooks;
-use WeDevBr\Celcoin\Types\DDA\RegisterWebhooks;
+use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Rules\BAAS\RegisterWebhooks as BAASRegisterWebhooks;
+use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
 /**
  * Class CelcoinWebhooks
@@ -14,17 +15,23 @@ use WeDevBr\Celcoin\Types\DDA\RegisterWebhooks;
  */
 class CelcoinBAASWebhooks extends CelcoinBaseApi
 {
+    const REGISTER_ENDPOINT = '/baas-webhookmanager/v1/webhook/subscription';
+    const LIST_ENDPOINT = '/baas-webhookmanager/v1/webhook/subscription';
+
     public function register(RegisterWebhooks $data)
     {
-        $body = Validator::validate($data->toArray(), DDARegisterWebhooks::rules());
+        $body = Validator::validate($data->toArray(), BAASRegisterWebhooks::rules());
         return $this->post(
-            "/dda-servicewebhook-webservice/v1/webhook/register",
+            self::REGISTER_ENDPOINT,
             $body
         );
     }
 
-    public function list()
+    public function list(EntityWebhookBAASEnum $entity, bool $active)
     {
-        return $this->get("/dda-servicewebhook-webservice/v1/webhook/routes");
+        return $this->get(self::LIST_ENDPOINT, [
+            'Entity' => $entity->value,
+            'Active' => $active ? 'true' : 'false'
+        ]);
     }
 }

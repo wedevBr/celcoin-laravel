@@ -10,11 +10,11 @@ use WeDevBr\Celcoin\Types\BAAS\PixCashOut;
 use WeDevBr\Celcoin\Types\BAAS\RefundPix;
 
 /**
- * Class CelcoinBAASPix
+ * Class CelcoinBAASPIX
  * API de Pix do BaaS possui o modulo de Pix Cash-out, através desse modulo você consegue realizar as seguintes operações:
  * @package WeDevBr\Celcoin
  */
-class CelcoinBAASPix extends CelcoinBaseApi
+class CelcoinBAASPIX extends CelcoinBaseApi
 {
     public function cashOut(PixCashOut $data)
     {
