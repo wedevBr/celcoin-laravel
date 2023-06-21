@@ -19,6 +19,7 @@ use WeDevBr\Celcoin\Types\BAAS\AccountRelease;
 
 /**
  * Class CelcoinBAAS
+ * Banking as a Service, ou BaaS, é uma tecnologia cujo objetivo é permitir que qualquer empresa – independentemente do seu ramo de atuação – comece a oferecer produtos financeiros sem a necessidade de ser um banco ou instituição financeira.
  * @package WeDevBr\Celcoin
  */
 class CelcoinBAAS extends CelcoinBaseApi

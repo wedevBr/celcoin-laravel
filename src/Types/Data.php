@@ -4,6 +4,8 @@ namespace WeDevBr\Celcoin\Types;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Psr\Http\Message\ResponseInterface;
+use ReflectionClass;
+use ReflectionProperty;
 use UnitEnum;
 
 abstract class Data implements Arrayable
@@ -17,8 +19,11 @@ abstract class Data implements Arrayable
     {
         foreach ($data as $key => $val) {
             if (property_exists($this, $key)) {
+                $rp = new ReflectionProperty($this, $key);
+                if (isset($rp) && enum_exists($rp->getType()->getName())) {
+                    $val = call_user_func([$rp->getType()->getName(), 'from'], $val);
+                }
                 $this->$key = $val;
-
                 continue;
             }
 
