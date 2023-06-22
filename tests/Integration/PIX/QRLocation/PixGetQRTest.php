@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\PIX;
+namespace Tests\Integration\PIX\QRLocation;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
