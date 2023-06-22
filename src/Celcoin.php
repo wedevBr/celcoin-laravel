@@ -10,6 +10,7 @@ use WeDevBr\Celcoin\Clients\CelcoinDDAUser;
 use WeDevBr\Celcoin\Clients\CelcoinDDAWebhooks;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
 use WeDevBr\Celcoin\Clients\CelcoinInternationalTopups;
+use WeDevBr\Celcoin\Clients\CelcoinPIXParticipants;
 use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
 
@@ -72,5 +73,14 @@ class Celcoin
     public static function clientPIXQR(?string $mtlsPassphrase = null): CelcoinPIXQR
     {
         return new CelcoinPIXQR($mtlsPassphrase);
+    }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinPIXParticipants
+     */
+    public static function clientPIXParticipants(?string $mtlsPassphrase = null): CelcoinPIXParticipants
+    {
+        return new CelcoinPIXParticipants($mtlsPassphrase);
     }
 }
