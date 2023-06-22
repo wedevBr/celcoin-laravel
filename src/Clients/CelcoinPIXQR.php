@@ -8,7 +8,7 @@ use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\PIX\QRLocationCreate;
 use WeDevBr\Celcoin\Types\PIX\QRLocation;
 
-class CelcoinPIX extends CelcoinBaseApi
+class CelcoinPIXQR extends CelcoinBaseApi
 {
     const CREATE_LOCATION_ENDPOINT = '/pix/v1/location';
     const GET_LOCATION_ENDPOINT = '/pix/v1/location/%d';

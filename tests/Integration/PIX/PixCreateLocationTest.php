@@ -8,8 +8,8 @@ use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\GlobalStubs;
-use WeDevBr\Celcoin\Clients\CelcoinPIX;
 use Tests\TestCase;
+use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
 use WeDevBr\Celcoin\Types\PIX\Merchant;
 use WeDevBr\Celcoin\Types\PIX\QRLocation;
 
@@ -28,75 +28,16 @@ class PixCreateLocationTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinPIX::CREATE_LOCATION_ENDPOINT
+                    CelcoinPIXQR::CREATE_LOCATION_ENDPOINT
                 ) => self::stubSuccess()
             ]
         );
 
         $location = $this->fakeLocationBody();
-        $pix = new CelcoinPIX();
+        $pix = new CelcoinPIXQR();
         $response = $pix->createLocation($location);
 
         $this->assertEquals('CREATED', $response['status']);
-    }
-
-    /**
-     * @throws RequestException
-     * @dataProvider errorDataProvider
-     */
-    final public function testConvertingValueError(Closure $response, string $status): void
-    {
-        Http::fake(
-            [
-                config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(
-                    '%s%s',
-                    config('api_url'),
-                    CelcoinPIX::CREATE_LOCATION_ENDPOINT
-                ) => $response
-            ]
-        );
-
-        $this->expectException(RequestException::class);
-
-        $location = $this->fakeLocationBody();
-
-        $pix = new CelcoinPIX();
-        $response = $pix->createLocation($location);
-
-        $this->assertEquals($status, $response['errorCode']);
-    }
-
-    /**
-     * @return QRLocation
-     */
-    private function fakeLocationBody(): QRLocation
-    {
-        $merchant = new Merchant();
-        $merchant->postalCode = '01201005';
-        $merchant->city = 'Barueri';
-        $merchant->merchantCategoryCode = '0000';
-        $merchant->name = 'Celcoin Pagamentos';
-
-        $location = new QRLocation();
-        $location->merchant = $merchant;
-        $location->type = 'COBV';
-        $location->clientRequestId = '9b26edb7cf254db09f5449c94bf13abc';
-        return $location;
-    }
-
-    /**
-     * @uses https://developers.celcoin.com.br/reference/criar-um-qrcode-location
-     * @return array[]
-     */
-    private function errorDataProvider(): array
-    {
-        return [
-            [fn() => self::stubConvertingError(), '400'],
-            [fn() => self::stubValueCannotBeNull(), 'CR001'],
-            // Status 500 - Internal server error return empty array
-            [fn() => [], ''],
-        ];
     }
 
     /**
@@ -121,6 +62,65 @@ class PixCreateLocationTest extends TestCase
             ],
             Response::HTTP_OK
         );
+    }
+
+    /**
+     * @return QRLocation
+     */
+    private function fakeLocationBody(): QRLocation
+    {
+        $merchant = new Merchant();
+        $merchant->postalCode = '01201005';
+        $merchant->city = 'Barueri';
+        $merchant->merchantCategoryCode = '0000';
+        $merchant->name = 'Celcoin Pagamentos';
+
+        $location = new QRLocation();
+        $location->merchant = $merchant;
+        $location->type = 'COBV';
+        $location->clientRequestId = '9b26edb7cf254db09f5449c94bf13abc';
+        return $location;
+    }
+
+    /**
+     * @throws RequestException
+     * @dataProvider errorDataProvider
+     */
+    final public function testConvertingValueError(Closure $response, string $status): void
+    {
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                sprintf(
+                    '%s%s',
+                    config('api_url'),
+                    CelcoinPIXQR::CREATE_LOCATION_ENDPOINT
+                ) => $response
+            ]
+        );
+
+        $this->expectException(RequestException::class);
+
+        $location = $this->fakeLocationBody();
+
+        $pix = new CelcoinPIXQR();
+        $response = $pix->createLocation($location);
+
+        $this->assertEquals($status, $response['errorCode']);
+    }
+
+    /**
+     * @uses https://developers.celcoin.com.br/reference/criar-um-qrcode-location
+     * @return array[]
+     */
+    private function errorDataProvider(): array
+    {
+        return [
+            [fn() => self::stubConvertingError(), '400'],
+            [fn() => self::stubValueCannotBeNull(), 'CR001'],
+            // Status 500 - Internal server error return empty array
+            [fn() => [], ''],
+        ];
     }
 
     /**

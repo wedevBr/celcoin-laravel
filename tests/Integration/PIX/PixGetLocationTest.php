@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\GlobalStubs;
 use Tests\TestCase;
-use WeDevBr\Celcoin\Clients\CelcoinPIX;
+use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
 
 class PixGetLocationTest extends TestCase
 {
@@ -21,7 +21,7 @@ class PixGetLocationTest extends TestCase
     final public function testSuccess(): void
     {
         $locationId = 12731081;
-        $url = sprintf(CelcoinPIX::GET_LOCATION_ENDPOINT, $locationId);
+        $url = sprintf(CelcoinPIXQR::GET_LOCATION_ENDPOINT, $locationId);
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
@@ -33,7 +33,7 @@ class PixGetLocationTest extends TestCase
             ]
         );
 
-        $pix = new CelcoinPIX();
+        $pix = new CelcoinPIXQR();
         $response = $pix->getLocation($locationId);
 
         $this->assertEquals('CREATED', $response['status']);
@@ -74,7 +74,7 @@ class PixGetLocationTest extends TestCase
     final public function testErrors(Closure $response, mixed $status): void
     {
         $locationId = 12731081;
-        $url = sprintf(CelcoinPIX::GET_LOCATION_ENDPOINT, $locationId);
+        $url = sprintf(CelcoinPIXQR::GET_LOCATION_ENDPOINT, $locationId);
 
         Http::fake(
             [
@@ -87,7 +87,7 @@ class PixGetLocationTest extends TestCase
             ]
         );
 
-        $pix = new CelcoinPIX();
+        $pix = new CelcoinPIXQR();
         $response = $pix->getLocation($locationId);
 
         $this->assertEquals($status, $response['errorCode']);
