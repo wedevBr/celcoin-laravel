@@ -12,6 +12,7 @@ class CelcoinPIXQR extends CelcoinBaseApi
 {
     const CREATE_LOCATION_ENDPOINT = '/pix/v1/location';
     const GET_LOCATION_ENDPOINT = '/pix/v1/location/%d';
+    const GET_QR_LOCATION_ENDPOINT = '/pix/v1/location/%d/base64';
 
     /**
      * @param QRLocation $merchant
@@ -36,6 +37,18 @@ class CelcoinPIXQR extends CelcoinBaseApi
     {
         return $this->get(
             sprintf(self::GET_LOCATION_ENDPOINT, $locationId)
+        );
+    }
+
+    /**
+     * @param int $locationId
+     * @return array|null
+     * @throws RequestException
+     */
+    final public function getQR(int $locationId): ?array
+    {
+        return $this->get(
+            sprintf(self::GET_QR_LOCATION_ENDPOINT, $locationId)
         );
     }
 }
