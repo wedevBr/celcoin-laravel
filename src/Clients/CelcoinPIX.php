@@ -11,6 +11,7 @@ use WeDevBr\Celcoin\Types\PIX\QRLocation;
 class CelcoinPIX extends CelcoinBaseApi
 {
     const CREATE_LOCATION_ENDPOINT = '/pix/v1/location';
+    const GET_LOCATION_ENDPOINT = '/pix/v1/location/%d';
 
     /**
      * @param QRLocation $merchant
@@ -23,6 +24,18 @@ class CelcoinPIX extends CelcoinBaseApi
         return $this->post(
             self::CREATE_LOCATION_ENDPOINT,
             $body
+        );
+    }
+
+    /**
+     * @param int $locationId
+     * @return array|null
+     * @throws RequestException
+     */
+    final public function getLocation(int $locationId): ?array
+    {
+        return $this->get(
+            sprintf(self::GET_LOCATION_ENDPOINT, $locationId)
         );
     }
 }
