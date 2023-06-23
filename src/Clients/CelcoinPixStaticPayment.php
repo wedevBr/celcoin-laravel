@@ -6,6 +6,7 @@ use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Validator;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\PIX\QRStaticPaymentCreate;
+use WeDevBr\Celcoin\Rules\PIX\QRStaticPaymentGetData;
 use WeDevBr\Celcoin\Rules\PIX\QRStaticPaymentGetQR;
 use WeDevBr\Celcoin\Types\PIX\QRStaticPayment;
 
@@ -14,6 +15,7 @@ class CelcoinPixStaticPayment extends CelcoinBaseApi
     const CREATE_STATIC_PAYMENT_ENDPOINT = '/pix/v1/brcode/static';
     const GET_STATIC_PAYMENT_ENDPOINT = '/pix/v1/brcode/static/%d';
     const GET_STATIC_PAYMENT_QR_ENDPOINT = '/pix/v1/brcode/static/%d/base64';
+    const GET_STATIC_PAYMENT_DATA_ENDPOINT = '/pix/v1/brcode/static';
 
     /**
      * @throws RequestException
@@ -52,6 +54,24 @@ class CelcoinPixStaticPayment extends CelcoinBaseApi
         $url = sprintf(self::GET_STATIC_PAYMENT_QR_ENDPOINT, $transactionId);
         return $this->get(
             sprintf('%s?%s', $url, http_build_query($params))
+        );
+    }
+
+    /**
+     * @param array $params
+     * @return array|null
+     * @throws RequestException
+     */
+    final public function getStaticPaymentData(array $params): ?array
+    {
+        $params = Validator::validate($params, QRStaticPaymentGetData::rules());
+
+        return $this->get(
+            sprintf(
+                '%s?%s',
+                self::GET_STATIC_PAYMENT_DATA_ENDPOINT,
+                http_build_query($params)
+            )
         );
     }
 }
