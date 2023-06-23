@@ -11,6 +11,7 @@ use WeDevBr\Celcoin\Types\PIX\QRStaticPayment;
 class CelcoinPixStaticPayment extends CelcoinBaseApi
 {
     const CREATE_STATIC_PAYMENT_ENDPOINT = '/pix/v1/brcode/static';
+    const GET_STATIC_PAYMENT_ENDPOINT = '/pix/v1/brcode/static/%d';
 
     /**
      * @throws RequestException
@@ -21,6 +22,18 @@ class CelcoinPixStaticPayment extends CelcoinBaseApi
         return $this->post(
             self::CREATE_STATIC_PAYMENT_ENDPOINT,
             $body
+        );
+    }
+
+    /**
+     * @param int $transactionId
+     * @return array|null
+     * @throws RequestException
+     */
+    final public function getStaticPix(int $transactionId): ?array
+    {
+        return $this->get(
+            sprintf(self::GET_STATIC_PAYMENT_ENDPOINT, $transactionId)
         );
     }
 }
