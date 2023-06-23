@@ -36,7 +36,7 @@ class PixGetQRTest extends TestCase
         $pix = new CelcoinPIXQR();
         $response = $pix->getQR($locationId);
 
-        $this->assertEquals(0, $response['status']);
+        $this->assertEquals(200, $response['status']);
         $this->assertArrayHasKey('base64image', $response);
     }
 
@@ -47,7 +47,7 @@ class PixGetQRTest extends TestCase
     {
         return Http::response(
             [
-                "status" => 0,
+                "status" => 200,
                 "base64image" => "iVBORw0KGgoAAAANSUhEUgAAAJMAAACTAQMAAACwK7lWAAAABlBMVEX///8AAABVwtN+AAACA0lEQVRIieWWMY7jMAxFaahQJ19AgK6hTleSL+DYF7CvpE7XEKALOJ0LwZzvJLuzW41YjxAg8QtAiOTnp4l+2xmZF1IXOT4pBr4kzJDaQhm5MtfL41HCQl0CH6EZKrPnTcj2Uy1ecXaLnK25DEykyUjZK4/o2xws/Zfbzwz123z9fL5r2sVwhkzk3Zrc8t26LnZXPTnmNuTK2UYJG1KLGt/uCnYmSxJmgkLtDyoRqvFlFjHdpoxgNOX6zIUkjDzv7BaNPNDzYiTMeGt8vUIbklqzuiRsON3l1eYB7COVKGKpPRJzUpeua3prrZcRfp40ngU12KgeEjZwm061Z7d5PMkY+VvjMzWj8U/dJMxQG1G5ZAe2ht416Gb3TGC2bPQQDi8ShlmcMBm6UChGvzXezbTbdImh0A2KiOHuU7bT6fZkKbzr1828uzRDa1Mqs3Yihm4P530jKA4OOotYZqiMM0xX8dmMhCEYbkGBF/T8r+77GHz30BbBNn3fhSRsTM1glLFqEqOEUcIMkjgxl7f/PXMTMvs4Yfbw3bpyXWQMtoeeI1J78Ce3TvZKhZ+MvtFMH1/rZNgze0blUIP6x3d7GfbbCpXBBTUAHyKGnZwgtzvYg4sRMjhQvHVaRryGCNnO9QgQqftHa32M1M4wodfbhH6v1l527/Nw77cpq41alLDfdb4A8PuP9RyscmkAAAAASUVORK5CYII=",
             ],
             Response::HTTP_OK

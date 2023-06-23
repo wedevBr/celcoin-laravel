@@ -11,7 +11,7 @@ use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXParticipants;
 
-class PixParticipantsLIstTest extends TestCase
+class PixParticipantsListTest extends TestCase
 {
 
     /**
