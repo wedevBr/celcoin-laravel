@@ -11,7 +11,7 @@ class DICTVerify
     {
         return [
             'keys' => ['required', 'array'],
-            'keys.key' => ['required'],
+            'keys.*.key' => ['required'],
         ];
     }
 }
