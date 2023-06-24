@@ -5,6 +5,7 @@ namespace Tests\Integration\PIX\DICT;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Tests\GlobalStubs;
 use Tests\TestCase;
@@ -204,6 +205,24 @@ class PixDICTSearchTest extends TestCase
 
         $pixDict = new CelcoinPIXDICT();
         $pixDict->searchDICT($this->fakeDictBody());
+    }
+
+    /**
+     * @throws RequestException
+     */
+    public function testVerifyDictValidationError()
+    {
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                CelcoinPIXDICT::POST_SEARCH_DICT => self::stubSuccess()
+            ]
+        );
+
+        $this->expectException(ValidationException::class);
+
+        $pixDict = new CelcoinPIXDICT();
+        $pixDict->verifyDICT(new DICT([]));
     }
 
     private function fakeDictBody(): DICT
