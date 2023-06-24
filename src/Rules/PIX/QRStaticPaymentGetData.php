@@ -10,8 +10,8 @@ class QRStaticPaymentGetData
     public static function rules(): array
     {
         return [
-            'transactionIdBrCode' => ['int', 'required_without:transactionIdentification'],
-            'transactionIdentification' => ['string', 'required_without:transactionIdBrCode'],
+            'transactionIdBrcode' => ['int', 'required_without:transactionIdentification'],
+            'transactionIdentification' => ['string', 'required_without:transactionIdBrcode'],
         ];
     }
 }
