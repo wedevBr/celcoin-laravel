@@ -2,12 +2,14 @@
 
 namespace WeDevBr\Celcoin\Rules\BAAS;
 
+use WeDevBr\Celcoin\Enums\ClientFinalityEnum;
+
 class TEDTransfer
 {
     public static function rules()
     {
         return [
-            'amount' => ['required', 'numeric'],
+            'amount' => ['required', 'regex:/\d{1,10}\.\d{2}/'],
             'clientCode' => ['required', 'string'],
             'debitParty' => ['required', 'array'],
             'debitParty.account' => ['required', 'string'],
@@ -20,7 +22,7 @@ class TEDTransfer
             'creditParty.accountType' => ['required', 'string'],
             'creditParty.personType' => ['required', 'string'],
             'clientFinality' => ['required', 'string'],
-            'description' => ['nullable', 'string'],
+            'description' => ['some', 'required_if:clientFinality,' . ClientFinalityEnum::OTHERS->value, 'string'],
         ];
     }
 }

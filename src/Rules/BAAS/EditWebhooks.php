@@ -5,7 +5,7 @@ namespace WeDevBr\Celcoin\Rules\BAAS;
 use Illuminate\Validation\Rule;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
 
-class RegisterWebhooks
+class EditWebhooks
 {
     public static function rules()
     {
@@ -16,6 +16,7 @@ class RegisterWebhooks
             "auth.login" => ['nullable', 'string'],
             "auth.pwd" => ['nullable', 'string'],
             "auth.type" => ['nullable', 'string'],
+            "active" => ['required', 'boolean'],
         ];
     }
-}
+}đ

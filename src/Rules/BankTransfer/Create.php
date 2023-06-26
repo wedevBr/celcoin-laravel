@@ -15,7 +15,7 @@ class Create
             "branchCode" => ['nullable', 'string'],
             "institutionCode" => ['nullable', 'numeric'],
             "name" => ['nullable', 'string'],
-            "value" => ['required', 'numeric'],
+            "value" => ['required', 'regex:/\d{1,10}\.\d{2}/'],
             "bankAccountType" => ['nullable', 'in:CC,CP'],
             "institutionIspb" => ['required', 'string']
         ];

@@ -7,7 +7,7 @@ class PixCashOut
     public static function rules()
     {
         return [
-            'amount' => ['required', 'numeric'],
+            'amount' => ['required', 'regex:/\d{1,10}\.\d{2}/'],
             'clientCode' => ['required', 'string'],
             'transactionIdentification' => ['nullable', 'string'],
             'endToEndId' => ['nullable', 'string'],

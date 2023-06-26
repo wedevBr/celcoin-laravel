@@ -14,7 +14,7 @@ class Deposit
             'transactionIdentifier' => ['required', 'string'],
             'payerName' => ['required', 'string'],
             'namePartner' => ['required', 'in:TECBAN_BANCO24H'],
-            'value' => ['required', 'string'],
+            'value' => ['required', 'regex:/\d{1,10}\.\d{2}/'],
         ];
     }
 }

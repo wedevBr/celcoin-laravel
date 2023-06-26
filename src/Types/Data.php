@@ -20,7 +20,7 @@ abstract class Data implements Arrayable
         foreach ($data as $key => $val) {
             if (property_exists($this, $key)) {
                 $rp = new ReflectionProperty($this, $key);
-                if (isset($rp) && enum_exists($rp->getType()->getName())) {
+                if (isset($rp) && is_string($val) && enum_exists($rp->getType()->getName())) {
                     $val = call_user_func([$rp->getType()->getName(), 'from'], $val);
                 }
                 $this->$key = $val;

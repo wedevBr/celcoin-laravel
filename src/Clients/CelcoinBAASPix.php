@@ -16,11 +16,22 @@ use WeDevBr\Celcoin\Types\BAAS\RefundPix;
  */
 class CelcoinBAASPIX extends CelcoinBaseApi
 {
+
+    const CASH_OUT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment';
+    const GET_PARTICIPANT_ENDPOINT = '/celcoin-baas-wallet-transactions-webservice/v1/pix/participant';
+    const STATUS_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment/status';
+    const SEARCH_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/external/%s';
+    const REGISTER_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry';
+    const GET_ALL_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
+    const DELETE_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
+    const REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse';
+    const STATUS_REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse';
+
     public function cashOut(PixCashOut $data)
     {
         $body = Validator::validate($data->toArray(), BAASPixCashOut::rules());
         return $this->post(
-            "/baas-wallet-transactions-webservice/v1/pix/payment",
+            self::CASH_OUT_ENDPOINT,
             $body
         );
     }
@@ -28,7 +39,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     public function getParticipant(?string $ISPB, ?string $name)
     {
         return $this->get(
-            "/celcoin-baas-wallet-transactions-webservice/v1/pix/participant",
+            self::GET_PARTICIPANT_ENDPOINT,
             [
                 'ISPB' => $ISPB,
                 'Name' => $name,
@@ -39,7 +50,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     public function statusPix(?string $id, ?string $clientCode, ?string $endToEndId)
     {
         return $this->get(
-            "/baas-wallet-transactions-webservice/v1/pix/payment/status",
+            self::STATUS_PIX_ENDPOINT,
             [
                 'id' => $id,
                 'clientCode' => $clientCode,
@@ -51,7 +62,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     public function searchPixKey(string $account, string $key)
     {
         return $this->get(
-            "/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/external/{$account}",
+            sprintf(self::SEARCH_PIX_KEY_ENDPOINT, $account),
             [
                 'key' => $key,
             ]
@@ -61,7 +72,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     public function registerPixKey(string $account, string $keyType, string $key)
     {
         return $this->post(
-            "/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry",
+            self::REGISTER_PIX_KEY_ENDPOINT,
             [
                 'account' => $account,
                 'keyType' => $keyType,
@@ -72,13 +83,13 @@ class CelcoinBAASPIX extends CelcoinBaseApi
 
     public function getAllPixKey(string $account)
     {
-        return $this->post("/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/{$account}");
+        return $this->post(sprintf(self::GET_ALL_PIX_KEY_ENDPOINT, $account));
     }
 
     public function deletePixKey(string $account, string $key)
     {
         return $this->delete(
-            "/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/{$key}",
+            sprintf(self::DELETE_PIX_KEY_ENDPOINT, $key),
             [
                 'account' => $account,
             ]
@@ -89,7 +100,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), BAASRefundPix::rules());
         return $this->post(
-            "/baas-wallet-transactions-webservice/v1/pix/reverse",
+            self::REFUND_PIX_ENDPOINT,
             $body
         );
     }
@@ -97,7 +108,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     public function statusRefundPix(string $id, string $clientCode, string $returnIdentification)
     {
         return $this->get(
-            "/baas-wallet-transactions-webservice/v1/pix/reverse",
+            self::STATUS_REFUND_PIX_ENDPOINT,
             [
                 'id' => $id,
                 'clientCode' => $clientCode,

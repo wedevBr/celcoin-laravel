@@ -2,6 +2,7 @@
 
 namespace WeDevBr\Celcoin\Types\BAAS;
 
+use WeDevBr\Celcoin\Enums\ReasonRefundPixEnum;
 use WeDevBr\Celcoin\Types\Data;
 
 class RefundPix extends Data
@@ -10,7 +11,7 @@ class RefundPix extends Data
     public ?string $endToEndId;
     public string $clientCode;
     public float $amount;
-    public string $reason;
+    public ReasonRefundPixEnum $reason;
     public ?string $reversalDescription;
 
     public function __construct(array $data = [])
