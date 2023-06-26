@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Validator;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\BAAS\PixCashOut as BAASPixCashOut;
 use WeDevBr\Celcoin\Rules\BAAS\RefundPix as BAASRefundPix;
+use WeDevBr\Celcoin\Rules\BAAS\RegisterPixKey as BAASRegisterPixKey;
 use WeDevBr\Celcoin\Types\BAAS\PixCashOut;
 use WeDevBr\Celcoin\Types\BAAS\RefundPix;
+use WeDevBr\Celcoin\Types\BAAS\RegisterPixKey;
 
 /**
  * Class CelcoinBAASPIX
@@ -69,15 +71,12 @@ class CelcoinBAASPIX extends CelcoinBaseApi
         );
     }
 
-    public function registerPixKey(string $account, string $keyType, string $key)
+    public function registerPixKey(RegisterPixKey $data)
     {
+        $body = Validator::validate($data->toArray(), BAASRegisterPixKey::rules());
         return $this->post(
             self::REGISTER_PIX_KEY_ENDPOINT,
-            [
-                'account' => $account,
-                'keyType' => $keyType,
-                'key' => $key,
-            ]
+            $body
         );
     }
 
@@ -105,7 +104,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
         );
     }
 
-    public function statusRefundPix(string $id, string $clientCode, string $returnIdentification)
+    public function statusRefundPix(?string $id = null, ?string $clientCode = null, ?string $returnIdentification = null)
     {
         return $this->get(
             self::STATUS_REFUND_PIX_ENDPOINT,
