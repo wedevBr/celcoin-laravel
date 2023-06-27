@@ -9,7 +9,6 @@ use WeDevBr\Celcoin\Clients\CelcoinDDAInvoice;
 use WeDevBr\Celcoin\Clients\CelcoinDDAUser;
 use WeDevBr\Celcoin\Clients\CelcoinDDAWebhooks;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
-use WeDevBr\Celcoin\Clients\CelcoinInternationalTopups;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDICT;
@@ -90,15 +89,6 @@ class Celcoin
 
     /**
      * @param string|null $mtlsPassphrase
-     * @return CelcoinInternationalTopups
-     */
-    public static function clientInternationalTopups(?string $mtlsPassphrase): CelcoinInternationalTopups
-    {
-        return new CelcoinInternationalTopups($mtlsPassphrase);
-    }
-
-    /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinTopups
      */
     public static function clientTopups(?string $mtlsPassphrase): CelcoinTopups
@@ -126,7 +116,7 @@ class Celcoin
 
     /**
      * @param string|null $mtlsPassphrase
-     * @return CelcoinPIXDICT()
+     * @return CelcoinPIXDICT
      */
     public static function clientPIXDICT(?string $mtlsPassphrase = null): CelcoinPIXDICT
     {
@@ -135,7 +125,7 @@ class Celcoin
 
     /**
      * @param string|null $mtlsPassphrase
-     * @return CelcoinPixStaticPayment()
+     * @return CelcoinPixStaticPayment
      */
     public static function clientPixStaticPayment(?string $mtlsPassphrase = null): CelcoinPixStaticPayment
     {
@@ -144,7 +134,7 @@ class Celcoin
 
     /**
      * @param string|null $mtlsPassphrase
-     * @return CelcoinPIXCOBV()
+     * @return CelcoinPIXCOBV
      */
     public static function clientPixCOBV(?string $mtlsPassphrase = null): CelcoinPIXCOBV
     {
@@ -153,7 +143,7 @@ class Celcoin
 
     /**
      * @param string|null $mtlsPassphrase
-     * @return CelcoinPIXCOB()
+     * @return CelcoinPIXCOB
      */
     public static function clientPixCOB(?string $mtlsPassphrase = null): CelcoinPIXCOB
     {
