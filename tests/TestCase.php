@@ -34,6 +34,7 @@ abstract class TestCase extends BaseTestCase
         $dotenv = Dotenv::createImmutable($root);
         $dotenv->safeLoad();
         $app['config']->set('laradumps', require(__DIR__ . '../../config/laradumps.php'));
+        $app['config']->set('cache.default', env('CACHE_DRIVER', 'file'));
         $app['config']->set('celcoin.client_id', env('CELCOIN_CLIENT_ID', null));
         $app['config']->set('celcoin.client_secret', env('CELCOIN_CLIENT_SECRET', null));
         $app['config']->set('celcoin.mtls_cert_path', env('CELCOIN_MTLS_CERT_PATH', null));

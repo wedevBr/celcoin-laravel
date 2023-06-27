@@ -16,14 +16,7 @@ class RemoveWebhooksTest extends TestCase
     {
         Http::fake(
             [
-                config('celcoin.login_url') => Http::response(
-                    [
-                        'access_token' => 'fake token',
-                        'expires_in' => 2400,
-                        'token_type' => 'bearer'
-                    ],
-                    Response::HTTP_OK
-                ),
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
                     '%s%s',
                     config('api_url'),

@@ -2,6 +2,7 @@
 
 namespace WeDevBr\Celcoin\Types\BAAS;
 
+use WeDevBr\Celcoin\Enums\CreditPartyAccountTypeEnum;
 use WeDevBr\Celcoin\Types\Data;
 
 class CreditParty extends Data
@@ -13,7 +14,7 @@ class CreditParty extends Data
     public string $branch;
     public string $taxId;
     public string $name;
-    public string $accountType;
+    public CreditPartyAccountTypeEnum $accountType;
 
     public function __construct(array $data = [])
     {

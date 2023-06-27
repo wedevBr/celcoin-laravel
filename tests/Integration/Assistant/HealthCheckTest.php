@@ -16,7 +16,7 @@ class HealthCheckTest extends TestCase
     public function testSuccessHealthCheckTest()
     {
         $assistant = new CelcoinAssistant();
-        $response = $assistant->healthCheck(HealthCheckTypeEnum::CONSULTA_DADOS_CONTA, HealthCheckPeriodEnum::LAST_24_HOURS);
+        $response = $assistant->healthCheck(HealthCheckTypeEnum::ACCOUNT_DATA_QUERY, HealthCheckPeriodEnum::LAST_24_HOURS);
 
         $this->assertNotEmpty($response);
     }
