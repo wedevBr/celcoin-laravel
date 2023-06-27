@@ -25,47 +25,83 @@ use WeDevBr\Celcoin\Clients\CelcoinTopups;
 class Celcoin
 {
 
-    public static function clientAssistant(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinAssistant
+     */
+    public static function clientAssistant(?string $mtlsPassphrase): CelcoinAssistant
     {
         return new CelcoinAssistant($mtlsPassphrase);
     }
 
-    public static function clientBankTransfer(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinBankTransfer
+     */
+    public static function clientBankTransfer(?string $mtlsPassphrase): CelcoinBankTransfer
     {
         return new CelcoinBankTransfer($mtlsPassphrase);
     }
 
-    public static function clientBillPayment(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinBillPayment
+     */
+    public static function clientBillPayment(?string $mtlsPassphrase): CelcoinBillPayment
     {
         return new CelcoinBillPayment($mtlsPassphrase);
     }
 
-    public static function clientDDAInvoice(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinDDAInvoice
+     */
+    public static function clientDDAInvoice(?string $mtlsPassphrase): CelcoinDDAInvoice
     {
         return new CelcoinDDAInvoice($mtlsPassphrase);
     }
 
-    public static function clientDDAUser(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinDDAUser
+     */
+    public static function clientDDAUser(?string $mtlsPassphrase): CelcoinDDAUser
     {
         return new CelcoinDDAUser($mtlsPassphrase);
     }
 
-    public static function clientDDAWebhooks(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinDDAWebhooks
+     */
+    public static function clientDDAWebhooks(?string $mtlsPassphrase): CelcoinDDAWebhooks
     {
         return new CelcoinDDAWebhooks($mtlsPassphrase);
     }
 
-    public static function clientElectronicTransactions(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinElectronicTransactions
+     */
+    public static function clientElectronicTransactions(?string $mtlsPassphrase): CelcoinElectronicTransactions
     {
         return new CelcoinElectronicTransactions($mtlsPassphrase);
     }
 
-    public static function clientInternationalTopups(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinInternationalTopups
+     */
+    public static function clientInternationalTopups(?string $mtlsPassphrase): CelcoinInternationalTopups
     {
         return new CelcoinInternationalTopups($mtlsPassphrase);
     }
 
-    public static function clientTopups(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinTopups
+     */
+    public static function clientTopups(?string $mtlsPassphrase): CelcoinTopups
     {
         return new CelcoinTopups($mtlsPassphrase);
     }
