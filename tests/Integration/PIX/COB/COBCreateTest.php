@@ -18,10 +18,11 @@ use WeDevBr\Celcoin\Types\PIX\Debtor;
 
 class COBCreateTest extends TestCase
 {
+
     /**
      * @throws RequestException
      */
-    final public function testCreateCOB(): void
+    final public function testCreateCob(): void
     {
         Http::fake(
             [
@@ -113,9 +114,40 @@ class COBCreateTest extends TestCase
 
     /**
      * @throws RequestException
+     */
+    final public function testCreateCobWithCobvLocation(): void
+    {
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                CelcoinPIXCOB::CREATE_COB_PIX_URL => self::stubCOBVError(),
+            ]
+        );
+        $this->expectException(RequestException::class);
+
+        $pixCOB = new CelcoinPIXCOB();
+        $result = $pixCOB->createCOBPIX(self::fakeCOBBody());
+
+        $this->assertEquals('PBE410', $result['errorCode']);
+        $this->assertEquals("Can't create a new PixImmediateCollection when the location type is COBV", $result['message']);
+
+    }
+
+    private static function stubCOBVError(): PromiseInterface
+    {
+        return Http::response([
+            "message" => "Can't create a new PixImmediateCollection when the location type is COBV",
+            "errorCode" => "PBE410"
+        ],
+            Response::HTTP_BAD_REQUEST
+        );
+    }
+
+    /**
+     * @throws RequestException
      * @dataProvider errorDataProvider
      */
-    final public function testCreateCOBWithoutAmount(string $unsetValue, array $validation): void
+    final public function testCreateCobWithoutAmount(string $unsetValue, array $validation): void
     {
         Http::fake(
             [
