@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.6/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          colors="true"
->
+         printerClass="PHPUnit\Util\TestDox\CliTestDoxPrinter">
     <testsuites>
         <testsuite name="Integration">
             <directory suffix="Test.php">./tests/Integration</directory>
@@ -11,7 +11,7 @@
     </testsuites>
     <coverage processUncoveredFiles="true">
         <include>
-            <directory suffix=".php">./app</directory>
+            <directory suffix=".php">src</directory>
         </include>
     </coverage>
     <!-- <php>

@@ -3,6 +3,7 @@
 namespace WeDevBr\Celcoin\Common;
 
 use Illuminate\Http\Client\PendingRequest;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use WeDevBr\Celcoin\Auth\Auth;
