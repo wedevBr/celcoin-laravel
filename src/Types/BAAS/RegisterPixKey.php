@@ -2,18 +2,14 @@
 
 namespace WeDevBr\Celcoin\Types\BAAS;
 
+use WeDevBr\Celcoin\Enums\PixKeyTypeEnum;
 use WeDevBr\Celcoin\Types\Data;
 
-class CreditParty extends Data
+class RegisterPixKey extends Data
 {
-
-    public string $bank;
-    public ?string $key;
     public string $account;
-    public string $branch;
-    public string $taxId;
-    public string $name;
-    public string $accountType;
+    public PixKeyTypeEnum $keyType;
+    public ?string $key;
 
     public function __construct(array $data = [])
     {

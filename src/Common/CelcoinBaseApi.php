@@ -49,7 +49,7 @@ class CelcoinBaseApi
             $this->token = Cache::get($this::CACHE_NAME);
         } else {
             $this->token = Auth::login()->getToken();
-            Cache::put($this::CACHE_NAME, $this->token, $this->token['expires_in'] ?? 2400);
+            Cache::put($this::CACHE_NAME, $this->token, 2400);
         }
         return $this->token;
     }

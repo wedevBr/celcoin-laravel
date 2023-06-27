@@ -8,15 +8,15 @@ class PixCashOut extends Data
 {
     public float $amount;
     public string $clientCode;
-    public string $transactionIdentification;
-    public string $endToEndId;
-    public string $initiationType;
-    public string $paymentType;
-    public string $urgency;
-    public string $transactionType;
-    public DebitParty $debitParty;
-    public CreditParty $creditParty;
-    public string $remittanceInformation;
+    public ?string $transactionIdentification;
+    public ?string $endToEndId;
+    public ?string $initiationType;
+    public ?string $paymentType;
+    public ?string $urgency;
+    public ?string $transactionType;
+    public ?DebitParty $debitParty;
+    public ?CreditParty $creditParty;
+    public ?string $remittanceInformation;
 
     public function __construct(array $data = [])
     {

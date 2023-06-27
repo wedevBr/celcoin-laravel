@@ -4,6 +4,6 @@ namespace WeDevBr\Celcoin\Enums;
 
 enum InstitutionsTypeEnum: string
 {
-    case NACIONAL = "NACIONAL";
-    case ESTADUAL = "ESTADUAL";
+    case NATIONAL = "NACIONAL";
+    case STATE = "ESTADUAL";
 }
