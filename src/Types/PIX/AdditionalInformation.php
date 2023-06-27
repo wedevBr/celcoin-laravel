@@ -4,15 +4,13 @@ namespace WeDevBr\Celcoin\Types\PIX;
 
 use WeDevBr\Celcoin\Types\Data;
 
-class Calendar extends Data
+class AdditionalInformation extends Data
 {
     public string $key;
     public string $value;
-    public int $expiration;
 
     public function __construct(array $data = [])
     {
         parent::__construct($data);
     }
-
 }

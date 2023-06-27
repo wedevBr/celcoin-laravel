@@ -11,14 +11,15 @@ class COB extends Data
     public string $key;
     public string $locationId;
     public Debtor $debtor;
-    public Amount | float $amount;
+    public Amount|float $amount;
     public Calendar $calendar;
+    /**
+     * @var AdditionalInformation[]
+     */
     public array $additionalInformation;
 
     public function __construct(array $data = [])
     {
         parent::__construct($data);
     }
-
-
 }
