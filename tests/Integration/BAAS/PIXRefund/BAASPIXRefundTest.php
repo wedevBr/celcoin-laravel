@@ -32,8 +32,8 @@ class BAASPIXRefundTest extends TestCase
             ]
         );
 
-        $ted = new CelcoinBAASPIX();
-        $response = $ted->refundPix(new RefundPix([
+        $pix = new CelcoinBAASPIX();
+        $response = $pix->refundPix(new RefundPix([
             "id" => "34fee7bc-4d40-4605-9af8-398ed7d0d6b5",
             "endToEndId" => "E3030629420200808185300887639654",
             "clientCode" => "1458854",
