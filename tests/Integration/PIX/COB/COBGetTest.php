@@ -41,56 +41,48 @@ class COBGetTest extends TestCase
     private static function stubSuccess(): PromiseInterface
     {
         return Http::response([
-            'transactionId' => 817852711,
+            'transactionId' => 817849685,
             'status' => 'ACTIVE',
-            'lastUpdate' => '2023-06-28T00:53:41.8681786+00:00',
-            'payerQuestion' => NULL,
-            'additionalInformation' => NULL,
+            'lastUpdate' => '2023-06-26T22:36:23.4800282+00:00',
+            'payerQuestion' => 'Não pagável após vencimento.',
+            'additionalInformation' => [
+                [
+                    'value' => 'Assinatura de serviço',
+                    'key' => 'Produto 1',
+                ],
+            ],
             'debtor' => [
                 'name' => 'Fulano de Tal',
                 'cpf' => NULL,
-                'cnpj' => '61360961000100',
-                'city' => 'Barueri',
-                'publicArea' => 'Avenida Brasil',
-                'state' => 'SP',
-                'postalCode' => '01202003',
-                'email' => 'umdoistres@celcoin.com.br',
+                'cnpj' => '00190305000103',
             ],
             'amount' => [
                 'original' => 15.63,
-                'discount' => [
-                    'discountDateFixed' => [
-                        [
-                            'date' => '2023-12-10T00:00:00',
-                            'amountPerc' => '1.00',
-                        ],
-                    ],
-                    'modality' => 'FIXED_VALUE_UNTIL_THE_DATES_INFORMED',
-                    'amountPerc' => NULL,
-                ],
-                'abatement' => NULL,
-                'fine' => NULL,
-                'interest' => NULL,
+                'changeType' => 0,
+                'withdrawal' => NULL,
+                'change' => NULL,
             ],
             'key' => 'testepix@celcoin.com.br',
-            'receiver' => [
-                'name' => 'João da Silva',
-                'cpf' => NULL,
-                'cnpj' => '60904237000129',
-                'postalCode' => '01202003',
-                'city' => 'Barueri',
-                'publicArea' => 'Avenida Brasil',
-                'state' => 'SP',
-                'fantasyName' => 'Nome de Comercial',
+            'location' => [
+                'merchant' => [
+                    'postalCode' => '01201005',
+                    'city' => 'Barueri',
+                    'merchantCategoryCode' => '0000',
+                    'name' => 'Celcoin Pagamentos',
+                ],
+                'url' => 'api-h.developer.btgpactual.com/pc/p/v2/1d53f8a4839641628b2d678f7ddb9ad6',
+                'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/pc/p/v2/1d53f8a4839641628b2d678f7ddb9ad65204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***63040D56',
+                'type' => 'COB',
+                'locationId' => NULL,
+                'id' => NULL,
             ],
+            'revision' => NULL,
             'calendar' => [
-                'expirationAfterPayment' => '10',
-                'createdAt' => '0001-01-01T00:00:00',
-                'dueDate' => '2023-12-15T00:00:00',
+                'expiration' => 86400,
             ],
-            'createAt' => '2023-06-28T00:53:41.8681786+00:00',
-            'clientRequestId' => '12341235123213',
-            'transactionIdentification' => 'kk6g232xel65a0daee4dd13kk817852711',
+            'createAt' => '2023-06-26T22:36:23.4800282+00:00',
+            'clientRequestId' => '14232341231',
+            'transactionIdentification' => 'kk6g232xel65a0daee4dd13kk817849685',
             'transactionIdPayment' => 0,
         ], Response::HTTP_OK);
     }
