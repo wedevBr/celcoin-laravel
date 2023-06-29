@@ -34,7 +34,7 @@ class UpdateAccountNaturalPersonTest extends TestCase
 
         $firstName = $fake->firstName();
 
-        $response = $baas->updateAccountNaturalPerson('300541976886', '50978064330', new AccountManagerNaturalPerson(
+        $response = $baas->updateAccountNaturalPerson('444444', '34335125070', new AccountManagerNaturalPerson(
             [
                 "phoneNumber" => sprintf('+5511%s', $fake->cellphone(false)),
                 "email" => $fake->email(),

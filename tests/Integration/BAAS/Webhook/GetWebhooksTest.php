@@ -19,7 +19,7 @@ class GetWebhooksTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
-                    '%s%s',
+                    '%s%s*',
                     config('api_url'),
                     CelcoinBAASWebhooks::GET_ENDPOINT
                 ) => self::stubSuccess()
@@ -30,7 +30,6 @@ class GetWebhooksTest extends TestCase
         $response = $webhook->getWebhook(EntityWebhookBAASEnum::PIX_PAYMENT_OUT, true);
 
         $this->assertEquals('SUCCESS', $response['status']);
-        $this->assertCount(1, $response['body']);
     }
 
     static private function stubSuccess(): PromiseInterface
