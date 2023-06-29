@@ -26,44 +26,21 @@ class BAASPIXGetParticipantTest extends TestCase
         );
 
         $pix = new CelcoinBAASPIX();
-        $response = $pix->getParticipant('', '');
+        $response = $pix->getParticipant('25683434', '');
 
-        $this->assertEquals('PROCESSING', $response['status']);
+        $this->assertCount(1, $response);
     }
 
     static private function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => "PROCESSING",
-                "version" => "1.0.0",
-                "body" => [
-                    "id" => "60ec4471-71dd-43a3-a848-efe7a314d76f",
-                    "amount" => 50,
-                    "clientCode" => "1458856889",
-                    "transactionIdentification" => null,
-                    "endToEndId" => "E1393589320221110144001306556986",
-                    "initiationType" => "MANUAL",
-                    "paymentType" => "IMMEDIATE",
-                    "urgency" => "HIGH",
-                    "transactionType" => "TRANSFER",
-                    "debitParty" => [
-                        "account" => "30053913714179",
-                        "branch" => "0001",
-                        "taxId" => "77859635097",
-                        "name" => "Hernani  Conrado",
-                        "accountType" => "TRAN"
-                    ],
-                    "creditParty" => [
-                        "bank" => "30306294",
-                        "key" => null,
-                        "account" => "42161",
-                        "branch" => "20",
-                        "taxId" => "12312312300",
-                        "name" => "Fulano de Tal",
-                        "accountType" => "CACC"
-                    ],
-                    "remittanceInformation" => "Texto de mensagem"
+                [
+                    "date" => "2022-03-23T00:00:00",
+                    "type" => "IDRT",
+                    "name" => "COOPERATIVA CENTRAL DE CRÉDITO DE MINAS GERAIS LTDA. - SICOOB CENTRAL CREDIMINAS",
+                    "startOperationDatetime" => "2020-11-03T09:30:00+00:00",
+                    "ispb" => "25683434"
                 ]
             ],
             Response::HTTP_OK

@@ -18,9 +18,9 @@ class BAASPIXSearchPixKeyTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
-                    '%s%s*',
+                    '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAASPIX::DELETE_PIX_KEY_ENDPOINT, 'testebaas@cecloin.com.br')
+                    sprintf(CelcoinBAASPIX::SEARCH_PIX_KEY_ENDPOINT, '30054065518')
                 ) => self::stubSuccess()
             ]
         );

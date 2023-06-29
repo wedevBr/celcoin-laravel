@@ -14,7 +14,7 @@ class PixCashOut
     public static function rules()
     {
         return [
-            'amount' => ['required', 'regex:/\d{1,10}\.\d{2}/'],
+            'amount' => ['required', 'decimal:0,2'],
             'clientCode' => ['required', 'string'],
             'transactionIdentification' => ['sometimes', 'required_unless:initiationType,' . InitiationTypeEnum::PAYMENT_DICT->value . ',' . InitiationTypeEnum::PAYMENT_MANUAL->value],
             'endToEndId' => ['sometimes', 'required_unless:initiationType,' . InitiationTypeEnum::PAYMENT_MANUAL->value],

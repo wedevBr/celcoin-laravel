@@ -108,13 +108,10 @@ class CelcoinBaseApi
      */
     protected function put(
         string $endpoint,
-        array $body = [],
-        bool $asJson = false,
+        ?array $body = null,
     ): mixed {
-        $body_format = $asJson ? 'json' : 'form_params';
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
-            ->bodyFormat($body_format)
             ->withHeaders([
                 'accept' => 'application/json',
                 'content-type' => 'application/json',
@@ -134,7 +131,7 @@ class CelcoinBaseApi
      */
     protected function patch(
         string $endpoint,
-        array $body = [],
+        ?array $body = null,
         bool $asJson = false
     ): mixed {
         $body_format = $asJson ? 'json' : 'form_params';
@@ -158,7 +155,7 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    protected function delete(string $endpoint, array $body = []): mixed
+    protected function delete(string $endpoint, ?array $body = null): mixed
     {
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token);

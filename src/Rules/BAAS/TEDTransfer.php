@@ -9,7 +9,7 @@ class TEDTransfer
     public static function rules()
     {
         return [
-            'amount' => ['required', 'regex:/\d{1,10}\.\d{2}/'],
+            'amount' => ['required', 'decimal:0,2'],
             'clientCode' => ['required', 'string'],
             'debitParty' => ['required', 'array'],
             'debitParty.account' => ['required', 'string'],

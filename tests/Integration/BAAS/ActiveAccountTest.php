@@ -1,19 +1,21 @@
 <?php
 
-namespace Tests\Integration\BAAS\Webhook;
+namespace Tests\Integration\BAAS;
 
 use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Symfony\Component\HttpFoundation\Response;
 use Tests\GlobalStubs;
 use Tests\TestCase;
-use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
-use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Clients\CelcoinBAAS;
 
-class RemoveWebhooksTest extends TestCase
+class ActiveAccountTest extends TestCase
 {
 
-    final public function testSuccess(): void
+    /**
+     * @return void
+     */
+    public function testSuccess()
     {
         Http::fake(
             [
@@ -21,13 +23,13 @@ class RemoveWebhooksTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAASWebhooks::REMOVE_ENDPOINT, EntityWebhookBAASEnum::PIX_PAYMENT_OUT->value)
+                    sprintf(CelcoinBAAS::ACTIVE_ACCOUNT, '12345', null)
                 ) => self::stubSuccess()
             ]
         );
 
-        $webhook = new CelcoinBAASWebhooks();
-        $response = $webhook->remove(EntityWebhookBAASEnum::PIX_PAYMENT_OUT);
+        $baas = new CelcoinBAAS();
+        $response = $baas->activeAccount('Ativando', '12345',);
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
@@ -37,7 +39,7 @@ class RemoveWebhooksTest extends TestCase
         return Http::response(
             [
                 "version" => "1.0.0",
-                "status" => "SUCCESS"
+                "status" => "SUCCESS",
             ],
             Response::HTTP_OK
         );

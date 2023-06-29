@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Http;
 use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
-use WeDevBr\Celcoin\Enums\AccountOnboardingTypeEnum;
-use WeDevBr\Celcoin\Types\BAAS\AccountNaturalPerson;
+use WeDevBr\Celcoin\Types\BAAS\AccountManagerNaturalPerson;
 
-class CreateAccountNaturalPersonTest extends TestCase
+class UpdateAccountNaturalPersonTest extends TestCase
 {
 
     /**
@@ -26,7 +25,7 @@ class CreateAccountNaturalPersonTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAAS::CREATE_ACCOUNT_NATURAL_PERSON
+                    sprintf(CelcoinBAAS::UPDATE_ACCOUNT_NATURAL_PERSON, '444444', '34335125070')
                 ) => self::stubSuccess()
             ]
         );
@@ -34,17 +33,11 @@ class CreateAccountNaturalPersonTest extends TestCase
         $baas = new CelcoinBAAS();
 
         $firstName = $fake->firstName();
-        $lastName = $fake->lastName();
 
-        $response = $baas->createAccountNaturalPerson(new AccountNaturalPerson(
+        $response = $baas->updateAccountNaturalPerson('300541976886', '50978064330', new AccountManagerNaturalPerson(
             [
-                "clientCode" => $fake->uuid(),
-                "accountOnboardingType" => AccountOnboardingTypeEnum::BANK_ACCOUNT,
-                "documentNumber" => $fake->cpf(false),
                 "phoneNumber" => sprintf('+5511%s', $fake->cellphone(false)),
                 "email" => $fake->email(),
-                "motherName" => sprintf('%s %s', $fake->firstNameFemale(), $fake->lastName()),
-                "fullName" => sprintf('%s %s', $firstName, $lastName),
                 "socialName" => $firstName,
                 "birthDate" => '15-01-1981',
                 "address" => [
@@ -62,7 +55,7 @@ class CreateAccountNaturalPersonTest extends TestCase
             ]
         ));
 
-        $this->assertEquals('PROCESSING', $response['status']);
+        $this->assertEquals('SUCCESS', $response['status']);
     }
 
     static private function stubSuccess(): PromiseInterface
@@ -70,10 +63,7 @@ class CreateAccountNaturalPersonTest extends TestCase
         return Http::response(
             [
                 "version" => "1.0.0",
-                "status" => "PROCESSING",
-                "body" => [
-                    "onBoardingId" => "39c8e322-9192-498d-947e-2daa4dfc749e"
-                ]
+                "status" => "SUCCESS"
             ],
             Response::HTTP_OK
         );

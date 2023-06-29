@@ -14,7 +14,7 @@ class Create
             'phone.number' => ['required', 'string'],
             'phone.countryCode' => ['nullable', 'numeric'],
             'phone.stateCode' => ['nullable', 'numeric'],
-            'value' => ['required', 'regex:/\d{1,10}\.\d{2}/'],
+            'value' => ['required', 'rdecimal:0,2'],
             'topupProductId' => ['nullable', 'string'],
         ];
     }

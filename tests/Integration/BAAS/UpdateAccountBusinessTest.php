@@ -8,10 +8,9 @@ use Illuminate\Support\Facades\Http;
 use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
-use WeDevBr\Celcoin\Enums\AccountOnboardingTypeEnum;
-use WeDevBr\Celcoin\Types\BAAS\AccountBusiness;
+use WeDevBr\Celcoin\Types\BAAS\AccountManagerBusiness;
 
-class CreateAccountBusinessTest extends TestCase
+class UpdateAccountBusinessTest extends TestCase
 {
 
     /**
@@ -24,39 +23,31 @@ class CreateAccountBusinessTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
-                    '%s%s',
+                    '%s%s*',
                     config('api_url'),
-                    CelcoinBAAS::CREATE_ACCOUNT_BUSINESS
+                    sprintf(CelcoinBAAS::UPDATE_ACCOUNT_BUSINESS, '12345', '12345')
                 ) => self::stubSuccess()
             ]
         );
 
         $baas = new CelcoinBAAS();
 
-        $firstBusinessName = $fake->firstName();
-        $lastBusinessName = $fake->lastName();
-
         $firstName = $fake->firstName();
         $lastName = $fake->lastName();
 
-        $response = $baas->createAccountBusiness(new AccountBusiness(
+        $response = $baas->updateAccountBusiness('12345', '12345', new AccountManagerBusiness(
             [
-                "clientCode" => $fake->uuid(),
-                "accountOnboardingType" => AccountOnboardingTypeEnum::BANK_ACCOUNT,
-                "documentNumber" => $fake->cnpj(false),
                 "contactNumber" => sprintf('+5511%s', $fake->cellphone(false)),
                 "businessEmail" => $fake->email(),
-                "businessName" => sprintf('%s %s LTDA', $firstBusinessName, $lastBusinessName),
-                "tradingName" => $firstBusinessName,
-                "owner" => [
+                "owners" => [
                     [
                         "documentNumber" => $fake->cpf(false),
                         "phoneNumber" => sprintf('+5511%s', $fake->cellphone(false)),
                         "email" => $fake->email(),
-                        "motherName" => sprintf('%s %s', $fake->firstNameFemale(), $fake->lastName()),
                         "fullName" => sprintf('%s %s', $firstName, $lastName),
                         "socialName" => $firstName,
                         "birthDate" => '15-01-1981',
+                        "motherName" => sprintf('%s %s', $fake->firstNameFemale(), $fake->lastName()),
                         "address" => [
                             "postalCode" => '01153000',
                             "street" => $fake->streetName(),
@@ -86,7 +77,7 @@ class CreateAccountBusinessTest extends TestCase
             ]
         ));
 
-        $this->assertEquals('PROCESSING', $response['status']);
+        $this->assertEquals('SUCCESS', $response['status']);
     }
 
     static private function stubSuccess(): PromiseInterface
@@ -94,10 +85,7 @@ class CreateAccountBusinessTest extends TestCase
         return Http::response(
             [
                 "version" => "1.0.0",
-                "status" => "PROCESSING",
-                "body" => [
-                    "onBoardingId" => "39c8e322-9192-498d-947e-2daa4dfc749e"
-                ]
+                "status" => "SUCCESS",
             ],
             Response::HTTP_OK
         );
