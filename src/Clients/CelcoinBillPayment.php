@@ -11,6 +11,7 @@ use WeDevBr\Celcoin\Rules\BillPayments\Create as BillPaymentsCreate;
 use WeDevBr\Celcoin\Rules\BillPayments\Cancel as BillPaymentsCancel;
 use WeDevBr\Celcoin\Rules\BillPayments\Confirm as BillPaymentsConfirm;
 use WeDevBr\Celcoin\Types\BillPayments\Authorize;
+use WeDevBr\Celcoin\Types\BillPayments\Cancel;
 use WeDevBr\Celcoin\Types\BillPayments\Confirm;
 use WeDevBr\Celcoin\Types\BillPayments\Create;
 
@@ -21,11 +22,20 @@ use WeDevBr\Celcoin\Types\BillPayments\Create;
  */
 class CelcoinBillPayment extends CelcoinBaseApi
 {
+
+    const AUTHORIZE_ENDPOINT = '/v5/transactions/billpayments/authorize';
+    const CREATE_ENDPOINT = '/v5/transactions/billpayments';
+    const CONFIRM_ENDPOINT = '/v5/transactions/billpayments/%d/capture';
+    const CANCEL_ENDPOINT = '/v5/transactions/billpayments/%d/void';
+    const REVERSE_ENDPOINT = '/v5/transactions/billpayments/%d/revers';
+    const STATUS_CONSULT_ENDPOINT = '/v5/transactions/status-consult';
+    const GET_OCCURRENCES_ENDPOINT = '/v5/transactions/occurrency';
+
     public function authorize(Authorize $data): mixed
     {
         $body = Validator::validate($data->toArray(), BillPaymentsAuthorize::rules());
         return $this->post(
-            "/v5/transactions/billpayments/authorize",
+            self::AUTHORIZE_ENDPOINT,
             $body
         );
     }
@@ -38,7 +48,7 @@ class CelcoinBillPayment extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), BillPaymentsCreate::rules());
         return $this->post(
-            "/v5/transactions/billpayments",
+            self::CREATE_ENDPOINT,
             $body
         );
     }
@@ -47,16 +57,16 @@ class CelcoinBillPayment extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), BillPaymentsConfirm::rules());
         return $this->put(
-            "/v5/transactions/billpayments/{$transactionId}/capture",
+            sprintf(self::CONFIRM_ENDPOINT, $transactionId),
             $body
         );
     }
 
-    public function cancel(int $transactionId, array $data): mixed
+    public function cancel(int $transactionId, Cancel $data): mixed
     {
-        $body = Validator::validate($data, BillPaymentsCancel::rules());
+        $body = Validator::validate($data->toArray(), BillPaymentsCancel::rules());
         return $this->delete(
-            "/v5/transactions/billpayments/{$transactionId}/void",
+            sprintf(self::CANCEL_ENDPOINT, $transactionId),
             $body
         );
     }
@@ -64,7 +74,7 @@ class CelcoinBillPayment extends CelcoinBaseApi
     public function reverse(int $transactionId): mixed
     {
         return $this->delete(
-            "/v5/transactions/billpayments/{$transactionId}/reverse"
+            sprintf(self::REVERSE_ENDPOINT, $transactionId),
         );
     }
 
@@ -75,7 +85,7 @@ class CelcoinBillPayment extends CelcoinBaseApi
         ?Carbon $operationDate = null
     ): mixed {
         return $this->get(
-            "/v5/transactions/status-consult",
+            self::STATUS_CONSULT_ENDPOINT,
             [
                 'transactionId' => $transactionId,
                 'externalNSU' => $externalNSU,
@@ -88,7 +98,7 @@ class CelcoinBillPayment extends CelcoinBaseApi
     public function getOccurrences(?Carbon $dateStart = null, ?Carbon $dateEnd = null): mixed
     {
         return $this->get(
-            "/v5/transactions/occurrency",
+            self::GET_OCCURRENCES_ENDPOINT,
             [
                 'DataInicio' => !empty($dateStart) ? $dateStart->format("Y-m-d") : null,
                 'DataFim' => !empty($dateEnd) ? $dateEnd->format("Y-m-d") : null,

@@ -2,6 +2,9 @@
 
 namespace Tests\Integration\ElectronicTransactions;
 
+use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
@@ -20,7 +23,7 @@ class PartnersTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinElectronicTransactions::UPDATE_ACCOUNT_NATURAL_PERSON, '444444', '34335125070')
+                    CelcoinElectronicTransactions::GET_PARTNERS_ENDPOINT
                 ) => self::stubSuccess()
             ]
         );
@@ -28,6 +31,33 @@ class PartnersTest extends TestCase
         $baas = new CelcoinElectronicTransactions();
         $response = $baas->getPartners();
 
-        $this->assertNotEmpty($response);
+        $this->assertEquals(0, $response['status']);
+    }
+
+    static private function stubSuccess(): PromiseInterface
+    {
+        return Http::response(
+            [
+                "ParceirosPecRec" => [
+                    "codeParceiro" => "0001",
+                    "IndBarCodeDeposit" => "S",
+                    "IndBarCodeWithdraw" => "S",
+                    "IndQRCodeDeposit" => "S",
+                    "IndQRCodeWithdraw" => "S",
+                    "namePartner" => "BrinksPay",
+                    "partnerPecRecRecId" => "1",
+                    "partnerType" => "VAREJO",
+                    "typeTransactionsCancelamento" => "SOLICITACANCELAMENTOPECREC",
+                    "maxValueDeposito" => 2000.0,
+                    "maxValueSaque" => 2000.0,
+                    "minValueDeposito" => 0.0,
+                    "minValueSaque" => 0.01,
+                ],
+                "errorCode" => "000",
+                "message" => "SUCESSO",
+                "status" => 0
+            ],
+            Response::HTTP_OK
+        );
     }
 }

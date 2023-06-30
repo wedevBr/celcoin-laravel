@@ -2,14 +2,18 @@
 
 namespace WeDevBr\Celcoin\Rules\BillPayments;
 
+use Illuminate\Validation\Rule;
+use WeDevBr\Celcoin\Enums\BarCodeTypeEnum;
+use WeDevBr\Celcoin\Enums\MethodPaymentCodeEnum;
+
 class Create
 {
 
     public static function rules()
     {
         return [
-            "externalNSU" => ['nullable', 'string'],
-            "externalTerminal" => ['nullable', 'numeric'],
+            "externalNSU" => ['nullable', 'integer'],
+            "externalTerminal" => ['nullable', 'string'],
             "cpfcnpj" => ['required', 'string'],
             "billData" => ['required', 'array'],
             "billData.value" => ['nullable', 'decimal:0,2'],
@@ -19,13 +23,13 @@ class Create
             "infoBearer" => ['nullable', 'array'],
             "infoBearer.nameBearer" => ['nullable', 'string'],
             "infoBearer.documentBearer" => ['nullable', 'string'],
-            "infoBearer.methodPaymentCode" => ['nullable', 'in:1,2,3,4'],
+            "infoBearer.methodPaymentCode" => ['nullable', Rule::in(array_column(MethodPaymentCodeEnum::cases(), 'value'))],
             "barCode" => ['required', 'array'],
-            "barCode.type" => ['required', 'in:1,2'],
+            "barCode.type" => ['required', Rule::in(array_column(BarCodeTypeEnum::cases(), 'value'))],
             "barCode.digitable" => ['nullable', 'string'],
             "barCode.barCode" => ['nullable', 'string'],
-            "dueDate" => ['nullable', 'date'],
-            "transactionIdAuthorize" => ['nullable', 'numeric']
+            "dueDate" => ['nullable', 'date_format:Y-m-d'],
+            "transactionIdAuthorize" => ['nullable', 'integer']
         ];
     }
 }
