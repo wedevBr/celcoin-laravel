@@ -105,12 +105,15 @@ class PixGetStaticPaymentTransactionTest extends TestCase
                 ) => $response
             ]
         );
+
         $this->expectException(RequestException::class);
-
-        $pix = new CelcoinPixStaticPayment();
-        $response = $pix->getStaticPix($transactionId);
-
-        $this->assertEquals($status, $response['code']);
+        try {
+            $pix = new CelcoinPixStaticPayment();
+            $pix->getStaticPix($transactionId);
+        } catch (RequestException $exception) {
+            $this->assertEquals($status, $exception->getCode());
+            throw $exception;
+        }
     }
 
     /**
@@ -119,7 +122,7 @@ class PixGetStaticPaymentTransactionTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            [fn() => [], ''],
+            [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
         ];
     }
 }

@@ -76,6 +76,7 @@ class PixGetStaticPaymentQRTest extends TestCase
                 ) => $response
             ]
         );
+
         $pix = new CelcoinPixStaticPayment();
         $response = $pix->getStaticPaymentQR($transactionId);
 
@@ -88,9 +89,9 @@ class PixGetStaticPaymentQRTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            [fn() => self::stubGenericError(400), 400],
-            [fn() => self::stubGenericError(404), 404],
-            [fn() => self::stubGenericError(500), 500],
+            'generic response status 400' => [fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST), Response::HTTP_BAD_REQUEST],
+            'generic response status 404' => [fn() => self::stubGenericError(Response::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND],
+            'generic response status 500' => [fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
         ];
     }
 

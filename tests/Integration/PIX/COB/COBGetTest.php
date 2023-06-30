@@ -104,11 +104,17 @@ class COBGetTest extends TestCase
         );
 
         $this->expectException(RequestException::class);
-        $data = new COBGet($searchParam);
-        $pixCOB = new CelcoinPIXCOB();
 
-        $result = $pixCOB->getCOBPIX($data);
-        $this->assertEquals('VL002', $result['errorCode']);
+        try {
+            $data = new COBGet($searchParam);
+            $pixCOB = new CelcoinPIXCOB();
+            $pixCOB->getCOBPIX($data);
+        } catch (RequestException $throwable) {
+            $result = $throwable->response->json();
+            $this->assertEquals('VL002', $result['errorCode']);
+            throw $throwable;
+        }
+
     }
 
     private static function stubNotFound(): PromiseInterface

@@ -48,9 +48,9 @@ class PixCreateStaticPaymentTest extends TestCase
     {
         return Http::response(
             [
-                "emvqrcps" => "00020126480014br.gov.bcb.pix0115aron@mqx.com.br0207adasdas520400005303986540515.605802BR5908Endereco6008Araruama61082897906362100506asdsad63040C48",
-                "transactionId" => 817834704,
-                "transactionIdentification" => "asdsad",
+                'emvqrcps' => '00020126480014br.gov.bcb.pix0115aron@mqx.com.br0207adasdas520400005303986540515.605802BR5908Endereco6008Araruama61082897906362100506asdsad63040C48',
+                'transactionId' => 817834704,
+                'transactionIdentification' => 'asdsad',
             ],
             Response::HTTP_OK,
         );
@@ -74,17 +74,18 @@ class PixCreateStaticPaymentTest extends TestCase
             'tag 1'
         ];
 
+
         return $staticPayment;
     }
 
     /**
      * @param Closure $response
-     * @param string $status
+     * @param int $status
      * @return void
      * @throws RequestException
      * @dataProvider errorDataProvider
      */
-    final public function testConvertingValueError(Closure $response, string $status): void
+    final public function testConvertingValueError(Closure $response, int $status): void
     {
         Http::fake(
             [
@@ -99,11 +100,14 @@ class PixCreateStaticPaymentTest extends TestCase
 
         $this->expectException(RequestException::class);
 
-        $paymentBody = $this->fakeQRStaticPayment();
-        $payment = new CelcoinPixStaticPayment();
-        $response = $payment->create($paymentBody);
-
-        $this->assertEquals($status, $response['errorCode']);
+        try {
+            $paymentBody = $this->fakeQRStaticPayment();
+            $payment = new CelcoinPixStaticPayment();
+            $payment->create($paymentBody);
+        } catch (RequestException $exception) {
+            $this->assertEquals($status, $exception->getCode());
+            throw $exception;
+        }
     }
 
     /**
@@ -113,7 +117,7 @@ class PixCreateStaticPaymentTest extends TestCase
     {
         return [
             // Status 500 - Internal server error return empty array
-            [fn() => [], ''],
+            'Internal server error' => [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
         ];
     }
 

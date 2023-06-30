@@ -33,9 +33,9 @@ class COBDeteleTest extends TestCase
     private function stubSuccess(): PromiseInterface
     {
         return Http::response([
-            "transactionId" => 817849688,
-            "status" => 200,
-            "message" => "200"
+            'transactionId' => 817849688,
+            'status' => 200,
+            'message' => '200'
         ],
             Response::HTTP_OK
         );
@@ -56,16 +56,22 @@ class COBDeteleTest extends TestCase
 
         $this->expectException(RequestException::class);
 
-        $pixCOB = new CelcoinPIXCOB();
-        $result = $pixCOB->deleteCOBPIX($transactionId);
-        $this->assertEquals(404, $result['statusCode']);
+        try {
+            $pixCOB = new CelcoinPIXCOB();
+            $pixCOB->deleteCOBPIX($transactionId);
+        } catch (RequestException $throwable) {
+            $result = $throwable->response->json();
+            $this->assertEquals(Response::HTTP_NOT_FOUND, $result['statusCode']);
+            $this->assertEquals(Response::HTTP_NOT_FOUND, $throwable->response->status());
+            throw $throwable;
+        }
     }
 
     private function stubError(): PromiseInterface
     {
         return Http::response([
-            "statusCode" => 404,
-            "message" => "Resource not found"
+            'statusCode' => 404,
+            'message' => 'Resource not found'
         ],
             Response::HTTP_NOT_FOUND
         );
