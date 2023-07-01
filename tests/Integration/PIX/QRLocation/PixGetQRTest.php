@@ -88,9 +88,9 @@ class PixGetQRTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            [fn() => self::stubGenericError(400), 400],
-            [fn() => self::stubGenericError(404), 404],
-            [fn() => self::stubGenericError(500), 500],
+            'status code 400' => [fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST), Response::HTTP_BAD_REQUEST],
+            'status code 404' => [fn() => self::stubGenericError(Response::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND],
+            'status code 500' => [fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
         ];
     }
 

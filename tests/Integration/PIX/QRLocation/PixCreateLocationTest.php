@@ -47,18 +47,18 @@ class PixCreateLocationTest extends TestCase
     {
         return Http::response(
             [
-                "status" => "CREATED",
-                "clientRequestId" => "9b26edb7cf254db09f5449c94bf13abc",
-                "merchant" => [
-                    "postalCode" => "01201005",
-                    "city" => "Barueri",
-                    "merchantCategoryCode" => "0000",
-                    "name" => "Celcoin"
+                'status' => 'CREATED',
+                'clientRequestId' => '9b26edb7cf254db09f5449c94bf13abc',
+                'merchant' => [
+                    'postalCode' => '01201005',
+                    'city' => 'Barueri',
+                    'merchantCategoryCode' => '0000',
+                    'name' => 'Celcoin'
                 ],
-                "url" => "api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e",
-                "emv" => "00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e5204000053039865802BR5907Celcoin6007Barueri61080120100562070503***630411BD",
-                "type" => "COBV",
-                "locationId" => 12731081
+                'url' => 'api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e',
+                'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e5204000053039865802BR5907Celcoin6007Barueri61080120100562070503***630411BD',
+                'type' => 'COBV',
+                'locationId' => 12731081
             ],
             Response::HTTP_OK
         );
@@ -83,10 +83,13 @@ class PixCreateLocationTest extends TestCase
     }
 
     /**
+     * @param Closure $response
+     * @param string $errorCode
+     * @return void
      * @throws RequestException
      * @dataProvider errorDataProvider
      */
-    final public function testConvertingValueError(Closure $response, string $status): void
+    final public function testConvertingValueError(Closure $response, string $errorCode): void
     {
         Http::fake(
             [
@@ -101,12 +104,15 @@ class PixCreateLocationTest extends TestCase
 
         $this->expectException(RequestException::class);
 
-        $location = $this->fakeLocationBody();
-
-        $pix = new CelcoinPIXQR();
-        $response = $pix->createLocation($location);
-
-        $this->assertEquals($status, $response['errorCode']);
+        try {
+            $location = $this->fakeLocationBody();
+            $pix = new CelcoinPIXQR();
+            $pix->createLocation($location);
+        } catch (RequestException $exception) {
+            $response = $exception->response->json();
+            $this->assertEquals($errorCode, $response['errorCode']);
+            throw $exception;
+        }
     }
 
     /**
@@ -116,10 +122,8 @@ class PixCreateLocationTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            [fn() => self::stubConvertingError(), '400'],
-            [fn() => self::stubValueCannotBeNull(), 'CR001'],
-            // Status 500 - Internal server error return empty array
-            [fn() => [], ''],
+            'status code 400' => [fn() => self::stubConvertingError(), '400'],
+            'status code CR001' => [fn() => self::stubValueCannotBeNull(), 'CR001']
         ];
     }
 
@@ -130,8 +134,8 @@ class PixCreateLocationTest extends TestCase
     {
         return Http::response(
             [
-                "message" => "Error converting value \"xxx\" to 'type' 'Pactual.BaaS.Entities.Pix.LocationType'. Path ''type'', line 3, position 17.",
-                "errorCode" => "400",
+                'message' => 'Error converting value \'xxx\' to \'type\' \'Pactual.BaaS.Entities.Pix.LocationType\'. Path \'type\', line 3, position 17.',
+                'errorCode' => '400',
             ],
             Response::HTTP_BAD_REQUEST
         );
@@ -144,8 +148,8 @@ class PixCreateLocationTest extends TestCase
     {
         return Http::response(
             [
-                "message" => "Value cannot be null. (Parameter 's')",
-                "errorCode" => "CR001",
+                'message' => 'Value cannot be null. (Parameter \'s\')',
+                'errorCode' => 'CR001',
             ],
             Response::HTTP_BAD_REQUEST
         );

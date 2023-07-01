@@ -151,7 +151,7 @@ class COBCreateTest extends TestCase
      * @throws RequestException
      * @dataProvider createErrorDataProvider
      */
-    final public function testCreateCobWithoutField(string $unsetValue, array $validation): void
+    final public function testCreateCobWithoutField(string $unsetValue): void
     {
         Http::fake(
             [
@@ -207,20 +207,23 @@ class COBCreateTest extends TestCase
 
     }
 
+    /**
+     * @return array[]
+     */
     final public function createErrorDataProvider(): array
     {
         return [
-            'required amount' => ['amount', ['attribute' => 'amount']],
-            'required amount original' => ['amount', ['attribute' => 'amount.original']],
-            'required clientRequestId' => ['clientRequestId', ['attribute' => 'clientRequestId']],
-            'required key' => ['key', ['attribute' => 'key']],
-            'required locationId' => ['locationId', ['attribute' => 'locationId', 'integer']],
-            'required debtor' => ['debtor', ['attribute' => 'debtor', 'integer']],
-            'required debtor name' => ['debtor', ['attribute' => 'debtor.name', 'string']],
-            'required debtor cpf' => ['debtor', ['attribute' => 'debtor.cpf', 'required_without:debtor.cnpj']],
-            'required debtor cnpj' => ['debtor', ['attribute' => 'debtor.cnpj', 'required_without:debtor.cpf']],
-            'required calendar' => ['calendar', ['attribute' => 'calendar', 'array']],
-            'required calendar expiration' => ['calendar', ['attribute' => 'calendar.expiration', 'integer']],
+            'required amount' => ['amount'],
+            'required amount original' => ['amount'],
+            'required clientRequestId' => ['clientRequestId'],
+            'required key' => ['key'],
+            'required locationId' => ['locationId'],
+            'required debtor' => ['debtor'],
+            'required debtor name' => ['debtor'],
+            'required debtor cpf' => ['debtor'],
+            'required debtor cnpj' => ['debtor'],
+            'required calendar' => ['calendar'],
+            'required calendar expiration' => ['calendar'],
         ];
     }
 

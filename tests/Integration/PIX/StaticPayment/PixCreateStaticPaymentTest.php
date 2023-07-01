@@ -117,7 +117,7 @@ class PixCreateStaticPaymentTest extends TestCase
     {
         return [
             // Status 500 - Internal server error return empty array
-            'Internal server error' => [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
+            'status·code·500' => [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
         ];
     }
 

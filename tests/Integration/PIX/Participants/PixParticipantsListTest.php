@@ -105,11 +105,14 @@ class PixParticipantsListTest extends TestCase
         );
 
         $this->expectException(RequestException::class);
+        try {
+            $pix = new CelcoinPIXParticipants();
+            $pix->getParticipants();
+        } catch (RequestException $exception) {
+            $this->assertEquals($status, $exception->getCode());
+            throw $exception;
+        }
 
-        $pix = new CelcoinPIXParticipants();
-        $response = $pix->getParticipants();
-
-        $this->assertEquals($status, $response['statusCode']);
     }
 
     /**
@@ -118,7 +121,7 @@ class PixParticipantsListTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            [fn() => [], ''],
+            'status·code·500' => [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
         ];
     }
 }

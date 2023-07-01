@@ -122,7 +122,7 @@ class PixGetStaticPaymentTransactionTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
+            'status·code·500' => [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
         ];
     }
 }
