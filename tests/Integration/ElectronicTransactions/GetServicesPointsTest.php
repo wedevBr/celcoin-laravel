@@ -16,7 +16,7 @@ class GetServicesPointsTest extends TestCase
     /**
      * @return void
      */
-    public function testSuccessAccountCheck()
+    public function testSuccess()
     {
         Http::fake(
             [
@@ -29,8 +29,8 @@ class GetServicesPointsTest extends TestCase
             ]
         );
 
-        $baas = new CelcoinElectronicTransactions();
-        $response = $baas->getServicesPoints(new ServicesPoints([
+        $electronicTransaction = new CelcoinElectronicTransactions();
+        $response = $electronicTransaction->getServicesPoints(new ServicesPoints([
             'latitude' => -22.89369,
             'longitude' => -47.025433,
             'namePartner' => 'TECBAN_BANCO24H',

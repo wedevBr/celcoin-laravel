@@ -9,7 +9,7 @@ use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinAssistant;
 
-class FindInstitutionsTest extends TestCase
+class StatusConsultTest extends TestCase
 {
     /**
      * @return void
@@ -20,15 +20,15 @@ class FindInstitutionsTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
-                    '%s%s',
+                    '%s%s*',
                     config('api_url'),
-                    CelcoinAssistant::FIND_INSTITUTIONS
+                    CelcoinAssistant::STATUS_CONSULT
                 ) => self::stubSuccess()
             ]
         );
 
         $assistant = new CelcoinAssistant();
-        $response = $assistant->findInstitutions();
+        $response = $assistant->statusConsult(externalNSU: 1234);
         $this->assertEquals(0, $response['status']);
     }
 
@@ -36,21 +36,19 @@ class FindInstitutionsTest extends TestCase
     {
         return Http::response(
             [
-                "convenants" => [
-                    [
-                        "timeLimit" => "12:00",
-                        "mask" => "99______________9999____________________________",
-                        "nomeconvenant" => "EXEMPLO 1",
-                        "type" => "ESTADUAL",
-                        "UF" => [
-                            "SP",
-                            "RJ"
-                        ]
-                    ]
+                "transaction" => [
+                    "authentication" => 0,
+                    "errorCode" => "061",
+                    "createDate" => "0001-01-01T00:00:00",
+                    "message" => "Transacao nao encontrada",
+                    "externalNSU" => 1234,
+                    "transactionId" => 1,
+                    "status" => 1,
+                    "externalTerminal" => null
                 ],
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0,
+                "status" => 0
             ],
             Response::HTTP_OK
         );

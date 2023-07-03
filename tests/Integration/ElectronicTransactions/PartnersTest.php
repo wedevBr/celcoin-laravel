@@ -15,7 +15,7 @@ class PartnersTest extends TestCase
     /**
      * @return void
      */
-    public function testSuccessAccountCheck()
+    public function testSuccess()
     {
         Http::fake(
             [
@@ -28,8 +28,8 @@ class PartnersTest extends TestCase
             ]
         );
 
-        $baas = new CelcoinElectronicTransactions();
-        $response = $baas->getPartners();
+        $electronicTransaction = new CelcoinElectronicTransactions();
+        $response = $electronicTransaction->getPartners();
 
         $this->assertEquals(0, $response['status']);
     }

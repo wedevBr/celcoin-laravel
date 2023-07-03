@@ -15,9 +15,17 @@ use WeDevBr\Celcoin\Enums\InstitutionsTypeEnum;
  */
 class CelcoinAssistant extends CelcoinBaseApi
 {
+    const GET_BALANCE = '/v5/merchant/balance';
+    const STATUS_CONSULT = '/v5/transactions/status-consult';
+    const GET_RECEIPT = '/v5/transactions/receipt/%s';
+    const FIND_INSTITUTIONS = '/v5/transactions/institutions';
+    const HEALTH_CHECK = '/v5/transactions/healthcheck';
+    const GET_BANKS = '/v5/transactions/banks';
+    const GET_PENDENCIES_LIST = '/v5/transactions/pendency';
+
     public function getBalance()
     {
-        return $this->get("/v5/merchant/balance");
+        return $this->get(self::GET_BALANCE);
     }
 
     public function statusConsult(
@@ -27,7 +35,7 @@ class CelcoinAssistant extends CelcoinBaseApi
         ?Carbon $operationDate = null
     ): mixed {
         return $this->get(
-            "/v5/transactions/status-consult",
+            self::STATUS_CONSULT,
             [
                 'transactionId' => $transactionId,
                 'externalNSU' => $externalNSU,
@@ -39,12 +47,12 @@ class CelcoinAssistant extends CelcoinBaseApi
 
     public function getReceipt(string $transactionId)
     {
-        return $this->get("/v5/transactions/receipt/{$transactionId}");
+        return $this->get(sprintf(self::GET_RECEIPT, $transactionId));
     }
 
     public function findInstitutions(?InstitutionsTypeEnum $type = null, ?array $uf = null)
     {
-        return $this->get("/v5/transactions/institutions", [
+        return $this->get(self::FIND_INSTITUTIONS, [
             "Type" => $type?->value,
             "UF" => $uf,
         ]);
@@ -52,7 +60,7 @@ class CelcoinAssistant extends CelcoinBaseApi
 
     public function healthCheck(?HealthCheckTypeEnum $type = null, ?HealthCheckPeriodEnum $period = null)
     {
-        return $this->get("/v5/transactions/healthcheck", [
+        return $this->get(self::HEALTH_CHECK, [
             "type" => $type?->value,
             "period" => $period?->value,
         ]);
@@ -60,11 +68,11 @@ class CelcoinAssistant extends CelcoinBaseApi
 
     public function getBanks()
     {
-        return $this->get("/v5/transactions/banks");
+        return $this->get(self::GET_BANKS);
     }
 
     public function getPendenciesList()
     {
-        return $this->get("/v5/transactions/pendency");
+        return $this->get(self::GET_PENDENCIES_LIST);
     }
 }

@@ -9,7 +9,7 @@ use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinAssistant;
 
-class FindInstitutionsTest extends TestCase
+class GetBalanceTest extends TestCase
 {
     /**
      * @return void
@@ -22,13 +22,13 @@ class FindInstitutionsTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinAssistant::FIND_INSTITUTIONS
+                    CelcoinAssistant::GET_BALANCE
                 ) => self::stubSuccess()
             ]
         );
 
         $assistant = new CelcoinAssistant();
-        $response = $assistant->findInstitutions();
+        $response = $assistant->getBalance();
         $this->assertEquals(0, $response['status']);
     }
 
@@ -36,18 +36,11 @@ class FindInstitutionsTest extends TestCase
     {
         return Http::response(
             [
-                "convenants" => [
-                    [
-                        "timeLimit" => "12:00",
-                        "mask" => "99______________9999____________________________",
-                        "nomeconvenant" => "EXEMPLO 1",
-                        "type" => "ESTADUAL",
-                        "UF" => [
-                            "SP",
-                            "RJ"
-                        ]
-                    ]
-                ],
+                "anticipated" => 0,
+                "reconcileExecuting" => "N",
+                "consumed" => 0,
+                "credit" => 0.01,
+                "balance" => 999999999.01,
                 "errorCode" => "000",
                 "message" => "SUCESSO",
                 "status" => 0,
