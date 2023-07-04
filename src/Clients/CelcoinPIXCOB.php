@@ -18,6 +18,7 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     const DELETE_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
     const GET_COB_PIX_URL = '/pix/v1/collection/pi/immediate';
     const UNLINK_COB_PIX_URL = '/pix/v1/collection/pi/immediate/%d/unlink';
+    const FETCH_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
 
     /**
      * @throws RequestException
@@ -74,6 +75,18 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     {
         return $this->patch(
             sprintf(self::UNLINK_COB_PIX_URL, $transactionId)
+        );
+    }
+
+    /**
+     * @param int $transactionId
+     * @return array
+     * @throws RequestException
+     */
+    final public function fetchCOBPIX(int $transactionId): array
+    {
+        return $this->get(
+            sprintf(self::FETCH_COB_PIX_URL, $transactionId)
         );
     }
 }
