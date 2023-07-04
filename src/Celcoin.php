@@ -154,22 +154,38 @@ class Celcoin
         return new CelcoinPIXCOB($mtlsPassphrase);
     }
 
-    public static function clientBAAS(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinBAAS
+     */
+    public static function clientBAAS(?string $mtlsPassphrase): CelcoinBAAS
     {
         return new CelcoinBAAS($mtlsPassphrase);
     }
 
-    public static function clientBAASPIX(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinBAASPIX
+     */
+    public static function clientBAASPIX(?string $mtlsPassphrase): CelcoinBAASPIX
     {
         return new CelcoinBAASPIX($mtlsPassphrase);
     }
 
-    public static function clientBAASTED(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinBAASTED
+     */
+    public static function clientBAASTED(?string $mtlsPassphrase): CelcoinBAASTED
     {
         return new CelcoinBAASTED($mtlsPassphrase);
     }
 
-    public static function clientBAASWebhooks(?string $mtlsPassphrase)
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinBAASWebhooks
+     */
+    public static function clientBAASWebhooks(?string $mtlsPassphrase): CelcoinBAASWebhooks
     {
         return new CelcoinBAASWebhooks($mtlsPassphrase);
     }

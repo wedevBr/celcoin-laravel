@@ -20,6 +20,10 @@ use WeDevBr\Celcoin\Celcoin;
  * @uses Celcoin::clientPixStaticPayment
  * @uses Celcoin::clientPixCOBV
  * @uses Celcoin::clientPixCOB
+ * @uses Celcoin::clientBAAS
+ * @uses Celcoin::clientBAASTED
+ * @uses Celcoin::clientBAASWebhooks
+ * @uses Celcoin::clientBAASPIX
  *
  */
 class CelcoinFacade extends Facade
