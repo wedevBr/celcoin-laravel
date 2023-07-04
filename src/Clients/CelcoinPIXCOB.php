@@ -17,7 +17,7 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     const UPDATE_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
     const DELETE_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
     const GET_COB_PIX_URL = '/pix/v1/collection/pi/immediate';
-    const UNLINK_COB_PIX_URL = '/pix/v1/collection/pi/immediate/unlink';
+    const UNLINK_COB_PIX_URL = '/pix/v1/collection/pi/immediate/%d/unlink';
 
     /**
      * @throws RequestException
