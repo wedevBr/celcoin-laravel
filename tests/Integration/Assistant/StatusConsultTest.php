@@ -22,7 +22,7 @@ class StatusConsultTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinAssistant::STATUS_CONSULT
+                    CelcoinAssistant::STATUS_CONSULT_ENDPOINT
                 ) => self::stubSuccess()
             ]
         );

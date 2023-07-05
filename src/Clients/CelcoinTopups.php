@@ -2,8 +2,6 @@
 
 namespace WeDevBr\Celcoin\Clients;
 
-use Carbon\Carbon;
-use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Validator;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\Topups\Cancel as TopupsCancel;
@@ -24,11 +22,18 @@ use WeDevBr\Celcoin\Types\Topups\ProvidersValues;
  */
 class CelcoinTopups extends CelcoinBaseApi
 {
+    const GET_PROVIDERS_ENDPOINT = '/v5/transactions/topups/providers';
+    const GET_PROVIDER_VALUES_ENDPOINT = '/v5/transactions/topups/provider-values';
+    const CREATE_ENDPOINT = '/v5/transactions/topups/topups';
+    const CONFIRM_ENDPOINT = '/v5/transactions/topups/%d/capture';
+    const CANCEL_ENDPOINT = '/v5/transactions/topups/%d/void';
+    const FIND_PROVIDERS_ENDPOINT = '/v5/transactions/topups/find-providers';
+
     public function getProviders(Providers $data): mixed
     {
         $body = Validator::validate($data->toArray(), TopupsProviders::rules());
         return $this->get(
-            "/v5/transactions/topups/providers",
+            self::GET_PROVIDERS_ENDPOINT,
             $body
         );
     }
@@ -37,7 +42,7 @@ class CelcoinTopups extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), TopupsProvidersValues::rules());
         return $this->get(
-            "/v5/transactions/topups/provider-values",
+            self::GET_PROVIDER_VALUES_ENDPOINT,
             $body
         );
     }
@@ -46,7 +51,7 @@ class CelcoinTopups extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), TopupsCreate::rules());
         return $this->post(
-            "/v5/transactions/topups/topups",
+            self::CREATE_ENDPOINT,
             $body
         );
     }
@@ -55,25 +60,8 @@ class CelcoinTopups extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), TopupsConfirm::rules());
         return $this->put(
-            "/v5/transactions/topups/{$transactionId}/capture",
+            sprintf(self::CONFIRM_ENDPOINT, $transactionId),
             $body
-        );
-    }
-
-    public function statusConsult(
-        ?int $transactionId = null,
-        ?int $externalNSU = null,
-        ?string $externalTerminal = null,
-        ?Carbon $operationDate = null
-    ): mixed {
-        return $this->get(
-            "/v5/transactions/status-consult",
-            [
-                'transactionId' => $transactionId,
-                'externalNSU' => $externalNSU,
-                'externalTerminal' => $externalTerminal,
-                'operationDate' => !empty($operationDate) ? $operationDate->format("Y-m-d") : null,
-            ]
         );
     }
 
@@ -81,18 +69,18 @@ class CelcoinTopups extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), TopupsCancel::rules());
         return $this->delete(
-            "/v5/transactions/topups/{$transactionId}/void",
+            sprintf(self::CANCEL_ENDPOINT, $transactionId),
             $body
         );
     }
 
-    public function findProviders(?int $statusCode = null, ?int $phoneNumber = null): mixed
+    public function findProviders(int $statusCode, int $phoneNumber): mixed
     {
         return $this->get(
-            "/v5/transactions/topups/find-providers",
+            self::FIND_PROVIDERS_ENDPOINT,
             [
-                'statusCode' => $statusCode ?? null,
-                'PhoneNumber' => $phoneNumber ?? null,
+                'statusCode' => $statusCode,
+                'PhoneNumber' => $phoneNumber,
             ]
         );
     }

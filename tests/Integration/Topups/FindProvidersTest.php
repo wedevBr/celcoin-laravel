@@ -1,16 +1,17 @@
 <?php
 
-namespace Tests\Integration\Assistant;
+namespace Tests\Integration\Topups;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Tests\GlobalStubs;
 use Tests\TestCase;
-use WeDevBr\Celcoin\Clients\CelcoinAssistant;
+use WeDevBr\Celcoin\Clients\CelcoinTopups;
 
-class GetBalanceTest extends TestCase
+class FindProvidersTest extends TestCase
 {
+
     /**
      * @return void
      */
@@ -20,15 +21,15 @@ class GetBalanceTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
-                    '%s%s',
+                    '%s%s*',
                     config('api_url'),
-                    CelcoinAssistant::GET_BALANCE_ENDPOINT
+                    CelcoinTopups::FIND_PROVIDERS_ENDPOINT
                 ) => self::stubSuccess()
             ]
         );
 
-        $assistant = new CelcoinAssistant();
-        $response = $assistant->getBalance();
+        $topups = new CelcoinTopups();
+        $response = $topups->findProviders(13, 912345678);
         $this->assertEquals(0, $response['status']);
     }
 
@@ -36,14 +37,11 @@ class GetBalanceTest extends TestCase
     {
         return Http::response(
             [
-                "anticipated" => 0,
-                "reconcileExecuting" => "N",
-                "consumed" => 0,
-                "credit" => 0.01,
-                "balance" => 999999999.01,
+                "nameProvider" => "Claro",
+                "providerId" => 2087,
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0,
+                "status" => 0
             ],
             Response::HTTP_OK
         );

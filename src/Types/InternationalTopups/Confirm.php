@@ -6,8 +6,8 @@ use WeDevBr\Celcoin\Types\Data;
 
 class Confirm extends Data
 {
-    public ?int $externalNsu;
-    public ?string $externalTerminal;
+    public int $externalNSU;
+    public string $externalTerminal;
 
     public function __construct(array $data = [])
     {

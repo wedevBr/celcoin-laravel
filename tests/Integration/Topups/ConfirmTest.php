@@ -1,16 +1,18 @@
 <?php
 
-namespace Tests\Integration\Assistant;
+namespace Tests\Integration\Topups;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Tests\GlobalStubs;
 use Tests\TestCase;
-use WeDevBr\Celcoin\Clients\CelcoinAssistant;
+use WeDevBr\Celcoin\Clients\CelcoinTopups;
+use WeDevBr\Celcoin\Types\Topups\Confirm;
 
-class FindInstitutionsTest extends TestCase
+class ConfirmTest extends TestCase
 {
+
     /**
      * @return void
      */
@@ -22,13 +24,16 @@ class FindInstitutionsTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinAssistant::FIND_INSTITUTIONS_ENDPOINT
+                    sprintf(CelcoinTopups::CONFIRM_ENDPOINT, 9173139)
                 ) => self::stubSuccess()
             ]
         );
 
-        $assistant = new CelcoinAssistant();
-        $response = $assistant->findInstitutions();
+        $topups = new CelcoinTopups();
+        $response = $topups->confirm(9173139, new Confirm([
+            "externalNSU" => 1234,
+            "externalTerminal" => "1123123123"
+        ]));
         $this->assertEquals(0, $response['status']);
     }
 
@@ -36,21 +41,9 @@ class FindInstitutionsTest extends TestCase
     {
         return Http::response(
             [
-                "convenants" => [
-                    [
-                        "timeLimit" => "12:00",
-                        "mask" => "99______________9999____________________________",
-                        "nomeconvenant" => "EXEMPLO 1",
-                        "type" => "ESTADUAL",
-                        "UF" => [
-                            "SP",
-                            "RJ"
-                        ]
-                    ]
-                ],
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0,
+                "status" => 0
             ],
             Response::HTTP_OK
         );

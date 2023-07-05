@@ -22,7 +22,7 @@ class PendenciesTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinAssistant::GET_PENDENCIES_LIST
+                    CelcoinAssistant::GET_PENDENCIES_LIST_ENDPOINT
                 ) => self::stubSuccess()
             ]
         );

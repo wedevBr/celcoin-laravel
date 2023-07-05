@@ -28,7 +28,6 @@ class CelcoinBillPayment extends CelcoinBaseApi
     const CONFIRM_ENDPOINT = '/v5/transactions/billpayments/%d/capture';
     const CANCEL_ENDPOINT = '/v5/transactions/billpayments/%d/void';
     const REVERSE_ENDPOINT = '/v5/transactions/billpayments/%d/revers';
-    const STATUS_CONSULT_ENDPOINT = '/v5/transactions/status-consult';
     const GET_OCCURRENCES_ENDPOINT = '/v5/transactions/occurrency';
 
     public function authorize(Authorize $data): mixed
@@ -75,23 +74,6 @@ class CelcoinBillPayment extends CelcoinBaseApi
     {
         return $this->delete(
             sprintf(self::REVERSE_ENDPOINT, $transactionId),
-        );
-    }
-
-    public function statusConsult(
-        ?int $transactionId = null,
-        ?int $externalNSU = null,
-        ?string $externalTerminal = null,
-        ?Carbon $operationDate = null
-    ): mixed {
-        return $this->get(
-            self::STATUS_CONSULT_ENDPOINT,
-            [
-                'transactionId' => $transactionId,
-                'externalNSU' => $externalNSU,
-                'externalTerminal' => $externalTerminal,
-                'operationDate' => !empty($operationDate) ? $operationDate->format("Y-m-d") : null,
-            ]
         );
     }
 

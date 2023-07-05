@@ -22,7 +22,7 @@ class BanksTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinAssistant::GET_BANKS
+                    CelcoinAssistant::GET_BANKS_ENDPOINT
                 ) => self::stubSuccess()
             ]
         );

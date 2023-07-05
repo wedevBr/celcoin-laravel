@@ -23,7 +23,7 @@ class HealthCheckTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinAssistant::HEALTH_CHECK
+                    CelcoinAssistant::HEALTH_CHECK_ENDPOINT
                 ) => self::stubSuccess()
             ]
         );

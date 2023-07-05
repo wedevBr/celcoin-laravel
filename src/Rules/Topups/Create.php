@@ -7,10 +7,10 @@ class Create
     public static function rules()
     {
         return [
-            'externalTerminal' => ['nullable', 'string'],
-            'externalNsu' => ['nullable', 'numeric'],
-            'topupData' => ['nullable', 'array'],
-            'topupData.value' => ['nullable', 'numeric'],
+            'externalTerminal' => ['required', 'string'],
+            'externalNsu' => ['required', 'integer'],
+            'topupData' => ['required', 'array'],
+            'topupData.value' => ['required', 'decimal:0,2'],
             'cpfCnpj' => ['required', 'string'],
             'signerCode' => ['nullable', 'string'],
             'providerId' => ['required', 'numeric'],

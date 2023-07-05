@@ -22,7 +22,7 @@ class GetReceiptTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinAssistant::GET_RECEIPT, 1)
+                    sprintf(CelcoinAssistant::GET_RECEIPT_ENDPOINT, 1)
                 ) => self::stubSuccess()
             ]
         );

@@ -1,16 +1,17 @@
 <?php
 
-namespace Tests\Integration\Assistant;
+namespace Tests\Integration\TopupsInternational;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Tests\GlobalStubs;
 use Tests\TestCase;
-use WeDevBr\Celcoin\Clients\CelcoinAssistant;
+use WeDevBr\Celcoin\Clients\CelcoinInternationalTopups;
 
-class FindInstitutionsTest extends TestCase
+class GetCountriesTest extends TestCase
 {
+
     /**
      * @return void
      */
@@ -20,15 +21,15 @@ class FindInstitutionsTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
-                    '%s%s',
+                    '%s%s*',
                     config('api_url'),
-                    CelcoinAssistant::FIND_INSTITUTIONS_ENDPOINT
+                    CelcoinInternationalTopups::GET_COUNTRIES_ENDPOINT
                 ) => self::stubSuccess()
             ]
         );
 
-        $assistant = new CelcoinAssistant();
-        $response = $assistant->findInstitutions();
+        $topups = new CelcoinInternationalTopups();
+        $response = $topups->getCountries();
         $this->assertEquals(0, $response['status']);
     }
 
@@ -36,16 +37,11 @@ class FindInstitutionsTest extends TestCase
     {
         return Http::response(
             [
-                "convenants" => [
+                "countrys" => [
                     [
-                        "timeLimit" => "12:00",
-                        "mask" => "99______________9999____________________________",
-                        "nomeconvenant" => "EXEMPLO 1",
-                        "type" => "ESTADUAL",
-                        "UF" => [
-                            "SP",
-                            "RJ"
-                        ]
+                        "flagURL" => "https://restcountries.eu/data/guf.svg",
+                        "code" => "+594",
+                        "name" => "French Guiana",
                     ]
                 ],
                 "errorCode" => "000",

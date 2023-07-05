@@ -1,16 +1,18 @@
 <?php
 
-namespace Tests\Integration\Assistant;
+namespace Tests\Integration\TopupsInternational;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Tests\GlobalStubs;
 use Tests\TestCase;
-use WeDevBr\Celcoin\Clients\CelcoinAssistant;
+use WeDevBr\Celcoin\Clients\CelcoinInternationalTopups;
+use WeDevBr\Celcoin\Types\InternationalTopups\Confirm;
 
-class FindInstitutionsTest extends TestCase
+class ConfirmTest extends TestCase
 {
+
     /**
      * @return void
      */
@@ -22,13 +24,16 @@ class FindInstitutionsTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinAssistant::FIND_INSTITUTIONS_ENDPOINT
+                    sprintf(CelcoinInternationalTopups::CONFIRM_ENDPOINT, 816057734)
                 ) => self::stubSuccess()
             ]
         );
 
-        $assistant = new CelcoinAssistant();
-        $response = $assistant->findInstitutions();
+        $topups = new CelcoinInternationalTopups();
+        $response = $topups->confirm(816057734, new Confirm([
+            "externalNSU" => 123,
+            "externalTerminal" => "41233"
+        ]));
         $this->assertEquals(0, $response['status']);
     }
 
@@ -36,21 +41,9 @@ class FindInstitutionsTest extends TestCase
     {
         return Http::response(
             [
-                "convenants" => [
-                    [
-                        "timeLimit" => "12:00",
-                        "mask" => "99______________9999____________________________",
-                        "nomeconvenant" => "EXEMPLO 1",
-                        "type" => "ESTADUAL",
-                        "UF" => [
-                            "SP",
-                            "RJ"
-                        ]
-                    ]
-                ],
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0,
+                "status" => 0
             ],
             Response::HTTP_OK
         );

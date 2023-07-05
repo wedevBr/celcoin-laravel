@@ -2,14 +2,18 @@
 
 namespace WeDevBr\Celcoin\Rules\Topups;
 
+use Illuminate\Validation\Rule;
+use WeDevBr\Celcoin\Enums\TopupProvidersCategoryEnum;
+use WeDevBr\Celcoin\Enums\TopupProvidersTypeEnum;
+
 class Providers
 {
     public static function rules()
     {
         return [
-            "stateCode" => ['nullable', 'numeric'],
-            "type" => ['nullable', 'in:0,1,2'],
-            "category" =>  ['nullable', 'in:0,1,2,3,4,5'],
+            "stateCode" => ['required', 'integer'],
+            "type" => ['required', Rule::in(array_column(TopupProvidersTypeEnum::cases(), 'value'))],
+            "category" =>  ['required', Rule::in(array_column(TopupProvidersCategoryEnum::cases(), 'value'))],
         ];
     }
 }
