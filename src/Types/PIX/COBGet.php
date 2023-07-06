@@ -4,15 +4,12 @@ namespace WeDevBr\Celcoin\Types\PIX;
 
 use WeDevBr\Celcoin\Types\Data;
 
-class DICT extends Data
+class COBGet extends Data
 {
-    public string $payerId;
-    public string $key;
-    public array $keys;
+    public string $transactionId;
+    public string $transactionIdentification;
+    public string $clientRequestId;
 
-    /**
-     * @param array $data
-     */
     public function __construct(array $data = [])
     {
         parent::__construct($data);

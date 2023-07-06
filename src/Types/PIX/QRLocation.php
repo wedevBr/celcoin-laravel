@@ -7,7 +7,6 @@ use WeDevBr\Celcoin\Types\Data;
 class QRLocation extends Data
 {
     public string $clientRequestId;
-
     public string $type;
     public Merchant $merchant;
 

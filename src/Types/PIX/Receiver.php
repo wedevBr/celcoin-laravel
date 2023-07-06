@@ -15,6 +15,9 @@ class Receiver extends Data
     public string $state;
     public string $fantasyName;
 
+    /**
+     * @param array $data
+     */
     public function __construct(array $data = [])
     {
         parent::__construct($data);

@@ -47,18 +47,18 @@ class PixGetLocationTest extends TestCase
     {
         return Http::response(
             [
-                "status" => "CREATED",
-                "clientRequestId" => "SANDBOXkk6g232xel65a0daee4dd13kk13040300",
-                "merchant" => [
-                    "postalCode" => "01201005",
-                    "city" => "Barueri",
-                    "merchantCategoryCode" => "0000",
-                    "name" => "Celcoin"
+                'status' => 'CREATED',
+                'clientRequestId' => 'SANDBOXkk6g232xel65a0daee4dd13kk13040300',
+                'merchant' => [
+                    'postalCode' => '01201005',
+                    'city' => 'Barueri',
+                    'merchantCategoryCode' => '0000',
+                    'name' => 'Celcoin'
                 ],
-                "url" => "api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e",
-                "emv" => "00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e5204000053039865802BR5907Celcoin6007Barueri61080120100562070503***630411BD",
-                "type" => "COBV",
-                "locationId" => 12731081
+                'url' => 'api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e',
+                'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e5204000053039865802BR5907Celcoin6007Barueri61080120100562070503***630411BD',
+                'type' => 'COBV',
+                'locationId' => 12731081
             ],
             Response::HTTP_OK
         );
@@ -99,9 +99,9 @@ class PixGetLocationTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            [fn() => self::stubGenericError(400), 400],
-            [fn() => self::stubGenericError(404), 404],
-            [fn() => self::stubGenericError(500), 500],
+            'status code 400' => [fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST), Response::HTTP_BAD_REQUEST],
+            'status code 404' => [fn() => self::stubGenericError(Response::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND],
+            'status code 500' => [fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
         ];
     }
 

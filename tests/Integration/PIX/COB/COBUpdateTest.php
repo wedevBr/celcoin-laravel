@@ -95,7 +95,7 @@ class COBUpdateTest extends TestCase
         ]);
         $cob->debtor = new Debtor([
             'name' => 'Fulano de Tal',
-            "cnpj" => "61360961000100",
+            'cnpj' => '61360961000100',
         ]);
         $cob->additionalInformation[] = new AdditionalInformation(
             [
@@ -116,30 +116,33 @@ class COBUpdateTest extends TestCase
     /**
      * @throws RequestException
      */
-    final public function testCreateCobWithCobvLocation(): void
+    final public function testCreateCobWithCobLocation(): void
     {
         $transactionId = 123456;
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXCOB::UPDATE_COB_PIX_URL, $transactionId) => self::stubCOBVError(),
+                sprintf(CelcoinPIXCOB::UPDATE_COB_PIX_URL, $transactionId) => self::stubCOBError(),
             ]
         );
         $this->expectException(RequestException::class);
 
-        $pixCOB = new CelcoinPIXCOB();
-        $result = $pixCOB->updateCOBPIX($transactionId, self::fakeCOBBody());
-
-        $this->assertEquals('PBE318', $result['erCrorCode']);
-        $this->assertEquals("Can't create a new Pix Collection when there is another Pix Collection active with the same location.", $result['message']);
-
+        try {
+            $pixCOB = new CelcoinPIXCOB();
+            $pixCOB->updateCOBPIX($transactionId, self::fakeCOBBody());
+        } catch (RequestException $throwable) {
+            $result = $throwable->response->json();
+            $this->assertEquals('PBE318', $result['errorCode']);
+            $this->assertEquals('Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.', $result['message']);
+            throw $throwable;
+        }
     }
 
-    private static function stubCOBVError(): PromiseInterface
+    private static function stubCOBError(): PromiseInterface
     {
         return Http::response([
-            "message" => "Can't create a new Pix Collection when there is another Pix Collection active with the same location.",
-            "errorCode" => "PBE318"
+            'message' => 'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
+            'errorCode' => 'PBE318'
         ],
             Response::HTTP_BAD_REQUEST
         );
@@ -155,10 +158,13 @@ class COBUpdateTest extends TestCase
         $cob->debtor = new Debtor([]);
 
         $this->expectException(ValidationException::class);
-        $this->expectExceptionMessage(__('required', ['attribute' => 'debtor.cpf', 'required_without:debtor.cnpj']));
-        $this->expectExceptionMessage(__('required', ['attribute' => 'debtor.cnpj', 'required_without:debtor.cpf']));
-
-        $pixCOB->updateCOBPIX($transactionId, $cob);
+        try {
+            $pixCOB->updateCOBPIX($transactionId, $cob);
+        } catch (ValidationException $throwable) {
+            $this->assertArrayHasKey('debtor.cpf', $throwable->errors());
+            $this->assertArrayHasKey('debtor.cnpj', $throwable->errors());
+            throw $throwable;
+        }
     }
 
     /**
@@ -170,7 +176,7 @@ class COBUpdateTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXCOB::UPDATE_COB_PIX_URL, $transactionId) => self::stubCOBVError(),
+                sprintf(CelcoinPIXCOB::UPDATE_COB_PIX_URL, $transactionId) => self::stubCOBError(),
             ]
         );
         $pixCOB = new CelcoinPIXCOB();
@@ -184,22 +190,26 @@ class COBUpdateTest extends TestCase
      */
     final public function testUpdateCobAdditionalInformationRules(): void
     {
+        /**
+         * @var $pixCOB CelcoinPIXCOB
+         */
         [$transactionId, $pixCOB, $cob] = $this->cobObjectUpdate();
 
         unset($cob->additionalInformation);
         $cob->additionalInformation[] = new AdditionalInformation([
-            'value' => 'teste'
+            'value' => 'valor'
         ]);
         $cob->additionalInformation[] = new AdditionalInformation([
-            'key' => 'teste'
+            'key' => 'chage'
         ]);
 
         $this->expectException(ValidationException::class);
-        $this->expectExceptionMessage(__('required', ['attribute' => 'additionalInformation.*.value', 'required_with:key']));
-        $this->expectExceptionMessage(__('required', ['attribute' => 'additionalInformation.*.key', 'required_with:value']));
-
-        $pixCOB->updateCOBPIX($transactionId, $cob);
+        try {
+            $pixCOB->updateCOBPIX($transactionId, $cob);
+        } catch (ValidationException $throwable) {
+            $this->assertArrayHasKey('additionalInformation.1.value', $throwable->errors());
+            $this->assertArrayHasKey('additionalInformation.0.key', $throwable->errors());
+            throw $throwable;
+        }
     }
-
-
 }

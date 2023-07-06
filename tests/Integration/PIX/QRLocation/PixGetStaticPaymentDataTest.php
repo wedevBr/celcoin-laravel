@@ -98,10 +98,12 @@ class PixGetStaticPaymentDataTest extends TestCase
     }
 
     /**
+     * @param string $key
      * @return void
      * @throws RequestException
+     * @dataProvider createErrorDataProvider
      */
-    final public function testValidationError(): void
+    final public function testValidationError(string $key): void
     {
         Http::fake(
             [
@@ -114,8 +116,13 @@ class PixGetStaticPaymentDataTest extends TestCase
             ]
         );
         $this->expectException(ValidationException::class);
-        $pix = new CelcoinPixStaticPayment();
-        $pix->getStaticPaymentData([]);
+        try {
+            $pix = new CelcoinPixStaticPayment();
+            $pix->getStaticPaymentData([]);
+        } catch (ValidationException $exception) {
+            $this->assertArrayHasKey($key, $exception->errors());
+            throw $exception;
+        }
     }
 
     /**
@@ -145,13 +152,24 @@ class PixGetStaticPaymentDataTest extends TestCase
         $this->assertEquals($status, $response['code']);
     }
 
+    /**
+     * @return array[]
+     */
+    final public function createErrorDataProvider(): array
+    {
+        return [
+            'required transactionIdBrcode' => ['transactionIdBrcode'],
+            'required transactionIdentification' => ['transactionIdentification'],
+        ];
+    }
+
     private function searchDataProvider(): array
     {
         return [
-            [
+            'searching by transactionIdBrcode' => [
                 ['transactionIdBrcode' => 12345345]
             ],
-            [
+            'searching by transactionIdentification' => [
                 ['transactionIdentification' => 'kk6g232xel65a0daee4dd13kk479195205']
             ],
         ];
@@ -163,9 +181,9 @@ class PixGetStaticPaymentDataTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            [fn() => self::stubGenericError(400), 400, ['transactionIdBrcode' => 12345345]],
-            [fn() => self::stubGenericError(404), 404, ['transactionIdBrcode' => 12345345]],
-            [fn() => self::stubGenericError(500), 500, ['transactionIdBrcode' => 12345345]],
+            'status code 400' => [fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST), Response::HTTP_BAD_REQUEST, ['transactionIdBrcode' => 12345345]],
+            'status code 404' => [fn() => self::stubGenericError(Response::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND, ['transactionIdBrcode' => 12345345]],
+            'status code 500' => [fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR, ['transactionIdBrcode' => 12345345]],
         ];
     }
 

@@ -2,7 +2,6 @@
 
 namespace WeDevBr\Celcoin\Types\PIX;
 
-use WeDevBr\Celcoin\Enums\AmountDiscountModalityTypeEnum;
 use WeDevBr\Celcoin\Types\Data;
 
 class AmountDicount extends Data
@@ -12,9 +11,11 @@ class AmountDicount extends Data
     public string $modality;
     public string $amountPerc;
 
+    /**
+     * @param array $data
+     */
     public function __construct(array $data = [])
     {
         parent::__construct($data);
     }
-
 }
