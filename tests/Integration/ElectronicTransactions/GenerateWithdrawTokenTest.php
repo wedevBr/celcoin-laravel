@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Http;
 use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
-use WeDevBr\Celcoin\Types\ElectronicTransactions\Withdraw;
 use WeDevBr\Celcoin\Types\ElectronicTransactions\WithdrawToken;
 
 class GenerateWithdrawTokenTest extends TestCase

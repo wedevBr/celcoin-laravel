@@ -2,12 +2,15 @@
 
 namespace WeDevBr\Celcoin\Rules\DDA;
 
+use Illuminate\Validation\Rule;
+use WeDevBr\Celcoin\Enums\DDAWebhooksTypeEventEnum;
+
 class RegisterWebhooks
 {
     public static function rules()
     {
         return [
-            "typeEventWebhook" => ['required', 'in:Subscription,Deletion,Invoice'],
+            "typeEventWebhook" => ['required', Rule::in(array_column(DDAWebhooksTypeEventEnum::cases(), 'value'))],
             "url" => ['required', 'string'],
             "basicAuthentication" => ['nullable', 'array'],
             "basicAuthentication.identification" => ['nullable', 'string'],

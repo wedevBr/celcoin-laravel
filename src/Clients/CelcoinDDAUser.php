@@ -16,11 +16,15 @@ use WeDevBr\Celcoin\Types\DDA\RemoveUser;
  */
 class CelcoinDDAUser extends CelcoinBaseApi
 {
+
+    const REGISTER_ENDPOINT = '/dda-subscription-webservice/v1/subscription/Register';
+    const REMOVE_ENDPOINT = 'dda-subscription-webservice/v1/subscription/Register';
+
     public function register(RegisterUser $data)
     {
         $body = Validator::validate($data->toArray(), DDARegisterUser::rules());
         return $this->post(
-            "/dda-subscription-webservice/v1/subscription/Register",
+            self::REGISTER_ENDPOINT,
             $body
         );
     }
@@ -28,8 +32,8 @@ class CelcoinDDAUser extends CelcoinBaseApi
     public function remove(RemoveUser $data)
     {
         $body = Validator::validate($data->toArray(), DDARemoveUser::rules());
-        return $this->get(
-            "dda-subscription-webservice/v1/subscription/Register",
+        return $this->delete(
+            self::REMOVE_ENDPOINT,
             $body
         );
     }

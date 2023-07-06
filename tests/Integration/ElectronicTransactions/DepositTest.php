@@ -9,7 +9,6 @@ use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
 use WeDevBr\Celcoin\Types\ElectronicTransactions\Deposit;
-use WeDevBr\Celcoin\Types\ElectronicTransactions\Withdraw;
 
 class DepositTest extends TestCase
 {
