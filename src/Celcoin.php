@@ -16,6 +16,7 @@ use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDICT;
+use WeDevBr\Celcoin\Clients\CelcoinPIXDynamic;
 use WeDevBr\Celcoin\Clients\CelcoinPIXParticipants;
 use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
 use WeDevBr\Celcoin\Clients\CelcoinPixStaticPayment;
@@ -188,5 +189,14 @@ class Celcoin
     public static function clientBAASWebhooks(?string $mtlsPassphrase): CelcoinBAASWebhooks
     {
         return new CelcoinBAASWebhooks($mtlsPassphrase);
+    }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinPIXDynamic
+     */
+    public static function clientPIXDynamic(?string $mtlsPassphrase): CelcoinPIXDynamic
+    {
+        return new CelcoinPIXDynamic($mtlsPassphrase);
     }
 }

@@ -24,6 +24,7 @@ use WeDevBr\Celcoin\Celcoin;
  * @uses Celcoin::clientBAASTED
  * @uses Celcoin::clientBAASWebhooks
  * @uses Celcoin::clientBAASPIX
+ * @uses Celcoin::clientPIXDynamic
  *
  */
 class CelcoinFacade extends Facade
