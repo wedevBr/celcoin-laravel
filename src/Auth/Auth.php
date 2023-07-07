@@ -2,6 +2,7 @@
 
 namespace WeDevBr\Celcoin\Auth;
 
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use WeDevBr\Celcoin\Events\CelcoinAuthenticatedEvent;
 
@@ -117,6 +118,7 @@ final class Auth
 
     /**
      * @return string
+     * @throws RequestException
      */
     public function getToken()
     {
@@ -147,6 +149,7 @@ final class Auth
 
     /**
      * @return void
+     * @throws RequestException
      */
     private function auth(): void
     {

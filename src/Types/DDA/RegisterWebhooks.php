@@ -2,11 +2,12 @@
 
 namespace WeDevBr\Celcoin\Types\DDA;
 
+use WeDevBr\Celcoin\Enums\DDAWebhooksTypeEventEnum;
 use WeDevBr\Celcoin\Types\Data;
 
 class RegisterWebhooks extends Data
 {
-    public string $typeEventWebhook;
+    public DDAWebhooksTypeEventEnum $typeEventWebhook;
     public string $url;
     public ?BasicAuthentication $basicAuthentication;
     public ?OAuthTwo $oAuthTwo;

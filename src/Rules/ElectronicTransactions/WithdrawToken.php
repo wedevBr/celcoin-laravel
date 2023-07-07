@@ -11,7 +11,7 @@ class WithdrawToken
             'externalTerminal' => ['nullable', 'string'],
             'receivingDocument' => ['required', 'string'],
             'receivingName' => ['required', 'string'],
-            'value' => ['required', 'string'],
+            'value' => ['required', 'decimal:0,2'],
         ];
     }
 }

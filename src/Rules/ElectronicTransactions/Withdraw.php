@@ -14,7 +14,7 @@ class Withdraw
             'transactionIdentifier' => ['required', 'string'],
             'receivingName' => ['required', 'string'],
             'namePartner' => ['required', 'in:TECBAN_BANCO24H'],
-            'value' => ['required', 'string'],
+            'value' => ['required', 'decimal:0,2'],
             'secondAuthentication' => ['nullable', 'array'],
             'secondAuthentication.dataForSecondAuthentication' => ['nullable', 'string'],
             'secondAuthentication.textForSecondIdentification' => ['nullable', 'string'],

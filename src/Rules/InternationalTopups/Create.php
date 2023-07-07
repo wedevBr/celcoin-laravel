@@ -7,15 +7,15 @@ class Create
     public static function rules()
     {
         return [
-            'externalTerminal' => ['nullable', 'string'],
-            'externalNsu' => ['nullable', 'numeric'],
-            'cpfCnpj' => ['nullable', 'string'],
+            'externalTerminal' => ['required', 'string'],
+            'externalNsu' => ['required', 'integer'],
+            'cpfCnpj' => ['required', 'string'],
             'phone' => ['required', 'array'],
             'phone.number' => ['required', 'string'],
-            'phone.countryCode' => ['nullable', 'numeric'],
-            'phone.stateCode' => ['nullable', 'numeric'],
-            'value' => ['nullable', 'string'],
-            'topupProductId' => ['nullable', 'string'],
+            'phone.countryCode' => ['required', 'integer'],
+            'phone.stateCode' => ['nullable', 'integer'],
+            'value' => ['required', 'decimal:0,4'],
+            'topupProductId' => ['required', 'string'],
         ];
     }
 }

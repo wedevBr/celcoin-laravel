@@ -10,9 +10,9 @@ class ServicesPoints
             'latitude' => ['required', 'numeric'],
             'longitude' => ['required', 'numeric'],
             'namePartner' => ['required', 'string'],
-            'radius' => ['required', 'numeric'],
-            'page' => ['required', 'numeric'],
-            'size' => ['required', 'numeric'],
+            'radius' => ['required', 'integer'],
+            'page' => ['required', 'integer'],
+            'size' => ['required', 'integer'],
         ];
     }
 }

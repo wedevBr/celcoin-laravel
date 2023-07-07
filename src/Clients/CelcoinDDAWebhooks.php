@@ -14,17 +14,21 @@ use WeDevBr\Celcoin\Types\DDA\RegisterWebhooks;
  */
 class CelcoinDDAWebhooks extends CelcoinBaseApi
 {
+
+    const REGISTER_ENDPOINT = '/dda-servicewebhook-webservice/v1/webhook/register';
+    const LIST_ENDPOINT = '/dda-servicewebhook-webservice/v1/webhook/routes';
+
     public function register(RegisterWebhooks $data)
     {
         $body = Validator::validate($data->toArray(), DDARegisterWebhooks::rules());
         return $this->post(
-            "/dda-servicewebhook-webservice/v1/webhook/register",
+            self::REGISTER_ENDPOINT,
             $body
         );
     }
 
     public function list()
     {
-        return $this->get("/dda-servicewebhook-webservice/v1/webhook/routes");
+        return $this->get(self::LIST_ENDPOINT);
     }
 }

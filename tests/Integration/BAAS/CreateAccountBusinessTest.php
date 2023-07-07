@@ -2,12 +2,14 @@
 
 namespace Tests\Integration\BAAS;
 
+use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
 use WeDevBr\Celcoin\Enums\AccountOnboardingTypeEnum;
 use WeDevBr\Celcoin\Types\BAAS\AccountBusiness;
-use WeDevBr\Celcoin\Types\BAAS\Address;
-use WeDevBr\Celcoin\Types\BAAS\Owner;
 
 class CreateAccountBusinessTest extends TestCase
 {
@@ -15,45 +17,89 @@ class CreateAccountBusinessTest extends TestCase
     /**
      * @return void
      */
-    public function testSuccessCreateAccountBusiness()
+    public function testSuccess()
     {
+        $fake = fake('pt_BR');
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                sprintf(
+                    '%s%s',
+                    config('api_url'),
+                    CelcoinBAAS::CREATE_ACCOUNT_BUSINESS
+                ) => self::stubSuccess()
+            ]
+        );
+
         $baas = new CelcoinBAAS();
-        $accountBusiness = new AccountBusiness();
-        $accountBusiness->clientCode = '8b6e666a-0869-46bc-87d8-b32b9d5e1d06';
-        $accountBusiness->accountOnboardingType = AccountOnboardingTypeEnum::from('BANKACCOUNT');
-        $accountBusiness->documentNumber = '93932977000128';
-        $accountBusiness->contactNumber = '+551239215555';
-        $accountBusiness->businessEmail = 'teste@email.com';
-        $accountBusiness->businessName = 'Julia e Kaique Mudancas ME';
-        $accountBusiness->tradingName = 'IPay Julia';
 
-        $address = new Address();
-        $address->postalCode = '88080320';
-        $address->street = 'Rua Sao Cristovao';
-        $address->number = '620';
-        $address->addressComplement = 'CJ 1604';
-        $address->neighborhood = 'Coqueiros';
-        $address->city = 'Florianopolis';
-        $address->state = 'SC';
-        $address->longitude = '-23.6288';
-        $address->latitude = '-46.6488';
+        $firstBusinessName = $fake->firstName();
+        $lastBusinessName = $fake->lastName();
 
-        $owner = new Owner();
-        $owner->documentNumber = '21025996046';
-        $owner->fullName = 'Julia Kaique';
-        $owner->phoneNumber = '+5512981175554';
-        $owner->email = 'teste@email.com';
-        $owner->motherName = 'Maria Julia Kaique';
-        $owner->socialName = 'Maria';
-        $owner->birthDate = '02-04-2016';
-        $owner->address = $address;
-        $owner->isPoliticallyExposedPerson = false;
+        $firstName = $fake->firstName();
+        $lastName = $fake->lastName();
 
-        $accountBusiness->owner = [$owner];
-        $accountBusiness->businessAddress = $address;
+        $response = $baas->createAccountBusiness(new AccountBusiness(
+            [
+                "clientCode" => $fake->uuid(),
+                "accountOnboardingType" => AccountOnboardingTypeEnum::BANK_ACCOUNT,
+                "documentNumber" => $fake->cnpj(false),
+                "contactNumber" => sprintf('+5511%s', $fake->cellphone(false)),
+                "businessEmail" => $fake->email(),
+                "businessName" => sprintf('%s %s LTDA', $firstBusinessName, $lastBusinessName),
+                "tradingName" => $firstBusinessName,
+                "owner" => [
+                    [
+                        "documentNumber" => $fake->cpf(false),
+                        "phoneNumber" => sprintf('+5511%s', $fake->cellphone(false)),
+                        "email" => $fake->email(),
+                        "motherName" => sprintf('%s %s', $fake->firstNameFemale(), $fake->lastName()),
+                        "fullName" => sprintf('%s %s', $firstName, $lastName),
+                        "socialName" => $firstName,
+                        "birthDate" => '15-01-1981',
+                        "address" => [
+                            "postalCode" => '01153000',
+                            "street" => $fake->streetName(),
+                            "number" => $fake->buildingNumber(),
+                            "addressComplement" => "Em frente ao parque.",
+                            "neighborhood" => 'Centro',
+                            "city" => $fake->city(),
+                            "state" => $fake->stateAbbr(),
+                            "longitude" => $fake->longitude(-23, -24),
+                            "latitude" => $fake->latitude(-46, -47)
+                        ],
+                        "isPoliticallyExposedPerson" => false
+                    ]
+                ],
+                "businessAddress" => [
+                    "postalCode" => '01153000',
+                    "street" => $fake->streetName(),
+                    "number" => $fake->buildingNumber(),
+                    "addressComplement" => "Em frente ao parque.",
+                    "neighborhood" => 'Centro',
+                    "city" => $fake->city(),
+                    "state" => $fake->stateAbbr(),
+                    "longitude" => $fake->longitude(-23, -24),
+                    "latitude" => $fake->latitude(-46, -47)
+                ],
+                "cadastraChavePix" => false
+            ]
+        ));
 
-        $baas->createAccountBusiness($accountBusiness);
+        $this->assertEquals('PROCESSING', $response['status']);
+    }
 
-        $this->assertTrue($baas instanceof CelcoinBAAS);
+    static private function stubSuccess(): PromiseInterface
+    {
+        return Http::response(
+            [
+                "version" => "1.0.0",
+                "status" => "PROCESSING",
+                "body" => [
+                    "onBoardingId" => "39c8e322-9192-498d-947e-2daa4dfc749e"
+                ]
+            ],
+            Response::HTTP_OK
+        );
     }
 }

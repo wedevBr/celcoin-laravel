@@ -6,9 +6,9 @@ use WeDevBr\Celcoin\Types\Data;
 
 class Create extends Data
 {
-    public ?string $externalTerminal;
-    public ?int $externalNsu;
-    public ?TopupData $topupData;
+    public string $externalTerminal;
+    public int $externalNsu;
+    public TopupData $topupData;
     public string $cpfCnpj;
     public ?string $signerCode;
     public int $providerId;

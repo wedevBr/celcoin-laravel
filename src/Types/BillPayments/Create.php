@@ -10,8 +10,8 @@ use WeDevBr\Celcoin\Types\Data;
  */
 class Create extends Data
 {
-    public ?string $externalNSU;
-    public ?int $externalTerminal;
+    public ?int $externalNSU;
+    public ?string $externalTerminal;
     public string $cpfcnpj;
     public BillData $billData;
     public ?InfoBearer $infoBearer;

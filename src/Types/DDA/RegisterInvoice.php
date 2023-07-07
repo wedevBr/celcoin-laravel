@@ -10,11 +10,6 @@ class RegisterInvoice extends Data
 
     public function __construct(array $data = [])
     {
-        $this->documents = [];
-        foreach ($data as $value) {
-            if (is_string($value)) {
-                $this->documents[] = $value;
-            }
-        }
+        parent::__construct($data);
     }
 }

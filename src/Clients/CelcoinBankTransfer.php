@@ -15,11 +15,14 @@ use WeDevBr\Celcoin\Types\BankTransfer\Create;
  */
 class CelcoinBankTransfer extends CelcoinBaseApi
 {
+    const CREATE_ENDPOINT = '/v5/transactions/banktransfer';
+    const GET_STATUS_TRANSFER_ENDPOINT = '/v5/transactions/banktransfer/status-transfer/%d';
+
     public function create(Create $data)
     {
         $body = Validator::validate($data->toArray(), BankTransferCreate::rules());
         return $this->post(
-            "/v5/transactions/banktransfer",
+            self::CREATE_ENDPOINT,
             $body
         );
     }
@@ -27,11 +30,11 @@ class CelcoinBankTransfer extends CelcoinBaseApi
     public function getStatusTransfer(int $transactionId, ?int $nsuExterno = null, ?string $terminalIdExterno = null, ?Carbon $dataOperacao = null)
     {
         return $this->get(
-            "/v5/transactions/banktransfer/status-transfer/{$transactionId}",
+            sprintf(self::GET_STATUS_TRANSFER_ENDPOINT, $transactionId),
             [
                 'nsuExterno' => $nsuExterno,
                 'terminalIdExterno' => $terminalIdExterno,
-                'dataOperacao' => !empty($dataOperacao) ? $dataOperacao->format("Y-m-d") : null,
+                'dataOperacao' => !empty($dataOperacao) ? $dataOperacao->format('Y-m-d') : null,
             ]
         );
     }

@@ -25,7 +25,6 @@ class AccountBusiness extends Data
         $data['owner'] = is_array($data['owner'] ?? null)
             ? array_map(fn ($owner) => new Owner(is_array($owner) ? $owner : []), $data['owner'])
             : null;
-        // $data['owner'] = new Owner($data['owner'] ?? []);
         $data['businessAddress'] = new Address($data['businessAddress'] ?? []);
         parent::__construct($data);
     }

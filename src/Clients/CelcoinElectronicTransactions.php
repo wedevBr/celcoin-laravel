@@ -22,9 +22,16 @@ use WeDevBr\Celcoin\Types\ElectronicTransactions\WithdrawToken;
  */
 class CelcoinElectronicTransactions extends CelcoinBaseApi
 {
+
+    const GET_PARTNERS_ENDPOINT = '/v5/transactions/electronictransactions/consult-partners';
+    const GET_SERVICES_POINTS_ENDPOINT = '/v5/transactions/electronictransactions/consult-servicespoints';
+    const DEPOSIT_ENDPOINT = '/v5/transactions/electronictransactions/electronic-payment';
+    const WITHDRAW_ENDPOINT = '/v5/transactions/electronictransactions/electronic-receipt';
+    const GENERATE_WITHDRAW_TOKEN_ENDPOINT = '/v5/transactions/electronictransactions/withdraw-thirdparty';
+
     public function getPartners()
     {
-        return $this->get("/v5/transactions/electronictransactions/consult-partners");
+        return $this->get(self::GET_PARTNERS_ENDPOINT);
     }
 
     /**
@@ -35,7 +42,7 @@ class CelcoinElectronicTransactions extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), ElectronicTransactionsServicesPoints::rules());
         return $this->post(
-            "/v5/transactions/electronictransactions/consult-servicespoints",
+            self::GET_SERVICES_POINTS_ENDPOINT,
             $body
         );
     }
@@ -44,7 +51,7 @@ class CelcoinElectronicTransactions extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), ElectronicTransactionsDeposit::rules());
         return $this->post(
-            "/v5/transactions/electronictransactions/electronic-payment",
+            self::DEPOSIT_ENDPOINT,
             $body
         );
     }
@@ -53,7 +60,7 @@ class CelcoinElectronicTransactions extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), ElectronicTransactionsWithdraw::rules());
         return $this->post(
-            "/v5/transactions/electronictransactions/electronic-receipt",
+            self::WITHDRAW_ENDPOINT,
             $body
         );
     }
@@ -62,7 +69,7 @@ class CelcoinElectronicTransactions extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), ElectronicTransactionsWithdrawToken::rules());
         return $this->post(
-            "/v5/transactions/electronictransactions/withdraw-thirdparty",
+            self::GENERATE_WITHDRAW_TOKEN_ENDPOINT,
             $body
         );
     }

@@ -2,22 +2,25 @@
 
 namespace WeDevBr\Celcoin\Rules\BankTransfer;
 
+use Illuminate\Validation\Rule;
+use WeDevBr\Celcoin\Enums\AccountTypeEnum;
+
 class Create
 {
     public static function rules()
     {
         return [
             "document" => ['required', 'string'],
-            "externalTerminal" => ['nullable', 'string'],
-            "externalNSU" => ['nullable', 'numeric'],
-            "accountCode" => ['nullable', 'string'],
+            "externalTerminal" => ['required', 'string'],
+            "externalNSU" => ['nullable', 'integer'],
+            "accountCode" => ['required', 'string'],
             "digitCode" => ['nullable', 'string'],
-            "branchCode" => ['nullable', 'string'],
-            "institutionCode" => ['nullable', 'numeric'],
+            "branchCode" => ['required', 'string'],
+            "institutionCode" => ['nullable', 'integer'],
             "name" => ['nullable', 'string'],
-            "value" => ['required', 'numeric'],
-            "bankAccountType" => ['nullable', 'in:CC,CP'],
-            "institutionIspb" => ['required', 'string']
+            "value" => ['required', 'decimal:0,2'],
+            "bankAccountType" => ['nullable', Rule::in(array_column(AccountTypeEnum::cases(), 'value'))],
+            "institutionIspb" => ['nullable', 'string']
         ];
     }
 }

@@ -6,8 +6,8 @@ use WeDevBr\Celcoin\Types\Data;
 
 class ProvidersValues extends Data
 {
-    public ?int $stateCode;
-    public ?string $providerId;
+    public int $stateCode;
+    public string $providerId;
 
     public function __construct(array $data = [])
     {
