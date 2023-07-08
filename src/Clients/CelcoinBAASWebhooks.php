@@ -42,7 +42,7 @@ class CelcoinBAASWebhooks extends CelcoinBaseApi
     public function edit(EditWebhooks $data, EntityWebhookBAASEnum $entity)
     {
         $body = Validator::validate($data->toArray(), BAASEditWebhooks::rules());
-        return $this->post(
+        return $this->put(
             sprintf(self::EDIT_ENDPOINT, $entity->value),
             $body
         );
