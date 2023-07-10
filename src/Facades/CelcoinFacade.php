@@ -3,7 +3,6 @@
 namespace WeDevBr\Celcoin\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use WeDevBr\Celcoin\Celcoin;
 
 /**
  * @uses Celcoin::clientAssistant
@@ -12,6 +11,7 @@ use WeDevBr\Celcoin\Celcoin;
  * @uses Celcoin::clientDDAInvoice
  * @uses Celcoin::clientDDAUser
  * @uses Celcoin::clientDDAWebhooks
+ * @uses Celcoin::clientCelcoinReport
  * @uses Celcoin::clientElectronicTransactions
  * @uses Celcoin::clientTopups
  * @uses Celcoin::clientPIXQR
@@ -21,9 +21,9 @@ use WeDevBr\Celcoin\Celcoin;
  * @uses Celcoin::clientPixCOBV
  * @uses Celcoin::clientPixCOB
  * @uses Celcoin::clientBAAS
+ * @uses Celcoin::clientBAASPIX
  * @uses Celcoin::clientBAASTED
  * @uses Celcoin::clientBAASWebhooks
- * @uses Celcoin::clientBAASPIX
  * @uses Celcoin::clientPIXDynamic
  *
  */

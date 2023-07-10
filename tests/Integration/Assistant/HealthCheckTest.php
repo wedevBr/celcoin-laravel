@@ -21,7 +21,7 @@ class HealthCheckTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
-                    '%s%s',
+                    '%s%s*',
                     config('api_url'),
                     CelcoinAssistant::HEALTH_CHECK_ENDPOINT
                 ) => self::stubSuccess()

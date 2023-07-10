@@ -16,7 +16,7 @@ class EditWebhooks
             "auth.login" => ['nullable', 'string'],
             "auth.pwd" => ['nullable', 'string'],
             "auth.type" => ['nullable', 'string'],
-            "active" => ['required', 'boolean'],
+            "active" => ['nullable', 'boolean'],
         ];
     }
-}đ
+}

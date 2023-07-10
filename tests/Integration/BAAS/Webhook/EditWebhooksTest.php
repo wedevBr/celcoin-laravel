@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
+use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Types\BAAS\EditWebhooks;
 use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
 class EditWebhooksTest extends TestCase
@@ -21,21 +23,21 @@ class EditWebhooksTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAASWebhooks::REGISTER_ENDPOINT
+                    sprintf(CelcoinBAASWebhooks::EDIT_ENDPOINT, EntityWebhookBAASEnum::PIX_PAYMENT_IN->value)
                 ) => self::stubSuccess()
             ]
         );
 
         $webhook = new CelcoinBAASWebhooks();
-        $response = $webhook->register(new RegisterWebhooks([
+        $response = $webhook->edit(new EditWebhooks([
             "entity" => "pix-payment-out",
             "webhookUrl" => "https://www.celcoin.com.br/baas",
             "auth" => [
-                "login" => "string",
+                "login" => "giovanni",
                 "pwd" => "string",
                 "type" => "basic"
             ]
-        ]));
+        ]), EntityWebhookBAASEnum::PIX_PAYMENT_IN);
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
