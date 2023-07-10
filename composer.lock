@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2461afc0def41698f7d527881ae8c1d6",
+    "content-hash": "d73c40528cd029e4d7281f2585086a98",
     "packages": [
         {
             "name": "brick/math",
@@ -1728,16 +1728,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.67.0",
+            "version": "2.68.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "c1001b3bc75039b07f38a79db5237c4c529e04c8"
+                "reference": "4f991ed2a403c85efbc4f23eb4030063fdbe01da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/c1001b3bc75039b07f38a79db5237c4c529e04c8",
-                "reference": "c1001b3bc75039b07f38a79db5237c4c529e04c8",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4f991ed2a403c85efbc4f23eb4030063fdbe01da",
+                "reference": "4f991ed2a403c85efbc4f23eb4030063fdbe01da",
                 "shasum": ""
             },
             "require": {
@@ -1826,7 +1826,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-25T22:09:47+00:00"
+            "time": "2023-06-20T18:29:04+00:00"
         },
         {
             "name": "nette/schema",
@@ -5432,31 +5432,31 @@
         },
         {
             "name": "laradumps/laradumps",
-            "version": "v2.0.0",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps.git",
-                "reference": "6caaf20e7ef138a33ae4aeebe20f11650cc7329c"
+                "reference": "f3ccab02b1a6fe17471deb94b6a8f870da59abfd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/6caaf20e7ef138a33ae4aeebe20f11650cc7329c",
-                "reference": "6caaf20e7ef138a33ae4aeebe20f11650cc7329c",
+                "url": "https://api.github.com/repos/laradumps/laradumps/zipball/f3ccab02b1a6fe17471deb94b6a8f870da59abfd",
+                "reference": "f3ccab02b1a6fe17471deb94b6a8f870da59abfd",
                 "shasum": ""
             },
             "require": {
                 "illuminate/mail": "^9.0|^10.0",
                 "illuminate/support": "^9.0|^10.0",
-                "laradumps/laradumps-core": "^0.1.0",
+                "laradumps/laradumps-core": "^0.2.0",
                 "nunomaduro/termwind": "^1.15.1",
                 "php": "^8.0"
             },
             "require-dev": {
                 "laravel/pint": "^1.7",
                 "nunomaduro/larastan": "^2.4",
-                "orchestra/testbench": "^7.22 | ^8.0",
+                "orchestra/testbench": "^7.22|^8.0",
                 "pestphp/pest": "^2.2",
-                "symfony/var-dumper": "^5.0 | ^6.0"
+                "symfony/var-dumper": "^5.0|^6.0"
             },
             "type": "library",
             "extra": {
@@ -5489,7 +5489,7 @@
             "homepage": "https://github.com/laradumps/laradumps",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps/issues",
-                "source": "https://github.com/laradumps/laradumps/tree/v2.0.0"
+                "source": "https://github.com/laradumps/laradumps/tree/v2.1.0"
             },
             "funding": [
                 {
@@ -5497,20 +5497,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-23T21:06:45+00:00"
+            "time": "2023-07-03T13:17:38+00:00"
         },
         {
             "name": "laradumps/laradumps-core",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laradumps/laradumps-core.git",
-                "reference": "1d01107db57a8dd6156ae054e147b521333c069e"
+                "reference": "d4ae3a1c6480285053910f57d6f2f51c9df5e76a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/1d01107db57a8dd6156ae054e147b521333c069e",
-                "reference": "1d01107db57a8dd6156ae054e147b521333c069e",
+                "url": "https://api.github.com/repos/laradumps/laradumps-core/zipball/d4ae3a1c6480285053910f57d6f2f51c9df5e76a",
+                "reference": "d4ae3a1c6480285053910f57d6f2f51c9df5e76a",
                 "shasum": ""
             },
             "require": {
@@ -5557,7 +5557,7 @@
             "homepage": "https://github.com/laradumps/laradumps-core",
             "support": {
                 "issues": "https://github.com/laradumps/laradumps-core/issues",
-                "source": "https://github.com/laradumps/laradumps-core/tree/v0.1.0"
+                "source": "https://github.com/laradumps/laradumps-core/tree/v0.2.0"
             },
             "funding": [
                 {
@@ -5565,7 +5565,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-15T20:07:57+00:00"
+            "time": "2023-07-03T13:10:12+00:00"
         },
         {
             "name": "mockery/mockery",
@@ -6016,6 +6016,68 @@
             "time": "2022-02-21T01:04:05+00:00"
         },
         {
+            "name": "phpstan/phpstan",
+            "version": "1.10.25",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpstan.git",
+                "reference": "578f4e70d117f9a90699324c555922800ac38d8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/578f4e70d117f9a90699324c555922800ac38d8c",
+                "reference": "578f4e70d117f9a90699324c555922800ac38d8c",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2|^8.0"
+            },
+            "conflict": {
+                "phpstan/phpstan-shim": "*"
+            },
+            "bin": [
+                "phpstan",
+                "phpstan.phar"
+            ],
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPStan - PHP Static Analysis Tool",
+            "keywords": [
+                "dev",
+                "static analysis"
+            ],
+            "support": {
+                "docs": "https://phpstan.org/user-guide/getting-started",
+                "forum": "https://github.com/phpstan/phpstan/discussions",
+                "issues": "https://github.com/phpstan/phpstan/issues",
+                "security": "https://github.com/phpstan/phpstan/security/policy",
+                "source": "https://github.com/phpstan/phpstan-src"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/ondrejmirtes",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/phpstan",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/phpstan/phpstan",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2023-07-06T12:11:37+00:00"
+        },
+        {
             "name": "phpunit/php-code-coverage",
             "version": "9.2.26",
             "source": {
@@ -6335,16 +6397,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.9",
+            "version": "9.6.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a9aceaf20a682aeacf28d582654a1670d8826778"
+                "reference": "a6d351645c3fe5a30f5e86be6577d946af65a328"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a9aceaf20a682aeacf28d582654a1670d8826778",
-                "reference": "a9aceaf20a682aeacf28d582654a1670d8826778",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a6d351645c3fe5a30f5e86be6577d946af65a328",
+                "reference": "a6d351645c3fe5a30f5e86be6577d946af65a328",
                 "shasum": ""
             },
             "require": {
@@ -6418,7 +6480,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.9"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.10"
             },
             "funding": [
                 {
@@ -6434,7 +6496,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-11T06:13:56+00:00"
+            "time": "2023-07-10T04:04:23+00:00"
         },
         {
             "name": "pimple/pimple",
