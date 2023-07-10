@@ -24,7 +24,7 @@ class GetStatusTransferTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBankTransfer::GET_STATUS_TRANSFER_ENDPOINT
+                    sprintf(CelcoinBankTransfer::GET_STATUS_TRANSFER_ENDPOINT, 817877890)
                 ) => self::stubSuccess()
             ]
         );
