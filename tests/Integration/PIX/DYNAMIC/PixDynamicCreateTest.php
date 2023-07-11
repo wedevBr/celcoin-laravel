@@ -57,7 +57,7 @@ class PixDynamicCreateTest extends TestCase
     /**
      * @return DynamicQRCreate
      */
-    static private function fakeBody(): DynamicQRCreate
+    static public function fakeBody(): DynamicQRCreate
     {
 
         $dynamic = new DynamicQRCreate();
