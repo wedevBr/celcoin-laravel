@@ -15,6 +15,7 @@ class CelcoinPIXDynamic extends CelcoinBaseApi
     const GET_DYNAMIC_BASE64_ENDPOINT = '/pix/v1/brcode/dynamic/%d/base64';
     const CREATE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic';
     const UPDATE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic/%d';
+    const DELETE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic/%d';
 
     /**
      * @param int $transactionId
@@ -50,6 +51,18 @@ class CelcoinPIXDynamic extends CelcoinBaseApi
         $body = Validator::validate($data->toArray(), DynamicQRUpdateRule::rules());
         return $this->put(
             sprintf(self::UPDATE_DYNAMIC_QRCODE_ENDPOINT, $transactionId), $body
+        );
+    }
+
+    /**
+     * @param int $transactionId
+     * @return array|null
+     * @throws RequestException
+     */
+    final public function deleteDynamicQRCode(int $transactionId): ?array
+    {
+        return $this->delete(
+            sprintf(self::DELETE_DYNAMIC_QRCODE_ENDPOINT, $transactionId)
         );
     }
 }
