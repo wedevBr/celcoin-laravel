@@ -18,7 +18,9 @@ class COBPayloadTest extends TestCase
     final public function testPayloadCobSuccess(): void
     {
         $transactionId = 123456;
-        $fetchUrl = sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId);
+        $fetchUrl = sprintf('%s%s', config('celcoin.api_url'),
+            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId)
+        );
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
@@ -69,7 +71,9 @@ class COBPayloadTest extends TestCase
     {
 
         $transactionId = 123456;
-        $fetchUrl = sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId);
+        $fetchUrl = sprintf('%s%s', config('celcoin.api_url'),
+            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId)
+        );
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
