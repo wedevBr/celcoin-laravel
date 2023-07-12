@@ -50,10 +50,12 @@ class CelcoinPIXCOB extends CelcoinBaseApi
      */
     final public function getCOBPIX(COBGetInput $data): array
     {
-        $body = Validator::validate($data->toArray(), COBGet::rules());
+        $params = Validator::validate($data->toArray(), COBGet::rules());
         return $this->get(
-            self::GET_COB_PIX_URL,
-            $body
+            sprintf('%s?%s',
+                self::GET_COB_PIX_URL,
+                http_build_query($params)
+            )
         );
     }
 
