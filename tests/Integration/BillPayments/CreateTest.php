@@ -32,21 +32,21 @@ class CreateTest extends TestCase
         $payment = new CelcoinBillPayment();
         $response = $payment->create(new Create([
             "externalNSU" => 1234,
-            "externalTerminal" => "t2",
+            "externalTerminal" => "teste2",
             "cpfcnpj" => "51680002000100",
             "billData" => [
-                "value" => 202.71,
-                "originalValue" => 202.71,
+                "value" => 1500,
+                "originalValue" => 1500,
                 "valueWithDiscount" => 0,
                 "valueWithAdditional" => 0
             ],
             "barCode" => [
                 "type" => 2,
-                "digitable" => "03399853012970000135607559001016189020000020271",
+                "digitable" => "34191090080025732445903616490003691150000020000",
                 "barCode" => ""
             ],
-            "dueDate" => "2022-02-20",
-            "transactionIdAuthorize" => 9087400
+            "dueDate" => "2023-07-14",
+            "transactionIdAuthorize" => 817958488
         ]));
         $this->assertArrayHasKey('authenticationAPI', $response);
     }
@@ -57,23 +57,23 @@ class CreateTest extends TestCase
             [
                 "convenant" => "BANCO VOTORANTIM",
                 "isExpired" => false,
-                "authentication" => 2604,
+                "authentication" => 7295,
                 "authenticationAPI" => [
-                    "Bloco1" => "FB.DF.50.98.3E.AD.70.4F",
-                    "Bloco2" => "53.41.A2.9D.06.9E.C1.59",
-                    "BlocoCompleto" => "FB.DF.50.98.3E.AD.70.4F.53.41.A2.9D.06.9E.C1.59"
+                    "Bloco1" => "F6.4E.2B.DD.C4.D9.5F.4D",
+                    "Bloco2" => "4B.FB.E0.D9.1B.84.C8.EA",
+                    "BlocoCompleto" => "F6.4E.2B.DD.C4.D9.5F.4D.4B.FB.E0.D9.1B.84.C8.EA",
                 ],
                 "receipt" => [
                     "receiptData" => "",
-                    "receiptformatted" => "        AMBIENTE DE HOMOLOGACAO\r\n          PROTOCOLO 0009087426\r\n1          15/02/2022        16:50\r\nTERM 228005 AGENTE 228005 AUTE 02604\r\n----------------------------------------\r\nAUTO 846644           RECEBIMENTO CONTA\r\n                    \r\n          BANCO SANTANDER S.A\r\n        03399.85301  29700.001356      \r\n       07559.001016  1 89020000020271\r\n\r\nBENEF:   BENEFICIARIO AMBIENTE HOMOLOGA\r\nCPF/CNPJ:            21.568.259/0001-00\r\nPAGADOR:   PAGADOR AMBIENTE HOMOLOGACAO\r\nCPF/CNPJ:            96.906.497/0001-00\r\n----------------------------------------\r\nDATA DE VENCIMENTO           20/02/2022\r\nDATA DO PAGAMENTO            15/02/2022\r\nDATA DE LIQUIDACAO           15/02/2022\r\nVALOR TITULO                     202,71\r\nVALOR COBRADO                    202,71\r\n<VIA1>\r\n \r\nVALIDO COMO RECIBO DE PAGAMENTO\r\n----------------------------------------\r\nAUTENTICACAO\r\nFB.DF.50.98.3E.AD.70.4F\r\n53.41.A2.9D.06.9E.C1.59\r\n</VIA1>----------------------------------------\r\n<VIA1> \r\nCONSULTE A AUTENTICA??O EM:\r\nCELCOIN.COM.BR/AUTENTICACAO\r\n</VIA1>\r\n"
+                    "receiptformatted" => "\nTESTE\n                PROTOCOLO 0817957611\n      1          13/07/2023        18:08\n      TERM 228001 AGENTE 228001 AUTE 07295\n      ----------------------------------------\n      AUTO 975550           RECEBIMENTO CONTA\n                          \n                  BANCO ITAU S.A.\n              34191.09008  00257.324459      \n             03616.490003  6 91150000020000\n      \n      BENEF:   BENEFICIARIO AMBIENTE HOMOLOGA\n      CPF/CNPJ:            13.935.893/0001-09\n      PAGADOR: PAGADOR AMBIENTE DE HOMOLOGACA\n      CPF/CNPJ:            13.935.893/0001-09\n      ----------------------------------------\n      DATA DE VENCIMENTO           14/07/2023\n      DATA DO PAGAMENTO            13/07/2023\n      DATA DE LIQUIDACAO           13/07/2023\n      VALOR TITULO                    1500,00\n      VALOR COBRADO                   1500,00\n      \n          VALIDO COMO RECIBO DE PAGAMENTO\n      ----------------------------------------\n                    AUTENTICACAO\n              F6.4E.2B.DD.C4.D9.5F.4D\n              4B.FB.E0.D9.1B.84.C8.EA\n      ----------------------------------------\n      \n      ",
                 ],
-                "settleDate" => "2022-02-15T00:00:00",
-                "createDate" => "2022-02-15T16:50:04",
-                "transactionId" => 9087426,
+                "settleDate" => "2023-07-13T00:00:00",
+                "createDate" => "2023-07-13T18:08:15",
+                "transactionId" => 817957611,
                 "Urlreceipt" => null,
                 "errorCode" => "000",
                 "message" => null,
-                "status" => 0
+                "status" => 0,
             ],
             Response::HTTP_OK
         );

@@ -2,6 +2,9 @@
 
 namespace WeDevBr\Celcoin\Rules\BillPayments;
 
+use Illuminate\Validation\Rule;
+use WeDevBr\Celcoin\Enums\BarCodeTypeEnum;
+
 class Authorize
 {
     public static function rules()
@@ -10,9 +13,9 @@ class Authorize
             "externalTerminal" => ['nullable', 'string'],
             "externalNSU" => ['nullable', 'numeric'],
             "barCode" =>  ['required', 'array'],
-            "barCode.type" =>  ['required', 'in:1,2'],
-            "barCode.digitable" => ['nullable', 'string'],
-            "barCode.barCode" => ['nullable', 'string']
+            "barCode.type" =>  ['required', Rule::in(array_column(BarCodeTypeEnum::cases(), 'value'))],
+            "barCode.digitable" => ['required_without:barCode.barCode', 'string'],
+            "barCode.barCode" => ['required_without:barCode.digitable', 'string']
         ];
     }
 }

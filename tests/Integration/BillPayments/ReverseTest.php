@@ -23,13 +23,13 @@ class ReverseTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBillPayment::REVERSE_ENDPOINT, 2604)
+                    sprintf(CelcoinBillPayment::REVERSE_ENDPOINT, 817958497)
                 ) => self::stubSuccess()
             ]
         );
 
         $payment = new CelcoinBillPayment();
-        $response = $payment->reverse(2604);
+        $response = $payment->reverse(817958497);
         $this->assertEquals('0', $response['status']);
     }
 
