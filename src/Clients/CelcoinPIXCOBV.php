@@ -7,12 +7,14 @@ use Illuminate\Support\Facades\Validator;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\PIX\COBVCreate;
 use WeDevBr\Celcoin\Rules\PIX\COBVGet;
+use WeDevBr\Celcoin\Rules\PIX\COBVPayload;
 use WeDevBr\Celcoin\Types\PIX\COBV;
 
 class CelcoinPIXCOBV extends CelcoinBaseApi
 {
     const CREATE_COBV_PIX = '/pix/v1/collection/duedate';
     const GET_COBV_PIX = '/pix/v1/collection/duedate';
+    const PAYLOAD_COBV_PIX = '/pix/v1/collection/duedate/payload/%s';
 
     /**
      * @throws RequestException
@@ -40,4 +42,16 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
             ),
         );
     }
+
+    /**
+     * @throws RequestException
+     */
+    final public function payloadCOBVPIX(string $url): ?array
+    {
+        Validator::validate(compact('url'), COBVPayload::rules());
+        return $this->get(
+            sprintf(self::PAYLOAD_COBV_PIX, urlencode($url))
+        );
+    }
+    
 }
