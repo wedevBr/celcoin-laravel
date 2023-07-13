@@ -118,7 +118,6 @@ class PixDynamicPayloadTest extends TestCase
      */
     final public function testPixDynamicPayloadInvalidUrl(): void
     {
-        $this->markAsRisky();
         $fetchUrl = 'teste';
         Http::fake(
             [
