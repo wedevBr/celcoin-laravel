@@ -27,7 +27,7 @@ class CelcoinBillPayment extends CelcoinBaseApi
     const CREATE_ENDPOINT = '/v5/transactions/billpayments';
     const CONFIRM_ENDPOINT = '/v5/transactions/billpayments/%d/capture';
     const CANCEL_ENDPOINT = '/v5/transactions/billpayments/%d/void';
-    const REVERSE_ENDPOINT = '/v5/transactions/billpayments/%d/revers';
+    const REVERSE_ENDPOINT = '/v5/transactions/billpayments/%d/reverse';
     const GET_OCCURRENCES_ENDPOINT = '/v5/transactions/occurrency';
 
     public function authorize(Authorize $data): mixed

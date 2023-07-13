@@ -30,7 +30,8 @@ class OcurrencyTest extends TestCase
         );
 
         $payment = new CelcoinBillPayment();
-        $response = $payment->getOccurrences(Carbon::now()->subDay(7), Carbon::now());
+        $date = Carbon::createFromFormat('Y-m-d', '2023-07-13');
+        $response = $payment->getOccurrences($date->clone()->subDay(7), $date);
 
         $this->assertArrayHasKey('occurrences', $response);
     }
