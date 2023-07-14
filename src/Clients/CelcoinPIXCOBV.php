@@ -8,6 +8,7 @@ use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\PIX\COBVCreate;
 use WeDevBr\Celcoin\Rules\PIX\COBVGet;
 use WeDevBr\Celcoin\Rules\PIX\COBVPayload;
+use WeDevBr\Celcoin\Rules\PIX\COBVUpdate as COBVUpdateRules;
 use WeDevBr\Celcoin\Types\PIX\COBV;
 
 class CelcoinPIXCOBV extends CelcoinBaseApi
@@ -15,6 +16,7 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
     const CREATE_COBV_PIX = '/pix/v1/collection/duedate';
     const GET_COBV_PIX = '/pix/v1/collection/duedate';
     const PAYLOAD_COBV_PIX = '/pix/v1/collection/duedate/payload/%s';
+    const UPDATE_COBV_PIX = '/pix/v1/collection/duedate/%d';
 
     /**
      * @throws RequestException
@@ -53,5 +55,20 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
             sprintf(self::PAYLOAD_COBV_PIX, urlencode($url))
         );
     }
-    
+
+    /**
+     * @param int $transactionId
+     * @param array $body
+     * @return array|null
+     * @throws RequestException
+     */
+    final public function updateCOBVPIX(int $transactionId, array $body): ?array
+    {
+        $params = Validator::validate($body, COBVUpdateRules::rules());
+        return $this->put(
+            sprintf(self::UPDATE_COBV_PIX, $transactionId),
+            $params
+        );
+    }
+
 }
