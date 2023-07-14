@@ -18,21 +18,21 @@ class ConfirmTest extends TestCase
      */
     public function testSuccess()
     {
-        Http::fake(
-            [
-                config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(
-                    '%s%s',
-                    config('api_url'),
-                    sprintf(CelcoinTopups::CONFIRM_ENDPOINT, 9173139)
-                ) => self::stubSuccess()
-            ]
-        );
+        // Http::fake(
+        //     [
+        //         config('celcoin.login_url') => GlobalStubs::loginResponse(),
+        //         sprintf(
+        //             '%s%s',
+        //             config('api_url'),
+        //             sprintf(CelcoinTopups::CONFIRM_ENDPOINT, 817981234)
+        //         ) => self::stubSuccess()
+        //     ]
+        // );
 
         $topups = new CelcoinTopups();
-        $response = $topups->confirm(9173139, new Confirm([
+        $response = $topups->confirm(817981234, new Confirm([
             "externalNSU" => 1234,
-            "externalTerminal" => "1123123123"
+            "externalTerminal" => "teste2"
         ]));
         $this->assertEquals(0, $response['status']);
     }

@@ -18,31 +18,31 @@ class CreateTest extends TestCase
      */
     public function testSuccess()
     {
-        Http::fake(
-            [
-                config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(
-                    '%s%s*',
-                    config('api_url'),
-                    CelcoinTopups::CREATE_ENDPOINT
-                ) => self::stubSuccess()
-            ]
-        );
+        // Http::fake(
+        //     [
+        //         config('celcoin.login_url') => GlobalStubs::loginResponse(),
+        //         sprintf(
+        //             '%s%s*',
+        //             config('api_url'),
+        //             CelcoinTopups::CREATE_ENDPOINT
+        //         ) => self::stubSuccess()
+        //     ]
+        // );
 
         $topups = new CelcoinTopups();
         $response = $topups->create(new Create([
-            "externalTerminal" => "1123123123",
+            "externalTerminal" => "teste2",
             "externalNsu" => 1234,
             "topupData" => [
-                "value" => 85.99
+                "value" => 15
             ],
-            "cpfCnpj" => "65419636069",
+            "cpfCnpj" => "19941206066",
             "signerCode" => "1234567",
-            "providerId" => 2125,
+            "providerId" => 2086,
             "phone" => [
-                "stateCode" => 15,
+                "stateCode" => 31,
                 "countryCode" => 55,
-                "number" => 993134307
+                "number" => 991452026
             ]
         ]));
         $this->assertEquals(0, $response['status']);
@@ -52,20 +52,24 @@ class CreateTest extends TestCase
     {
         return Http::response(
             [
-                "NSUnameProvider" => 0,
-                "authentication" => 5878,
-                "authenticationAPI" => null,
+                "NSUnameProvider" => 610761,
+                "authentication" => 6003,
+                "authenticationAPI" => [
+                    "Bloco1" => "DA.53.00.C9.57.A2.6E.8E",
+                    "Bloco2" => "8A.DB.0B.8E.17.F1.78.97",
+                    "BlocoCompleto" => "DA.53.00.C9.57.A2.6E.8E.8A.DB.0B.8E.17.F1.78.97",
+                ],
                 "receipt" => [
                     "receiptData" => "",
-                    "receiptformatted" => "        AMBIENTE DE HOMOLOGACAO\r\n          PROTOCOLO 0002751870\r\n1          11/03/2022        09:24\r\nTERM 228005 AGENTE 228005 AUTE 05878\r\n----------------------------------------\r\nAUTO 806689                            \r\n<VIA1>\r\nESTE CUPOM NAO TEM VALOR FISCAL\r\n</VIA1>PRODUTO: R$ 85,99 - XBOX LIVE 3 MESES\r\n<VIA1>VALOR: R$  85,99\r\nPIN: 6365-4427-6400-1327\r\nSERIE: 00000000\r\nTELEFONE:  15 993134307\r\n\r\n      COMO RESGATAR O CODIGO XBOX:\r\n       VISITE XBOX.COM/REDEEMCODE\r\nDIGITE O CODIGO DESTE RECIBO E COMECE A \r\n                 USAR!\r\n                    \r\n    APOS O USO, INUTILIZE ESTE CUPOM\r\nIS2B - INTEGRATED SOLUTIONS TO BUSINESS\r\n                    \r\n                    \r\n                    \r\n                    \r\n</VIA1>----------------------------------------\r\n\r\n"
+                    "receiptformatted" => "\n                       TESTE\n                PROTOCOLO 0817981234\n      1          14/07/2023        17:46\n      TERM 228001 AGENTE 228001 AUTE 06003\n      ----------------------------------------\n      AUTO 987535                     RECARGA\n      \n      PRODUTO: TIM\n      ASSINANTE: 1234567\n      TELEFONE:  11 941497981\n      NSU OPERADORA: 610761\n      DATA:  14/07/2023 17:46\n      VALOR: R$  15,00\n      \n      VIVO TURBO: INTERNET + LIGACOES E SMS\n      ILIMITADOS PARA VIVO (CEL E FIXO, USANDO\n      O 15)APENAS R$9,99 POR SEMANA. LIGUE\n      *9003 E CADASTRE SE!\n      ----------------------------------------\n                    AUTENTICACAO\n              DA.53.00.C9.57.A2.6E.8E\n              8A.DB.0B.8E.17.F1.78.97\n      ----------------------------------------\n      \n      ",
                 ],
-                "settleDate" => "2022-03-11T00:00:00",
-                "createDate" => "2022-03-11T09:24:38",
-                "transactionId" => 9172370,
+                "settleDate" => "2023-07-14T00:00:00",
+                "createDate" => "2023-07-14T17:46:43",
+                "transactionId" => 817981234,
                 "Urlreceipt" => null,
                 "errorCode" => "000",
                 "message" => null,
-                "status" => 0
+                "status" => 0,
             ],
             Response::HTTP_OK
         );

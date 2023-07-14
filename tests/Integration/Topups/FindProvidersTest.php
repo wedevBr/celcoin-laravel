@@ -17,19 +17,19 @@ class FindProvidersTest extends TestCase
      */
     public function testSuccess()
     {
-        Http::fake(
-            [
-                config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(
-                    '%s%s*',
-                    config('api_url'),
-                    CelcoinTopups::FIND_PROVIDERS_ENDPOINT
-                ) => self::stubSuccess()
-            ]
-        );
+        // Http::fake(
+        //     [
+        //         config('celcoin.login_url') => GlobalStubs::loginResponse(),
+        //         sprintf(
+        //             '%s%s*',
+        //             config('api_url'),
+        //             CelcoinTopups::FIND_PROVIDERS_ENDPOINT
+        //         ) => self::stubSuccess()
+        //     ]
+        // );
 
         $topups = new CelcoinTopups();
-        $response = $topups->findProviders(13, 912345678);
+        $response = $topups->findProviders(31, 991452026);
         $this->assertEquals(0, $response['status']);
     }
 
@@ -37,8 +37,8 @@ class FindProvidersTest extends TestCase
     {
         return Http::response(
             [
-                "nameProvider" => "Claro",
-                "providerId" => 2087,
+                "nameProvider" => "Vivo",
+                "providerId" => 2088,
                 "errorCode" => "000",
                 "message" => "SUCESSO",
                 "status" => 0

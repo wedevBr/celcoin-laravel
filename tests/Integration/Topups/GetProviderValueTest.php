@@ -18,16 +18,16 @@ class GetProviderValueTest extends TestCase
      */
     public function testSuccess()
     {
-        Http::fake(
-            [
-                config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(
-                    '%s%s*',
-                    config('api_url'),
-                    CelcoinTopups::GET_PROVIDER_VALUES_ENDPOINT
-                ) => self::stubSuccess()
-            ]
-        );
+        // Http::fake(
+        //     [
+        //         config('celcoin.login_url') => GlobalStubs::loginResponse(),
+        //         sprintf(
+        //             '%s%s*',
+        //             config('api_url'),
+        //             CelcoinTopups::GET_PROVIDER_VALUES_ENDPOINT
+        //         ) => self::stubSuccess()
+        //     ]
+        // );
 
         $topups = new CelcoinTopups();
         $response = $topups->getProviderValues(new ProvidersValues([
