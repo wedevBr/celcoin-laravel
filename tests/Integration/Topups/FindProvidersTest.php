@@ -17,16 +17,16 @@ class FindProvidersTest extends TestCase
      */
     public function testSuccess()
     {
-        // Http::fake(
-        //     [
-        //         config('celcoin.login_url') => GlobalStubs::loginResponse(),
-        //         sprintf(
-        //             '%s%s*',
-        //             config('api_url'),
-        //             CelcoinTopups::FIND_PROVIDERS_ENDPOINT
-        //         ) => self::stubSuccess()
-        //     ]
-        // );
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                sprintf(
+                    '%s%s*',
+                    config('api_url'),
+                    CelcoinTopups::FIND_PROVIDERS_ENDPOINT
+                ) => self::stubSuccess()
+            ]
+        );
 
         $topups = new CelcoinTopups();
         $response = $topups->findProviders(31, 991452026);

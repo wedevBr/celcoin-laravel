@@ -24,13 +24,13 @@ class ConfirmTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinInternationalTopups::CONFIRM_ENDPOINT, 816057734)
+                    sprintf(CelcoinInternationalTopups::CONFIRM_ENDPOINT, 817981428)
                 ) => self::stubSuccess()
             ]
         );
 
         $topups = new CelcoinInternationalTopups();
-        $response = $topups->confirm(816057734, new Confirm([
+        $response = $topups->confirm(817981428, new Confirm([
             "externalNSU" => 123,
             "externalTerminal" => "41233"
         ]));

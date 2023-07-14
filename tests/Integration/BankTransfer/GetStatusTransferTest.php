@@ -2,7 +2,6 @@
 
 namespace Tests\Integration\BankTransfer;
 
-use Carbon\Carbon;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
@@ -24,13 +23,13 @@ class GetStatusTransferTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    sprintf(CelcoinBankTransfer::GET_STATUS_TRANSFER_ENDPOINT, 817877890)
+                    sprintf(CelcoinBankTransfer::GET_STATUS_TRANSFER_ENDPOINT, 817981763)
                 ) => self::stubSuccess()
             ]
         );
 
         $transfer = new CelcoinBankTransfer();
-        $response = $transfer->getStatusTransfer(817877890, dataOperacao: new Carbon('2023-07-05T23:31:27.5883691+00:00'));
+        $response = $transfer->getStatusTransfer(817981763);
         $this->assertEquals(0, $response['status']);
     }
 
@@ -39,12 +38,12 @@ class GetStatusTransferTest extends TestCase
         return Http::response(
             [
                 "authentication" => 0,
-                "createDate" => "2023-07-05T20:31:27",
+                "createDate" => "2023-07-14T18:15:24",
                 "refundReason" => "Value in Creditor Identifier is incorrect",
-                "externalNSU" => "123",
-                "transactionId" => 817877890,
+                "externalNSU" => "1234",
+                "transactionId" => 817981763,
                 "stateCompensation" => "Processado com erro",
-                "externalTerminal" => "123",
+                "externalTerminal" => "teste2",
                 "typeTransactions" => null,
                 "errorCode" => "000",
                 "message" => "SUCESSO",

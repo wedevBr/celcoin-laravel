@@ -18,16 +18,16 @@ class CreateTest extends TestCase
      */
     public function testSuccess()
     {
-        // Http::fake(
-        //     [
-        //         config('celcoin.login_url') => GlobalStubs::loginResponse(),
-        //         sprintf(
-        //             '%s%s*',
-        //             config('api_url'),
-        //             CelcoinTopups::CREATE_ENDPOINT
-        //         ) => self::stubSuccess()
-        //     ]
-        // );
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                sprintf(
+                    '%s%s*',
+                    config('api_url'),
+                    CelcoinTopups::CREATE_ENDPOINT
+                ) => self::stubSuccess()
+            ]
+        );
 
         $topups = new CelcoinTopups();
         $response = $topups->create(new Create([

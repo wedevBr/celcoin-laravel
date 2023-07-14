@@ -24,13 +24,13 @@ class CancelTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinInternationalTopups::CANCEL_ENDPOINT, 9173139)
+                    sprintf(CelcoinInternationalTopups::CANCEL_ENDPOINT, 817981439)
                 ) => self::stubSuccess()
             ]
         );
 
         $topups = new CelcoinInternationalTopups();
-        $response = $topups->cancel(9173139, new Cancel([
+        $response = $topups->cancel(817981439, new Cancel([
             "externalNSU" => 1234,
             "externalTerminal" => "1123123123"
         ]));

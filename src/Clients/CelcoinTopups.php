@@ -24,7 +24,7 @@ class CelcoinTopups extends CelcoinBaseApi
 {
     const GET_PROVIDERS_ENDPOINT = '/v5/transactions/topups/providers';
     const GET_PROVIDER_VALUES_ENDPOINT = '/v5/transactions/topups/provider-values';
-    const CREATE_ENDPOINT = '/v5/transactions/topups/topups';
+    const CREATE_ENDPOINT = '/v5/transactions/topups';
     const CONFIRM_ENDPOINT = '/v5/transactions/topups/%d/capture';
     const CANCEL_ENDPOINT = '/v5/transactions/topups/%d/void';
     const FIND_PROVIDERS_ENDPOINT = '/v5/transactions/topups/find-providers';
@@ -74,12 +74,12 @@ class CelcoinTopups extends CelcoinBaseApi
         );
     }
 
-    public function findProviders(int $statusCode, int $phoneNumber): mixed
+    public function findProviders(int $stateCode, int $phoneNumber): mixed
     {
         return $this->get(
             self::FIND_PROVIDERS_ENDPOINT,
             [
-                'statusCode' => $statusCode,
+                'stateCode' => $stateCode,
                 'PhoneNumber' => $phoneNumber,
             ]
         );
