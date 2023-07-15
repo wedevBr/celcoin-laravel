@@ -17,6 +17,7 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
     const GET_COBV_PIX = '/pix/v1/collection/duedate';
     const PAYLOAD_COBV_PIX = '/pix/v1/collection/duedate/payload/%s';
     const UPDATE_COBV_PIX = '/pix/v1/collection/duedate/%d';
+    const DELETE_COB_PIX_URL = '/pix/v1/collection/duedate/%d';
 
     /**
      * @throws RequestException
@@ -68,6 +69,16 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
         return $this->put(
             sprintf(self::UPDATE_COBV_PIX, $transactionId),
             $params
+        );
+    }
+
+    /**
+     * @throws RequestException
+     */
+    final public function deleteCOBVPIX(int $transactionId): ?array
+    {
+        return $this->delete(
+            sprintf(self::DELETE_COB_PIX_URL, $transactionId)
         );
     }
 
