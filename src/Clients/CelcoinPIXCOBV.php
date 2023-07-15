@@ -18,6 +18,7 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
     const PAYLOAD_COBV_PIX = '/pix/v1/collection/duedate/payload/%s';
     const UPDATE_COBV_PIX = '/pix/v1/collection/duedate/%d';
     const DELETE_COB_PIX_URL = '/pix/v1/collection/duedate/%d';
+    const UNLINK_COB_PIX_URL = '/pix/v1/collection/duedate/%d/unlink';
 
     /**
      * @throws RequestException
@@ -82,4 +83,13 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
         );
     }
 
+    /**
+     * @throws RequestException
+     */
+    final public function unlinkCOBVPIX(int $transactionId): ?array
+    {
+        return $this->patch(
+            sprintf(self::UNLINK_COB_PIX_URL, $transactionId)
+        );
+    }
 }
