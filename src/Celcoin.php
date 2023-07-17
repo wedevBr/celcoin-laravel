@@ -18,6 +18,7 @@ use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDICT;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDynamic;
 use WeDevBr\Celcoin\Clients\CelcoinPIXParticipants;
+use WeDevBr\Celcoin\Clients\CelcoinPIXPayment;
 use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
 use WeDevBr\Celcoin\Clients\CelcoinPixStaticPayment;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
@@ -199,4 +200,14 @@ class Celcoin
     {
         return new CelcoinPIXDynamic($mtlsPassphrase);
     }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinPIXPayment
+     */
+    public static function clientPIXPayment(?string $mtlsPassphrase): CelcoinPIXPayment
+    {
+        return new CelcoinPIXPayment($mtlsPassphrase);
+    }
+
 }
