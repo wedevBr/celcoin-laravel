@@ -2,7 +2,7 @@
 
 namespace WeDevBr\Celcoin\Rules\PIX;
 
-class EndToEndRules
+class PaymentEmvRules
 {
     /**
      * @return array[]
@@ -10,7 +10,7 @@ class EndToEndRules
     public static function rules(): array
     {
         return [
-            'dpp' => ['required', 'date']
+            'emv' => ['required', 'string']
         ];
     }
 }
