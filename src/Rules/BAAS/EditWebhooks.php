@@ -19,4 +19,4 @@ class EditWebhooks
             "active" => ['required', 'boolean'],
         ];
     }
-}đ
+}
