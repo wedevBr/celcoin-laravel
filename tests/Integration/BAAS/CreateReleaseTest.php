@@ -24,7 +24,7 @@ class CreateReleaseTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::CREATE_RELEASE, '444444')
+                    sprintf(CelcoinBAAS::CREATE_RELEASE, '300541976902')
                 ) => self::stubSuccess()
             ]
         );

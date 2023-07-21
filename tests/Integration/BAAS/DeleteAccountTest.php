@@ -17,13 +17,20 @@ class DeleteAccountTest extends TestCase
      */
     public function testSuccess()
     {
+        $params = http_build_query(
+            [
+                'Account' => '12345',
+                'DocumentNumber' => null,
+                'Reason' => 'Segurança',
+            ]
+        );
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::DELETE_ACCOUNT, '')
+                    sprintf(CelcoinBAAS::DELETE_ACCOUNT, $params)
                 ) => self::stubSuccess()
             ]
         );

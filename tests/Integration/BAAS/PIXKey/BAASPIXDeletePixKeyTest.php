@@ -20,7 +20,7 @@ class BAASPIXDeletePixKeyTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    sprintf(CelcoinBAASPIX::DELETE_PIX_KEY_ENDPOINT, 'testebaas@cecloin.com.br')
+                    sprintf(CelcoinBAASPIX::DELETE_PIX_KEY_ENDPOINT, '0f4f01e4-53ec-4c7c-9c50-334621c19cb3')
                 ) => self::stubSuccess()
             ]
         );

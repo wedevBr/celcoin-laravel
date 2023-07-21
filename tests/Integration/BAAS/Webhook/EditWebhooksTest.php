@@ -22,7 +22,7 @@ class EditWebhooksTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAASWebhooks::EDIT_ENDPOINT, EntityWebhookBAASEnum::PIX_PAYMENT_IN->value)
+                    sprintf(CelcoinBAASWebhooks::EDIT_ENDPOINT, EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED->value)
                 ) => self::stubSuccess()
             ]
         );
