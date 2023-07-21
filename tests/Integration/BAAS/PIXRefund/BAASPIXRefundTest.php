@@ -28,10 +28,10 @@ class BAASPIXRefundTest extends TestCase
 
         $pix = new CelcoinBAASPIX();
         $response = $pix->refundPix(new RefundPix([
-            "id" => "34fee7bc-4d40-4605-9af8-398ed7d0d6b5",
-            "endToEndId" => "E3030629420200808185300887639654",
-            "clientCode" => "1458854",
-            "amount" => 150.54,
+            "id" => "fba1b37b-c0f3-440b-bcde-8228f31fd585",
+            "endToEndId" => "E1393589320230719213601039975372",
+            "clientCode" => "1234",
+            "amount" => 5.55,
             "reason" => "MD06",
             "reversalDescription" => "Devolução do churrasco",
         ]));

@@ -30,7 +30,7 @@ class GetInfoAccountBusinessTest extends TestCase
 
         $baas = new CelcoinBAAS();
 
-        $response = $baas->getInfoAccountBusiness('300541976894');
+        $response = $baas->getInfoAccountBusiness('300541976902');
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

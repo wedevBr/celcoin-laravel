@@ -28,25 +28,25 @@ class BAASPIXCashOutTest extends TestCase
 
         $pix = new CelcoinBAASPIX();
         $response = $pix->cashOut(new PixCashOut([
-            "amount" => 25.55,
-            "clientCode" => "1458854",
-            "transactionIdentification" => "dc8cf02b81b54bd59323453b207e704a",
-            "endToEndId" => "E3030629420200808185300887639654",
-            "initiationType" => "MANUAL",
+            "amount" => 5.55,
+            "clientCode" => "1234",
+            "transactionIdentification" => fake()->uuid(),
+            "endToEndId" => "E1393589320230719213601039975372",
+            "initiationType" => "DICT",
             "paymentType" => "IMMEDIATE",
             "urgency" => "HIGH",
             "transactionType" => "TRANSFER",
             "debitParty" => [
-                "account" => "444444"
+                "account" => "300541976902"
             ],
             "creditParty" => [
                 "bank" => "30306294",
-                "key" => "5244f4e-15ff-413d-808d-7837652ebdc2",
-                "account" => "10545584",
-                "branch" => "10545584",
-                "taxId" => "11122233344",
-                "name" => "Celcoin",
-                "accountType" => "CACC"
+                "key" => "845c16bf-1b02-4396-9112-623f3f7ab5f7",
+                "account" => "300541976910",
+                "branch" => "0001",
+                "taxId" => "00558856756",
+                "name" => "Noelí Valência",
+                "accountType" => "TRAN"
             ],
             "remittanceInformation" => "Texto de mensagem"
         ]));
@@ -60,33 +60,33 @@ class BAASPIXCashOutTest extends TestCase
             [
                 "status" => "PROCESSING",
                 "version" => "1.0.0",
-                "body" => [
-                    "id" => "60ec4471-71dd-43a3-a848-efe7a314d76f",
-                    "amount" => 50,
-                    "clientCode" => "1458856889",
+                "body" =>  [
+                    "id" => "fba1b37b-c0f3-440b-bcde-8228f31fd585",
+                    "amount" => 5.55,
+                    "clientCode" => "1234",
                     "transactionIdentification" => null,
-                    "endToEndId" => "E1393589320221110144001306556986",
-                    "initiationType" => "MANUAL",
+                    "endToEndId" => "E1393589320230719213601039975372",
+                    "initiationType" => "DICT",
                     "paymentType" => "IMMEDIATE",
                     "urgency" => "HIGH",
                     "transactionType" => "TRANSFER",
                     "debitParty" => [
-                        "account" => "30053913714179",
+                        "account" => "300541976902",
                         "branch" => "0001",
-                        "taxId" => "77859635097",
-                        "name" => "Hernani  Conrado",
-                        "accountType" => "TRAN"
+                        "taxId" => "17938715000192",
+                        "name" => "Mateus Chaves LTDA",
+                        "accountType" => "TRAN",
                     ],
                     "creditParty" => [
                         "bank" => "30306294",
-                        "key" => null,
-                        "account" => "42161",
-                        "branch" => "20",
-                        "taxId" => "12312312300",
-                        "name" => "Fulano de Tal",
-                        "accountType" => "CACC"
+                        "key" => "845c16bf-1b02-4396-9112-623f3f7ab5f7",
+                        "account" => "300541976910",
+                        "branch" => "0001",
+                        "taxId" => "00558856756",
+                        "name" => "Noelí Valência",
+                        "accountType" => "TRAN",
                     ],
-                    "remittanceInformation" => "Texto de mensagem"
+                    "remittanceInformation" => "Texto de mensagem",
                 ]
             ],
             Response::HTTP_OK

@@ -29,7 +29,7 @@ class GetWalletMovementTest extends TestCase
             ]
         );
         $baasWebhook = new CelcoinBAAS();
-        $response = $baasWebhook->getWalletMovement('300151', '34335125070', Carbon::createFromFormat('Y-m-d', '2022-01-01'), Carbon::createFromFormat('Y-m-d', '2022-01-02'));
+        $response = $baasWebhook->getWalletMovement('300541976902', '17938715000192', Carbon::createFromFormat('Y-m-d', '2023-07-17'), Carbon::createFromFormat('Y-m-d', '2023-07-17'));
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

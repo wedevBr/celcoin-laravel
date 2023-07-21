@@ -147,14 +147,14 @@ class CelcoinBAAS extends CelcoinBaseApi
         );
     }
 
-    public function getWalletBalance(string $account, string $documentNumber)
+    public function getWalletBalance(string $account, ?string $documentNumber = null)
     {
         return $this->get(
             sprintf(self::GET_WALLET_BALANCE, $account, $documentNumber),
         );
     }
 
-    public function getWalletMovement(string $account, string $documentNumber, Carbon $dateFrom, Carbon $dateTo, ?int $page = 1, ?int $limit = null)
+    public function getWalletMovement(string $account, ?string $documentNumber, Carbon $dateFrom, Carbon $dateTo, ?int $page = 1, ?int $limit = null)
     {
         return $this->get(
             self::GET_WALLET_MOVEMENT,

@@ -38,7 +38,7 @@ class PartnersTest extends TestCase
     {
         return Http::response(
             [
-                "ParceirosPecRec" => [
+                "ParceirosPecRec" => [[
                     "codeParceiro" => "0001",
                     "IndBarCodeDeposit" => "S",
                     "IndBarCodeWithdraw" => "S",
@@ -52,7 +52,7 @@ class PartnersTest extends TestCase
                     "maxValueSaque" => 2000.0,
                     "minValueDeposito" => 0.0,
                     "minValueSaque" => 0.01,
-                ],
+                ]],
                 "errorCode" => "000",
                 "message" => "SUCESSO",
                 "status" => 0

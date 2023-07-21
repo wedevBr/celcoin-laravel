@@ -26,7 +26,7 @@ class BAASPIXGetParticipantTest extends TestCase
         );
 
         $pix = new CelcoinBAASPIX();
-        $response = $pix->getParticipant('25683434', '');
+        $response = $pix->getParticipant('25683434', null);
 
         $this->assertCount(1, $response);
     }

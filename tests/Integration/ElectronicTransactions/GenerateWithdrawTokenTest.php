@@ -32,7 +32,7 @@ class GenerateWithdrawTokenTest extends TestCase
         $electronicTransaction = new CelcoinElectronicTransactions();
         $response = $electronicTransaction->generateWithdrawToken(new WithdrawToken([
             "externalNSU" => 1234,
-            "externalTerminal" => "11122233344",
+            "externalTerminal" => "teste2",
             "receivingDocument" => "11122233344",
             "receivingName" => "Fulano de tal",
             "value" => 150,

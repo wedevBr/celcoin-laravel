@@ -26,7 +26,7 @@ class BAASPIXSearchPixKeyTest extends TestCase
         );
 
         $pix = new CelcoinBAASPIX();
-        $response = $pix->searchPixKey('30054065518');
+        $response = $pix->searchPixKey('300541976902');
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
@@ -35,28 +35,28 @@ class BAASPIXSearchPixKeyTest extends TestCase
     {
         return Http::response(
             [
-                "version" => "1.0.0",
                 "status" => "SUCCESS",
                 "body" => [
                     "listKeys" => [
-                        [
-                            "keyType" => "EMAIL",
-                            "key" => "testebaas@cecloin.com.br",
+                        0 => [
+                            "keyType" => "EVP",
+                            "key" => "0a9d3572-eda9-48cb-a8a7-d31d52a82ea7",
                             "account" => [
-                                "participant" => "30306294",
+                                "participant" => "13935893",
                                 "branch" => "0001",
-                                "account" => "10545584",
+                                "account" => "300541976902",
                                 "accountType" => "TRAN",
-                                "createDate" => "2020-11-03T06:30:00-03:00"
+                                "createDate" => "2023-07-19T21:31:59Z",
                             ],
                             "owner" => [
-                                "type" => "NATURAL_PERSON",
-                                "documentNumber" => "34335125070",
-                                "name" => "Carlos Henrique da Silva"
+                                "type" => "LEGAL_PERSON",
+                                "documentNumber" => "17938715000192",
+                                "name" => "Mateus",
                             ]
                         ]
                     ]
-                ]
+                ],
+                "version" => "1.0.0",
             ],
             Response::HTTP_OK
         );

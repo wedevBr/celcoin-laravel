@@ -31,8 +31,8 @@ class RemoveTest extends TestCase
 
         $dda = new CelcoinDDAUser();
         $response = $dda->remove(new RemoveUser([
-            "document" => "71929784007",
-            "clientRequestId" => "customer_teste"
+            "document" => "64834852393",
+            "clientRequestId" => "0001"
         ]));
 
         $this->assertEquals(201, $response['status']);

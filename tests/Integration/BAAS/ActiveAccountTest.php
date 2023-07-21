@@ -23,13 +23,13 @@ class ActiveAccountTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::ACTIVE_ACCOUNT, '12345', null)
+                    sprintf(CelcoinBAAS::ACTIVE_ACCOUNT, '300541976902', null)
                 ) => self::stubSuccess()
             ]
         );
 
         $baas = new CelcoinBAAS();
-        $response = $baas->activeAccount('Ativando', '12345',);
+        $response = $baas->activeAccount('Ativando', '300541976902',);
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

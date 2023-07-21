@@ -24,15 +24,15 @@ class ConfirmTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinTopups::CONFIRM_ENDPOINT, 9173139)
+                    sprintf(CelcoinTopups::CONFIRM_ENDPOINT, 817981234)
                 ) => self::stubSuccess()
             ]
         );
 
         $topups = new CelcoinTopups();
-        $response = $topups->confirm(9173139, new Confirm([
+        $response = $topups->confirm(817981234, new Confirm([
             "externalNSU" => 1234,
-            "externalTerminal" => "1123123123"
+            "externalTerminal" => "teste2"
         ]));
         $this->assertEquals(0, $response['status']);
     }

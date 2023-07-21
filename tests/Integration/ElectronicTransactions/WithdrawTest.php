@@ -32,7 +32,7 @@ class WithdrawTest extends TestCase
         $electronicTransaction = new CelcoinElectronicTransactions();
         $response = $electronicTransaction->withdraw(new Withdraw([
             "externalNSU" => 1234,
-            "externalTerminal" => "11122233344",
+            "externalTerminal" => "teste2",
             "receivingContact" => "944445555",
             "receivingDocument" => "11122233344",
             "transactionIdentifier" => "05e07b49-f57a-453c-b5e7-46ebe7bc5037",
@@ -54,12 +54,12 @@ class WithdrawTest extends TestCase
         return Http::response(
             [
                 "BarCodeBase64" => null,
-                "convenant" => "0720",
-                "externalWithdrawIdentifier" => "27cd1b67-976d-4ab1-a2f4-017492c2ed21-0124",
+                "convenant" => "0860",
+                "externalWithdrawIdentifier" => "",
                 "transactionIdentifier" => "05e07b49-f57a-453c-b5e7-46ebe7bc5037",
                 "orderNumber" => null,
                 "product" => null,
-                "transactionId" => 816055786,
+                "transactionId" => 817981834,
                 "QRCodeBase64" => null,
                 "token" => null,
                 "value" => 150,

@@ -30,7 +30,7 @@ class CheckAccountTest extends TestCase
 
         $baas = new CelcoinBAAS();
 
-        $response = $baas->accountCheck('6174ec78-3de2-4add-85db-e56aace8b5ef');
+        $response = $baas->accountCheck('75f6941c-8e5a-4ebc-9dbf-85f528aa1628');
 
         $this->assertEquals('CONFIRMED', $response['status']);
     }

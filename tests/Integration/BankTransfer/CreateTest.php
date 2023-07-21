@@ -33,8 +33,8 @@ class CreateTest extends TestCase
         $transfer = new CelcoinBankTransfer();
         $response = $transfer->create(new Create([
             "document" => "35914746817",
-            "externalTerminal" => "123",
-            "externalNSU" => 123,
+            "externalTerminal" => "teste2",
+            "externalNSU" => 1234,
             "accountCode" => "379424",
             "digitCode" => "5",
             "branchCode" => "30",

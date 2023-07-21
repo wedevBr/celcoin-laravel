@@ -31,9 +31,9 @@ class RegisterTest extends TestCase
 
         $dda = new CelcoinDDAUser();
         $response = $dda->register(new RegisterUser([
-            "document" => "23155663049",
-            "clientName" => "Celcoin Customer",
-            "clientRequestId" => "0001"
+            "document" => '71929784007',
+            "clientName" => "Customer Teste de Sucesso",
+            "clientRequestId" => "customer_sucess_teste"
         ]));
 
         $this->assertEquals(201, $response['status']);
@@ -45,11 +45,11 @@ class RegisterTest extends TestCase
             [
                 "status" => 201,
                 "body" => [
-                    "document" => "23155663049",
+                    "document" => "64834852393",
                     "clientRequestId" => "0001",
-                    "responseDate" => "2022-11-17T14:03:06.4688394+00:00",
+                    "responseDate" => "2023-07-17T20:53:09.3583614+00:00",
                     "status" => "PROCESSING",
-                    "subscriptionId" => "bfacff76-de86-4b8d-9797-4ea565b4f60d"
+                    "subscriptionId" => "058f3598-a2ad-464d-9bec-96a045cfde6a",
                 ]
             ],
             Response::HTTP_OK

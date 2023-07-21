@@ -32,13 +32,13 @@ class DepositTest extends TestCase
         $electronicTransaction = new CelcoinElectronicTransactions();
         $response = $electronicTransaction->deposit(new Deposit([
             "externalNSU" => 1234,
-            "externalTerminal" => "11122233344",
-            "payerContact" => "944445555",
+            "externalTerminal" => "teste2",
+            "payerContact" => "Fulano de tal",
             "payerDocument" => "11122233344",
             "transactionIdentifier" => "Banco24Horas/DepositoDigital/v1/a0a0d296-3754-454d-bc0c-b1c4d114467f/ea9dd655/1240004",
             "payerName" => "Fulano de tal",
             "namePartner" => "TECBAN_BANCO24H",
-            "value" => 150
+            "value" => 10
         ]));
 
         $this->assertEquals(0, $response['status']);

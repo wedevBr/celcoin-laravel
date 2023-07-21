@@ -9,13 +9,13 @@ use WeDevBr\Celcoin\Types\BAAS\TEDTransfer;
 
 /**
  * Class CelcoinBAASTED
- * API de BaaS possui o modulo de TED, esse modulo contempla os seguintes serviços:
+ * API de BaaS possui o modulo de TED, esse modulo contempla os seguintes serviços Transferência via TED e Consultar Status de uma Transferência TED
  * @package WeDevBr\Celcoin
  */
 class CelcoinBAASTED extends CelcoinBaseApi
 {
     const TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/spb/transfer';
-    const GET_STATUS_TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/spb/transfer';
+    const GET_STATUS_TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/spb/transfer/status';
 
     public function transfer(TEDTransfer $data)
     {

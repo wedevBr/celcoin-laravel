@@ -29,7 +29,7 @@ class CreateReleaseTest extends TestCase
             ]
         );
         $baasWebhook = new CelcoinBAAS();
-        $response = $baasWebhook->createRelease('444444', new AccountRelease([
+        $response = $baasWebhook->createRelease('300541976902', new AccountRelease([
             "clientCode" => "f9b978a6-ab7e-4460-997d",
             "amount" => 20,
             "type" => "CREDIT",
@@ -46,7 +46,7 @@ class CreateReleaseTest extends TestCase
                 "status" => "CONFIRMED",
                 "version" => "1.0.0",
                 "body" => [
-                    "id" => "c0b2d6ac-d46c-4f95-8c8c-d7e74877d1c0",
+                    "id" => "0cdf3a01-71c5-4428-9545-783667ccc289",
                     "clientCode" => "f9b978a6-ab7e-4460-997d"
                 ]
             ],
