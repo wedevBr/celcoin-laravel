@@ -14,18 +14,20 @@ use WeDevBr\Celcoin\Celcoin;
  * @uses Celcoin::clientDDAWebhooks
  * @uses Celcoin::clientElectronicTransactions
  * @uses Celcoin::clientTopups
+ * @uses Celcoin::clientBAAS
+ * @uses Celcoin::clientBAASTED
+ * @uses Celcoin::clientBAASWebhooks
+ * @uses Celcoin::clientBAASPIX
  * @uses Celcoin::clientPIXQR
  * @uses Celcoin::clientPIXParticipants
  * @uses Celcoin::clientPIXDICT
  * @uses Celcoin::clientPixStaticPayment
  * @uses Celcoin::clientPixCOBV
  * @uses Celcoin::clientPixCOB
- * @uses Celcoin::clientBAAS
- * @uses Celcoin::clientBAASTED
- * @uses Celcoin::clientBAASWebhooks
- * @uses Celcoin::clientBAASPIX
  * @uses Celcoin::clientPIXDynamic
  * @uses Celcoin::clientPIXPayment
+ * @uses Celcoin::clientPIXReceivement
+ * @uses Celcoin::clientPIXReverse
  *
  */
 class CelcoinFacade extends Facade
