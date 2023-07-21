@@ -12,9 +12,8 @@ use Tests\TestCase;
 use WeDevBr\Celcoin\Clients as Clients;
 use WeDevBr\Celcoin\Types\PIX as Types;
 
-class PixReceivementStatus extends TestCase
+class PixReceivementStatusTest extends TestCase
 {
-
     final public function testReceivementStatusNotFound(): void
     {
         $params = new Types\PixReceivementStatus();

@@ -29,8 +29,7 @@ class CelcoinPIXPayment extends CelcoinBaseApi
     final public function endToEndPayment(PaymentEndToEnd $params): ?array
     {
         $body = Validator::validate($params->toArray(), PaymentEndToEndRules::rules());
-
-        dd($body);
+        
         return $this->post(
             self::END_TO_END_PAYMENT_ENDPOINT,
             $body

@@ -12,7 +12,7 @@ use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXPayment;
 use WeDevBr\Celcoin\Types\PIX\PaymentEndToEnd;
 
-class PixPaymentEndToEnd extends TestCase
+class PixPaymentEndToEndTest extends TestCase
 {
     /**
      * @throws RequestException

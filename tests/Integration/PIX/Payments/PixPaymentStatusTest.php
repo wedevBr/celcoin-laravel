@@ -11,7 +11,7 @@ use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXPayment;
 use WeDevBr\Celcoin\Types\PIX\PaymentStatus;
 
-class PixPaymentStatus extends TestCase
+class PixPaymentStatusTest extends TestCase
 {
     /**
      * @throws RequestException
