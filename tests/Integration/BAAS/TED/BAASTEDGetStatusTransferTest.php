@@ -26,7 +26,8 @@ class BAASTEDGetStatusTransferTest extends TestCase
         );
 
         $ted = new CelcoinBAASTED();
-        $response = $ted->getStatusTransfer('2cda5113-4e6d-4671-a277-b1f5b77f9a5b');
+        $response = $ted->getStatusTransfer('222dbad8-c309-4f52-af62-8bfbe945ca2d');
+
 
         $this->assertEquals('CONFIRMED', $response['status']);
     }

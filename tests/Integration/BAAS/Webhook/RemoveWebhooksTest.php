@@ -21,13 +21,13 @@ class RemoveWebhooksTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAASWebhooks::REMOVE_ENDPOINT, EntityWebhookBAASEnum::PIX_PAYMENT_OUT->value)
+                    sprintf(CelcoinBAASWebhooks::REMOVE_ENDPOINT, EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED->value)
                 ) => self::stubSuccess()
             ]
         );
 
         $webhook = new CelcoinBAASWebhooks();
-        $response = $webhook->remove(EntityWebhookBAASEnum::PIX_PAYMENT_OUT);
+        $response = $webhook->remove(EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED);
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

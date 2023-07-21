@@ -10,7 +10,6 @@ use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
 use WeDevBr\Celcoin\Types\BAAS\EditWebhooks;
-use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
 class EditWebhooksTest extends TestCase
 {
@@ -30,14 +29,15 @@ class EditWebhooksTest extends TestCase
 
         $webhook = new CelcoinBAASWebhooks();
         $response = $webhook->edit(new EditWebhooks([
-            "entity" => "pix-payment-out",
+            "entity" => EntityWebhookBAASEnum::SPB_REVERSAL_OUT_TED,
             "webhookUrl" => "https://www.celcoin.com.br/baas",
             "auth" => [
                 "login" => "giovanni",
                 "pwd" => "string",
                 "type" => "basic"
-            ]
-        ]), EntityWebhookBAASEnum::PIX_PAYMENT_IN);
+            ],
+            "active" => true
+        ]), EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED);
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

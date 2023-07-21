@@ -28,9 +28,8 @@ class BAASPIXRegisterPixKeyTest extends TestCase
 
         $pix = new CelcoinBAASPIX();
         $response = $pix->registerPixKey(new RegisterPixKey([
-            'account' => '444444',
+            'account' => '300541976910',
             'keyType' => 'EVP',
-            'key' => '',
         ]));
 
         $this->assertEquals('CONFIRMED', $response['status']);

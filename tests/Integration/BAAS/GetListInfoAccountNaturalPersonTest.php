@@ -31,7 +31,7 @@ class GetListInfoAccountNaturalPersonTest extends TestCase
 
         $baas = new CelcoinBAAS();
 
-        $response = $baas->getListInfoAccountNaturalPerson(Carbon::createFromFormat('Y-m-d', '2022-06-28'), Carbon::createFromFormat('Y-m-d', '2022-06-30'));
+        $response = $baas->getListInfoAccountNaturalPerson(Carbon::createFromFormat('Y-m-d', '2023-07-19'), Carbon::createFromFormat('Y-m-d', '2023-07-19'));
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

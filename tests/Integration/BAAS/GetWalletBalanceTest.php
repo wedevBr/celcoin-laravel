@@ -23,12 +23,12 @@ class GetWalletBalanceTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::GET_WALLET_BALANCE, '1234', '25400754015')
+                    sprintf(CelcoinBAAS::GET_WALLET_BALANCE, '0001', '300541976902')
                 ) => self::stubSuccess()
             ]
         );
         $baasWebhook = new CelcoinBAAS();
-        $response = $baasWebhook->getWalletBalance('1234', '25400754015');
+        $response = $baasWebhook->getWalletBalance('300541976902');
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

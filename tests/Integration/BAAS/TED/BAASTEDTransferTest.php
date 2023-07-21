@@ -29,15 +29,17 @@ class BAASTEDTransferTest extends TestCase
 
         $ted = new CelcoinBAASTED();
         $response = $ted->transfer(new TEDTransfer([
-            "amount" => 0.01,
-            "clientCode" => "ad575298-8e81-4f90-a0b0-f3a04d8a48c6",
-            "debitParty" => ["account" => "30023646056255"],
+            "amount" => 4.00,
+            "clientCode" => "1234",
+            "debitParty" => [
+                "account" => "300541976902"
+            ],
             "creditParty" => [
                 "bank" => "30306294",
-                "account" => "000001",
-                "branch" => "20",
-                "taxId" => "07693440704",
-                "name" => "Davi Ferreira de Sousa",
+                "account" => "300541976910",
+                "branch" => "0001",
+                "taxId" => "00558856756",
+                "name" => "Noelí Valência",
                 "accountType" => "CC",
                 "personType" => "J",
             ],
@@ -55,28 +57,28 @@ class BAASTEDTransferTest extends TestCase
                 "status" => "PROCESSING",
                 "version" => "1.0.0",
                 "body" => [
-                    "id" => "34fee7bc-4d40-4605-9af8-398ed7d0d6b5",
-                    "amount" => 0,
-                    "clientCode" => "1458854",
+                    "id" => "222dbad8-c309-4f52-af62-8bfbe945ca2d",
+                    "amount" => 4,
+                    "clientCode" => "1234",
                     "debitParty" => [
-                        "account" => "444444",
-                        "branch" => "1",
-                        "taxId" => "11122233344",
-                        "name" => "Celcoin",
-                        "accountType" => "CACC",
-                        "personType" => "F",
-                        "bank" => "30306294",
+                        "account" => "300541976902",
+                        "branch" => "0001",
+                        "taxId" => "17938715000192",
+                        "name" => "Mateus",
+                        "accountType" => "CC",
+                        "personType" => "J",
+                        "bank" => "13935893",
                     ],
                     "creditParty" => [
                         "bank" => "30306294",
-                        "account" => "10545584",
-                        "branch" => "1",
-                        "taxId" => "11122233344",
-                        "name" => "Celcoin",
+                        "account" => "300541976910",
+                        "branch" => "0001",
+                        "taxId" => "00558856756",
+                        "name" => "Noelí Valência",
                         "accountType" => "CC",
-                        "personType" => "F",
-                    ],
-                ],
+                        "personType" => "J",
+                    ]
+                ]
             ],
             Response::HTTP_OK
         );

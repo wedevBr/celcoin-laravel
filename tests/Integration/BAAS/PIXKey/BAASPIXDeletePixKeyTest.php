@@ -26,7 +26,7 @@ class BAASPIXDeletePixKeyTest extends TestCase
         );
 
         $pix = new CelcoinBAASPIX();
-        $response = $pix->deletePixKey('30054065518', 'testebaas@cecloin.com.br');
+        $response = $pix->deletePixKey('300541976902', '0f4f01e4-53ec-4c7c-9c50-334621c19cb3');
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
