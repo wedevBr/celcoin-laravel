@@ -23,6 +23,7 @@ use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
 use WeDevBr\Celcoin\Clients\CelcoinPIXReceivement;
 use WeDevBr\Celcoin\Clients\CelcoinPIXReverse;
 use WeDevBr\Celcoin\Clients\CelcoinPixStaticPayment;
+use WeDevBr\Celcoin\Clients\CelcoinPixWebhooks;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
 
 /**
@@ -228,5 +229,14 @@ class Celcoin
     public static function clientPIXReverse(?string $mtlsPassphrase): CelcoinPIXReverse
     {
         return new CelcoinPIXReverse($mtlsPassphrase);
+    }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinPixWebhooks
+     */
+    public static function clientPixWebhooks(?string $mtlsPassphrase): CelcoinPixWebhooks
+    {
+        return new CelcoinPixWebhooks($mtlsPassphrase);
     }
 }

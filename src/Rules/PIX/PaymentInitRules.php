@@ -12,14 +12,14 @@ class PaymentInitRules
         return [
             'amount' => [
                 'required',
-                'decimal:2,2'
+                'decimal:2'
             ],
             'vlcpAmount' => [
-                'decimal:2,2',
+                'decimal:2',
                 'required_if:transactionType,CHANGE'
             ],
             'vldnAmount' => [
-                'decimal:2,2',
+                'decimal:2',
                 'required_if:transactionType,WITHDRAWAL',
                 'required_if:transactionType,CHANGE'
             ],

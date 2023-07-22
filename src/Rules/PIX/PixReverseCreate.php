@@ -8,7 +8,7 @@ class PixReverseCreate
     {
         return [
             'clientCode' => ['required'],
-            'amount' => ['required', 'decimal:2,2'],
+            'amount' => ['required', 'decimal:2'],
             'reason' => ['required', 'string', 'in:BE08,FR01,MD06,SL02'],
             'additionalInformation' => ['sometimes', 'string', 'max:105'],
             'reversalDescription' => ['sometimes', 'string', 'max:140'],
