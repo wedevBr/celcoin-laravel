@@ -20,6 +20,10 @@ class PixWebhookLisGetListTest extends TestCase
      */
     final public function testWebhookGetListSuccess(): void
     {
+        /**
+         * @var Types\PixWebhookGetList $params
+         * @var WebhookEventEnum $webhookEventEnum
+         */
         [$params, $webhookEventEnum] = $this->callWebhookBase(fn() => self::stubSuccess());
 
         $pix = new Clients\CelcoinPixWebhooks();
