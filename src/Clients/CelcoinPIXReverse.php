@@ -11,6 +11,7 @@ use WeDevBr\Celcoin\Types\PIX as Types;
 class CelcoinPIXReverse extends CelcoinBaseApi
 {
     const PIX_REVERSE_CREATE_ENDPOINT = '/pix/v2/reverse/pi/%s';
+    const PIX_REVERSE_GET_STATUS_ENDPOINT = '/pix/v2/reverse/pi/status';
 
     /**
      * @throws RequestException
@@ -21,6 +22,21 @@ class CelcoinPIXReverse extends CelcoinBaseApi
         return $this->post(
             sprintf(self::PIX_REVERSE_CREATE_ENDPOINT, $transactionId),
             $params
+        );
+    }
+
+    /**
+     * @throws RequestException
+     */
+    final public function getStatus(Types\PixReverseGetStatus $getStatus): ?array
+    {
+        $params = Validator::validate($getStatus->toArray(), Rules\PixReverseGetStatus::rules());
+        return $this->get(
+            sprintf(
+                '%s?%s',
+                self::PIX_REVERSE_GET_STATUS_ENDPOINT,
+                http_build_query($params)
+            )
         );
     }
 }
