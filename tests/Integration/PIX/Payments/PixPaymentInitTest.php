@@ -31,8 +31,8 @@ class PixPaymentInitTest extends TestCase
 
         $params = new PaymentInit();
         $params->clientCode = Str::random();
-        $params->amount = fake()->randomFloat(2, 2);
-        $params->vlcpAmount = fake()->randomFloat(2, 2);
+        $params->amount = 19.12;
+        $params->vlcpAmount = 19.12;
         $params->initiationType = 'MANUAL';
 
         $pix = new CelcoinPIXPayment();

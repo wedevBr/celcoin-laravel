@@ -13,7 +13,7 @@ use WeDevBr\Celcoin\Clients as Clients;
 use WeDevBr\Celcoin\Enums\WebhookEventEnum;
 use WeDevBr\Celcoin\Types\PIX as Types;
 
-class PixWebhookLisGetListTest extends TestCase
+class PixReactivateAndResendAllPendingMessagesTest extends TestCase
 {
     use GenericWebhookErrorsTrait;
 
@@ -23,26 +23,26 @@ class PixWebhookLisGetListTest extends TestCase
     final public function testWebhookGetListSuccess(): void
     {
         /**
-         * @var Types\PixWebhookGetList $params
+         * @var Types\PixReactivateAndResendAllPendingMessages $params
          * @var WebhookEventEnum $webhookEventEnum
          */
         [$params, $webhookEventEnum] = $this->callWebhookBase(fn() => self::stubSuccess());
 
         $pix = new Clients\CelcoinPixWebhooks();
-        $response = $pix->getList($webhookEventEnum, $params);
+        $response = $pix->reactivateAndResendAllPendingMessages($webhookEventEnum, $params);
         $this->assertEquals('200', $response['status']);
     }
 
     /**
      * @param Closure<PromiseInterface> $stub
-     * @return array<Types\PixWebhookGetList, WebhookEventEnum>
+     * @param WebhookEventEnum $webhookEventEnum
+     * @return array<Types\PixReactivateAndResendAllPendingMessages, WebhookEventEnum>
      */
-    private function callWebhookBase(Closure $stub): array
+    private function callWebhookBase(Closure $stub, WebhookEventEnum $webhookEventEnum = WebhookEventEnum::CONFIRMED): array
     {
-        $params = new Types\PixWebhookGetList();
+        $params = new Types\PixReactivateAndResendAllPendingMessages();
 
-        $webhookEventEnum = WebhookEventEnum::ERROR;
-        $url = sprintf(Clients\CelcoinPixWebhooks::PIX_WEBHOOK_GET_LIST_ENDPOINT, $webhookEventEnum->value);
+        $url = sprintf(Clients\CelcoinPixWebhooks::PIX_REACTIVATE_RESEND_PENDING_ENDPOINT, $webhookEventEnum->value);
 
         if (sizeof($params->toArray()) > 1) {
             $url .= '?' . http_build_query($params->toArray());
@@ -66,28 +66,14 @@ class PixWebhookLisGetListTest extends TestCase
         return Http::response(
             [
                 'version' => 'v1.0',
+                'webhookEvent' => 'CONFIRMED',
+                'dateTo' => '2023-07-22T00:00:00+00:00',
+                'dateFrom' => '2023-07-21T00:00:00+00:00',
                 'status' => 200,
-                'webhookEvent' => 'ERROR',
-                'dateTo' => '2022-09-20',
-                'dateFrom' => '2022-09-21',
-                'totalFound' => 0,
-                'totalReturned' => 0,
-                'eventStatus' => 'Bloqueado',
-                'webhookDetails' => [
-                    [
-                        'endpoint' => 'www.api.com.br/teste',
-                        'status' => 'Bloqueado)',
-                        'transactionId' => 12312331,
-                        'dateLastUpdate' => '2022-09-21',
-                        'requestBody' => '{"RequestBody":{"TransactionType":"PAYMENT","TransactionId":4644372,"StatusCode":{"StatusId":2,"Description":"Confirmed"}}}',
-                        'statusCode' => '200',
-                    ],
-                ],
             ],
             Response::HTTP_OK
         );
     }
-
 
     /**
      * @throws RequestException
@@ -96,7 +82,7 @@ class PixWebhookLisGetListTest extends TestCase
     final public function testWebhookErrorNotFound(string $returnCode, Closure $stub): void
     {
         /**
-         * @var Types\PixWebhookGetList $params
+         * @var Types\PixReactivateAndResendAllPendingMessages $params
          * @var WebhookEventEnum $webhookEventEnum
          */
         [$params, $webhookEventEnum] = $this->callWebhookBase($stub);
@@ -104,7 +90,7 @@ class PixWebhookLisGetListTest extends TestCase
         $this->expectException(RequestException::class);
         try {
             $pix = new Clients\CelcoinPixWebhooks();
-            $pix->getList($webhookEventEnum, $params);
+            $pix->reactivateAndResendAllPendingMessages($webhookEventEnum, $params);
         } catch (RequestException $exception) {
             $response = $exception->response->json();
             $this->assertEquals($returnCode, $response['error']['errorCode']);
