@@ -13,6 +13,7 @@ class CelcoinPixWebhooks extends CelcoinBaseApi
 {
     const PIX_WEBHOOK_GET_LIST_ENDPOINT = '/webhook-manager-webservice/v1/webhook/%s';
     const PIX_REACTIVATE_RESEND_PENDING_ENDPOINT = '/webhook-manager-webservice/v1/webhook/resend/%s';
+    const RESEND_TRANSACTION_LIST_WEBHOOK = '/webhook-manager-webservice/v1/webhook/resendTransactionList/%s';
 
     /**
      * @throws RequestException
@@ -34,7 +35,6 @@ class CelcoinPixWebhooks extends CelcoinBaseApi
             $url
         );
     }
-
 
     /**
      * @throws RequestException
@@ -59,6 +59,27 @@ class CelcoinPixWebhooks extends CelcoinBaseApi
             $url
         );
 
+    }
+
+    /**
+     * @throws RequestException
+     */
+    final public function reactivateEventAndResendSpecifiedMessagesInList(
+        WebhookEventEnum                                         $webhookEvent,
+        Types\PixReactivateEventAndResendSpecifiedMessagesInList $resendSpecifiedMessagesInList
+    ): ?array
+    {
+        $params = Validator::validate(
+            $resendSpecifiedMessagesInList->toArray(),
+            Rules\PixReactivateEventAndResendSpecifiedMessagesInList::rules()
+        );
+
+        $url = sprintf(self::RESEND_TRANSACTION_LIST_WEBHOOK, $webhookEvent->value);
+
+        return $this->post(
+            $url,
+            $params
+        );
     }
 
 }
