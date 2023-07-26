@@ -26,7 +26,7 @@ class BAASPIXGetExternalPixKeyTest extends TestCase
         );
 
         $pix = new CelcoinBAASPIX();
-        $response = $pix->getExternalPixKey('300541976902', '0a9d3572-eda9-48cb-a8a7-d31d52a82ea7');
+        $response = $pix->getExternalPixKey('300541976910', '0a9d3572-eda9-48cb-a8a7-d31d52a82ea7');
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

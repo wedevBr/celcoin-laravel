@@ -29,9 +29,9 @@ class BAASPIXCashOutTest extends TestCase
         $pix = new CelcoinBAASPIX();
         $response = $pix->cashOut(new PixCashOut([
             "amount" => 5.55,
-            "clientCode" => "1234",
+            "clientCode" => "1234ab",
             "transactionIdentification" => fake()->uuid(),
-            "endToEndId" => "E1393589320230719213601039975372",
+            "endToEndId" => "E1393589320230724213001637810511",
             "initiationType" => "DICT",
             "paymentType" => "IMMEDIATE",
             "urgency" => "HIGH",
