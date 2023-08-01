@@ -1,7 +1,11 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace Tests\Integration\ElectronicTransactions;
 
+use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
 
@@ -11,11 +15,49 @@ class PartnersTest extends TestCase
     /**
      * @return void
      */
-    public function testSuccessAccountCheck()
+    public function testSuccess()
     {
-        $baas = new CelcoinElectronicTransactions();
-        $response = $baas->getPartners();
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                sprintf(
+                    '%s%s',
+                    config('api_url'),
+                    CelcoinElectronicTransactions::GET_PARTNERS_ENDPOINT
+                ) => self::stubSuccess()
+            ]
+        );
 
-        $this->assertNotEmpty($response);
+        $electronicTransaction = new CelcoinElectronicTransactions();
+        $response = $electronicTransaction->getPartners();
+
+        $this->assertEquals(0, $response['status']);
+    }
+
+    static private function stubSuccess(): PromiseInterface
+    {
+        return Http::response(
+            [
+                "ParceirosPecRec" => [[
+                    "codeParceiro" => "0001",
+                    "IndBarCodeDeposit" => "S",
+                    "IndBarCodeWithdraw" => "S",
+                    "IndQRCodeDeposit" => "S",
+                    "IndQRCodeWithdraw" => "S",
+                    "namePartner" => "BrinksPay",
+                    "partnerPecRecRecId" => "1",
+                    "partnerType" => "VAREJO",
+                    "typeTransactionsCancelamento" => "SOLICITACANCELAMENTOPECREC",
+                    "maxValueDeposito" => 2000.0,
+                    "maxValueSaque" => 2000.0,
+                    "minValueDeposito" => 0.0,
+                    "minValueSaque" => 0.01,
+                ]],
+                "errorCode" => "000",
+                "message" => "SUCESSO",
+                "status" => 0
+            ],
+            Response::HTTP_OK
+        );
     }
 }

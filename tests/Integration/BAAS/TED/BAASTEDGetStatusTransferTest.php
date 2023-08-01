@@ -5,6 +5,7 @@ namespace Tests\Integration\BAAS\TED;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASTED;
 
@@ -15,14 +16,7 @@ class BAASTEDGetStatusTransferTest extends TestCase
     {
         Http::fake(
             [
-                config('celcoin.login_url') => Http::response(
-                    [
-                        'access_token' => 'fake token',
-                        'expires_in' => 2400,
-                        'token_type' => 'bearer'
-                    ],
-                    Response::HTTP_OK
-                ),
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
                     '%s%s*',
                     config('api_url'),
@@ -32,7 +26,8 @@ class BAASTEDGetStatusTransferTest extends TestCase
         );
 
         $ted = new CelcoinBAASTED();
-        $response = $ted->getStatusTransfer('2cda5113-4e6d-4671-a277-b1f5b77f9a5b');
+        $response = $ted->getStatusTransfer('5e8e0e08-1628-4265-be6f-26cc23e265a4', "1234");
+
 
         $this->assertEquals('CONFIRMED', $response['status']);
     }

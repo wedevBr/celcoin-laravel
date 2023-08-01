@@ -5,8 +5,10 @@ namespace Tests\Integration\BAAS\Webhook;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
+use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
 use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
 class RegisterWebhooksTest extends TestCase
@@ -16,14 +18,7 @@ class RegisterWebhooksTest extends TestCase
     {
         Http::fake(
             [
-                config('celcoin.login_url') => Http::response(
-                    [
-                        'access_token' => 'fake token',
-                        'expires_in' => 2400,
-                        'token_type' => 'bearer'
-                    ],
-                    Response::HTTP_OK
-                ),
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
                     '%s%s',
                     config('api_url'),
@@ -34,14 +29,13 @@ class RegisterWebhooksTest extends TestCase
 
         $webhook = new CelcoinBAASWebhooks();
         $response = $webhook->register(new RegisterWebhooks([
-            "entity" => "pix-payment-out",
+            "entity" => EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED,
             "webhookUrl" => "https://www.celcoin.com.br/baas",
             "auth" => [
                 "login" => "string",
                 "pwd" => "string",
                 "type" => "basic"
             ],
-            "active" => false
         ]));
 
         $this->assertEquals('SUCCESS', $response['status']);
@@ -51,6 +45,9 @@ class RegisterWebhooksTest extends TestCase
     {
         return Http::response(
             [
+                "body" => [
+                    "subscriptionId" => "64bb0bef9065331bad7bf996"
+                ],
                 "version" => "1.0.0",
                 "status" => "SUCCESS"
             ],

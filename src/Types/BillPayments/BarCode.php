@@ -2,11 +2,12 @@
 
 namespace WeDevBr\Celcoin\Types\BillPayments;
 
+use WeDevBr\Celcoin\Enums\BarCodeTypeEnum;
 use WeDevBr\Celcoin\Types\Data;
 
 class BarCode extends Data
 {
-    public string $type;
+    public BarCodeTypeEnum $type;
     public ?string $digitable;
     public ?string $barCode;
 

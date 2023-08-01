@@ -21,13 +21,13 @@ class CelcoinBAASPIX extends CelcoinBaseApi
 
     const CASH_OUT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment';
     const GET_PARTICIPANT_ENDPOINT = '/celcoin-baas-wallet-transactions-webservice/v1/pix/participant';
+    const GET_EXTERNAL_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/external/%s';
     const STATUS_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment/status';
-    const SEARCH_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/external/%s';
     const REGISTER_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry';
-    const GET_ALL_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
+    const SEARCH_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
     const DELETE_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
     const REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse';
-    const STATUS_REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse';
+    const STATUS_REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse/status';
 
     public function cashOut(PixCashOut $data)
     {
@@ -49,7 +49,17 @@ class CelcoinBAASPIX extends CelcoinBaseApi
         );
     }
 
-    public function statusPix(?string $id, ?string $clientCode, ?string $endToEndId)
+    public function getExternalPixKey(string $account, string $key)
+    {
+        return $this->get(
+            sprintf(self::GET_EXTERNAL_KEY_ENDPOINT, $account),
+            [
+                'key' => $key,
+            ]
+        );
+    }
+
+    public function statusPix(?string $id = null, ?string $clientCode = null, ?string $endToEndId = null)
     {
         return $this->get(
             self::STATUS_PIX_ENDPOINT,
@@ -57,16 +67,6 @@ class CelcoinBAASPIX extends CelcoinBaseApi
                 'id' => $id,
                 'clientCode' => $clientCode,
                 'endToEndId' => $endToEndId,
-            ]
-        );
-    }
-
-    public function searchPixKey(string $account, string $key)
-    {
-        return $this->get(
-            sprintf(self::SEARCH_PIX_KEY_ENDPOINT, $account),
-            [
-                'key' => $key,
             ]
         );
     }
@@ -80,9 +80,11 @@ class CelcoinBAASPIX extends CelcoinBaseApi
         );
     }
 
-    public function getAllPixKey(string $account)
+    public function searchPixKey(string $account)
     {
-        return $this->post(sprintf(self::GET_ALL_PIX_KEY_ENDPOINT, $account));
+        return $this->get(
+            sprintf(self::SEARCH_PIX_KEY_ENDPOINT, $account)
+        );
     }
 
     public function deletePixKey(string $account, string $key)

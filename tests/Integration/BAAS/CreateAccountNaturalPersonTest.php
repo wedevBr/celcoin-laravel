@@ -2,11 +2,14 @@
 
 namespace Tests\Integration\BAAS;
 
+use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
 use WeDevBr\Celcoin\Enums\AccountOnboardingTypeEnum;
 use WeDevBr\Celcoin\Types\BAAS\AccountNaturalPerson;
-use WeDevBr\Celcoin\Types\BAAS\Address;
 
 class CreateAccountNaturalPersonTest extends TestCase
 {
@@ -14,35 +17,65 @@ class CreateAccountNaturalPersonTest extends TestCase
     /**
      * @return void
      */
-    public function testSuccessCreateAccountNaturalPerson()
+    public function testSuccess()
     {
+        $fake = fake('pt_BR');
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                sprintf(
+                    '%s%s',
+                    config('api_url'),
+                    CelcoinBAAS::CREATE_ACCOUNT_NATURAL_PERSON
+                ) => self::stubSuccess()
+            ]
+        );
+
         $baas = new CelcoinBAAS();
-        $accountNaturalPerson = new AccountNaturalPerson();
-        $accountNaturalPerson->clientCode = '8b6e666a-0869-46bc-87d8-b32b9d5e1d06';
-        $accountNaturalPerson->accountOnboardingType = AccountOnboardingTypeEnum::BANK_ACCOUNT;
-        $accountNaturalPerson->documentNumber = '21025996046';
-        $accountNaturalPerson->phoneNumber = '+5548988319285';
-        $accountNaturalPerson->email = 'teset@email.com';
-        $accountNaturalPerson->motherName = 'Maria Julia Kaique';
-        $accountNaturalPerson->fullName = 'Julia Kaique';
-        $accountNaturalPerson->socialName = 'Julia';
-        $accountNaturalPerson->birthDate = '02-04-2001';
-        $accountNaturalPerson->isPoliticallyExposedPerson = false;
 
-        $address = new Address();
-        $address->postalCode = '88080320';
-        $address->street = 'Rua São Cristóvão';
-        $address->number = '620';
-        $address->addressComplement = 'CJ 1604';
-        $address->neighborhood = 'Coqueiros';
-        $address->city = 'Florianópolis';
-        $address->state = 'SC';
-        $address->longitude = '-23.6288';
-        $address->latitude = '-46.6488';
-        $accountNaturalPerson->address = $address;
+        $firstName = $fake->firstName();
+        $lastName = $fake->lastName();
 
-        $baas->createAccountNaturalPerson($accountNaturalPerson);
+        $response = $baas->createAccountNaturalPerson(new AccountNaturalPerson(
+            [
+                "clientCode" => $fake->uuid(),
+                "accountOnboardingType" => AccountOnboardingTypeEnum::BANK_ACCOUNT,
+                "documentNumber" => $fake->cpf(false),
+                "phoneNumber" => sprintf('+5511%s', $fake->cellphone(false)),
+                "email" => $fake->email(),
+                "motherName" => sprintf('%s %s', $fake->firstNameFemale(), $fake->lastName()),
+                "fullName" => sprintf('%s %s', $firstName, $lastName),
+                "socialName" => $firstName,
+                "birthDate" => '15-01-1981',
+                "address" => [
+                    "postalCode" => '01153000',
+                    "street" => $fake->streetName(),
+                    "number" => $fake->buildingNumber(),
+                    "addressComplement" => "Em frente ao parque.",
+                    "neighborhood" => 'Centro',
+                    "city" => $fake->city(),
+                    "state" => $fake->stateAbbr(),
+                    "longitude" => $fake->longitude(-23, -24),
+                    "latitude" => $fake->latitude(-46, -47)
+                ],
+                "isPoliticallyExposedPerson" => false
+            ]
+        ));
 
-        $this->assertTrue($baas instanceof CelcoinBAAS);
+        $this->assertEquals('PROCESSING', $response['status']);
+    }
+
+    static private function stubSuccess(): PromiseInterface
+    {
+        return Http::response(
+            [
+                "version" => "1.0.0",
+                "status" => "PROCESSING",
+                "body" => [
+                    "onBoardingId" => "39c8e322-9192-498d-947e-2daa4dfc749e"
+                ]
+            ],
+            Response::HTTP_OK
+        );
     }
 }

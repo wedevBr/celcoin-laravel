@@ -5,6 +5,7 @@ namespace Tests\Integration\BAAS\PIXKey;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Types\BAAS\RegisterPixKey;
@@ -16,14 +17,7 @@ class BAASPIXRegisterPixKeyTest extends TestCase
     {
         Http::fake(
             [
-                config('celcoin.login_url') => Http::response(
-                    [
-                        'access_token' => 'fake token',
-                        'expires_in' => 2400,
-                        'token_type' => 'bearer'
-                    ],
-                    Response::HTTP_OK
-                ),
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
                     '%s%s',
                     config('api_url'),
@@ -34,9 +28,8 @@ class BAASPIXRegisterPixKeyTest extends TestCase
 
         $pix = new CelcoinBAASPIX();
         $response = $pix->registerPixKey(new RegisterPixKey([
-            'account' => '444444',
+            'account' => '300541976910',
             'keyType' => 'EVP',
-            'key' => '',
         ]));
 
         $this->assertEquals('CONFIRMED', $response['status']);

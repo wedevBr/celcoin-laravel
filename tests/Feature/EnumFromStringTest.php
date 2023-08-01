@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace Tests\Feature;
 
 use Tests\TestCase;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
 use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
-class RegisterWebhooksIntanceEnumTest extends TestCase
+class EnumFromStringTest extends TestCase
 {
 
     /**
@@ -14,7 +14,7 @@ class RegisterWebhooksIntanceEnumTest extends TestCase
      */
     public function testSuccessInstanceCreateRegisterWebhooksWithEnumString()
     {
-        $webhook = new RegisterWebhooks([
+        $data = new RegisterWebhooks([
             'entity' => 'pix-payment-out',
             'webhookUrl' => 'http://teste.com',
             'auth' => [
@@ -24,6 +24,6 @@ class RegisterWebhooksIntanceEnumTest extends TestCase
             ]
         ]);
 
-        $this->assertTrue($webhook->entity instanceof EntityWebhookBAASEnum);
+        $this->assertInstanceOf(EntityWebhookBAASEnum::class, $data->entity);
     }
 }

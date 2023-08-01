@@ -5,6 +5,7 @@ namespace Tests\Integration\BAAS\PIXKey;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 
@@ -15,24 +16,17 @@ class BAASPIXDeletePixKeyTest extends TestCase
     {
         Http::fake(
             [
-                config('celcoin.login_url') => Http::response(
-                    [
-                        'access_token' => 'fake token',
-                        'expires_in' => 2400,
-                        'token_type' => 'bearer'
-                    ],
-                    Response::HTTP_OK
-                ),
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    sprintf(CelcoinBAASPIX::DELETE_PIX_KEY_ENDPOINT, 'testebaas@cecloin.com.br')
+                    sprintf(CelcoinBAASPIX::DELETE_PIX_KEY_ENDPOINT, '0f4f01e4-53ec-4c7c-9c50-334621c19cb3')
                 ) => self::stubSuccess()
             ]
         );
 
         $pix = new CelcoinBAASPIX();
-        $response = $pix->deletePixKey('30054065518', 'testebaas@cecloin.com.br');
+        $response = $pix->deletePixKey('300541976902', '0f4f01e4-53ec-4c7c-9c50-334621c19cb3');
 
         $this->assertEquals('SUCCESS', $response['status']);
     }

@@ -7,11 +7,11 @@ class AccountManagerNaturalPerson
     public static function rules()
     {
         return [
-            "phoneNumber" => ['required', 'string'],
+            "phoneNumber" => ['required', 'starts_with:+', 'regex:/(\+55)\d{10,11}/'],
             "email" => ['required', 'string'],
             "socialName" => ['required', 'string'],
             "address" => ['required', 'array'],
-            "address.postalCode" => ['required', 'string'],
+            "address.postalCode" => ['required', 'digits:8'],
             "address.street" => ['required', 'string'],
             "address.number" => ['nullable', 'string'],
             "address.addressComplement" => ['nullable', 'string'],

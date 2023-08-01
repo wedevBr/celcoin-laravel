@@ -5,6 +5,7 @@ namespace Tests\Integration\BAAS\Webhook;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
@@ -16,16 +17,9 @@ class GetWebhooksTest extends TestCase
     {
         Http::fake(
             [
-                config('celcoin.login_url') => Http::response(
-                    [
-                        'access_token' => 'fake token',
-                        'expires_in' => 2400,
-                        'token_type' => 'bearer'
-                    ],
-                    Response::HTTP_OK
-                ),
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
-                    '%s%s',
+                    '%s%s*',
                     config('api_url'),
                     CelcoinBAASWebhooks::GET_ENDPOINT
                 ) => self::stubSuccess()
@@ -33,30 +27,30 @@ class GetWebhooksTest extends TestCase
         );
 
         $webhook = new CelcoinBAASWebhooks();
-        $response = $webhook->getWebhook(EntityWebhookBAASEnum::PIX_PAYMENT_OUT, true);
+        $response = $webhook->getWebhook(EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED, false);
 
         $this->assertEquals('SUCCESS', $response['status']);
-        $this->assertCount(1, $response['body']);
     }
 
     static private function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "version" => "1.0.0",
-                "status" => "SUCCESS",
                 "body" => [
-                    "entity" => "string",
-                    "webhookUrl" => "string",
-                    "active" => true,
-                    "createDate" => "2023-03-06T12:02:48.419Z",
-                    "lastUpdateDate" => "2023-03-06T12:02:48.419Z",
-                    "auth" => [
-                        "login" => "string",
-                        "pwd" => "string",
-                        "type" => "string"
+                    "subscriptions" => [
+                        0 => [
+                            "subscriptionId" => "64b13326a90a5b4a702dac3f",
+                            "entity" => "pix-payment-out",
+                            "webhookUrl" => "http://uoleti.io/transaction/webhook/LEKMZqMJUjBaVen1kyb9",
+                            "active" => true,
+                            "createDate" => "2023-07-14T08:36:06.292Z",
+                            "lastUpdateDate" => null,
+                            "auth" => null,
+                        ]
                     ]
-                ]
+                ],
+                "status" => "SUCCESS",
+                "version" => "1.0.0",
             ],
             Response::HTTP_OK
         );

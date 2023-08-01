@@ -22,7 +22,8 @@
   "require-dev": {
     "orchestra/testbench": "^7.24.1",
     "phpunit/phpunit": "^9.6.9",
-    "laradumps/laradumps": "^1.12.3"
+    "laradumps/laradumps": "^2.0",
+    "phpstan/phpstan": "^1.10"
   },
   "extra": {
     "laravel": {

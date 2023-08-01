@@ -19,10 +19,16 @@ use WeDevBr\Celcoin\Types\InternationalTopups\Create;
  */
 class CelcoinInternationalTopups extends CelcoinBaseApi
 {
+    const GET_COUNTRIES_ENDPOINT = '/v5/transactions/internationaltopups/countrys';
+    const GET_VALUES_ENDPOINT = '/v5/transactions/internationaltopups/values';
+    const CREATE_ENDPOINT = '/v5/transactions/internationaltopups';
+    const CONFIRM_ENDPOINT = '/v5/transactions/internationaltopups/%d/capture';
+    const CANCEL_ENDPOINT = '/v5/transactions/internationaltopups/%d/void';
+
     public function getCountries(int $page = 1, int $size = 50): mixed
     {
         return $this->get(
-            "/v5/transactions/internationaltopups/countrys",
+            self::GET_COUNTRIES_ENDPOINT,
             [
                 'page' => $page,
                 'size' => $size,
@@ -33,7 +39,7 @@ class CelcoinInternationalTopups extends CelcoinBaseApi
     public function getValues(?string $countryCode = null, string $phoneNumber = null): mixed
     {
         return $this->get(
-            "/v5/transactions/internationaltopups/values",
+            self::GET_VALUES_ENDPOINT,
             [
                 'countryCode' => $countryCode,
                 'phoneNumber' => $phoneNumber,
@@ -49,7 +55,7 @@ class CelcoinInternationalTopups extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), InternationalTopupsCreate::rules());
         return $this->post(
-            "/v5/transactions/internationaltopups",
+            self::CREATE_ENDPOINT,
             $body
         );
     }
@@ -58,7 +64,7 @@ class CelcoinInternationalTopups extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), InternationalTopupsConfirm::rules());
         return $this->put(
-            "/v5/transactions/internationaltopups/{$transactionId}/capture",
+            sprintf(self::CONFIRM_ENDPOINT, $transactionId),
             $body
         );
     }
@@ -67,7 +73,7 @@ class CelcoinInternationalTopups extends CelcoinBaseApi
     {
         $body = Validator::validate($data->toArray(), InternationalTopupsCancel::rules());
         return $this->delete(
-            "/v5/transactions/internationaltopups/{$transactionId}/void",
+            sprintf(self::CANCEL_ENDPOINT, $transactionId),
             $body
         );
     }

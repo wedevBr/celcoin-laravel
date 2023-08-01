@@ -5,6 +5,7 @@ namespace Tests\Integration\BAAS\PIXRefund;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
+use Tests\GlobalStubs;
 use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Types\BAAS\RefundPix;
@@ -16,14 +17,7 @@ class BAASPIXRefundTest extends TestCase
     {
         Http::fake(
             [
-                config('celcoin.login_url') => Http::response(
-                    [
-                        'access_token' => 'fake token',
-                        'expires_in' => 2400,
-                        'token_type' => 'bearer'
-                    ],
-                    Response::HTTP_OK
-                ),
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(
                     '%s%s',
                     config('api_url'),
@@ -39,7 +33,7 @@ class BAASPIXRefundTest extends TestCase
             "clientCode" => "1458854",
             "amount" => 150.54,
             "reason" => "MD06",
-            "reversalDescription" => "Devolução do churrasco",
+            "reversalDescription" => "Devolução do churrasco"
         ]));
 
         $this->assertEquals('PROCESSING', $response['status']);

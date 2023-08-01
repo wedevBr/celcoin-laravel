@@ -7,8 +7,8 @@ class Cancel
     public static function rules()
     {
         return [
-            'externalNsu' => ['nullable', 'numeric'],
-            'externalTerminal' => ['nullable', 'string'],
+            'externalNSU' => ['required', 'integer'],
+            'externalTerminal' => ['required', 'string'],
         ];
     }
 }
