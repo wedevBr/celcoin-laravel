@@ -26,14 +26,6 @@ php artisan vendor:publish --provider="WeDevBr\Celcoin\CelcoinServiceProvider"
 First you need to set up your credentials. Define
 yours `CELCOIN_CLIENT_SECRET`, `CELCOIN_CLIENT_ID`, `CELCOIN_LOGIN_URL` and `CELCOIN_API_URL` at .env file.
 
-### Changelog
-
-Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Contributing
-
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
-
 ### Security
 
 If you discover any security related issues, please email adeildo.amorim@wedev.software instead of using the issue
