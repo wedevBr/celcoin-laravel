@@ -18,7 +18,10 @@ use WeDevBr\Celcoin\Types\PIX\Receiver;
 
 class COBVCreateTest extends TestCase
 {
-    public function testCreateCOBV()
+    /**
+     * @throws RequestException
+     */
+    final public function testCreateCobv(): void
     {
         Http::fake(
             [
@@ -89,6 +92,38 @@ class COBVCreateTest extends TestCase
             ],
             "createAt" => "2022-03-21T14:27:58.2106288+00:00"
         ], Response::HTTP_OK);
+    }
+
+    private function fakeCOBVBody(): COBV
+    {
+        $cobv = new COBV([
+            'clientRequestId' => '9b26edb7cf254db09f5449c94bf13abc',
+            'expirationAfterPayment' => 30,
+            'duedate' => '2023-08-29 00:00:00',
+            'amount' => 15.63,
+            'key' => 'testepix@celcoin.com.br'
+        ]);
+        $cobv->debtor = new Debtor([
+            'name' => 'Fulano de Tal',
+            "cnpj" => "61360961000100",
+            'city' => 'Barueri',
+            'publicArea' => 'Avenida Brasil',
+            'state' => 'SP',
+            'postalCode' => '01202003',
+            'email' => 'contato@celcoin.com.br'
+        ]);
+        $cobv->receiver = new Receiver([
+            'name' => 'João da Silva',
+            'cnpj' => '60904237000129',
+            'postalCode' => '01202003',
+            'city' => 'Barueri',
+            'publicArea' => 'Avenida Brasil',
+            'state' => 'SP',
+            'fantasyName' => "Nome de Comercial",
+        ]);
+
+        return $cobv;
+
     }
 
     /**
@@ -173,37 +208,5 @@ class COBVCreateTest extends TestCase
             "message" => "Can't create a new PixCollectionDueDate when there is another Pix Collection active with the same location.",
             "errorCode" => "PBE318"
         ], Response::HTTP_BAD_REQUEST);
-    }
-
-    private function fakeCOBVBody(): COBV
-    {
-        $cobv = new COBV([
-            'clientRequestId' => '9b26edb7cf254db09f5449c94bf13abc',
-            'expirationAfterPayment' => 30,
-            'duedate' => '2023-08-29 00:00:00',
-            'amount' => 15.63,
-            'key' => 'testepix@celcoin.com.br'
-        ]);
-        $cobv->debtor = new Debtor([
-            'name' => 'Fulano de Tal',
-            "cnpj" => "61360961000100",
-            'city' => 'Barueri',
-            'publicArea' => 'Avenida Brasil',
-            'state' => 'SP',
-            'postalCode' => '01202003',
-            'email' => 'contato@celcoin.com.br'
-        ]);
-        $cobv->receiver = new Receiver([
-            'name' => 'João da Silva',
-            'cnpj' => '60904237000129',
-            'postalCode' => '01202003',
-            'city' => 'Barueri',
-            'publicArea' => 'Avenida Brasil',
-            'state' => 'SP',
-            'fantasyName' => "Nome de Comercial",
-        ]);
-
-        return $cobv;
-
     }
 }

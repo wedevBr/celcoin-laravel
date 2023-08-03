@@ -18,8 +18,12 @@ use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDICT;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDynamic;
 use WeDevBr\Celcoin\Clients\CelcoinPIXParticipants;
+use WeDevBr\Celcoin\Clients\CelcoinPIXPayment;
 use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
+use WeDevBr\Celcoin\Clients\CelcoinPIXReceivement;
+use WeDevBr\Celcoin\Clients\CelcoinPIXReverse;
 use WeDevBr\Celcoin\Clients\CelcoinPixStaticPayment;
+use WeDevBr\Celcoin\Clients\CelcoinPixWebhooks;
 use WeDevBr\Celcoin\Clients\CelcoinReport;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
 
@@ -208,5 +212,41 @@ class Celcoin
     public static function clientPIXDynamic(?string $mtlsPassphrase = null): CelcoinPIXDynamic
     {
         return new CelcoinPIXDynamic($mtlsPassphrase);
+    }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinPIXPayment
+     */
+    public static function clientPIXPayment(?string $mtlsPassphrase): CelcoinPIXPayment
+    {
+        return new CelcoinPIXPayment($mtlsPassphrase);
+    }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinPIXReceivement
+     */
+    public static function clientPIXReceivement(?string $mtlsPassphrase): CelcoinPIXReceivement
+    {
+        return new CelcoinPIXReceivement($mtlsPassphrase);
+    }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinPIXReverse
+     */
+    public static function clientPIXReverse(?string $mtlsPassphrase): CelcoinPIXReverse
+    {
+        return new CelcoinPIXReverse($mtlsPassphrase);
+    }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinPixWebhooks
+     */
+    public static function clientPixWebhooks(?string $mtlsPassphrase): CelcoinPixWebhooks
+    {
+        return new CelcoinPixWebhooks($mtlsPassphrase);
     }
 }
