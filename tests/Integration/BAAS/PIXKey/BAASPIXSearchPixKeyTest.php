@@ -20,7 +20,7 @@ class BAASPIXSearchPixKeyTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAASPIX::SEARCH_PIX_KEY_ENDPOINT, '30054065518')
+                    sprintf(CelcoinBAASPIX::SEARCH_PIX_KEY_ENDPOINT, '300541976902')
                 ) => self::stubSuccess()
             ]
         );

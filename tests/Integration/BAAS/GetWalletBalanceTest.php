@@ -23,7 +23,7 @@ class GetWalletBalanceTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::GET_WALLET_BALANCE, '0001', '300541976902')
+                    sprintf(CelcoinBAAS::GET_WALLET_BALANCE, '300541976902', null)
                 ) => self::stubSuccess()
             ]
         );
