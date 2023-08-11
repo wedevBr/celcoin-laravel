@@ -27,5 +27,5 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
 
-      - name: Execute tests (Unit and Feature tests) via Pest
+      - name: Execute tests (Unit and Feature tests)
         run: vendor/bin/phpunit
