@@ -2,9 +2,9 @@ name: Laravel
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   laravel-tests:
@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        php: [8.1, 8.2]
+        php: [ 8.1, 8.2 ]
 
     steps:
       - name: Checkout
@@ -23,9 +23,6 @@ jobs:
         with:
           tools: composer:v2
           php-version: ${{ matrix.php }}
-
-      - name: Copy .env
-        run: php -r "file_exists('.env') || copy('.env.example', '.env');"
 
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
