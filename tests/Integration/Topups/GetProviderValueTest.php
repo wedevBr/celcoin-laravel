@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\Topups;
+namespace WeDevBr\Celcoin\Tests\Integration\Topups;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\Topups\ProvidersValues;
 
 class GetProviderValueTest extends TestCase
@@ -24,16 +24,18 @@ class GetProviderValueTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinTopups::GET_PROVIDER_VALUES_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinTopups::GET_PROVIDER_VALUES_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $topups = new CelcoinTopups();
-        $response = $topups->getProviderValues(new ProvidersValues([
-            "stateCode" => 13,
-            "providerId" => '2125'
-        ]));
+        $response = $topups->getProviderValues(
+            new ProvidersValues([
+                "stateCode" => 13,
+                "providerId" => '2125',
+            ]),
+        );
         $this->assertEquals(0, $response['status']);
     }
 
@@ -52,7 +54,7 @@ class GetProviderValueTest extends TestCase
                         "dueProduct" => 0,
                         "valueBonus" => 0,
                         "maxValue" => 85.99,
-                        "minValue" => 85.99
+                        "minValue" => 85.99,
                     ],
                     [
                         "properties" => null,
@@ -64,7 +66,7 @@ class GetProviderValueTest extends TestCase
                         "dueProduct" => 0,
                         "valueBonus" => 0,
                         "maxValue" => 171.89,
-                        "minValue" => 171.98
+                        "minValue" => 171.98,
                     ],
                     [
                         "properties" => null,
@@ -76,15 +78,15 @@ class GetProviderValueTest extends TestCase
                         "dueProduct" => 0,
                         "valueBonus" => 0,
                         "maxValue" => 199,
-                        "minValue" => 199
-                    ]
+                        "minValue" => 199,
+                    ],
                 ],
                 "externalNsuQuery" => null,
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0
+                "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

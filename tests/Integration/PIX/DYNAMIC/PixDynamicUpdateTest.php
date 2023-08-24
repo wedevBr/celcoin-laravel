@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\DYNAMIC;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\DYNAMIC;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDynamic;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\AdditionalInformation;
 use WeDevBr\Celcoin\Types\PIX\DynamicQRUpdate;
 use WeDevBr\Celcoin\Types\PIX\Merchant;
@@ -28,8 +28,8 @@ class PixDynamicUpdateTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXDynamic::UPDATE_DYNAMIC_QRCODE_ENDPOINT, $transactionId) => self::stubInvalidKey()
-            ]
+                sprintf(CelcoinPIXDynamic::UPDATE_DYNAMIC_QRCODE_ENDPOINT, $transactionId) => self::stubInvalidKey(),
+            ],
         );
         $this->expectException(RequestException::class);
         try {
@@ -52,7 +52,7 @@ class PixDynamicUpdateTest extends TestCase
                 'code' => 'LC003',
                 'description' => 'Chave Pix informada não é válida para este tipo de ação. Contate o suporte. / Chave informada não cadastrada',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -61,7 +61,6 @@ class PixDynamicUpdateTest extends TestCase
      */
     static private function fakeBody(): DynamicQRUpdate
     {
-
         $dynamic = new DynamicQRUpdate;
         $dynamic->key = 'testepix@celcoin.com.br';
         $dynamic->amount = 15.63;
@@ -100,7 +99,7 @@ class PixDynamicUpdateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXDynamic::UPDATE_DYNAMIC_QRCODE_ENDPOINT, $transactionId) => self::stubSuccess(),
-            ]
+            ],
         );
 
         $data = self::fakeBody();
@@ -134,7 +133,7 @@ class PixDynamicUpdateTest extends TestCase
                     'lastUpdateTimestamp' => '2022-03-22T18:59:28.0944527+00:00',
                     'entity' => 'PixImmediateCollection',
                     'status' => 'ACTIVE',
-                    'tags' => NULL,
+                    'tags' => null,
                     'transactionIdentification' => 'kk6g232xel65a0daee4dd13kk9193296',
                     'body' => [
                         'key' => 'teste@celcoin.com.br',
@@ -149,7 +148,7 @@ class PixDynamicUpdateTest extends TestCase
                         ],
                         'debtor' => [
                             'cpf' => '74881162080',
-                            'cnpj' => NULL,
+                            'cnpj' => null,
                             'name' => 'valdir',
                         ],
                         'additionalInformation' => [
@@ -172,7 +171,7 @@ class PixDynamicUpdateTest extends TestCase
                     ],
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -196,8 +195,8 @@ class PixDynamicUpdateTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXDynamic::UPDATE_DYNAMIC_QRCODE_ENDPOINT, $transactionId) => self::stubSuccess()
-            ]
+                sprintf(CelcoinPIXDynamic::UPDATE_DYNAMIC_QRCODE_ENDPOINT, $transactionId) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinPIXDynamic();

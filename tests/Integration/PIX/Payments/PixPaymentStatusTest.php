@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\PIX\Payments;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\Payments;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\PaymentStatus;
 
 class PixPaymentStatusTest extends TestCase
@@ -25,7 +25,7 @@ class PixPaymentStatusTest extends TestCase
         $url = sprintf(
             '%s?%s',
             CelcoinPIXPayment::STATUS_PAYMENT_ENDPOINT,
-            http_build_query($params)
+            http_build_query($params),
         );
 
         Http::fake(
@@ -34,9 +34,9 @@ class PixPaymentStatusTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => $response()
-            ]
+                    $url,
+                ) => $response(),
+            ],
         );
 
         $params = new PaymentStatus();
@@ -71,7 +71,7 @@ class PixPaymentStatusTest extends TestCase
         ];
 
         return Http::response(
-            array_merge($body, ['status' => $status])
+            array_merge($body, ['status' => $status]),
         );
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\DDA\Invoice;
+namespace WeDevBr\Celcoin\Tests\Integration\DDA\Invoice;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinDDAInvoice;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\DDA\RegisterInvoice;
 
 class RegisterTest extends TestCase
@@ -24,18 +24,20 @@ class RegisterTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinDDAInvoice::REGISTER_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinDDAInvoice::REGISTER_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $dda = new CelcoinDDAInvoice();
-        $response = $dda->register(new RegisterInvoice([
-            "document" => [
-                "28935923095",
-                "85429850012"
-            ]
-        ]));
+        $response = $dda->register(
+            new RegisterInvoice([
+                "document" => [
+                    "28935923095",
+                    "85429850012",
+                ],
+            ]),
+        );
 
         $this->assertEquals(201, $response['status']);
     }
@@ -48,15 +50,15 @@ class RegisterTest extends TestCase
                 "body" => [
                     [
                         "document" => "28935923095",
-                        "status" => "Success"
+                        "status" => "Success",
                     ],
                     [
                         "document" => "85429850012",
-                        "status" => "Success"
-                    ]
-                ]
+                        "status" => "Success",
+                    ],
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

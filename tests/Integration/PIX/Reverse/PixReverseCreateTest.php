@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\Reverse;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\Reverse;
 
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients as Clients;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX as Types;
 
 class PixReverseCreateTest extends TestCase
@@ -28,7 +28,8 @@ class PixReverseCreateTest extends TestCase
         $transactionId = '1234-5678';
 
         $url = sprintf(
-            Clients\CelcoinPIXReverse::PIX_REVERSE_CREATE_ENDPOINT, $transactionId
+            Clients\CelcoinPIXReverse::PIX_REVERSE_CREATE_ENDPOINT,
+            $transactionId,
         );
         Http::fake(
             [
@@ -36,9 +37,9 @@ class PixReverseCreateTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => self::stubSuccess()
-            ]
+                    $url,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new Clients\CelcoinPIXReverse();
@@ -55,7 +56,7 @@ class PixReverseCreateTest extends TestCase
                 'amount' => 10,
                 'message' => 'PROCESSING',
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

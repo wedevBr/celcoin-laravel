@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BAAS\TED;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\TED;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASTED;
 use WeDevBr\Celcoin\Enums\ClientFinalityEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BAAS\TEDTransfer;
 
 class BAASTEDTransferTest extends TestCase
@@ -22,30 +22,32 @@ class BAASTEDTransferTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAASTED::TRANSFER_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAASTED::TRANSFER_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $ted = new CelcoinBAASTED();
-        $response = $ted->transfer(new TEDTransfer([
-            "amount" => 4.00,
-            "clientCode" => "1234",
-            "debitParty" => [
-                "account" => "300541976902"
-            ],
-            "creditParty" => [
-                "bank" => "30306294",
-                "account" => "300541976910",
-                "branch" => "0001",
-                "taxId" => "00558856756",
-                "name" => "Noelí Valência",
-                "accountType" => "CC",
-                "personType" => "J",
-            ],
-            "clientFinality" => ClientFinalityEnum::ACCOUNT_CREDIT,
-            "description" => "",
-        ]));
+        $response = $ted->transfer(
+            new TEDTransfer([
+                "amount" => 4.00,
+                "clientCode" => "1234",
+                "debitParty" => [
+                    "account" => "300541976902",
+                ],
+                "creditParty" => [
+                    "bank" => "30306294",
+                    "account" => "300541976910",
+                    "branch" => "0001",
+                    "taxId" => "00558856756",
+                    "name" => "Noelí Valência",
+                    "accountType" => "CC",
+                    "personType" => "J",
+                ],
+                "clientFinality" => ClientFinalityEnum::ACCOUNT_CREDIT,
+                "description" => "",
+            ]),
+        );
 
         $this->assertEquals('PROCESSING', $response['status']);
     }
@@ -77,10 +79,10 @@ class BAASTEDTransferTest extends TestCase
                         "name" => "Noelí Valência",
                         "accountType" => "CC",
                         "personType" => "J",
-                    ]
-                ]
+                    ],
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

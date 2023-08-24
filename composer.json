@@ -10,8 +10,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "WeDevBr\\Celcoin\\": "src/",
-      "Tests\\": "tests/"
+      "WeDevBr\\Celcoin\\Tests\\": "tests/"
     }
   },
   "require": {

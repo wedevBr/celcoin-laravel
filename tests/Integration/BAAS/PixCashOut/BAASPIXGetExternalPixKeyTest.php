@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS\PixCashOut;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PixCashOut;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXGetExternalPixKeyTest extends TestCase
 {
@@ -20,9 +20,9 @@ class BAASPIXGetExternalPixKeyTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    sprintf(CelcoinBAASPIX::GET_EXTERNAL_KEY_ENDPOINT, '')
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAASPIX::GET_EXTERNAL_KEY_ENDPOINT, ''),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinBAASPIX();
@@ -55,7 +55,7 @@ class BAASPIXGetExternalPixKeyTest extends TestCase
                 ],
                 "version" => "1.0.0",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

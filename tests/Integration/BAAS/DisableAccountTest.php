@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class DisableAccountTest extends TestCase
 {
@@ -23,9 +23,9 @@ class DisableAccountTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::DISABLE_ACCOUNT, '12345', null)
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAAS::DISABLE_ACCOUNT, '12345', null),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $baas = new CelcoinBAAS();
@@ -41,7 +41,7 @@ class DisableAccountTest extends TestCase
                 "version" => "1.0.0",
                 "status" => "SUCCESS",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

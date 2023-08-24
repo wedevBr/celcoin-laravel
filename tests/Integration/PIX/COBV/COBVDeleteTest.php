@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\PIX\COBV;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COBV;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBVDeleteTest extends TestCase
 {
@@ -23,7 +23,7 @@ class COBVDeleteTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOBV::DELETE_COB_PIX_URL, $transactionId) => self::stubErrorInvalidValue(),
-            ]
+            ],
         );
         $this->expectException(RequestException::class);
         try {
@@ -43,7 +43,7 @@ class COBVDeleteTest extends TestCase
                 'errorCode' => 'DE001',
                 'description' => 'Value cannot be null. (Parameter \'source\')',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -57,7 +57,7 @@ class COBVDeleteTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOBV::DELETE_COB_PIX_URL, $transactionId) => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXCOBV();
         $result = $pixCOB->deleteCOBVPIX($transactionId);
@@ -72,7 +72,7 @@ class COBVDeleteTest extends TestCase
                 'status' => 200,
                 'message' => 'success',
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

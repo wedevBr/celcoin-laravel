@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use Carbon\Carbon;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetWalletMovementTest extends TestCase
 {
@@ -24,12 +24,17 @@ class GetWalletMovementTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAAS::GET_WALLET_MOVEMENT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAAS::GET_WALLET_MOVEMENT,
+                ) => self::stubSuccess(),
+            ],
         );
         $baasWebhook = new CelcoinBAAS();
-        $response = $baasWebhook->getWalletMovement('300541976902', '17938715000192', Carbon::createFromFormat('Y-m-d', '2023-07-17'), Carbon::createFromFormat('Y-m-d', '2023-07-17'));
+        $response = $baasWebhook->getWalletMovement(
+            '300541976902',
+            '17938715000192',
+            Carbon::createFromFormat('Y-m-d', '2023-07-17'),
+            Carbon::createFromFormat('Y-m-d', '2023-07-17'),
+        );
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
@@ -58,12 +63,12 @@ class GetWalletMovementTest extends TestCase
                             "amount" => 10.12,
                             "status" => "Saldo Liberado",
                             "balanceType" => "CREDIT",
-                            "movementType" => "PIXPAYMENTIN"
-                        ]
-                    ]
-                ]
+                            "movementType" => "PIXPAYMENTIN",
+                        ],
+                    ],
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

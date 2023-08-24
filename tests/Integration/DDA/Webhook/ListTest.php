@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\DDA\Webhook;
+namespace WeDevBr\Celcoin\Tests\Integration\DDA\Webhook;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinDDAWebhooks;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class ListTest extends TestCase
 {
@@ -23,9 +23,9 @@ class ListTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinDDAWebhooks::LIST_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinDDAWebhooks::LIST_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $dda = new CelcoinDDAWebhooks();
@@ -42,19 +42,19 @@ class ListTest extends TestCase
                 "body" => [
                     [
                         "typeEventWebhook" => "Invoice",
-                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab"
+                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab",
                     ],
                     [
                         "typeEventWebhook" => "Deletion",
-                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab"
+                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab",
                     ],
                     [
                         "typeEventWebhook" => "Subscription",
-                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab"
-                    ]
-                ]
+                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab",
+                    ],
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

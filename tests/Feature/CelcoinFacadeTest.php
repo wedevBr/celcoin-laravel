@@ -1,10 +1,10 @@
 <?php
 
-namespace Tests\Feature;
+namespace WeDevBr\Celcoin\Tests\Feature;
 
 use Illuminate\Support\Facades\App;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Celcoin;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class CelcoinFacadeTest extends TestCase
 {

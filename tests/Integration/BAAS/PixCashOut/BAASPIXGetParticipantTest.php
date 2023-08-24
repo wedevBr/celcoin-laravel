@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS\PixCashOut;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PixCashOut;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXGetParticipantTest extends TestCase
 {
@@ -20,9 +20,9 @@ class BAASPIXGetParticipantTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAASPIX::GET_PARTICIPANT_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAASPIX::GET_PARTICIPANT_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinBAASPIX();
@@ -40,10 +40,10 @@ class BAASPIXGetParticipantTest extends TestCase
                     "type" => "IDRT",
                     "name" => "COOPERATIVA CENTRAL DE CRÉDITO DE MINAS GERAIS LTDA. - SICOOB CENTRAL CREDIMINAS",
                     "startOperationDatetime" => "2020-11-03T09:30:00+00:00",
-                    "ispb" => "25683434"
-                ]
+                    "ispb" => "25683434",
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

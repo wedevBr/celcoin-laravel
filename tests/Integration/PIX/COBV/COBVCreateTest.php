@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\COBV;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COBV;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
 use WeDevBr\Celcoin\Enums\AmountDiscountModalityTypeEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\AmountDicount;
 use WeDevBr\Celcoin\Types\PIX\COBV;
 use WeDevBr\Celcoin\Types\PIX\Debtor;
@@ -27,7 +27,7 @@ class COBVCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOBV::CREATE_COBV_PIX => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOBV = new CelcoinPIXCOBV();
         $result = $pixCOBV->createCOBVPIX(self::fakeCOBVBody());
@@ -48,7 +48,7 @@ class COBVCreateTest extends TestCase
             "debtor" => [
                 "name" => "Fulano de Tal",
                 "cpf" => null,
-                "cnpj" => "61360961000100"
+                "cnpj" => "61360961000100",
             ],
             "amount" => [
                 "original" => 15.63,
@@ -56,41 +56,41 @@ class COBVCreateTest extends TestCase
                     "discountDateFixed" => [
                         [
                             "date" => "2022-03-21T00:00:00",
-                            "amountPerc" => "1.00"
-                        ]
+                            "amountPerc" => "1.00",
+                        ],
                     ],
-                    "modality" => "FIXED_VALUE_UNTIL_THE_DATES_INFORMED"
+                    "modality" => "FIXED_VALUE_UNTIL_THE_DATES_INFORMED",
                 ],
                 "abatement" => null,
                 "fine" => null,
-                "interest" => null
+                "interest" => null,
             ],
             "location" => [
                 "merchant" => [
                     "postalCode" => "01201005",
                     "city" => "Barueri",
                     "merchantCategoryCode" => "0000",
-                    "name" => "Celcoin Pagamentos"
+                    "name" => "Celcoin Pagamentos",
                 ],
                 "url" => "api-h.developer.btgpactual.com/v1/p/v2/cobv/8767107ce1db49fdb1058224e00c4ab1",
                 "emv" => "00020101021226980014br.gov.bcb.pix2576api-h.developer.btgpactual.com/v1/p/v2/cobv/8767107ce1db49fdb1058224e00c4ab15204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***630411F9",
                 "type" => "COBV",
                 "locationId" => "55845",
-                "id" => null
+                "id" => null,
             ],
             "key" => "testepix@celcoin.com.br",
             "receiver" => [
                 "name" => "João da Silva",
                 "fantasyName" => "Nome de Comercial",
                 "cpf" => null,
-                "cnpj" => "60904237000129"
+                "cnpj" => "60904237000129",
             ],
             "calendar" => [
                 "expirationAfterPayment" => "10",
                 "createdAt" => "0001-01-01T00:00:00",
-                "dueDate" => "2022-03-22T00:00:00"
+                "dueDate" => "2022-03-22T00:00:00",
             ],
-            "createAt" => "2022-03-21T14:27:58.2106288+00:00"
+            "createAt" => "2022-03-21T14:27:58.2106288+00:00",
         ], Response::HTTP_OK);
     }
 
@@ -101,7 +101,7 @@ class COBVCreateTest extends TestCase
             'expirationAfterPayment' => 30,
             'duedate' => '2023-08-29 00:00:00',
             'amount' => 15.63,
-            'key' => 'testepix@celcoin.com.br'
+            'key' => 'testepix@celcoin.com.br',
         ]);
         $cobv->debtor = new Debtor([
             'name' => 'Fulano de Tal',
@@ -110,7 +110,7 @@ class COBVCreateTest extends TestCase
             'publicArea' => 'Avenida Brasil',
             'state' => 'SP',
             'postalCode' => '01202003',
-            'email' => 'contato@celcoin.com.br'
+            'email' => 'contato@celcoin.com.br',
         ]);
         $cobv->receiver = new Receiver([
             'name' => 'João da Silva',
@@ -123,7 +123,6 @@ class COBVCreateTest extends TestCase
         ]);
 
         return $cobv;
-
     }
 
     /**
@@ -135,7 +134,7 @@ class COBVCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOBV::CREATE_COBV_PIX => self::stubDueDateLessCurrentDate(),
-            ]
+            ],
         );
         $pixCOBV = new CelcoinPIXCOBV();
         $cobv = self::fakeCOBVBody();
@@ -149,7 +148,7 @@ class COBVCreateTest extends TestCase
     {
         return Http::response([
             "message" => "The Calendar.DueDate field cannot be less than the current date.",
-            "errorCode" => "PCE003"
+            "errorCode" => "PCE003",
         ], Response::HTTP_BAD_REQUEST);
     }
 
@@ -159,7 +158,7 @@ class COBVCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOBV::CREATE_COBV_PIX => self::stubDiscountDateFixedLessCurrentDate(),
-            ]
+            ],
         );
         $pixCOBV = new CelcoinPIXCOBV();
         $cobv = self::fakeCOBVBody();
@@ -167,12 +166,12 @@ class COBVCreateTest extends TestCase
             'discountDateFixed' => [
                 new DiscountDateFixed([
                     'date' => '2021-04-29',
-                    'amountPerc' => '1.00'
-                ])
+                    'amountPerc' => '1.00',
+                ]),
             ],
             'hasDiscount' => true,
             'modality' => AmountDiscountModalityTypeEnum::AMOUNT_PER_CALENDAR_DAY_ADVANCE->value,
-            'amountPerc' => '0.5'
+            'amountPerc' => '0.5',
 
         ]);
         $this->expectException(RequestException::class);
@@ -183,7 +182,7 @@ class COBVCreateTest extends TestCase
     {
         return Http::response([
             "message" => "The Discount.DiscountDateFixed.AmountPerc field cannot be less than the current date.",
-            "errorCode" => "PCE003"
+            "errorCode" => "PCE003",
         ], Response::HTTP_BAD_REQUEST);
     }
 
@@ -193,7 +192,7 @@ class COBVCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOBV::CREATE_COBV_PIX => self::stubPixCollectionForSameLocation(),
-            ]
+            ],
         );
         $pixCOBV = new CelcoinPIXCOBV();
         $cobv = self::fakeCOBVBody();
@@ -206,7 +205,7 @@ class COBVCreateTest extends TestCase
     {
         return Http::response([
             "message" => "Can't create a new PixCollectionDueDate when there is another Pix Collection active with the same location.",
-            "errorCode" => "PBE318"
+            "errorCode" => "PBE318",
         ], Response::HTTP_BAD_REQUEST);
     }
 }

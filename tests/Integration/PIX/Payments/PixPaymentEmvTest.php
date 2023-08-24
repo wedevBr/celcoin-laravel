@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\PIX\Payments;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\Payments;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\PaymentEmv;
 
 class PixPaymentEmvTest extends TestCase
@@ -24,9 +24,9 @@ class PixPaymentEmvTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinPIXPayment::EMV_PAYMENT_ENDPOINT
-                ) => self::stubEmvError()
-            ]
+                    CelcoinPIXPayment::EMV_PAYMENT_ENDPOINT,
+                ) => self::stubEmvError(),
+            ],
         );
 
         $params = new PaymentEmv();
@@ -57,7 +57,7 @@ class PixPaymentEmvTest extends TestCase
                     ],
                 ],
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -72,9 +72,9 @@ class PixPaymentEmvTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinPIXPayment::EMV_PAYMENT_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinPIXPayment::EMV_PAYMENT_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $params = new PaymentEmv();
@@ -96,9 +96,9 @@ class PixPaymentEmvTest extends TestCase
                 'merchantAccountInformation' => [
                     'url' => 'https://api-h.developer.btgpactual.com/v1/p/v2/4c98d619a4344f6aa719c35bd16fb777',
                     'gui' => 'br.gov.bcb.pix',
-                    'key' => NULL,
-                    'additionalInformation' => NULL,
-                    'withdrawalServiceProvider' => NULL,
+                    'key' => null,
+                    'additionalInformation' => null,
+                    'withdrawalServiceProvider' => null,
                 ],
                 'merchantCategoryCode' => 0,
                 'transactionCurrency' => 986,
@@ -110,7 +110,7 @@ class PixPaymentEmvTest extends TestCase
                 'initiationMethod' => '12',
                 'transactionIdentification' => '***',
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

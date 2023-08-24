@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\COBV;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COBV;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\AdditionalInformation;
 use WeDevBr\Celcoin\Types\PIX\Calendar;
 use WeDevBr\Celcoin\Types\PIX\COBV;
@@ -28,7 +28,7 @@ class COBVUpdateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOBV::UPDATE_COBV_PIX, $transactionId) => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXCOBV();
         $result = $pixCOB->updateCOBVPIX($transactionId, self::fakeCOBVBody()->toArray());
@@ -53,14 +53,14 @@ class COBVUpdateTest extends TestCase
             ],
             'debtor' => [
                 'name' => 'Fulano',
-                'cpf' => NULL,
+                'cpf' => null,
                 'cnpj' => '00190305000103',
             ],
             'amount' => [
                 'original' => 15.01,
                 'changeType' => 0,
-                'withdrawal' => NULL,
-                'change' => NULL,
+                'withdrawal' => null,
+                'change' => null,
             ],
             'location' => [
                 'merchant' => [
@@ -73,7 +73,7 @@ class COBVUpdateTest extends TestCase
                 'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/pc/p/v2/1d53f8a4839641628b2d678f7ddb9ad65204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***63040D56',
                 'type' => 'COB',
                 'locationId' => '0',
-                'id' => NULL,
+                'id' => null,
             ],
             'key' => 'testepix@celcoin.com.br',
             'calendar' => [
@@ -100,14 +100,13 @@ class COBVUpdateTest extends TestCase
             [
                 'value' => 'Assinatura de serviço',
                 'key' => 'Produto 1',
-            ]
+            ],
         );
         $cobv->amount = 15.01;
         $cobv->calendar = new Calendar([
             'expiration' => 84000,
         ]);
         return $cobv;
-
     }
 
     /**
@@ -120,7 +119,7 @@ class COBVUpdateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOBV::UPDATE_COBV_PIX, $transactionId) => $response,
-            ]
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -138,13 +137,19 @@ class COBVUpdateTest extends TestCase
     {
         return [
             'wrong calendar due date' => [
-                fn() => self::getCalendarDueDateErrorResponse(), 'PCE003', 'errorCode'
+                fn() => self::getCalendarDueDateErrorResponse(),
+                'PCE003',
+                'errorCode',
             ],
             'wrong discount amount perc' => [
-                fn() => self::getDiscountAmountPercErrorResponse(), 'PCE003', 'errorCode'
+                fn() => self::getDiscountAmountPercErrorResponse(),
+                'PCE003',
+                'errorCode',
             ],
             'wrong pix collection error' => [
-                fn() => self::getCanNotCreateNewPixCollectionDueDateErrorResponse(), 'PBE318', 'errorCode'
+                fn() => self::getCanNotCreateNewPixCollectionDueDateErrorResponse(),
+                'PBE318',
+                'errorCode',
             ],
         ];
     }
@@ -153,7 +158,7 @@ class COBVUpdateTest extends TestCase
     {
         $data = [
             'message' => 'The Calendar.DueDate field cannot be less than the current date.',
-            'errorCode' => 'PCE003'
+            'errorCode' => 'PCE003',
         ];
 
         return Http::response($data, Response::HTTP_BAD_REQUEST);
@@ -163,7 +168,7 @@ class COBVUpdateTest extends TestCase
     {
         $data = [
             'message' => 'The Discount.DiscountDateFixed.AmountPerc field cannot be less than the current date.',
-            'errorCode' => 'PCE003'
+            'errorCode' => 'PCE003',
         ];
 
         return Http::response($data, Response::HTTP_BAD_REQUEST);
@@ -173,7 +178,7 @@ class COBVUpdateTest extends TestCase
     {
         $data = [
             'message' => 'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
-            'errorCode' => 'PBE318'
+            'errorCode' => 'PBE318',
         ];
 
         return Http::response($data, Response::HTTP_BAD_REQUEST);

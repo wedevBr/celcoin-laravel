@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\DDA\User;
+namespace WeDevBr\Celcoin\Tests\Integration\DDA\User;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinDDAUser;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\DDA\RegisterUser;
 
 class RegisterTest extends TestCase
@@ -24,17 +24,19 @@ class RegisterTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinDDAUser::REGISTER_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinDDAUser::REGISTER_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $dda = new CelcoinDDAUser();
-        $response = $dda->register(new RegisterUser([
-            "document" => '71929784007',
-            "clientName" => "Customer Teste de Sucesso",
-            "clientRequestId" => "customer_sucess_teste"
-        ]));
+        $response = $dda->register(
+            new RegisterUser([
+                "document" => '71929784007',
+                "clientName" => "Customer Teste de Sucesso",
+                "clientRequestId" => "customer_sucess_teste",
+            ]),
+        );
 
         $this->assertEquals(201, $response['status']);
     }
@@ -50,9 +52,9 @@ class RegisterTest extends TestCase
                     "responseDate" => "2023-07-17T20:53:09.3583614+00:00",
                     "status" => "PROCESSING",
                     "subscriptionId" => "058f3598-a2ad-464d-9bec-96a045cfde6a",
-                ]
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

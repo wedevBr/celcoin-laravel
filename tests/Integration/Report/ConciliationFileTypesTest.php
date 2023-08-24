@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\Report;
+namespace WeDevBr\Celcoin\Tests\Integration\Report;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinReport;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class ConciliationFileTypesTest extends TestCase
 {
@@ -23,9 +23,9 @@ class ConciliationFileTypesTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinReport::GET_CONCILIATION_FILE_TYPES_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinReport::GET_CONCILIATION_FILE_TYPES_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $report = new CelcoinReport();
@@ -39,66 +39,66 @@ class ConciliationFileTypesTest extends TestCase
             [
                 [
                     "fileType" => 1,
-                    "description" => "Movimentacao"
+                    "description" => "Movimentacao",
                 ],
                 [
                     "fileType" => 2,
-                    "description" => "Recusa Movimentacao"
+                    "description" => "Recusa Movimentacao",
                 ],
                 [
                     "fileType" => 22,
-                    "description" => "Transferencia Movimentacao"
+                    "description" => "Transferencia Movimentacao",
                 ],
                 [
                     "fileType" => 23,
-                    "description" => "Transferencia Recusa"
+                    "description" => "Transferencia Recusa",
                 ],
                 [
                     "fileType" => 24,
-                    "description" => "Recebimento Eletronico"
+                    "description" => "Recebimento Eletronico",
                 ],
                 [
                     "fileType" => 25,
-                    "description" => "Pagamento Eletronico"
+                    "description" => "Pagamento Eletronico",
                 ],
                 [
                     "fileType" => 36,
-                    "description" => "PIX Pagamento"
+                    "description" => "PIX Pagamento",
                 ],
                 [
                     "fileType" => 37,
-                    "description" => "PIX Recebimento"
+                    "description" => "PIX Recebimento",
                 ],
                 [
                     "fileType" => 38,
-                    "description" => "PIX Devolução de Recebimento"
+                    "description" => "PIX Devolução de Recebimento",
                 ],
                 [
                     "fileType" => 39,
-                    "description" => "PIX Devolução de Pagamento"
+                    "description" => "PIX Devolução de Pagamento",
                 ],
                 [
                     "fileType" => 40,
-                    "description" => "Recarga Internacional"
+                    "description" => "Recarga Internacional",
                 ],
                 [
                     "fileType" => 41,
-                    "description" => "PIX Aporte"
+                    "description" => "PIX Aporte",
                 ],
                 [
                     "fileType" => 43,
-                    "description" => "Pagamento DA"
+                    "description" => "Pagamento DA",
                 ],
                 [
                     "fileType" => 46,
-                    "description" => "Consulta Debito Veicular"
+                    "description" => "Consulta Debito Veicular",
                 ],
                 [
                     "fileType" => 47,
-                    "description" => "Liquidacao Debito Veicular"
-                ]
+                    "description" => "Liquidacao Debito Veicular",
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

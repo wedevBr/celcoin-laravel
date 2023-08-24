@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\Assistant;
+namespace WeDevBr\Celcoin\Tests\Integration\Assistant;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinAssistant;
 use WeDevBr\Celcoin\Enums\HealthCheckTypeEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class HealthCheckTest extends TestCase
 {
@@ -23,9 +23,9 @@ class HealthCheckTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinAssistant::HEALTH_CHECK_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinAssistant::HEALTH_CHECK_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $assistant = new CelcoinAssistant();
@@ -48,13 +48,13 @@ class HealthCheckTest extends TestCase
                         "thresholdAverageTimeDown" => 12.0,
                         "thresholdAverageTimeUP" => 2.5,
                         "transaction" => "CONSULTADADOSCONTA",
-                    ]
+                    ],
                 ],
                 "errorCode" => "000",
                 "message" => "SUCESSO",
                 "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

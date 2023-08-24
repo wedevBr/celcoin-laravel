@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\Topups;
+namespace WeDevBr\Celcoin\Tests\Integration\Topups;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\Topups\Create;
 
 class CreateTest extends TestCase
@@ -24,27 +24,29 @@ class CreateTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinTopups::CREATE_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinTopups::CREATE_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $topups = new CelcoinTopups();
-        $response = $topups->create(new Create([
-            "externalTerminal" => "teste2",
-            "externalNsu" => 1234,
-            "topupData" => [
-                "value" => 15
-            ],
-            "cpfCnpj" => "19941206066",
-            "signerCode" => "1234567",
-            "providerId" => 2086,
-            "phone" => [
-                "stateCode" => 31,
-                "countryCode" => 55,
-                "number" => 991452026
-            ]
-        ]));
+        $response = $topups->create(
+            new Create([
+                "externalTerminal" => "teste2",
+                "externalNsu" => 1234,
+                "topupData" => [
+                    "value" => 15,
+                ],
+                "cpfCnpj" => "19941206066",
+                "signerCode" => "1234567",
+                "providerId" => 2086,
+                "phone" => [
+                    "stateCode" => 31,
+                    "countryCode" => 55,
+                    "number" => 991452026,
+                ],
+            ]),
+        );
         $this->assertEquals(0, $response['status']);
     }
 
@@ -71,7 +73,7 @@ class CreateTest extends TestCase
                 "message" => null,
                 "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

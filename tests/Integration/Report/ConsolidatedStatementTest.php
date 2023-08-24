@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\Report;
+namespace WeDevBr\Celcoin\Tests\Integration\Report;
 
 use Carbon\Carbon;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinReport;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class ConsolidatedStatementTest extends TestCase
 {
@@ -24,9 +24,9 @@ class ConsolidatedStatementTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinReport::CONSOLIDATED_STATEMENT_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinReport::CONSOLIDATED_STATEMENT_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $report = new CelcoinReport();
@@ -47,7 +47,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 47887,
                         "value" => -4212076.5,
                         "indCreditDebit" => "D",
-                        "balance" => -1802424.5
+                        "balance" => -1802424.5,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -57,7 +57,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 204577,
                         "value" => -24533722,
                         "indCreditDebit" => "D",
-                        "balance" => -26336146
+                        "balance" => -26336146,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -67,7 +67,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 103422,
                         "value" => -1746272.9,
                         "indCreditDebit" => "D",
-                        "balance" => -28082420
+                        "balance" => -28082420,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -76,7 +76,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 20,
                         "value" => 12520000,
                         "indCreditDebit" => "C",
-                        "balance" => -22277410
+                        "balance" => -22277410,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -85,7 +85,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 113,
                         "value" => 4824.52,
                         "indCreditDebit" => "C",
-                        "balance" => -22272586
+                        "balance" => -22272586,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -94,7 +94,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 1,
                         "value" => 55,
                         "indCreditDebit" => "C",
-                        "balance" => -22272530
+                        "balance" => -22272530,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -103,7 +103,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 69,
                         "value" => 19452.8,
                         "indCreditDebit" => "C",
-                        "balance" => -22253078
+                        "balance" => -22253078,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -112,7 +112,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 775,
                         "value" => -292824.75,
                         "indCreditDebit" => "D",
-                        "balance" => -28375244
+                        "balance" => -28375244,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -121,7 +121,7 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 345,
                         "value" => 268750,
                         "indCreditDebit" => "C",
-                        "balance" => -21984328
+                        "balance" => -21984328,
                     ],
                     [
                         "date" => "2022-01-03T00:00:00",
@@ -130,22 +130,22 @@ class ConsolidatedStatementTest extends TestCase
                         "entryAmount" => 7,
                         "value" => -920,
                         "indCreditDebit" => "D",
-                        "balance" => -28376164
-                    ]
+                        "balance" => -28376164,
+                    ],
                 ],
                 "balance" => [
                     "balanceStartDate" => 2409652.2,
-                    "balanceEndDate" => -210270.39
+                    "balanceEndDate" => -210270.39,
                 ],
                 "pagination" => [
                     "page" => 1,
                     "totalCount" => 16,
                     "totalPages" => 2,
                     "hasPrevious" => false,
-                    "hasNext" => true
-                ]
+                    "hasNext" => true,
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }
