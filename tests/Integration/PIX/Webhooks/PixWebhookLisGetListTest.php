@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Integration\PIX\Webhooks;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\Webhooks;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients as Clients;
 use WeDevBr\Celcoin\Enums\WebhookEventEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX as Types;
 
 class PixWebhookLisGetListTest extends TestCase
@@ -35,6 +35,7 @@ class PixWebhookLisGetListTest extends TestCase
 
     /**
      * @param Closure<PromiseInterface> $stub
+     *
      * @return array<Types\PixWebhookGetList, WebhookEventEnum>
      */
     private function callWebhookBase(Closure $stub): array
@@ -54,9 +55,9 @@ class PixWebhookLisGetListTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => $stub
-            ]
+                    $url,
+                ) => $stub,
+            ],
         );
         return [$params, $webhookEventEnum];
     }
@@ -84,10 +85,9 @@ class PixWebhookLisGetListTest extends TestCase
                     ],
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
-
 
     /**
      * @throws RequestException

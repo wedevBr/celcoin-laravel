@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use Carbon\Carbon;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetListInfoAccountNaturalPersonTest extends TestCase
 {
@@ -24,14 +24,17 @@ class GetListInfoAccountNaturalPersonTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAAS::GET_LIST_INFO_ACCOUNT_NATURAL_PERSON
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAAS::GET_LIST_INFO_ACCOUNT_NATURAL_PERSON,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $baas = new CelcoinBAAS();
 
-        $response = $baas->getListInfoAccountNaturalPerson(Carbon::createFromFormat('Y-m-d', '2023-07-19'), Carbon::createFromFormat('Y-m-d', '2023-07-19'));
+        $response = $baas->getListInfoAccountNaturalPerson(
+            Carbon::createFromFormat('Y-m-d', '2023-07-19'),
+            Carbon::createFromFormat('Y-m-d', '2023-07-19'),
+        );
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
@@ -66,12 +69,12 @@ class GetListInfoAccountNaturalPersonTest extends TestCase
                             "city" => "Sao Paulo",
                             "state" => "SP",
                             "longitude" => null,
-                            "latitude" => null
+                            "latitude" => null,
                         ],
                         "isPoliticallyExposedPerson" => false,
                         "createDate" => "2022-10-25T20:33:34",
                         "closeDate" => "2022-10-25T20:33:47",
-                        "closeReason" => "Motivo X"
+                        "closeReason" => "Motivo X",
                     ],
                     [
                         "statusAccount" => "ATIVO",
@@ -91,16 +94,16 @@ class GetListInfoAccountNaturalPersonTest extends TestCase
                             "city" => "Sao Paulo",
                             "state" => "SP",
                             "longitude" => null,
-                            "latitude" => null
+                            "latitude" => null,
                         ],
                         "isPoliticallyExposedPerson" => false,
                         "createDate" => "2022-10-25T20:33:54",
                         "closeDate" => "2022-10-25T20:34:06",
-                        "closeReason" => "Desejo encerrar a conta..."
-                    ]
-                ]
+                        "closeReason" => "Desejo encerrar a conta...",
+                    ],
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

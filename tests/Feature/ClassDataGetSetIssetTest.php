@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Feature;
+namespace WeDevBr\Celcoin\Tests\Feature;
 
-use Tests\TestCase;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BAAS\AccountManagerBusiness;
 use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
@@ -19,7 +19,7 @@ class ClassDataGetSetIssetTest extends TestCase
                 'login' => 'login_teste',
                 'pwd' => 'pwd_teste',
                 'type' => 'type_teste',
-            ]
+            ],
         ]);
         $data->type = 'teste';
 
@@ -35,11 +35,11 @@ class ClassDataGetSetIssetTest extends TestCase
                 'login' => 'login_teste',
                 'pwd' => 'pwd_teste',
                 'type' => 'type_teste',
-            ]
+            ],
         ]);
 
         $this->assertEquals([
-            'entity' =>  EntityWebhookBAASEnum::PIX_PAYMENT_OUT->value,
+            'entity' => EntityWebhookBAASEnum::PIX_PAYMENT_OUT->value,
             'webhookUrl' => 'http://teste.com',
             'auth' => [
                 'login' => 'login_teste',
@@ -65,7 +65,7 @@ class ClassDataGetSetIssetTest extends TestCase
                 "city" => 'z',
                 "state" => '1',
                 "longitude" => '2',
-                "latitude" => '3'
+                "latitude" => '3',
             ],
         ]);
 
@@ -112,10 +112,10 @@ class ClassDataGetSetIssetTest extends TestCase
                         "city" => 'o',
                         "state" => 'p',
                         "longitude" => 'q',
-                        "latitude" => 'r'
+                        "latitude" => 'r',
                     ],
-                    "isPoliticallyExposedPerson" => false
-                ]
+                    "isPoliticallyExposedPerson" => false,
+                ],
             ],
             "businessAddress" => [
                 "postalCode" => 's',
@@ -126,7 +126,7 @@ class ClassDataGetSetIssetTest extends TestCase
                 "city" => 'z',
                 "state" => '1',
                 "longitude" => '2',
-                "latitude" => '3'
+                "latitude" => '3',
             ],
         ]);
 
@@ -156,7 +156,7 @@ class ClassDataGetSetIssetTest extends TestCase
                     ],
                     "isPoliticallyExposedPerson" => false,
                     "attributes" => [],
-                ]
+                ],
             ],
             "businessAddress" => [
                 "postalCode" => 's',
@@ -184,7 +184,7 @@ class ClassDataGetSetIssetTest extends TestCase
                 'pwd' => 'pwd_teste',
                 'type' => 'type_teste',
             ],
-            'test' => false
+            'test' => false,
         ]);
 
         $this->assertTrue(isset($data->test));

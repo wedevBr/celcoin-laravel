@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS\PIXKey;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PIXKey;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BAAS\RegisterPixKey;
 
 class BAASPIXRegisterPixKeyTest extends TestCase
@@ -21,16 +21,18 @@ class BAASPIXRegisterPixKeyTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAASPIX::REGISTER_PIX_KEY_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAASPIX::REGISTER_PIX_KEY_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinBAASPIX();
-        $response = $pix->registerPixKey(new RegisterPixKey([
-            'account' => '300541976910',
-            'keyType' => 'EVP',
-        ]));
+        $response = $pix->registerPixKey(
+            new RegisterPixKey([
+                'account' => '300541976910',
+                'keyType' => 'EVP',
+            ]),
+        );
 
         $this->assertEquals('CONFIRMED', $response['status']);
     }
@@ -58,7 +60,7 @@ class BAASPIXRegisterPixKeyTest extends TestCase
                     ],
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

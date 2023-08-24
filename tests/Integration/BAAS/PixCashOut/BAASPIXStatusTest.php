@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS\PixCashOut;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PixCashOut;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXStatusTest extends TestCase
 {
@@ -20,9 +20,9 @@ class BAASPIXStatusTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAASPIX::STATUS_PIX_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAASPIX::STATUS_PIX_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinBAASPIX();
@@ -37,7 +37,7 @@ class BAASPIXStatusTest extends TestCase
             [
                 "status" => "CONFIRMED",
                 "version" => "1.0.0",
-                "body" =>  [
+                "body" => [
                     "id" => "fba1b37b-c0f3-440b-bcde-8228f31fd585",
                     "amount" => 5.55,
                     "clientCode" => "1234",
@@ -63,9 +63,9 @@ class BAASPIXStatusTest extends TestCase
                         "accountType" => "TRAN",
                     ],
                     "remittanceInformation" => "Texto de mensagem",
-                ]
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

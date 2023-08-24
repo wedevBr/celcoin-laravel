@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\PIX\COB;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COB;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBFetchTest extends TestCase
 {
@@ -22,7 +22,7 @@ class COBFetchTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId) => self::stubSuccess(),
-            ]
+            ],
         );
 
         $pixCOB = new CelcoinPIXCOB();
@@ -37,18 +37,18 @@ class COBFetchTest extends TestCase
             'transactionId' => 9191641,
             'status' => 'ACTIVE',
             'lastUpdate' => '2022-03-22T12:13:50.7339728+00:00',
-            'payerQuestion' => NULL,
-            'additionalInformation' => NULL,
+            'payerQuestion' => null,
+            'additionalInformation' => null,
             'debtor' => [
                 'name' => 'valdir',
                 'cpf' => '35814746814',
-                'cnpj' => NULL,
+                'cnpj' => null,
             ],
             'amount' => [
                 'original' => 15.01,
                 'changeType' => 0,
-                'withdrawal' => NULL,
-                'change' => NULL,
+                'withdrawal' => null,
+                'change' => null,
             ],
             'key' => 'testepix@celcoin.com.br',
             'location' => [
@@ -61,10 +61,10 @@ class COBFetchTest extends TestCase
                 'url' => 'api-h.developer.btgpactual.com/v1/p/v2/0e3c73a70189497294c08ef7aa16ffeb',
                 'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/v1/p/v2/0e3c73a70189497294c08ef7aa16ffeb5204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***6304231F',
                 'type' => 'COB',
-                'locationId' => NULL,
-                'id' => NULL,
+                'locationId' => null,
+                'id' => null,
             ],
-            'revision' => NULL,
+            'revision' => null,
             'calendar' => [
                 'expiration' => 86400,
             ],
@@ -80,13 +80,12 @@ class COBFetchTest extends TestCase
      */
     final public function testFetchCobNotFound(): void
     {
-
         $transactionId = 123456;
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId) => self::stubNotFound()
-            ]
+                sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId) => self::stubNotFound(),
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -109,7 +108,7 @@ class COBFetchTest extends TestCase
             'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
             'errorCode' => 'VL002',
         ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 }

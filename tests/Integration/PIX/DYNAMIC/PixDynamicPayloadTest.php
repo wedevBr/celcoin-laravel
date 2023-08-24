@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Integration\PIX\DYNAMIC;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\DYNAMIC;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDynamic;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixDynamicPayloadTest extends TestCase
 {
@@ -20,8 +20,10 @@ class PixDynamicPayloadTest extends TestCase
     final public function testPixDynamicPayloadSuccess(): void
     {
         $transactionId = 123456;
-        $fetchUrl = sprintf('%s%s', config('celcoin.api_url'),
-            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId)
+        $fetchUrl = sprintf(
+            '%s%s',
+            config('celcoin.api_url'),
+            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId),
         );
         Http::fake(
             [
@@ -29,9 +31,9 @@ class PixDynamicPayloadTest extends TestCase
                 sprintf(
                     '%s?%s',
                     CelcoinPIXDynamic::PAYLOAD_DYNAMIC_QRCODE_ENDPOINT,
-                    http_build_query(['url' => $fetchUrl])
+                    http_build_query(['url' => $fetchUrl]),
                 ) => self::stubSuccess(),
-            ]
+            ],
         );
 
         $pixCOB = new CelcoinPIXDynamic();
@@ -45,19 +47,19 @@ class PixDynamicPayloadTest extends TestCase
         return Http::response(
             [
                 'status' => 'ATIVA',
-                'infoAdicionais' => NULL,
+                'infoAdicionais' => null,
                 'txid' => 'kk6g232xel65a0daee4dd13kk9192148',
                 'chave' => 'testepix@celcoin.com.br',
-                'solicitacaoPagador' => NULL,
+                'solicitacaoPagador' => null,
                 'valor' => [
                     'original' => '15.01',
-                    'abatimento' => NULL,
-                    'desconto' => NULL,
-                    'multa' => NULL,
-                    'juros' => NULL,
-                    'final' => NULL,
+                    'abatimento' => null,
+                    'desconto' => null,
+                    'multa' => null,
+                    'juros' => null,
+                    'final' => null,
                     'modalidadeAlteracao' => 0,
-                    'retirada' => NULL,
+                    'retirada' => null,
                 ],
                 'calendario' => [
                     'criacao' => '2022-03-22T14:20:47Z',
@@ -67,7 +69,7 @@ class PixDynamicPayloadTest extends TestCase
                 ],
                 'revisao' => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -78,8 +80,10 @@ class PixDynamicPayloadTest extends TestCase
     final public function testPixDynamicPayloadInvalidUrlParameter(): void
     {
         $transactionId = 123456;
-        $fetchUrl = sprintf('%s%s', config('celcoin.api_url'),
-            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId)
+        $fetchUrl = sprintf(
+            '%s%s',
+            config('celcoin.api_url'),
+            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId),
         );
         Http::fake(
             [
@@ -87,9 +91,9 @@ class PixDynamicPayloadTest extends TestCase
                 sprintf(
                     '%s?%s',
                     CelcoinPIXDynamic::PAYLOAD_DYNAMIC_QRCODE_ENDPOINT,
-                    http_build_query(['url' => $fetchUrl])
+                    http_build_query(['url' => $fetchUrl]),
                 ) => self::stubInvalidUrlParameter(),
-            ]
+            ],
         );
         $this->expectException(RequestException::class);
         try {
@@ -109,7 +113,7 @@ class PixDynamicPayloadTest extends TestCase
                 'message' => 'Invalid url parameter.',
                 'errorCode' => 'PCE002',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -125,9 +129,9 @@ class PixDynamicPayloadTest extends TestCase
                 sprintf(
                     '%s?%s',
                     CelcoinPIXDynamic::PAYLOAD_DYNAMIC_QRCODE_ENDPOINT,
-                    http_build_query(['url' => $fetchUrl])
+                    http_build_query(['url' => $fetchUrl]),
                 ) => Http::response([], Response::HTTP_BAD_REQUEST),
-            ]
+            ],
         );
 
         $this->expectException(ValidationException::class);

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetInfoAccountNaturalPersonTest extends TestCase
 {
@@ -23,9 +23,9 @@ class GetInfoAccountNaturalPersonTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAAS::GET_INFO_ACCOUNT_NATURAL_PERSON
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAAS::GET_INFO_ACCOUNT_NATURAL_PERSON,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $baas = new CelcoinBAAS();
@@ -59,17 +59,17 @@ class GetInfoAccountNaturalPersonTest extends TestCase
                         "city" => "São Paulo",
                         "state" => "SP",
                         "longitude" => "-46.6488",
-                        "latitude" => "-23.6288"
+                        "latitude" => "-23.6288",
                     ],
                     "isPoliticallyExposedPerson" => false,
                     "account" => [
                         "branch" => "0001",
-                        "account" => "300539137798"
+                        "account" => "300539137798",
                     ],
-                    "createDate" => "2022-10-28T13:50:55"
-                ]
+                    "createDate" => "2022-10-28T13:50:55",
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

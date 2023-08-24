@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BillPayments;
+namespace WeDevBr\Celcoin\Tests\Integration\BillPayments;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBillPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BillPayments\Authorize;
 
 class AutorizeTest extends TestCase
@@ -24,21 +24,23 @@ class AutorizeTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBillPayment::AUTHORIZE_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBillPayment::AUTHORIZE_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $payment = new CelcoinBillPayment();
-        $response = $payment->authorize(new Authorize([
-            "externalTerminal" => "teste2",
-            "externalNSU" => 1234,
-            "barCode" => [
-                "type" => 2,
-                "digitable" => "34191090080025732445903616490003691150000020000",
-                "barCode" => "",
-            ]
-        ]));
+        $response = $payment->authorize(
+            new Authorize([
+                "externalTerminal" => "teste2",
+                "externalNSU" => 1234,
+                "barCode" => [
+                    "type" => 2,
+                    "digitable" => "34191090080025732445903616490003691150000020000",
+                    "barCode" => "",
+                ],
+            ]),
+        );
         $this->assertArrayHasKey('registerData', $response);
     }
 
@@ -81,7 +83,7 @@ class AutorizeTest extends TestCase
                 "message" => null,
                 "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

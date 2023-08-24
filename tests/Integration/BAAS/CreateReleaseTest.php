@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BAAS\AccountRelease;
 
 class CreateReleaseTest extends TestCase
@@ -24,17 +24,20 @@ class CreateReleaseTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::CREATE_RELEASE, '300541976902')
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAAS::CREATE_RELEASE, '300541976902'),
+                ) => self::stubSuccess(),
+            ],
         );
         $baasWebhook = new CelcoinBAAS();
-        $response = $baasWebhook->createRelease('300541976902', new AccountRelease([
-            "clientCode" => "f9b978a6-ab7e-4460-997d",
-            "amount" => 20,
-            "type" => "CREDIT",
-            "description" => "Deposito"
-        ]));
+        $response = $baasWebhook->createRelease(
+            '300541976902',
+            new AccountRelease([
+                "clientCode" => "f9b978a6-ab7e-4460-997d",
+                "amount" => 20,
+                "type" => "CREDIT",
+                "description" => "Deposito",
+            ]),
+        );
 
         $this->assertEquals('CONFIRMED', $response['status']);
     }
@@ -47,10 +50,10 @@ class CreateReleaseTest extends TestCase
                 "version" => "1.0.0",
                 "body" => [
                     "id" => "0cdf3a01-71c5-4428-9545-783667ccc289",
-                    "clientCode" => "f9b978a6-ab7e-4460-997d"
-                ]
+                    "clientCode" => "f9b978a6-ab7e-4460-997d",
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

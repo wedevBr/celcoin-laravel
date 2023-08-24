@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\DDA\User;
+namespace WeDevBr\Celcoin\Tests\Integration\DDA\User;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinDDAUser;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\DDA\RemoveUser;
 
 class RemoveTest extends TestCase
@@ -24,16 +24,18 @@ class RemoveTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinDDAUser::REMOVE_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinDDAUser::REMOVE_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $dda = new CelcoinDDAUser();
-        $response = $dda->remove(new RemoveUser([
-            "document" => "64834852393",
-            "clientRequestId" => "0001"
-        ]));
+        $response = $dda->remove(
+            new RemoveUser([
+                "document" => "64834852393",
+                "clientRequestId" => "0001",
+            ]),
+        );
 
         $this->assertEquals(201, $response['status']);
     }
@@ -48,10 +50,10 @@ class RemoveTest extends TestCase
                     "clientRequestId" => "0001",
                     "responseDate" => "2023-01-18T19:54:16.6647364+00:00",
                     "status" => "PROCESSING",
-                    "subscriptionId" => "37c571d7-a594-4a11-8629-2e993beecf5d"
-                ]
+                    "subscriptionId" => "37c571d7-a594-4a11-8629-2e993beecf5d",
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

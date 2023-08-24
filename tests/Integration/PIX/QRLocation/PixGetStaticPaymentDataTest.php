@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\PIX\QRLocation;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\QRLocation;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -8,15 +8,16 @@ use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPixStaticPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixGetStaticPaymentDataTest extends TestCase
 {
 
     /**
      * @param array $search
+     *
      * @return void
      * @throws RequestException
      * @dataProvider searchDataProvider
@@ -31,9 +32,9 @@ class PixGetStaticPaymentDataTest extends TestCase
                     '%s%s?%s',
                     config('api_url'),
                     CelcoinPixStaticPayment::GET_STATIC_PAYMENT_DATA_ENDPOINT,
-                    http_build_query($search)
-                ) => self::stubSuccess()
-            ]
+                    http_build_query($search),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinPixStaticPayment();
@@ -93,12 +94,13 @@ class PixGetStaticPaymentDataTest extends TestCase
                     ],
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
     /**
      * @param string $key
+     *
      * @return void
      * @throws RequestException
      * @dataProvider createErrorDataProvider
@@ -111,9 +113,9 @@ class PixGetStaticPaymentDataTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinPixStaticPayment::GET_STATIC_PAYMENT_DATA_ENDPOINT
-                ) => []
-            ]
+                    CelcoinPixStaticPayment::GET_STATIC_PAYMENT_DATA_ENDPOINT,
+                ) => [],
+            ],
         );
         $this->expectException(ValidationException::class);
         try {
@@ -129,6 +131,7 @@ class PixGetStaticPaymentDataTest extends TestCase
      * @param Closure $response
      * @param int $status
      * @param array $params
+     *
      * @return void
      * @throws RequestException
      * @dataProvider errorDataProvider
@@ -142,9 +145,9 @@ class PixGetStaticPaymentDataTest extends TestCase
                     '%s%s?%s',
                     config('api_url'),
                     CelcoinPixStaticPayment::GET_STATIC_PAYMENT_DATA_ENDPOINT,
-                    http_build_query($params)
-                ) => $response
-            ]
+                    http_build_query($params),
+                ) => $response,
+            ],
         );
         $pix = new CelcoinPixStaticPayment();
         $response = $pix->getStaticPaymentData($params);
@@ -167,10 +170,10 @@ class PixGetStaticPaymentDataTest extends TestCase
     {
         return [
             'searching by transactionIdBrcode' => [
-                ['transactionIdBrcode' => 12345345]
+                ['transactionIdBrcode' => 12345345],
             ],
             'searching by transactionIdentification' => [
-                ['transactionIdentification' => 'kk6g232xel65a0daee4dd13kk479195205']
+                ['transactionIdentification' => 'kk6g232xel65a0daee4dd13kk479195205'],
             ],
         ];
     }
@@ -181,14 +184,27 @@ class PixGetStaticPaymentDataTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            'status code 400' => [fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST), Response::HTTP_BAD_REQUEST, ['transactionIdBrcode' => 12345345]],
-            'status code 404' => [fn() => self::stubGenericError(Response::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND, ['transactionIdBrcode' => 12345345]],
-            'status code 500' => [fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR, ['transactionIdBrcode' => 12345345]],
+            'status code 400' => [
+                fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST),
+                Response::HTTP_BAD_REQUEST,
+                ['transactionIdBrcode' => 12345345],
+            ],
+            'status code 404' => [
+                fn() => self::stubGenericError(Response::HTTP_NOT_FOUND),
+                Response::HTTP_NOT_FOUND,
+                ['transactionIdBrcode' => 12345345],
+            ],
+            'status code 500' => [
+                fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR),
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+                ['transactionIdBrcode' => 12345345],
+            ],
         ];
     }
 
     /**
      * @param int $status
+     *
      * @return PromiseInterface
      */
     static private function stubGenericError(int $status): PromiseInterface
@@ -197,7 +213,7 @@ class PixGetStaticPaymentDataTest extends TestCase
             [
                 'code' => $status,
                 'description' => 'Message',
-            ]
+            ],
         );
     }
 }

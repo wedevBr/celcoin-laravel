@@ -1,8 +1,7 @@
 <?php
 
-namespace Tests\Feature;
+namespace WeDevBr\Celcoin\Tests\Feature;
 
-use Tests\TestCase;
 use WeDevBr\Celcoin\Celcoin;
 use WeDevBr\Celcoin\Clients\CelcoinAssistant;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
@@ -24,6 +23,7 @@ use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
 use WeDevBr\Celcoin\Clients\CelcoinPixStaticPayment;
 use WeDevBr\Celcoin\Clients\CelcoinReport;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class CelcoinClientInstancesTest extends TestCase
 {
@@ -93,6 +93,7 @@ class CelcoinClientInstancesTest extends TestCase
         $instance = Celcoin::clientPIXParticipants();
         $this->assertInstanceOf(CelcoinPIXParticipants::class, $instance);
     }
+
     public function testSuccessCreateInstancePIXDICT()
     {
         $instance = Celcoin::clientPIXDICT();

@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\COBV;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COBV;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBVGetTest extends TestCase
 {
@@ -25,9 +25,9 @@ class COBVGetTest extends TestCase
                 sprintf(
                     '%s?%s',
                     CelcoinPIXCOBV::GET_COBV_PIX,
-                    http_build_query($search)
+                    http_build_query($search),
                 ) => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOBV = new CelcoinPIXCOBV();
         $result = $pixCOBV->getCOBVPIX($search);
@@ -111,7 +111,7 @@ class COBVGetTest extends TestCase
     final public function testGetCobvNotFoundError(): void
     {
         $search = [
-            'transactionId' => 123
+            'transactionId' => 123,
         ];
         Http::fake(
             [
@@ -119,9 +119,9 @@ class COBVGetTest extends TestCase
                 sprintf(
                     '%s?%s',
                     CelcoinPIXCOBV::GET_COBV_PIX,
-                    http_build_query($search)
+                    http_build_query($search),
                 ) => self::stubNotFoundError(),
-            ]
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -145,7 +145,7 @@ class COBVGetTest extends TestCase
                 'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
                 'errorCode' => 'VL002',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -162,9 +162,9 @@ class COBVGetTest extends TestCase
                 sprintf(
                     '%s?%s',
                     CelcoinPIXCOBV::GET_COBV_PIX,
-                    http_build_query($search)
+                    http_build_query($search),
                 ) => self::stubNotFoundError(),
-            ]
+            ],
         );
 
         $this->expectException(ValidationException::class);
@@ -193,18 +193,18 @@ class COBVGetTest extends TestCase
         return [
             'transactionId' => [
                 [
-                    'transactionId' => 12345
-                ]
+                    'transactionId' => 12345,
+                ],
             ],
             'clientRequestId' => [
                 [
-                    'clientRequestId' => 12345
-                ]
+                    'clientRequestId' => 12345,
+                ],
             ],
             'transactionIdentification' => [
                 [
-                    'transactionIdentification' => 12345
-                ]
+                    'transactionIdentification' => 12345,
+                ],
             ],
         ];
     }

@@ -35,6 +35,7 @@ tracker.
 
 - [We Dev Tecnologia LTDA](https://github.com/wedevbr)
 - [Aron Peyroteo Cardoso](https://github.com/aronpc)
+- [Vagner Paes](https://github.com/VagnerPaes)
 
 ## License
 

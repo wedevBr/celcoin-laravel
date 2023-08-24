@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS\PIXKey;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PIXKey;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXDeletePixKeyTest extends TestCase
 {
@@ -20,9 +20,9 @@ class BAASPIXDeletePixKeyTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    sprintf(CelcoinBAASPIX::DELETE_PIX_KEY_ENDPOINT, '0f4f01e4-53ec-4c7c-9c50-334621c19cb3')
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAASPIX::DELETE_PIX_KEY_ENDPOINT, '0f4f01e4-53ec-4c7c-9c50-334621c19cb3'),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinBAASPIX();
@@ -38,7 +38,7 @@ class BAASPIXDeletePixKeyTest extends TestCase
                 "status" => "SUCCESS",
                 "version" => "1.0.0",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

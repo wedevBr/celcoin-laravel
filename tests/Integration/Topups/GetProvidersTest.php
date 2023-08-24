@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\Topups;
+namespace WeDevBr\Celcoin\Tests\Integration\Topups;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
 use WeDevBr\Celcoin\Enums\TopupProvidersCategoryEnum;
 use WeDevBr\Celcoin\Enums\TopupProvidersTypeEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\Topups\Providers;
 
 class GetProvidersTest extends TestCase
@@ -26,17 +26,19 @@ class GetProvidersTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinTopups::GET_PROVIDERS_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinTopups::GET_PROVIDERS_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $topups = new CelcoinTopups();
-        $response = $topups->getProviders(new Providers([
-            "stateCode" => 13,
-            "type" => TopupProvidersTypeEnum::ALL,
-            "category" => TopupProvidersCategoryEnum::ALL
-        ]));
+        $response = $topups->getProviders(
+            new Providers([
+                "stateCode" => 13,
+                "type" => TopupProvidersTypeEnum::ALL,
+                "category" => TopupProvidersCategoryEnum::ALL,
+            ]),
+        );
         $this->assertArrayHasKey('providers', $response);
     }
 
@@ -52,7 +54,7 @@ class GetProvidersTest extends TestCase
                         "RegionaisnameProvider" => [],
                         "TipoRecarganameProvider" => 1,
                         "maxValue" => 0,
-                        "minValue" => 0
+                        "minValue" => 0,
                     ],
                     [
                         "category" => 2,
@@ -61,11 +63,11 @@ class GetProvidersTest extends TestCase
                         "RegionaisnameProvider" => [],
                         "TipoRecarganameProvider" => 1,
                         "maxValue" => 0,
-                        "minValue" => 0
-                    ]
-                ]
+                        "minValue" => 0,
+                    ],
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

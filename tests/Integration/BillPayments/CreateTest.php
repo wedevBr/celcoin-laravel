@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BillPayments;
+namespace WeDevBr\Celcoin\Tests\Integration\BillPayments;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBillPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BillPayments\Create;
 
 class CreateTest extends TestCase
@@ -24,30 +24,32 @@ class CreateTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBillPayment::CREATE_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBillPayment::CREATE_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $payment = new CelcoinBillPayment();
-        $response = $payment->create(new Create([
-            "externalNSU" => 1234,
-            "externalTerminal" => "teste2",
-            "cpfcnpj" => "51680002000100",
-            "billData" => [
-                "value" => 1500,
-                "originalValue" => 1500,
-                "valueWithDiscount" => 0,
-                "valueWithAdditional" => 0
-            ],
-            "barCode" => [
-                "type" => 2,
-                "digitable" => "34191090080025732445903616490003691150000020000",
-                "barCode" => ""
-            ],
-            "dueDate" => "2023-07-14",
-            "transactionIdAuthorize" => 817958488
-        ]));
+        $response = $payment->create(
+            new Create([
+                "externalNSU" => 1234,
+                "externalTerminal" => "teste2",
+                "cpfcnpj" => "51680002000100",
+                "billData" => [
+                    "value" => 1500,
+                    "originalValue" => 1500,
+                    "valueWithDiscount" => 0,
+                    "valueWithAdditional" => 0,
+                ],
+                "barCode" => [
+                    "type" => 2,
+                    "digitable" => "34191090080025732445903616490003691150000020000",
+                    "barCode" => "",
+                ],
+                "dueDate" => "2023-07-14",
+                "transactionIdAuthorize" => 817958488,
+            ]),
+        );
         $this->assertArrayHasKey('authenticationAPI', $response);
     }
 
@@ -75,7 +77,7 @@ class CreateTest extends TestCase
                 "message" => null,
                 "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

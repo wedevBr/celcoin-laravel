@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\COB;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COB;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\AdditionalInformation;
 use WeDevBr\Celcoin\Types\PIX\Amount;
 use WeDevBr\Celcoin\Types\PIX\Calendar;
@@ -29,7 +29,7 @@ class COBUpdateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOB::UPDATE_COB_PIX_URL, $transactionId) => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXCOB();
         $result = $pixCOB->updateCOBPIX($transactionId, self::fakeCOBBody());
@@ -54,14 +54,14 @@ class COBUpdateTest extends TestCase
             ],
             'debtor' => [
                 'name' => 'Fulano',
-                'cpf' => NULL,
+                'cpf' => null,
                 'cnpj' => '00190305000103',
             ],
             'amount' => [
                 'original' => 15.01,
                 'changeType' => 0,
-                'withdrawal' => NULL,
-                'change' => NULL,
+                'withdrawal' => null,
+                'change' => null,
             ],
             'location' => [
                 'merchant' => [
@@ -74,7 +74,7 @@ class COBUpdateTest extends TestCase
                 'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/pc/p/v2/1d53f8a4839641628b2d678f7ddb9ad65204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***63040D56',
                 'type' => 'COB',
                 'locationId' => '0',
-                'id' => NULL,
+                'id' => null,
             ],
             'key' => 'testepix@celcoin.com.br',
             'calendar' => [
@@ -101,7 +101,7 @@ class COBUpdateTest extends TestCase
             [
                 'value' => 'Assinatura de serviço',
                 'key' => 'Produto 1',
-            ]
+            ],
         );
         $cob->amount = new Amount([
             'original' => 15.63,
@@ -110,7 +110,6 @@ class COBUpdateTest extends TestCase
             'expiration' => 84000,
         ]);
         return $cob;
-
     }
 
     /**
@@ -123,7 +122,7 @@ class COBUpdateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOB::UPDATE_COB_PIX_URL, $transactionId) => self::stubCOBError(),
-            ]
+            ],
         );
         $this->expectException(RequestException::class);
 
@@ -133,7 +132,10 @@ class COBUpdateTest extends TestCase
         } catch (RequestException $throwable) {
             $result = $throwable->response->json();
             $this->assertEquals('PBE318', $result['errorCode']);
-            $this->assertEquals('Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.', $result['message']);
+            $this->assertEquals(
+                'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
+                $result['message'],
+            );
             throw $throwable;
         }
     }
@@ -142,9 +144,9 @@ class COBUpdateTest extends TestCase
     {
         return Http::response([
             'message' => 'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
-            'errorCode' => 'PBE318'
+            'errorCode' => 'PBE318',
         ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -177,7 +179,7 @@ class COBUpdateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOB::UPDATE_COB_PIX_URL, $transactionId) => self::stubCOBError(),
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXCOB();
 
@@ -197,10 +199,10 @@ class COBUpdateTest extends TestCase
 
         unset($cob->additionalInformation);
         $cob->additionalInformation[] = new AdditionalInformation([
-            'value' => 'valor'
+            'value' => 'valor',
         ]);
         $cob->additionalInformation[] = new AdditionalInformation([
-            'key' => 'chage'
+            'key' => 'chage',
         ]);
 
         $this->expectException(ValidationException::class);

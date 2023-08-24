@@ -1,21 +1,22 @@
 <?php
 
-namespace Tests\Integration\PIX\Participants;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\Participants;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXParticipants;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixParticipantsListTest extends TestCase
 {
 
     /**
      * @param int $status
+     *
      * @return PromiseInterface
      */
     static private function stubGenericError(int $status): PromiseInterface
@@ -24,7 +25,7 @@ class PixParticipantsListTest extends TestCase
             [
                 'code' => $status,
                 'description' => 'Message',
-            ]
+            ],
         );
     }
 
@@ -40,9 +41,9 @@ class PixParticipantsListTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinPIXParticipants::GET_PARTICIPANTS_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinPIXParticipants::GET_PARTICIPANTS_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinPIXParticipants();
@@ -78,15 +79,16 @@ class PixParticipantsListTest extends TestCase
                     'name' => 'COOPERATIVA DE CRÉDITO UNICRED CENTRO-SUL LTDA - UNICRED CENTRO-SUL',
                     'startOperationDatetime' => '2020-11-03T09:30:00+00:00',
                     'ispb' => '00075847',
-                ]
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
     /**
      * @param Closure $response
      * @param string $status
+     *
      * @return void
      * @dataProvider errorDataProvider
      * @throws RequestException
@@ -99,9 +101,9 @@ class PixParticipantsListTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinPIXParticipants::GET_PARTICIPANTS_ENDPOINT
-                ) => $response
-            ]
+                    CelcoinPIXParticipants::GET_PARTICIPANTS_ENDPOINT,
+                ) => $response,
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -112,7 +114,6 @@ class PixParticipantsListTest extends TestCase
             $this->assertEquals($status, $exception->getCode());
             throw $exception;
         }
-
     }
 
     /**
@@ -121,7 +122,10 @@ class PixParticipantsListTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            'status·code·500' => [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
+            'status·code·500' => [
+                fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR),
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+            ],
         ];
     }
 }

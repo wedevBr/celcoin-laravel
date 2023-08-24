@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\COB;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COB;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\COBGet;
 
 class COBGetTest extends TestCase
@@ -24,11 +24,12 @@ class COBGetTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf('%s?%s',
+                sprintf(
+                    '%s?%s',
                     CelcoinPIXCOB::GET_COB_PIX_URL,
-                    http_build_query($searchParam)
+                    http_build_query($searchParam),
                 ) => self::stubSuccess(),
-            ]
+            ],
         );
         $data = new COBGet($searchParam);
         $pixCOB = new CelcoinPIXCOB();
@@ -53,14 +54,14 @@ class COBGetTest extends TestCase
             ],
             'debtor' => [
                 'name' => 'Fulano de Tal',
-                'cpf' => NULL,
+                'cpf' => null,
                 'cnpj' => '00190305000103',
             ],
             'amount' => [
                 'original' => 15.63,
                 'changeType' => 0,
-                'withdrawal' => NULL,
-                'change' => NULL,
+                'withdrawal' => null,
+                'change' => null,
             ],
             'key' => 'testepix@celcoin.com.br',
             'location' => [
@@ -73,10 +74,10 @@ class COBGetTest extends TestCase
                 'url' => 'api-h.developer.btgpactual.com/pc/p/v2/1d53f8a4839641628b2d678f7ddb9ad6',
                 'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/pc/p/v2/1d53f8a4839641628b2d678f7ddb9ad65204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***63040D56',
                 'type' => 'COB',
-                'locationId' => NULL,
-                'id' => NULL,
+                'locationId' => null,
+                'id' => null,
             ],
-            'revision' => NULL,
+            'revision' => null,
             'calendar' => [
                 'expiration' => 86400,
             ],
@@ -96,11 +97,12 @@ class COBGetTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf('%s?%s',
+                sprintf(
+                    '%s?%s',
                     CelcoinPIXCOB::GET_COB_PIX_URL,
-                    http_build_query($searchParam)
+                    http_build_query($searchParam),
                 ) => self::stubNotFound(),
-            ]
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -114,14 +116,13 @@ class COBGetTest extends TestCase
             $this->assertEquals('VL002', $result['errorCode']);
             throw $throwable;
         }
-
     }
 
     private static function stubNotFound(): PromiseInterface
     {
         return Http::response([
             'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
-            'errorCode' => 'VL002'
+            'errorCode' => 'VL002',
         ], Response::HTTP_NOT_FOUND);
     }
 
@@ -135,7 +136,7 @@ class COBGetTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOB::GET_COB_PIX_URL => self::stubSuccess(),
-            ]
+            ],
         );
 
         $this->expectException(ValidationException::class);
@@ -146,7 +147,6 @@ class COBGetTest extends TestCase
             $this->assertArrayHasKey($key, $throwable->errors());
             throw $throwable;
         }
-
     }
 
     private function paramErrosDataProvider(): array

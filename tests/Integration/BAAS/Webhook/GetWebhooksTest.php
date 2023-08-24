@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BAAS\Webhook;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\Webhook;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetWebhooksTest extends TestCase
 {
@@ -21,9 +21,9 @@ class GetWebhooksTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAASWebhooks::GET_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAASWebhooks::GET_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $webhook = new CelcoinBAASWebhooks();
@@ -46,13 +46,13 @@ class GetWebhooksTest extends TestCase
                             "createDate" => "2023-07-14T08:36:06.292Z",
                             "lastUpdateDate" => null,
                             "auth" => null,
-                        ]
-                    ]
+                        ],
+                    ],
                 ],
                 "status" => "SUCCESS",
                 "version" => "1.0.0",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

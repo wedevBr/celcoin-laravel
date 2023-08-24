@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BAAS\Webhook;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\Webhook;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
 class RegisterWebhooksTest extends TestCase
@@ -22,21 +22,23 @@ class RegisterWebhooksTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAASWebhooks::REGISTER_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAASWebhooks::REGISTER_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $webhook = new CelcoinBAASWebhooks();
-        $response = $webhook->register(new RegisterWebhooks([
-            "entity" => EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED,
-            "webhookUrl" => "https://www.celcoin.com.br/baas",
-            "auth" => [
-                "login" => "string",
-                "pwd" => "string",
-                "type" => "basic"
-            ],
-        ]));
+        $response = $webhook->register(
+            new RegisterWebhooks([
+                "entity" => EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED,
+                "webhookUrl" => "https://www.celcoin.com.br/baas",
+                "auth" => [
+                    "login" => "string",
+                    "pwd" => "string",
+                    "type" => "basic",
+                ],
+            ]),
+        );
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
@@ -46,12 +48,12 @@ class RegisterWebhooksTest extends TestCase
         return Http::response(
             [
                 "body" => [
-                    "subscriptionId" => "64bb0bef9065331bad7bf996"
+                    "subscriptionId" => "64bb0bef9065331bad7bf996",
                 ],
                 "version" => "1.0.0",
-                "status" => "SUCCESS"
+                "status" => "SUCCESS",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

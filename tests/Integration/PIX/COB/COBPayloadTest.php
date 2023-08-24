@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\PIX\COB;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COB;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBPayloadTest extends TestCase
 {
@@ -18,14 +18,16 @@ class COBPayloadTest extends TestCase
     final public function testPayloadCobSuccess(): void
     {
         $transactionId = 123456;
-        $fetchUrl = sprintf('%s%s', config('celcoin.api_url'),
-            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId)
+        $fetchUrl = sprintf(
+            '%s%s',
+            config('celcoin.api_url'),
+            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId),
         );
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOB::PAYLOAD_COB_PIX_URL, urlencode($fetchUrl)) => self::stubSuccess(),
-            ]
+            ],
         );
 
         $pixCOB = new CelcoinPIXCOB();
@@ -39,19 +41,19 @@ class COBPayloadTest extends TestCase
         //TODO (aronpc) : Verificar resposta em ingles/portugues?
         return Http::response([
             'status' => 'ATIVA',
-            'infoAdicionais' => NULL,
+            'infoAdicionais' => null,
             'txid' => 'kk6g232xel65a0daee4dd13kk9192148',
             'chave' => 'testepix@celcoin.com.br',
-            'solicitacaoPagador' => NULL,
+            'solicitacaoPagador' => null,
             'valor' => [
                 'original' => '15.01',
-                'abatimento' => NULL,
-                'desconto' => NULL,
-                'multa' => NULL,
-                'juros' => NULL,
-                'final' => NULL,
+                'abatimento' => null,
+                'desconto' => null,
+                'multa' => null,
+                'juros' => null,
+                'final' => null,
                 'modalidadeAlteracao' => 0,
-                'retirada' => NULL,
+                'retirada' => null,
             ],
             'calendario' => [
                 'criacao' => '2022-03-22T14:20:47Z',
@@ -63,22 +65,22 @@ class COBPayloadTest extends TestCase
         ], Response::HTTP_OK);
     }
 
-
     /**
      * @throws RequestException
      */
     final public function testPayloadCobNotFound(): void
     {
-
         $transactionId = 123456;
-        $fetchUrl = sprintf('%s%s', config('celcoin.api_url'),
-            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId)
+        $fetchUrl = sprintf(
+            '%s%s',
+            config('celcoin.api_url'),
+            sprintf(CelcoinPIXCOB::FETCH_COB_PIX_URL, $transactionId),
         );
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXCOB::PAYLOAD_COB_PIX_URL, urlencode($fetchUrl)) => self::stubNotFound()
-            ]
+                sprintf(CelcoinPIXCOB::PAYLOAD_COB_PIX_URL, urlencode($fetchUrl)) => self::stubNotFound(),
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -101,7 +103,7 @@ class COBPayloadTest extends TestCase
             'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
             'errorCode' => 'VL002',
         ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 }

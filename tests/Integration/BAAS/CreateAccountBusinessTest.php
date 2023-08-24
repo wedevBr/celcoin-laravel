@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
 use WeDevBr\Celcoin\Enums\AccountOnboardingTypeEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BAAS\AccountBusiness;
 
 class CreateAccountBusinessTest extends TestCase
@@ -26,9 +26,9 @@ class CreateAccountBusinessTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAAS::CREATE_ACCOUNT_BUSINESS
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAAS::CREATE_ACCOUNT_BUSINESS,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $baas = new CelcoinBAAS();
@@ -39,52 +39,54 @@ class CreateAccountBusinessTest extends TestCase
         $firstName = $fake->firstName();
         $lastName = $fake->lastName();
 
-        $response = $baas->createAccountBusiness(new AccountBusiness(
-            [
-                "clientCode" => $fake->uuid(),
-                "accountOnboardingType" => AccountOnboardingTypeEnum::BANK_ACCOUNT,
-                "documentNumber" => $fake->cnpj(false),
-                "contactNumber" => sprintf('+5511%s', $fake->cellphone(false)),
-                "businessEmail" => $fake->email(),
-                "businessName" => sprintf('%s %s LTDA', $firstBusinessName, $lastBusinessName),
-                "tradingName" => $firstBusinessName,
-                "owner" => [
-                    [
-                        "documentNumber" => $fake->cpf(false),
-                        "phoneNumber" => sprintf('+5511%s', $fake->cellphone(false)),
-                        "email" => $fake->email(),
-                        "motherName" => sprintf('%s %s', $fake->firstNameFemale(), $fake->lastName()),
-                        "fullName" => sprintf('%s %s', $firstName, $lastName),
-                        "socialName" => $firstName,
-                        "birthDate" => '15-01-1981',
-                        "address" => [
-                            "postalCode" => '01153000',
-                            "street" => $fake->streetName(),
-                            "number" => $fake->buildingNumber(),
-                            "addressComplement" => "Em frente ao parque.",
-                            "neighborhood" => 'Centro',
-                            "city" => $fake->city(),
-                            "state" => $fake->stateAbbr(),
-                            "longitude" => $fake->longitude(-23, -24),
-                            "latitude" => $fake->latitude(-46, -47)
+        $response = $baas->createAccountBusiness(
+            new AccountBusiness(
+                [
+                    "clientCode" => $fake->uuid(),
+                    "accountOnboardingType" => AccountOnboardingTypeEnum::BANK_ACCOUNT,
+                    "documentNumber" => $fake->cnpj(false),
+                    "contactNumber" => sprintf('+5511%s', $fake->cellphone(false)),
+                    "businessEmail" => $fake->email(),
+                    "businessName" => sprintf('%s %s LTDA', $firstBusinessName, $lastBusinessName),
+                    "tradingName" => $firstBusinessName,
+                    "owner" => [
+                        [
+                            "documentNumber" => $fake->cpf(false),
+                            "phoneNumber" => sprintf('+5511%s', $fake->cellphone(false)),
+                            "email" => $fake->email(),
+                            "motherName" => sprintf('%s %s', $fake->firstNameFemale(), $fake->lastName()),
+                            "fullName" => sprintf('%s %s', $firstName, $lastName),
+                            "socialName" => $firstName,
+                            "birthDate" => '15-01-1981',
+                            "address" => [
+                                "postalCode" => '01153000',
+                                "street" => $fake->streetName(),
+                                "number" => $fake->buildingNumber(),
+                                "addressComplement" => "Em frente ao parque.",
+                                "neighborhood" => 'Centro',
+                                "city" => $fake->city(),
+                                "state" => $fake->stateAbbr(),
+                                "longitude" => $fake->longitude(-23, -24),
+                                "latitude" => $fake->latitude(-46, -47),
+                            ],
+                            "isPoliticallyExposedPerson" => false,
                         ],
-                        "isPoliticallyExposedPerson" => false
-                    ]
+                    ],
+                    "businessAddress" => [
+                        "postalCode" => '01153000',
+                        "street" => $fake->streetName(),
+                        "number" => $fake->buildingNumber(),
+                        "addressComplement" => "Em frente ao parque.",
+                        "neighborhood" => 'Centro',
+                        "city" => $fake->city(),
+                        "state" => $fake->stateAbbr(),
+                        "longitude" => $fake->longitude(-23, -24),
+                        "latitude" => $fake->latitude(-46, -47),
+                    ],
+                    "cadastraChavePix" => false,
                 ],
-                "businessAddress" => [
-                    "postalCode" => '01153000',
-                    "street" => $fake->streetName(),
-                    "number" => $fake->buildingNumber(),
-                    "addressComplement" => "Em frente ao parque.",
-                    "neighborhood" => 'Centro',
-                    "city" => $fake->city(),
-                    "state" => $fake->stateAbbr(),
-                    "longitude" => $fake->longitude(-23, -24),
-                    "latitude" => $fake->latitude(-46, -47)
-                ],
-                "cadastraChavePix" => false
-            ]
-        ));
+            ),
+        );
 
         $this->assertEquals('PROCESSING', $response['status']);
     }
@@ -96,10 +98,10 @@ class CreateAccountBusinessTest extends TestCase
                 "version" => "1.0.0",
                 "status" => "PROCESSING",
                 "body" => [
-                    "onBoardingId" => "39c8e322-9192-498d-947e-2daa4dfc749e"
-                ]
+                    "onBoardingId" => "39c8e322-9192-498d-947e-2daa4dfc749e",
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

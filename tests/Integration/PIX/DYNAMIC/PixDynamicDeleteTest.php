@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\PIX\DYNAMIC;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\DYNAMIC;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDynamic;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixDynamicDeleteTest extends TestCase
 {
@@ -24,7 +24,7 @@ class PixDynamicDeleteTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXDynamic::DELETE_DYNAMIC_QRCODE_ENDPOINT, $transactionId) => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXDynamic();
         $result = $pixCOB->deleteDynamicQRCode($transactionId);
@@ -39,7 +39,7 @@ class PixDynamicDeleteTest extends TestCase
                 'status' => 200,
                 'message' => 'Sucesso',
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -54,7 +54,7 @@ class PixDynamicDeleteTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXDynamic::DELETE_DYNAMIC_QRCODE_ENDPOINT, $transactionId) => self::stubNotFoundError(),
-            ]
+            ],
         );
         $this->expectException(RequestException::class);
         try {
@@ -77,7 +77,7 @@ class PixDynamicDeleteTest extends TestCase
                     'status' => 404,
                 ],
             ],
-            Response::HTTP_NOT_FOUND
+            Response::HTTP_NOT_FOUND,
         );
     }
 }

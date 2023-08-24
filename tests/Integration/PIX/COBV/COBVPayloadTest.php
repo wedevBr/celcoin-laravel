@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\COBV;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COBV;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBVPayloadTest extends TestCase
 {
@@ -19,18 +19,20 @@ class COBVPayloadTest extends TestCase
     final public function testPayloadCobvSuccess(): void
     {
         $transactionId = 123456;
-        $fetchUrl = sprintf('%s%s', config('celcoin.api_url'),
+        $fetchUrl = sprintf(
+            '%s%s',
+            config('celcoin.api_url'),
             sprintf(
                 '%s?%s',
                 CelcoinPIXCOBV::GET_COBV_PIX,
-                http_build_query(compact('transactionId'))
-            )
+                http_build_query(compact('transactionId')),
+            ),
         );
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOBV::PAYLOAD_COBV_PIX, urlencode($fetchUrl)) => self::stubSuccess(),
-            ]
+            ],
         );
 
         $pixCOB = new CelcoinPIXCOBV();
@@ -91,20 +93,21 @@ class COBVPayloadTest extends TestCase
      */
     final public function testPayloadCobvNotFound(): void
     {
-
         $transactionId = 123456;
-        $fetchUrl = sprintf('%s%s', config('celcoin.api_url'),
+        $fetchUrl = sprintf(
+            '%s%s',
+            config('celcoin.api_url'),
             sprintf(
                 '%s?%s',
                 CelcoinPIXCOBV::GET_COBV_PIX,
-                http_build_query(compact('transactionId'))
-            )
+                http_build_query(compact('transactionId')),
+            ),
         );
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXCOBV::PAYLOAD_COBV_PIX, urlencode($fetchUrl)) => self::stubNotFound()
-            ]
+                sprintf(CelcoinPIXCOBV::PAYLOAD_COBV_PIX, urlencode($fetchUrl)) => self::stubNotFound(),
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -127,7 +130,7 @@ class COBVPayloadTest extends TestCase
             'message' => 'The BRCode is expired and can\'t be paid.',
             'errorCode' => '400',
         ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -143,9 +146,9 @@ class COBVPayloadTest extends TestCase
                 sprintf(
                     '%s?%s',
                     CelcoinPIXCOBV::PAYLOAD_COBV_PIX,
-                    http_build_query(['url' => $fetchUrl])
+                    http_build_query(['url' => $fetchUrl]),
                 ) => Http::response([], Response::HTTP_BAD_REQUEST),
-            ]
+            ],
         );
 
         $this->expectException(ValidationException::class);
