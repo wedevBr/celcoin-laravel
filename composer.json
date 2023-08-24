@@ -1,37 +1,37 @@
 {
-  "name": "wedevbr/celcoin-laravel",
-  "description": "Celcoin API wrapper",
-  "type": "library",
-  "license": "MIT",
-  "autoload": {
-    "psr-4": {
-      "WeDevBr\\Celcoin\\": "src/"
+    "name": "wedevbr/celcoin-laravel",
+    "description": "Celcoin API wrapper",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "WeDevBr\\Celcoin\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "WeDevBr\\Celcoin\\Tests\\": "tests/"
+        }
+    },
+    "require": {
+        "php": "^8.1",
+        "laravel/framework": "^9.0|^10.0",
+        "guzzlehttp/guzzle": "^7.7"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^7.24.1",
+        "phpunit/phpunit": "^9.6.9",
+        "laradumps/laradumps": "^2.0",
+        "phpstan/phpstan": "^1.10"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "WeDevBr\\Celcoin\\CelcoinServiceProvider"
+            ],
+            "aliases": {
+                "Celcoin": "WeDevBr\\Celcoin\\CelcoinFacade"
+            }
+        }
     }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "WeDevBr\\Celcoin\\Tests\\": "tests/"
-    }
-  },
-  "require": {
-    "php": "^8.1",
-    "laravel/framework": "^9.52.9|^10.0",
-    "guzzlehttp/guzzle": "^7.7"
-  },
-  "require-dev": {
-    "orchestra/testbench": "^7.24.1",
-    "phpunit/phpunit": "^9.6.9",
-    "laradumps/laradumps": "^2.0",
-    "phpstan/phpstan": "^1.10"
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "WeDevBr\\Celcoin\\CelcoinServiceProvider"
-      ],
-      "aliases": {
-        "Celcoin": "WeDevBr\\Celcoin\\CelcoinFacade"
-      }
-    }
-  }
 }
