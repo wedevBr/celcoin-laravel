@@ -11,28 +11,100 @@ use WeDevBr\Celcoin\Enums\UrgencyEnum;
 
 class PixCashOut
 {
-    public static function rules()
+    /**
+     * @see https://developers.celcoin.com.br/docs/realizar-um-pix-cash-out-por-chaves-pix
+     * @see https://developers.celcoin.com.br/docs/realizar-um-pix-cash-out
+     * @return array
+     */
+    public static function rules(): array
+    {
+
+        return match (request()->initiationType) {
+            InitiationTypeEnum::PAYMENT_MANUAL->value => self::manual(),
+            InitiationTypeEnum::PAYMENT_DICT->value => self::dict(),
+            InitiationTypeEnum::PAYMENT_STATIC_BRCODE->value => self::static(),
+            InitiationTypeEnum::PAYMENT_DYNAMIC_BRCODE->value => self::dynamic(),
+            default => self::defaultRules()
+        };
+    }
+
+    private static function manual(): array
+    {
+
+        return array_merge(
+            self::defaultRules(),
+            [
+                'transactionIdentification' => ['prohibited'],
+                'endToEndId' => ['prohibited'],
+                'creditParty.key' => ['prohibited'],
+            ]
+        );
+    }
+
+    private static function defaultRules(): array
     {
         return [
             'amount' => ['required', 'decimal:0,2'],
             'clientCode' => ['required', 'string'],
-            'transactionIdentification' => ['sometimes', 'required_unless:initiationType,' . InitiationTypeEnum::PAYMENT_DICT->value . ',' . InitiationTypeEnum::PAYMENT_MANUAL->value],
-            'endToEndId' => ['sometimes', 'required_unless:initiationType,' . InitiationTypeEnum::PAYMENT_MANUAL->value],
+            'remittanceInformation' => ['nullable', 'string'],
             'initiationType' => ['required', Rule::in(array_column(InitiationTypeEnum::cases(), 'value'))],
             'paymentType' => ['required', Rule::in(array_column(PaymentTypeEnum::cases(), 'value'))],
             'urgency' => ['required', Rule::in(array_column(UrgencyEnum::cases(), 'value'))],
             'transactionType' => ['required', Rule::in(array_column(TransactionTypeEnum::cases(), 'value'))],
             'debitParty' => ['required', 'array'],
             'debitParty.account' => ['required', 'string'],
-            'creditParty' => ['nullable', 'array'],
-            'creditParty.bank' => ['required', 'string'],
-            'creditParty.key' => ['nullable', 'string'],
-            'creditParty.account' => ['required', 'string'],
-            'creditParty.branch' => ['required', 'string'],
-            'creditParty.taxId' => ['required', 'string'],
-            'creditParty.name' => ['required', 'string'],
-            'creditParty.accountType' => ['required', Rule::in(array_column(CreditPartyAccountTypeEnum::cases(), 'value'))],
-            'remittanceInformation' => ['nullable', 'string'],
+            //opcional ?
+            'creditParty' => ['sometimes', 'array'],
+            'creditParty.bank' => ['sometimes', 'string'],
+            'creditParty.key' => ['sometimes', 'string'],
+            'creditParty.account' => ['sometimes', 'string'],
+            'creditParty.branch' => ['sometimes', 'string'],
+            'creditParty.taxId' => ['sometimes', 'string'],
+            'creditParty.name' => ['sometimes', 'string'],
+            'creditParty.accountType' => [
+                'sometimes',
+                Rule::in(array_column(CreditPartyAccountTypeEnum::cases(), 'value')
+                )
+            ],
         ];
+    }
+
+    private static function dict(): array
+    {
+        return array_merge(
+            self::defaultRules(),
+            [
+                'transactionIdentification' => ['prohibited'],
+                'endToEndId' => ['required'],
+                'creditParty.*' => ['required', 'array'],
+                'creditParty.key' => ['required'],
+            ]
+        );
+    }
+
+    private static function static(): array
+    {
+        return array_merge(
+            self::defaultRules(),
+            [
+                'transactionIdentification' => ['required', 'string', 'size:25'],
+                'endToEndId' => ['required'],
+                'creditParty.*' => ['required', 'array'],
+                'creditParty.key' => ['required'],
+            ]
+        );
+    }
+
+    private static function dynamic(): array
+    {
+        return array_merge(
+            self::defaultRules(),
+            [
+                'transactionIdentification' => ['required', 'string', 'min:26', 'min:35'],
+                'endToEndId' => ['required'],
+                'creditParty.*' => ['required', 'array'],
+                'creditParty.key' => ['required'],
+            ]
+        );
     }
 }
