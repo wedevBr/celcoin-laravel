@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BAAS\Webhook;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\Webhook;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class RemoveWebhooksTest extends TestCase
 {
@@ -21,9 +21,9 @@ class RemoveWebhooksTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAASWebhooks::REMOVE_ENDPOINT, EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED->value)
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAASWebhooks::REMOVE_ENDPOINT, EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED->value),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $webhook = new CelcoinBAASWebhooks();
@@ -37,9 +37,9 @@ class RemoveWebhooksTest extends TestCase
         return Http::response(
             [
                 "version" => "1.0.0",
-                "status" => "SUCCESS"
+                "status" => "SUCCESS",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

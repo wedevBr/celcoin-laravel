@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\TopupsInternational;
+namespace WeDevBr\Celcoin\Tests\Integration\TopupsInternational;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinInternationalTopups;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetCountriesTest extends TestCase
 {
@@ -23,9 +23,9 @@ class GetCountriesTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinInternationalTopups::GET_COUNTRIES_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinInternationalTopups::GET_COUNTRIES_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $topups = new CelcoinInternationalTopups();
@@ -42,13 +42,13 @@ class GetCountriesTest extends TestCase
                         "flagURL" => "https://restcountries.eu/data/guf.svg",
                         "code" => "+594",
                         "name" => "French Guiana",
-                    ]
+                    ],
                 ],
                 "errorCode" => "000",
                 "message" => "SUCESSO",
                 "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

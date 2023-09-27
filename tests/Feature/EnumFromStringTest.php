@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\Feature;
+namespace WeDevBr\Celcoin\Tests\Feature;
 
-use Tests\TestCase;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
 class EnumFromStringTest extends TestCase
@@ -21,7 +21,7 @@ class EnumFromStringTest extends TestCase
                 'login' => 'login_teste',
                 'pwd' => 'pwd_teste',
                 'type' => 'type_teste',
-            ]
+            ],
         ]);
 
         $this->assertInstanceOf(EntityWebhookBAASEnum::class, $data->entity);

@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\Assistant;
+namespace WeDevBr\Celcoin\Tests\Integration\Assistant;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinAssistant;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class FindInstitutionsTest extends TestCase
 {
@@ -22,9 +22,9 @@ class FindInstitutionsTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinAssistant::FIND_INSTITUTIONS_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinAssistant::FIND_INSTITUTIONS_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $assistant = new CelcoinAssistant();
@@ -44,15 +44,15 @@ class FindInstitutionsTest extends TestCase
                         "type" => "ESTADUAL",
                         "UF" => [
                             "SP",
-                            "RJ"
-                        ]
-                    ]
+                            "RJ",
+                        ],
+                    ],
                 ],
                 "errorCode" => "000",
                 "message" => "SUCESSO",
                 "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

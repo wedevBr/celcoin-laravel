@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS\TED;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\TED;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASTED;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASTEDGetStatusTransferTest extends TestCase
 {
@@ -20,9 +20,9 @@ class BAASTEDGetStatusTransferTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAASTED::GET_STATUS_TRANSFER_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAASTED::GET_STATUS_TRANSFER_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $ted = new CelcoinBAASTED();
@@ -67,7 +67,7 @@ class BAASTEDGetStatusTransferTest extends TestCase
                     ],
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

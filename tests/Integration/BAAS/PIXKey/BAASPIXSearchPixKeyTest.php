@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS\PIXKey;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PIXKey;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXSearchPixKeyTest extends TestCase
 {
@@ -20,9 +20,9 @@ class BAASPIXSearchPixKeyTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAASPIX::SEARCH_PIX_KEY_ENDPOINT, '30054065518')
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAASPIX::SEARCH_PIX_KEY_ENDPOINT, '300541976902'),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinBAASPIX();
@@ -52,13 +52,13 @@ class BAASPIXSearchPixKeyTest extends TestCase
                                 "type" => "LEGAL_PERSON",
                                 "documentNumber" => "17938715000192",
                                 "name" => "Mateus",
-                            ]
-                        ]
-                    ]
+                            ],
+                        ],
+                    ],
                 ],
                 "version" => "1.0.0",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

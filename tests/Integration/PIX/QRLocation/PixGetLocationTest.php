@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\QRLocation;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\QRLocation;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXQR;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixGetLocationTest extends TestCase
 {
@@ -28,9 +28,9 @@ class PixGetLocationTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => self::stubSuccess()
-            ]
+                    $url,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinPIXQR();
@@ -53,20 +53,21 @@ class PixGetLocationTest extends TestCase
                     'postalCode' => '01201005',
                     'city' => 'Barueri',
                     'merchantCategoryCode' => '0000',
-                    'name' => 'Celcoin'
+                    'name' => 'Celcoin',
                 ],
                 'url' => 'api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e',
                 'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/v1/p/v2/f5d3c300f49442149d996c3dccc8860e5204000053039865802BR5907Celcoin6007Barueri61080120100562070503***630411BD',
                 'type' => 'COBV',
-                'locationId' => 12731081
+                'locationId' => 12731081,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
     /**
      * @param Closure $response
      * @param string $status
+     *
      * @return void
      * @dataProvider errorDataProvider
      * @throws RequestException
@@ -82,9 +83,9 @@ class PixGetLocationTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => $response
-            ]
+                    $url,
+                ) => $response,
+            ],
         );
 
         $pix = new CelcoinPIXQR();
@@ -99,14 +100,21 @@ class PixGetLocationTest extends TestCase
     private function errorDataProvider(): array
     {
         return [
-            'status code 400' => [fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST), Response::HTTP_BAD_REQUEST],
+            'status code 400' => [
+                fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST),
+                Response::HTTP_BAD_REQUEST,
+            ],
             'status code 404' => [fn() => self::stubGenericError(Response::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND],
-            'status code 500' => [fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
+            'status code 500' => [
+                fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR),
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+            ],
         ];
     }
 
     /**
      * @param int $status
+     *
      * @return PromiseInterface
      */
     static private function stubGenericError(int $status): PromiseInterface
@@ -115,7 +123,7 @@ class PixGetLocationTest extends TestCase
             [
                 'errorCode' => $status,
                 'description' => 'Message',
-            ]
+            ],
         );
     }
 

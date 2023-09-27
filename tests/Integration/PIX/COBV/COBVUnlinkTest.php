@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\PIX\COBV;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COBV;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBVUnlinkTest extends TestCase
 {
@@ -23,7 +23,7 @@ class COBVUnlinkTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOBV::UNLINK_COB_PIX_URL, $transactionId) => self::stubNotFoundError(),
-            ]
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -44,7 +44,7 @@ class COBVUnlinkTest extends TestCase
                 'message' => 'Não foram encontrados dados para a transação informada.',
                 'errorCode' => '404',
             ],
-            Response::HTTP_NOT_FOUND
+            Response::HTTP_NOT_FOUND,
         );
     }
 
@@ -58,7 +58,7 @@ class COBVUnlinkTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOBV::UNLINK_COB_PIX_URL, $transactionId) => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOBV = new CelcoinPIXCOBV();
         $result = $pixCOBV->unlinkCOBVPIX($transactionId);
@@ -78,15 +78,15 @@ class COBVUnlinkTest extends TestCase
                 'pactualId' => 'f7352171-e983-4d91-8073-c2e513b83ce6',
                 'createTimestamp' => '2022-03-21T14:27:58.2106288+00:00',
                 'body' => [
-                    'payerQuestion' => NULL,
-                    'additionalInformation' => NULL,
+                    'payerQuestion' => null,
+                    'additionalInformation' => null,
                     'key' => 'testepix@celcoin.com.br',
                     'amount' => [
                         'original' => 15.63,
                     ],
                     'debtor' => [
                         'name' => 'Fulano de Tal',
-                        'cpf' => NULL,
+                        'cpf' => null,
                         'cnpj' => '33188542046',
                     ],
                     'calendar' => [
@@ -94,7 +94,7 @@ class COBVUnlinkTest extends TestCase
                     ],
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

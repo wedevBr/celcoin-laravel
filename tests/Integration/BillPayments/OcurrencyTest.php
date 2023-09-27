@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BillPayments;
+namespace WeDevBr\Celcoin\Tests\Integration\BillPayments;
 
 use Carbon\Carbon;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBillPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class OcurrencyTest extends TestCase
 {
@@ -24,9 +24,9 @@ class OcurrencyTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBillPayment::GET_OCCURRENCES_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBillPayment::GET_OCCURRENCES_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $payment = new CelcoinBillPayment();
@@ -48,10 +48,10 @@ class OcurrencyTest extends TestCase
                     "transactionId" => 7061967,
                     "externalTerminal" => "11122233344",
                     "linhaDigitavel" => "34191090080012213037050059980008586260000065000 ",
-                    "value" => "20"
-                ]
+                    "value" => "20",
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

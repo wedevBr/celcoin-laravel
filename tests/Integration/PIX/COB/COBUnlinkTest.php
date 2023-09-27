@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\PIX\COB;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COB;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBUnlinkTest extends TestCase
 {
@@ -23,7 +23,7 @@ class COBUnlinkTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOB::UNLINK_COB_PIX_URL, $transactionId) => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXCOB();
         $result = $pixCOB->unlinkCOBPIX($transactionId);
@@ -44,20 +44,20 @@ class COBUnlinkTest extends TestCase
                 'clientRequestId' => '',
                 'status' => 'ACTIVE',
                 'lastUpdate' => '2022-03-22T12:49:21.2461549+00:00',
-                'payerQuestion' => NULL,
-                'additionalInformation' => NULL,
+                'payerQuestion' => null,
+                'additionalInformation' => null,
                 'debtor' => [
                     'name' => 'teste',
                     'cpf' => '35914875417',
-                    'cnpj' => NULL,
+                    'cnpj' => null,
                 ],
                 'amount' => [
                     'original' => 15.01,
                     'changeType' => 0,
-                    'withdrawal' => NULL,
-                    'change' => NULL,
+                    'withdrawal' => null,
+                    'change' => null,
                 ],
-                'location' => NULL,
+                'location' => null,
                 'key' => 'testepix@celcoin.com.br',
                 'calendar' => [
                     'expiration' => 86400,
@@ -77,7 +77,7 @@ class COBUnlinkTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 sprintf(CelcoinPIXCOB::UNLINK_COB_PIX_URL, $transactionId) => self::stubNotFoundError(),
-            ]
+            ],
         );
         $this->expectException(RequestException::class);
         try {
@@ -98,9 +98,9 @@ class COBUnlinkTest extends TestCase
         return Http::response(
             [
                 'message' => '{\'version\':\'1.2.7\',\'status\':404}',
-                'errorCode' => '404'
+                'errorCode' => '404',
             ],
-            Response::HTTP_NOT_FOUND
+            Response::HTTP_NOT_FOUND,
         );
     }
 }

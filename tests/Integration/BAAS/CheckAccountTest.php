@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class CheckAccountTest extends TestCase
 {
@@ -23,9 +23,9 @@ class CheckAccountTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAAS::ACCOUNT_CHECK
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAAS::ACCOUNT_CHECK,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $baas = new CelcoinBAAS();
@@ -50,11 +50,11 @@ class CheckAccountTest extends TestCase
                         "branch" => "1234",
                         "account" => "123456",
                         "name" => "Fernanda Aparecida da Silva",
-                        "documentNumber" => "47855748778"
-                    ]
-                ]
+                        "documentNumber" => "47855748778",
+                    ],
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

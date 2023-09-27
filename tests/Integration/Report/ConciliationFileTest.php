@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\Report;
+namespace WeDevBr\Celcoin\Tests\Integration\Report;
 
 use Carbon\Carbon;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinReport;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class ConciliationFileTest extends TestCase
 {
@@ -24,9 +24,9 @@ class ConciliationFileTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinReport::CONCILIATION_FILE_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinReport::CONCILIATION_FILE_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $report = new CelcoinReport();
@@ -50,7 +50,7 @@ class ConciliationFileTest extends TestCase
                         "NSU" => 97102,
                         "ExternalTerminal" => "TesteMockado-6C59770F-4A0A-4429-9C39-0ADBFFCDB525",
                         "ExternalNSU" => 2105324538,
-                        "PaymentMethod" => 2
+                        "PaymentMethod" => 2,
                     ],
                     [
                         "DigitableLine" => "03399492813698211200901537301028400000000000000 ",
@@ -63,18 +63,18 @@ class ConciliationFileTest extends TestCase
                         "NSU" => 2107,
                         "ExternalTerminal" => "TesteMockado-3A977B5E-631D-4D59-8265-F780FDD3E373",
                         "ExternalNSU" => 966441828,
-                        "PaymentMethod" => 2
-                    ]
+                        "PaymentMethod" => 2,
+                    ],
                 ],
                 "pagination" => [
                     "page" => 1,
                     "totalCount" => 10,
                     "totalPages" => 5,
                     "hasPrevious" => false,
-                    "hasNext" => true
-                ]
+                    "hasNext" => true,
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

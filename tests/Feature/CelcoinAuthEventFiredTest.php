@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Feature;
+namespace WeDevBr\Celcoin\Tests\Feature;
 
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Auth\Auth;
 use WeDevBr\Celcoin\Events\CelcoinAuthenticatedEvent;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class CelcoinAuthEventFiredTest extends TestCase
 {
@@ -18,8 +18,8 @@ class CelcoinAuthEventFiredTest extends TestCase
 
         Http::fake(
             [
-                config('celcoin.login_url') => GlobalStubs::loginResponse()
-            ]
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+            ],
         );
 
         Auth::login()->getToken();

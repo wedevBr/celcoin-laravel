@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\Topups;
+namespace WeDevBr\Celcoin\Tests\Integration\Topups;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinTopups;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class FindProvidersTest extends TestCase
 {
@@ -23,9 +23,9 @@ class FindProvidersTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinTopups::FIND_PROVIDERS_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinTopups::FIND_PROVIDERS_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $topups = new CelcoinTopups();
@@ -41,9 +41,9 @@ class FindProvidersTest extends TestCase
                 "providerId" => 2088,
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0
+                "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

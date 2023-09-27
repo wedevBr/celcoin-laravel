@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\BAAS\Webhook;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\Webhook;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
 use WeDevBr\Celcoin\Enums\EntityWebhookBAASEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BAAS\EditWebhooks;
 
 class EditWebhooksTest extends TestCase
@@ -22,22 +22,25 @@ class EditWebhooksTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAASWebhooks::EDIT_ENDPOINT, EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED->value)
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAASWebhooks::EDIT_ENDPOINT, EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED->value),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $webhook = new CelcoinBAASWebhooks();
-        $response = $webhook->edit(new EditWebhooks([
-            "entity" => EntityWebhookBAASEnum::SPB_REVERSAL_OUT_TED,
-            "webhookUrl" => "https://www.celcoin.com.br/baas",
-            "auth" => [
-                "login" => "giovanni",
-                "pwd" => "string",
-                "type" => "basic"
-            ],
-            "active" => true
-        ]), EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED);
+        $response = $webhook->edit(
+            new EditWebhooks([
+                "entity" => EntityWebhookBAASEnum::SPB_REVERSAL_OUT_TED,
+                "webhookUrl" => "https://www.celcoin.com.br/baas",
+                "auth" => [
+                    "login" => "giovanni",
+                    "pwd" => "string",
+                    "type" => "basic",
+                ],
+                "active" => true,
+            ]),
+            EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED,
+        );
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
@@ -47,9 +50,9 @@ class EditWebhooksTest extends TestCase
         return Http::response(
             [
                 "version" => "1.0.0",
-                "status" => "SUCCESS"
+                "status" => "SUCCESS",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

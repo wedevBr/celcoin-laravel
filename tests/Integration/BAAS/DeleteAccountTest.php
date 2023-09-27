@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class DeleteAccountTest extends TestCase
 {
@@ -22,7 +22,7 @@ class DeleteAccountTest extends TestCase
                 'Account' => '12345',
                 'DocumentNumber' => null,
                 'Reason' => 'Segurança',
-            ]
+            ],
         );
         Http::fake(
             [
@@ -30,9 +30,9 @@ class DeleteAccountTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::DELETE_ACCOUNT, $params)
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAAS::DELETE_ACCOUNT, $params),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $baas = new CelcoinBAAS();
@@ -48,7 +48,7 @@ class DeleteAccountTest extends TestCase
                 "version" => "1.0.0",
                 "status" => "SUCCESS",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

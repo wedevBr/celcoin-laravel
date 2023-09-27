@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace WeDevBr\Celcoin\Tests;
 
 use Dotenv\Dotenv;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;

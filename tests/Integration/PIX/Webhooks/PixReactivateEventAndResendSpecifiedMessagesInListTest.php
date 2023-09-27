@@ -1,16 +1,16 @@
 <?php
 
-namespace Tests\Integration\PIX\Webhooks;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\Webhooks;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients as Clients;
 use WeDevBr\Celcoin\Enums\WebhookEventEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX as Types;
 
 class PixReactivateEventAndResendSpecifiedMessagesInListTest extends TestCase
@@ -36,10 +36,13 @@ class PixReactivateEventAndResendSpecifiedMessagesInListTest extends TestCase
     /**
      * @param Closure<PromiseInterface> $stub
      * @param WebhookEventEnum $webhookEventEnum
+     *
      * @return array<Types\PixReactivateEventAndResendSpecifiedMessagesInList, WebhookEventEnum>
      */
-    private function callWebhookBase(Closure $stub, WebhookEventEnum $webhookEventEnum = WebhookEventEnum::CONFIRMED): array
-    {
+    private function callWebhookBase(
+        Closure $stub,
+        WebhookEventEnum $webhookEventEnum = WebhookEventEnum::CONFIRMED,
+    ): array {
         $params = new Types\PixReactivateEventAndResendSpecifiedMessagesInList();
 
         $url = sprintf(Clients\CelcoinPixWebhooks::RESEND_TRANSACTION_LIST_WEBHOOK, $webhookEventEnum->value);
@@ -50,9 +53,9 @@ class PixReactivateEventAndResendSpecifiedMessagesInListTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => $stub
-            ]
+                    $url,
+                ) => $stub,
+            ],
         );
         return [$params, $webhookEventEnum];
     }
@@ -67,7 +70,7 @@ class PixReactivateEventAndResendSpecifiedMessagesInListTest extends TestCase
                 'dateFrom' => '2023-07-21T00:00:00+00:00',
                 'status' => 200,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 

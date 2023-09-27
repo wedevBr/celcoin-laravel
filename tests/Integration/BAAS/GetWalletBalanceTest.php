@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetWalletBalanceTest extends TestCase
 {
@@ -23,12 +23,12 @@ class GetWalletBalanceTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBAAS::GET_WALLET_BALANCE, '0001', '300541976902')
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBAAS::GET_WALLET_BALANCE, '0001', '300541976902'),
+                ) => self::stubSuccess(),
+            ],
         );
         $baasWebhook = new CelcoinBAAS();
-        $response = $baasWebhook->getWalletBalance('300541976902');
+        $response = $baasWebhook->getWalletBalance('0001', '300541976902');
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
@@ -40,10 +40,10 @@ class GetWalletBalanceTest extends TestCase
                 "status" => "SUCCESS",
                 "version" => "1.0.0",
                 "body" => [
-                    "amount" => 1.1
-                ]
+                    "amount" => 1.1,
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

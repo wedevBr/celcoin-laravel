@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BAAS\PIXRefund;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PIXRefund;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXStatusRefundTest extends TestCase
 {
@@ -20,9 +20,9 @@ class BAASPIXStatusRefundTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    CelcoinBAASPIX::STATUS_REFUND_PIX_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinBAASPIX::STATUS_REFUND_PIX_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinBAASPIX();
@@ -48,7 +48,7 @@ class BAASPIXStatusRefundTest extends TestCase
                     "reversalDescription" => "Devolução do churrasco",
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

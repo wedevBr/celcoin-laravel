@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BankTransfer;
+namespace WeDevBr\Celcoin\Tests\Integration\BankTransfer;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBankTransfer;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetStatusTransferTest extends TestCase
 {
@@ -23,9 +23,9 @@ class GetStatusTransferTest extends TestCase
                 sprintf(
                     '%s%s*',
                     config('api_url'),
-                    sprintf(CelcoinBankTransfer::GET_STATUS_TRANSFER_ENDPOINT, 817981763)
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBankTransfer::GET_STATUS_TRANSFER_ENDPOINT, 817981763),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $transfer = new CelcoinBankTransfer();
@@ -49,7 +49,7 @@ class GetStatusTransferTest extends TestCase
                 "message" => "SUCESSO",
                 "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

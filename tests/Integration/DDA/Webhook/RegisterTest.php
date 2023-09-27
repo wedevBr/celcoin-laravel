@@ -1,14 +1,14 @@
 <?php
 
-namespace Tests\Integration\DDA\Webhook;
+namespace WeDevBr\Celcoin\Tests\Integration\DDA\Webhook;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinDDAWebhooks;
 use WeDevBr\Celcoin\Enums\DDAWebhooksTypeEventEnum;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\DDA\RegisterWebhooks;
 
 class RegisterTest extends TestCase
@@ -25,20 +25,22 @@ class RegisterTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinDDAWebhooks::REGISTER_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinDDAWebhooks::REGISTER_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $dda = new CelcoinDDAWebhooks();
-        $response = $dda->register(new RegisterWebhooks([
-            "typeEventWebhook" => DDAWebhooksTypeEventEnum::INVOICE,
-            "url" => "https://webhook.site/d24aa98f-1837-4698-8825-688f94390cfe",
-            "basicAuthentication" => [
-                "identification" => "João",
-                "password" => "Um@Pro7ec@o"
-            ]
-        ]));
+        $response = $dda->register(
+            new RegisterWebhooks([
+                "typeEventWebhook" => DDAWebhooksTypeEventEnum::INVOICE,
+                "url" => "https://webhook.site/d24aa98f-1837-4698-8825-688f94390cfe",
+                "basicAuthentication" => [
+                    "identification" => "João",
+                    "password" => "Um@Pro7ec@o",
+                ],
+            ]),
+        );
 
         $this->assertEquals(201, $response['status']);
     }
@@ -53,12 +55,12 @@ class RegisterTest extends TestCase
                     "url" => "https://webhook.site/d24aa98f-1837-4698-8825-688f94390cfe",
                     "basicAuthentication" => [
                         "identification" => "João",
-                        "password" => "Um@Pro7ec@o"
+                        "password" => "Um@Pro7ec@o",
                     ],
-                    "oAuthTwo" => null
-                ]
+                    "oAuthTwo" => null,
+                ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

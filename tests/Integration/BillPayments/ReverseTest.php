@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BillPayments;
+namespace WeDevBr\Celcoin\Tests\Integration\BillPayments;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBillPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class ReverseTest extends TestCase
 {
@@ -23,9 +23,9 @@ class ReverseTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBillPayment::REVERSE_ENDPOINT, 817958497)
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBillPayment::REVERSE_ENDPOINT, 817958497),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $payment = new CelcoinBillPayment();
@@ -39,9 +39,9 @@ class ReverseTest extends TestCase
             [
                 "errorCode" => "000",
                 "message" => "Pedido de estorno registrado com sucesso.",
-                "status" => "0"
+                "status" => "0",
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

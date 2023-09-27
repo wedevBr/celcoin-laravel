@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\ElectronicTransactions;
+namespace WeDevBr\Celcoin\Tests\Integration\ElectronicTransactions;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 
 class PartnersTest extends TestCase
 {
@@ -23,9 +23,9 @@ class PartnersTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinElectronicTransactions::GET_PARTNERS_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinElectronicTransactions::GET_PARTNERS_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $electronicTransaction = new CelcoinElectronicTransactions();
@@ -38,26 +38,28 @@ class PartnersTest extends TestCase
     {
         return Http::response(
             [
-                "ParceirosPecRec" => [[
-                    "codeParceiro" => "0001",
-                    "IndBarCodeDeposit" => "S",
-                    "IndBarCodeWithdraw" => "S",
-                    "IndQRCodeDeposit" => "S",
-                    "IndQRCodeWithdraw" => "S",
-                    "namePartner" => "BrinksPay",
-                    "partnerPecRecRecId" => "1",
-                    "partnerType" => "VAREJO",
-                    "typeTransactionsCancelamento" => "SOLICITACANCELAMENTOPECREC",
-                    "maxValueDeposito" => 2000.0,
-                    "maxValueSaque" => 2000.0,
-                    "minValueDeposito" => 0.0,
-                    "minValueSaque" => 0.01,
-                ]],
+                "ParceirosPecRec" => [
+                    [
+                        "codeParceiro" => "0001",
+                        "IndBarCodeDeposit" => "S",
+                        "IndBarCodeWithdraw" => "S",
+                        "IndQRCodeDeposit" => "S",
+                        "IndQRCodeWithdraw" => "S",
+                        "namePartner" => "BrinksPay",
+                        "partnerPecRecRecId" => "1",
+                        "partnerType" => "VAREJO",
+                        "typeTransactionsCancelamento" => "SOLICITACANCELAMENTOPECREC",
+                        "maxValueDeposito" => 2000.0,
+                        "maxValueSaque" => 2000.0,
+                        "minValueDeposito" => 0.0,
+                        "minValueSaque" => 0.01,
+                    ],
+                ],
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0
+                "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

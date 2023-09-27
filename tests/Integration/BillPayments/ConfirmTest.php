@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\BillPayments;
+namespace WeDevBr\Celcoin\Tests\Integration\BillPayments;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinBillPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\BillPayments\Confirm;
 
 class ConfirmTest extends TestCase
@@ -24,16 +24,19 @@ class ConfirmTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    sprintf(CelcoinBillPayment::CONFIRM_ENDPOINT, 817958497)
-                ) => self::stubSuccess()
-            ]
+                    sprintf(CelcoinBillPayment::CONFIRM_ENDPOINT, 817958497),
+                ) => self::stubSuccess(),
+            ],
         );
 
         $payment = new CelcoinBillPayment();
-        $response = $payment->confirm(817958497, new Confirm([
-            "externalNSU" => 1234,
-            "externalTerminal" => "teste2"
-        ]));
+        $response = $payment->confirm(
+            817958497,
+            new Confirm([
+                "externalNSU" => 1234,
+                "externalTerminal" => "teste2",
+            ]),
+        );
         $this->assertEquals(0, $response['status']);
     }
 
@@ -43,9 +46,9 @@ class ConfirmTest extends TestCase
             [
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0
+                "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

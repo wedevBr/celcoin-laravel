@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\DYNAMIC;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\DYNAMIC;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDynamic;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\AdditionalInformation;
 use WeDevBr\Celcoin\Types\PIX\DynamicQRCreate;
 use WeDevBr\Celcoin\Types\PIX\Merchant;
@@ -26,8 +26,8 @@ class PixDynamicCreateTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDynamic::CREATE_DYNAMIC_QRCODE_ENDPOINT => self::stubInvalidKey()
-            ]
+                CelcoinPIXDynamic::CREATE_DYNAMIC_QRCODE_ENDPOINT => self::stubInvalidKey(),
+            ],
         );
         $this->expectException(RequestException::class);
         try {
@@ -50,7 +50,7 @@ class PixDynamicCreateTest extends TestCase
                 'code' => 'LC003',
                 'description' => 'Chave Pix informada não é válida para este tipo de ação. Contate o suporte. / Chave informada não cadastrada',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -59,7 +59,6 @@ class PixDynamicCreateTest extends TestCase
      */
     static public function fakeBody(): DynamicQRCreate
     {
-
         $dynamic = new DynamicQRCreate();
         $dynamic->clientRequestId = '9b26edb7cf254db09f5449c94bf13abc';
         $dynamic->key = 'testepix@celcoin.com.br';
@@ -90,7 +89,6 @@ class PixDynamicCreateTest extends TestCase
         return $dynamic;
     }
 
-
     /**
      * @throws RequestException
      */
@@ -100,7 +98,7 @@ class PixDynamicCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXDynamic::CREATE_DYNAMIC_QRCODE_ENDPOINT => self::stubSuccess(),
-            ]
+            ],
         );
 
         $data = self::fakeBody();
@@ -136,7 +134,7 @@ class PixDynamicCreateTest extends TestCase
                     'lastUpdateTimestamp' => '2022-03-22T18:59:28.0944527+00:00',
                     'entity' => 'PixImmediateCollection',
                     'status' => 'ACTIVE',
-                    'tags' => NULL,
+                    'tags' => null,
                     'transactionIdentification' => 'kk6g232xel65a0daee4dd13kk9193296',
                     'body' => [
                         'key' => 'testepix@celcoin.com.br',
@@ -151,7 +149,7 @@ class PixDynamicCreateTest extends TestCase
                         ],
                         'debtor' => [
                             'cpf' => '12312312312',
-                            'cnpj' => NULL,
+                            'cnpj' => null,
                             'name' => 'valdir',
                         ],
                         'additionalInformation' => [
@@ -174,7 +172,7 @@ class PixDynamicCreateTest extends TestCase
                     ],
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -188,7 +186,7 @@ class PixDynamicCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXDynamic::CREATE_DYNAMIC_QRCODE_ENDPOINT => self::stubSuccess(),
-            ]
+            ],
         );
 
         $data = self::fakeBody();
@@ -228,8 +226,8 @@ class PixDynamicCreateTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDynamic::CREATE_DYNAMIC_QRCODE_ENDPOINT => self::stubSuccess()
-            ]
+                CelcoinPIXDynamic::CREATE_DYNAMIC_QRCODE_ENDPOINT => self::stubSuccess(),
+            ],
         );
 
         $pix = new CelcoinPIXDynamic();

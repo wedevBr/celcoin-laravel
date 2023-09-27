@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\Receivement;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\Receivement;
 
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients as Clients;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX as Types;
 
 class PixReceivementStatusTest extends TestCase
@@ -22,7 +22,7 @@ class PixReceivementStatusTest extends TestCase
         $url = sprintf(
             '%s?%s',
             Clients\CelcoinPIXReceivement::PIX_RECEIVEMENT_STATUS_ENDPOINT,
-            http_build_query($params->toArray())
+            http_build_query($params->toArray()),
         );
         Http::fake(
             [
@@ -30,9 +30,9 @@ class PixReceivementStatusTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => self::stubErrorNotFound()
-            ]
+                    $url,
+                ) => self::stubErrorNotFound(),
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -53,7 +53,7 @@ class PixReceivementStatusTest extends TestCase
                 'errorCode' => '99',
                 'description' => 'Transação de recebimento não encontrada.',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -68,7 +68,7 @@ class PixReceivementStatusTest extends TestCase
         $url = sprintf(
             '%s?%s',
             Clients\CelcoinPIXReceivement::PIX_RECEIVEMENT_STATUS_ENDPOINT,
-            http_build_query($params->toArray())
+            http_build_query($params->toArray()),
         );
         Http::fake(
             [
@@ -76,9 +76,9 @@ class PixReceivementStatusTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => self::stubSuccess()
-            ]
+                    $url,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new Clients\CelcoinPIXReceivement();
@@ -122,7 +122,7 @@ class PixReceivementStatusTest extends TestCase
                     'urgency' => 'HIGH',
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

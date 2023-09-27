@@ -1,15 +1,15 @@
 <?php
 
-namespace Tests\Integration\PIX\StaticPayment;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\StaticPayment;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPixStaticPayment;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\Merchant;
 use WeDevBr\Celcoin\Types\PIX\QRStaticPayment;
 
@@ -27,9 +27,9 @@ class PixCreateStaticPaymentTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinPixStaticPayment::CREATE_STATIC_PAYMENT_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinPixStaticPayment::CREATE_STATIC_PAYMENT_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $paymentBody = $this->fakeQRStaticPayment();
@@ -71,7 +71,7 @@ class PixCreateStaticPaymentTest extends TestCase
         $staticPayment->additionalInformation = 'nota';
         $staticPayment->transactionIdentification = '9b26edb7cf254db09f5449c94bf13abc';
         $staticPayment->tags = [
-            'tag 1'
+            'tag 1',
         ];
 
 
@@ -81,6 +81,7 @@ class PixCreateStaticPaymentTest extends TestCase
     /**
      * @param Closure $response
      * @param int $status
+     *
      * @return void
      * @throws RequestException
      * @dataProvider errorDataProvider
@@ -93,9 +94,9 @@ class PixCreateStaticPaymentTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinPixStaticPayment::CREATE_STATIC_PAYMENT_ENDPOINT
-                ) => $response
-            ]
+                    CelcoinPixStaticPayment::CREATE_STATIC_PAYMENT_ENDPOINT,
+                ) => $response,
+            ],
         );
 
         $this->expectException(RequestException::class);
@@ -117,7 +118,10 @@ class PixCreateStaticPaymentTest extends TestCase
     {
         return [
             // Status 500 - Internal server error return empty array
-            'status·code·500' => [fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR), Response::HTTP_INTERNAL_SERVER_ERROR],
+            'status·code·500' => [
+                fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR),
+                Response::HTTP_INTERNAL_SERVER_ERROR,
+            ],
         ];
     }
 

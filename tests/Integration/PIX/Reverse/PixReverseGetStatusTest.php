@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\PIX\Reverse;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\Reverse;
 
 
 use Closure;
@@ -8,9 +8,9 @@ use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients as Clients;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX as Types;
 
 class PixReverseGetStatusTest extends TestCase
@@ -34,7 +34,7 @@ class PixReverseGetStatusTest extends TestCase
                 'code' => '11',
                 'description' => 'Transação original não encontrada.',
             ],
-            Response::HTTP_NOT_FOUND
+            Response::HTTP_NOT_FOUND,
         );
     }
 
@@ -45,7 +45,7 @@ class PixReverseGetStatusTest extends TestCase
                 'code' => '12',
                 'description' => 'Limite de devolução excedido para a transação original.',
             ],
-            Response::HTTP_NOT_FOUND
+            Response::HTTP_NOT_FOUND,
         );
     }
 
@@ -56,7 +56,7 @@ class PixReverseGetStatusTest extends TestCase
                 'code' => '99',
                 'description' => 'Transação de recebimento não encontrada.',
             ],
-            Response::HTTP_NOT_FOUND
+            Response::HTTP_NOT_FOUND,
         );
     }
 
@@ -67,7 +67,7 @@ class PixReverseGetStatusTest extends TestCase
                 'code' => '999',
                 'description' => 'Erro desconhecido no account service..',
             ],
-            Response::HTTP_NOT_FOUND
+            Response::HTTP_NOT_FOUND,
         );
     }
 
@@ -78,7 +78,7 @@ class PixReverseGetStatusTest extends TestCase
                 'code' => '40',
                 'description' => 'Saldo insuficiente',
             ],
-            Response::HTTP_NOT_FOUND
+            Response::HTTP_NOT_FOUND,
         );
     }
 
@@ -93,7 +93,7 @@ class PixReverseGetStatusTest extends TestCase
         $url = sprintf(
             '%s?%s',
             Clients\CelcoinPIXReverse::PIX_REVERSE_GET_STATUS_ENDPOINT,
-            http_build_query($params->toArray())
+            http_build_query($params->toArray()),
         );
         Http::fake(
             [
@@ -101,9 +101,9 @@ class PixReverseGetStatusTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => self::stubSuccess()
-            ]
+                    $url,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $pix = new Clients\CelcoinPIXReverse();
@@ -128,7 +128,7 @@ class PixReverseGetStatusTest extends TestCase
                     'description' => 'General reject operation.',
                 ],
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 
@@ -144,7 +144,7 @@ class PixReverseGetStatusTest extends TestCase
         $url = sprintf(
             '%s?%s',
             Clients\CelcoinPIXReverse::PIX_REVERSE_GET_STATUS_ENDPOINT,
-            http_build_query($params->toArray())
+            http_build_query($params->toArray()),
         );
         Http::fake(
             [
@@ -152,9 +152,9 @@ class PixReverseGetStatusTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    $url
-                ) => $stub
-            ]
+                    $url,
+                ) => $stub,
+            ],
         );
 
         $this->expectException(RequestException::class);

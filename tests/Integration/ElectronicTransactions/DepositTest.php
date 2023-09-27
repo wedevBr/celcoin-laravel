@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Integration\ElectronicTransactions;
+namespace WeDevBr\Celcoin\Tests\Integration\ElectronicTransactions;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\ElectronicTransactions\Deposit;
 
 class DepositTest extends TestCase
@@ -24,22 +24,24 @@ class DepositTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinElectronicTransactions::DEPOSIT_ENDPOINT
-                ) => self::stubSuccess()
-            ]
+                    CelcoinElectronicTransactions::DEPOSIT_ENDPOINT,
+                ) => self::stubSuccess(),
+            ],
         );
 
         $electronicTransaction = new CelcoinElectronicTransactions();
-        $response = $electronicTransaction->deposit(new Deposit([
-            "externalNSU" => 1234,
-            "externalTerminal" => "teste2",
-            "payerContact" => "Fulano de tal",
-            "payerDocument" => "11122233344",
-            "transactionIdentifier" => "Banco24Horas/DepositoDigital/v1/a0a0d296-3754-454d-bc0c-b1c4d114467f/ea9dd655/1240004",
-            "payerName" => "Fulano de tal",
-            "namePartner" => "TECBAN_BANCO24H",
-            "value" => 10
-        ]));
+        $response = $electronicTransaction->deposit(
+            new Deposit([
+                "externalNSU" => 1234,
+                "externalTerminal" => "teste2",
+                "payerContact" => "Fulano de tal",
+                "payerDocument" => "11122233344",
+                "transactionIdentifier" => "Banco24Horas/DepositoDigital/v1/a0a0d296-3754-454d-bc0c-b1c4d114467f/ea9dd655/1240004",
+                "payerName" => "Fulano de tal",
+                "namePartner" => "TECBAN_BANCO24H",
+                "value" => 10,
+            ]),
+        );
 
         $this->assertEquals(0, $response['status']);
     }
@@ -58,9 +60,9 @@ class DepositTest extends TestCase
                 "value" => 150,
                 "errorCode" => "000",
                 "message" => "SUCESSO",
-                "status" => 0
+                "status" => 0,
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
         );
     }
 }

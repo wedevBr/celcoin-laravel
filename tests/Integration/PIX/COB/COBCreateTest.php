@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\PIX\COB;
+namespace WeDevBr\Celcoin\Tests\Integration\PIX\COB;
 
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
@@ -8,9 +8,9 @@ use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use Tests\GlobalStubs;
-use Tests\TestCase;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
+use WeDevBr\Celcoin\Tests\GlobalStubs;
+use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\AdditionalInformation;
 use WeDevBr\Celcoin\Types\PIX\Amount;
 use WeDevBr\Celcoin\Types\PIX\Calendar;
@@ -29,7 +29,7 @@ class COBCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOB::CREATE_COB_PIX_URL => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXCOB();
         $result = $pixCOB->createCOBPIX(self::fakeCOBBody());
@@ -54,14 +54,14 @@ class COBCreateTest extends TestCase
             ],
             'debtor' => [
                 'name' => 'Fulano de Tal',
-                'cpf' => NULL,
+                'cpf' => null,
                 'cnpj' => '00190305000103',
             ],
             'amount' => [
                 'original' => 15.63,
                 'changeType' => 0,
-                'withdrawal' => NULL,
-                'change' => NULL,
+                'withdrawal' => null,
+                'change' => null,
             ],
             'location' => [
                 'merchant' => [
@@ -74,7 +74,7 @@ class COBCreateTest extends TestCase
                 'emv' => '00020101021226930014br.gov.bcb.pix2571api-h.developer.btgpactual.com/pc/p/v2/1d53f8a4839641628b2d678f7ddb9ad65204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***63040D56',
                 'type' => 'COB',
                 'locationId' => '13043812',
-                'id' => NULL,
+                'id' => null,
             ],
             'key' => 'testepix@celcoin.com.br',
             'calendar' => [
@@ -101,7 +101,7 @@ class COBCreateTest extends TestCase
             [
                 'value' => 'Assinatura de serviço',
                 'key' => 'Produto 1',
-            ]
+            ],
         );
         $cob->amount = new Amount([
             'original' => 15.63,
@@ -110,7 +110,6 @@ class COBCreateTest extends TestCase
             'expiration' => 84000,
         ]);
         return $cob;
-
     }
 
     /**
@@ -122,7 +121,7 @@ class COBCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOB::CREATE_COB_PIX_URL => self::stubCOBError(),
-            ]
+            ],
         );
         $this->expectException(RequestException::class);
 
@@ -132,7 +131,10 @@ class COBCreateTest extends TestCase
         } catch (RequestException $exception) {
             $result = $exception->response->json();
             $this->assertEquals('PBE410', $result['errorCode']);
-            $this->assertEquals('Can\'t create a new PixImmediateCollection when the location type is COB', $result['message']);
+            $this->assertEquals(
+                'Can\'t create a new PixImmediateCollection when the location type is COB',
+                $result['message'],
+            );
             throw $exception;
         }
     }
@@ -141,9 +143,9 @@ class COBCreateTest extends TestCase
     {
         return Http::response([
             'message' => 'Can\'t create a new PixImmediateCollection when the location type is COB',
-            'errorCode' => 'PBE410'
+            'errorCode' => 'PBE410',
         ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -157,7 +159,7 @@ class COBCreateTest extends TestCase
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOB::CREATE_COB_PIX_URL => self::stubSuccess(),
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXCOB();
 
@@ -173,7 +175,6 @@ class COBCreateTest extends TestCase
             $this->assertArrayHasKey($unsetValue, $exception->errors());
             throw $exception;
         }
-
     }
 
     /**
@@ -182,15 +183,14 @@ class COBCreateTest extends TestCase
      */
     final public function testCreateErrors(
         Closure $response,
-        string  $errorCode,
-        string  $errorCodeKey = 'errorCode'
-    ): void
-    {
+        string $errorCode,
+        string $errorCodeKey = 'errorCode',
+    ): void {
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
                 CelcoinPIXCOB::CREATE_COB_PIX_URL => $response,
-            ]
+            ],
         );
         $pixCOB = new CelcoinPIXCOB();
 
@@ -204,7 +204,6 @@ class COBCreateTest extends TestCase
             $this->assertEquals($errorCode, $response[$errorCodeKey]);
             throw $exception;
         }
-
     }
 
     /**
@@ -250,9 +249,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
-                'errorCode' => 'PBE318'
+                'errorCode' => 'PBE318',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -261,9 +260,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'Não foi retornado BRCode Location.',
-                'errorCode' => 'CI002'
+                'errorCode' => 'CI002',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -272,9 +271,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'Chave informada não cadastrada',
-                'errorCode' => 'CI003'
+                'errorCode' => 'CI003',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -283,9 +282,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'O valor original é obrigatório neste tipo de transação',
-                'errorCode' => 'VLI001'
+                'errorCode' => 'VLI001',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -294,9 +293,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'Não é permitido preencher os objetos \'change\' e \'withdrawal\' simultaneamente',
-                'errorCode' => 'VLI002'
+                'errorCode' => 'VLI002',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -306,9 +305,9 @@ class COBCreateTest extends TestCase
             [
                 // TODO(aronpc): verificar se existe um espaço na frente do valor " Valor..."
                 'message' => 'Valor em dinheiro disponibilizado é obrigatório neste tipo de transação',
-                'errorCode' => 'VLI010'
+                'errorCode' => 'VLI010',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -317,9 +316,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'O valor \'Amount.Original\' não pode ser maior que 0 quando o tipo de transação é WITHDRAWAL.',
-                'errorCode' => 'VLI004'
+                'errorCode' => 'VLI004',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -328,9 +327,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'O valor \'Amount.Original\' não pode ser maior que 0 quando o tipo de transação é WITHDRAWAL.',
-                'errorCode' => 'VLI005'
+                'errorCode' => 'VLI005',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -340,9 +339,9 @@ class COBCreateTest extends TestCase
             [
                 // TODO(aronpc): verificar se existe um espaço na frente do valor " O código..."
                 'message' => 'O código de ISPB em operações de saque está fora do padrão \'[0-9]{8}\'.',
-                'errorCode' => 'VLI006'
+                'errorCode' => 'VLI006',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -351,9 +350,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'O modo de agente de saque é obrigatório neste tipo de transação',
-                'errorCode' => 'VLI007'
+                'errorCode' => 'VLI007',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -362,9 +361,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'O modo de agente de saque deve ser um dos seguinte: AGTEC, AGTOT ou AGPSS',
-                'errorCode' => 'VLI008'
+                'errorCode' => 'VLI008',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
@@ -373,9 +372,9 @@ class COBCreateTest extends TestCase
         return Http::response(
             [
                 'message' => 'Valor em dinheiro disponibilizado é obrigatório neste tipo de transação',
-                'errorCode' => 'VLI009'
+                'errorCode' => 'VLI009',
             ],
-            Response::HTTP_BAD_REQUEST
+            Response::HTTP_BAD_REQUEST,
         );
     }
 
