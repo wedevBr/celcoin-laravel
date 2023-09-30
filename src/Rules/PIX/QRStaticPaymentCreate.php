@@ -10,7 +10,7 @@ class QRStaticPaymentCreate
     public static function rules(): array
     {
         return [
-            'amount' => ['required', 'regex:/\d{1,10}\.\d{2}/'],
+            'amount' => ['required', 'decimal:0,2'],
             'key' => ['required', 'string'],
             'transactionIdentification' => ['required', 'string'],
             'additionalInformation' => ['sometimes', 'string'],
