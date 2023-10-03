@@ -12,7 +12,7 @@ class RegisterPixKey extends Data
     {
         return [
             "account" => ['required', 'string'],
-            "keyType" => ['required', Rule::in([PixKeyTypeEnum::EVP->value])],
+            "keyType" => ['required', Rule::enum(PixKeyTypeEnum::class)],
             "key" => ['required_unless:keyType,EVP', 'string'],
         ];
     }
