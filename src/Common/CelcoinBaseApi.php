@@ -7,6 +7,7 @@ use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use WeDevBr\Celcoin\Auth\Auth;
+use WeDevBr\Celcoin\Types\KYC\KycDocument;
 
 class CelcoinBaseApi
 {
@@ -85,17 +86,23 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    protected function post(string $endpoint, array $body = null)
+    protected function post(string $endpoint, array $body = [])
     {
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
                 'accept' => 'application/json',
-                'content-type' => 'application/json',
+                'content-type' => 'application/json'
             ]);
 
         if ($this->mtlsCert && $this->mtlsKey && $this->mtlsPassphrase) {
             $request = $this->setRequestMtls($request);
+        }
+
+        foreach ($body as $field => $document) {
+            if ($document instanceof KycDocument) {
+                $request->attach($field, $document->getContents(), $document->getFileName());
+            }
         }
 
         return $request->post($this->getFinalUrl($endpoint), $body)
@@ -109,7 +116,8 @@ class CelcoinBaseApi
     protected function put(
         string $endpoint,
         ?array $body = null,
-    ): mixed {
+    ): mixed
+    {
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
@@ -133,7 +141,8 @@ class CelcoinBaseApi
         string $endpoint,
         ?array $body = null,
         bool $asJson = false
-    ): mixed {
+    ): mixed
+    {
         $body_format = $asJson ? 'json' : 'form_params';
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
