@@ -4,10 +4,10 @@ namespace WeDevBr\Celcoin\Common;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use WeDevBr\Celcoin\Auth\Auth;
-use WeDevBr\Celcoin\Types\KYC\KycDocument;
 
 class CelcoinBaseApi
 {
@@ -100,8 +100,8 @@ class CelcoinBaseApi
         }
 
         foreach ($body as $field => $document) {
-            if ($document instanceof KycDocument) {
-                $request->attach($field, $document->getContents(), $document->getFileName());
+            if ($document instanceof File) {
+                $request->attach($field, $document->getContent(), $document->getFileName());
             }
         }
 
