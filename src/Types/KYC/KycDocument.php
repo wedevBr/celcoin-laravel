@@ -2,26 +2,25 @@
 
 namespace WeDevBr\Celcoin\Types\KYC;
 
-use Storage;
+use Illuminate\Http\File;
 use WeDevBr\Celcoin\Types\Data;
 
 class KycDocument extends Data
 {
-    public string $path;
     public string $fileName;
-    public ?string $contents;
-    public ?string $disk;
+    public string $contents;
+    public File $file;
 
-    public function __construct(array $data = [])
+    public function __construct(File $file)
     {
+        $data['contents'] = $file->getContent();
+        $data['fileName'] = $file->getFilename();
+        $data['file'] = $file;
         parent::__construct($data);
     }
 
     public function getContents(): string
     {
-        if (empty($this->contents)) {
-            return Storage::when($this->disk, fn($storage) => $storage->disk($this->disk))->get($this->path);
-        }
         return $this->contents;
     }
 

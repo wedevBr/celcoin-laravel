@@ -14,13 +14,28 @@ class CreateKyc extends Data
 
     public KycDocument $front;
 
-    public ?KycDocument $verse;
+    public ?KycDocument $verse = null;
 
     public function __construct(array $data = [])
     {
-        if (empty($data['cnpj']) && count($data['documentnumber']) === 14) {
+        if (empty($data['cnpj']) && strlen($data['documentnumber']) === 14) {
             $data['cnpj'] = $data['documentnumber'];
         }
         parent::__construct($data);
+    }
+
+    public function toArray(): array
+    {
+        $array = parent::toArray();
+
+        if (!empty($array['front'])) {
+            $array['front'] = $this->front->file;
+        }
+
+        if ($array['verse']) {
+            $array['verse'] = $this->verse->file;
+        }
+
+        return $array;
     }
 }
