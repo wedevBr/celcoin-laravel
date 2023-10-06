@@ -10,6 +10,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use WeDevBr\Celcoin\Clients\CelcoinKyc;
+use WeDevBr\Celcoin\Enums\KycDocumentEnum;
 use WeDevBr\Celcoin\Tests\GlobalStubs;
 use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\KYC\CreateKyc;
@@ -79,7 +80,7 @@ class CelcoinSendKycTest extends TestCase
 
     public function getKycBody(
         string $nifNumber = null,
-        string $fileType = null,
+        KycDocumentEnum $fileType = null,
         string $fileFront = null,
         string $cnpj = null,
         bool $addVerse = true
@@ -89,7 +90,7 @@ class CelcoinSendKycTest extends TestCase
 
         $body = [
             'documentnumber' => $nifNumber ?? "11122233344",
-            'filetype' => $fileType ?? 'CONTRATO_SOCIAL',
+            'filetype' => $fileType ?? KycDocumentEnum::CONTRATO_SOCIAL,
             'front' => $fileFront ?? $this->getFile($file->path()),
         ];
 
