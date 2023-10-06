@@ -4,6 +4,7 @@ namespace WeDevBr\Celcoin\Tests\Integration\BAAS;
 
 use Exception;
 use GuzzleHttp\Promise\PromiseInterface;
+use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use WeDevBr\Celcoin\Clients\CelcoinBAASBillet;
@@ -15,7 +16,7 @@ use WeDevBr\Celcoin\Types\BAAS\BilletReceiver;
 
 class CelcoinBASSBilletTest extends TestCase
 {
-
+    use WithFaker;
     /**
      * @throws RequestException
      */
@@ -50,8 +51,8 @@ class CelcoinBASSBilletTest extends TestCase
             "amount" => 12.5,
             "key" => "testepix@celcoin.com.br",
             "debtor" => new BilletDebtor([
-                "name" => "Marcos Samuel Duarte",
-                "document" => "49188474801",
+                "name" => "João teste de teste",
+                "document" => "12345678910",
                 "postalCode" => "06463035",
                 "publicArea" => "Rua Mãe D'Água",
                 "complement" => null,
@@ -61,7 +62,7 @@ class CelcoinBASSBilletTest extends TestCase
                 "state" => "SP"
             ]),
             "receiver" => new BilletReceiver([
-                "document" => "40655847871",
+                "document" => "12345678910",
                 "account" => "30023646056263"
             ]),
         ]);
@@ -113,8 +114,8 @@ class CelcoinBASSBilletTest extends TestCase
                 "duedate" => "2023-12-30",
                 "status" => "CONFIRMED",
                 "debtor" => [
-                    "name" => "Marcos Samuel Duarte",
-                    "document" => "49188474801",
+                    "name" => $this->faker->name,
+                    "document" => $this->faker->numerify('###########'),
                     "postalCode" => "06463035",
                     "publicArea" => "Rua Mãe D'Água",
                     "number" => "1004",
@@ -125,7 +126,7 @@ class CelcoinBASSBilletTest extends TestCase
                 ],
                 "receiver" => [
                     "name" => "Emilly Malu Tereza Sales",
-                    "document" => "23234457824",
+                    "document" => $this->faker->numerify('###########'),
                     "postalCode" => "06474070",
                     "publicArea" => "Alameda França",
                     "city" => "Barueri",
