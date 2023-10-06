@@ -4,6 +4,7 @@ namespace WeDevBr\Celcoin\Common;
 
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\Client\RequestException;
+use Illuminate\Http\File;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use WeDevBr\Celcoin\Auth\Auth;
@@ -85,17 +86,23 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    protected function post(string $endpoint, array $body = null)
+    protected function post(string $endpoint, array $body = [])
     {
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
                 'accept' => 'application/json',
-                'content-type' => 'application/json',
+                'content-type' => 'application/json'
             ]);
 
         if ($this->mtlsCert && $this->mtlsKey && $this->mtlsPassphrase) {
             $request = $this->setRequestMtls($request);
+        }
+
+        foreach ($body as $field => $document) {
+            if ($document instanceof File) {
+                $request->attach($field, $document->getContent(), $document->getFileName());
+            }
         }
 
         return $request->post($this->getFinalUrl($endpoint), $body)
@@ -109,7 +116,8 @@ class CelcoinBaseApi
     protected function put(
         string $endpoint,
         ?array $body = null,
-    ): mixed {
+    ): mixed
+    {
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
@@ -133,7 +141,8 @@ class CelcoinBaseApi
         string $endpoint,
         ?array $body = null,
         bool $asJson = false
-    ): mixed {
+    ): mixed
+    {
         $body_format = $asJson ? 'json' : 'form_params';
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
