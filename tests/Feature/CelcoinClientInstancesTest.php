@@ -14,6 +14,7 @@ use WeDevBr\Celcoin\Clients\CelcoinDDAInvoice;
 use WeDevBr\Celcoin\Clients\CelcoinDDAUser;
 use WeDevBr\Celcoin\Clients\CelcoinDDAWebhooks;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
+use WeDevBr\Celcoin\Clients\CelcoinKyc;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
 use WeDevBr\Celcoin\Clients\CelcoinPIXDICT;
@@ -146,5 +147,11 @@ class CelcoinClientInstancesTest extends TestCase
     {
         $instance = Celcoin::clientPIXDynamic();
         $this->assertInstanceOf(CelcoinPIXDynamic::class, $instance);
+    }
+
+    public function testSuccessCreateInstanceKyc()
+    {
+        $instance = Celcoin::clientKyc();
+        $this->assertInstanceOf(CelcoinKyc::class, $instance);
     }
 }
