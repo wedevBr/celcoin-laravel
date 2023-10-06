@@ -2,6 +2,7 @@
 
 namespace WeDevBr\Celcoin\Types\KYC;
 
+use WeDevBr\Celcoin\Enums\KycDocumentEnum;
 use WeDevBr\Celcoin\Types\Data;
 
 class CreateKyc extends Data
@@ -10,7 +11,7 @@ class CreateKyc extends Data
 
     public ?string $cnpj;
 
-    public string $filetype;
+    public KycDocumentEnum $filetype;
 
     public KycDocument $front;
 

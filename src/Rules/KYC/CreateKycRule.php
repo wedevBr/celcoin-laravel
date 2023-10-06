@@ -2,13 +2,16 @@
 
 namespace WeDevBr\Celcoin\Rules\KYC;
 
+use Illuminate\Validation\Rule;
+use WeDevBr\Celcoin\Enums\KycDocumentEnum;
+
 class CreateKycRule
 {
-    public static function rules()
+    public static function rules(): array
     {
         return [
             'documentnumber' => ['required', 'digits:11,14'],
-            'filetype' => ['required', 'in:RG,CNH,RNE,CARTAO_CNPJ,CONTRATO_SOCIAL,BALANCO,FATURAMENTO,KYC_EXTERNO'],
+            'filetype' => ['required', Rule::enum(KycDocumentEnum::class)],
             'front' => ['required', 'file'],
             'verse' => ['sometimes', 'file'],
             'cnpj' => ['sometimes', 'same:documentnumber', 'digits:11,14'],

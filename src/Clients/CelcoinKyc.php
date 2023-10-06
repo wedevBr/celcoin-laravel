@@ -2,6 +2,7 @@
 
 namespace WeDevBr\Celcoin\Clients;
 
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Validator;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\KYC\CreateKycRule;
@@ -11,6 +12,9 @@ class CelcoinKyc extends CelcoinBaseApi
 {
     public const CREATE_KYC_ENDPOINT = '/v1/fileupload';
 
+    /**
+     * @throws RequestException
+     */
     public function createKyc(CreateKyc $data): array
     {
         $body = Validator::validate($data->toArray(), CreateKycRule::rules());
