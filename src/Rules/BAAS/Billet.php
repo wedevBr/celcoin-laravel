@@ -14,7 +14,7 @@ class Billet
             'expirationAfterPayment' => ['boolean'],
             'duedate' => ['required', 'date'],
             'amount' => ['required', 'decimal:0,2'],
-            'key' => ['sometimes', 'nullable'],
+            'key' => ['required'],
             'debtor' => ['required', 'array'],
             'debtor.name' => ['required'],
             'debtor.document' => ['required', 'numeric'],
