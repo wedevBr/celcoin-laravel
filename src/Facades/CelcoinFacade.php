@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\Facade;
  * @uses Celcoin::clientPIXReceivement
  * @uses Celcoin::clientPIXReverse
  * @uses Celcoin::clientPixWebhooks
+ * @uses Celcoin::clientKyc
  *
  */
 class CelcoinFacade extends Facade
