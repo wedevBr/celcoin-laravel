@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Facade;
  * @uses Celcoin::clientElectronicTransactions
  * @uses Celcoin::clientTopups
  * @uses Celcoin::clientBAAS
+ * @uses Celcoin::clientBAASBillet
  * @uses Celcoin::clientBAASTED
  * @uses Celcoin::clientBAASWebhooks
  * @uses Celcoin::clientBAASPIX
