@@ -14,12 +14,13 @@ class PixCashOut
     /**
      * @see https://developers.celcoin.com.br/docs/realizar-um-pix-cash-out-por-chaves-pix
      * @see https://developers.celcoin.com.br/docs/realizar-um-pix-cash-out
+     * @param string $initiationTypeEnum
      * @return array
      */
-    public static function rules(): array
+    public static function rules(string $initiationTypeEnum): array
     {
 
-        return match (request()->initiationType) {
+        return match ($initiationTypeEnum) {
             InitiationTypeEnum::PAYMENT_MANUAL->value => self::manual(),
             InitiationTypeEnum::PAYMENT_DICT->value => self::dict(),
             InitiationTypeEnum::PAYMENT_STATIC_BRCODE->value => self::static(),
@@ -76,7 +77,7 @@ class PixCashOut
             [
                 'transactionIdentification' => ['prohibited'],
                 'endToEndId' => ['required'],
-                'creditParty.*' => ['required', 'array'],
+                'creditParty' => ['required', 'array'],
                 'creditParty.key' => ['required'],
             ]
         );
