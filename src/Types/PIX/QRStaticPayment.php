@@ -10,7 +10,7 @@ class QRStaticPayment extends Data
     public string $transactionIdentification;
     public string $additionalInformation;
 
-    public float $amount;
+    public ?string $amount;
     /**
      * @var array<string>
      */
@@ -22,6 +22,9 @@ class QRStaticPayment extends Data
      */
     public function __construct(array $data = [])
     {
+        if (!empty($data['amount'])) {
+            $data['amount'] = number_format($data['amount'], 2, '.', '');
+        }
         parent::__construct($data);
     }
 }
