@@ -10,8 +10,8 @@ use WeDevBr\Celcoin\Types\BAAS\Billet;
 
 class CelcoinBAASBillet extends CelcoinBaseApi
 {
-    const CREATE_BILLET_URL = '/api-integration-baas-webservice/v1/charge';
-    const GET_BILLET_URL = '/api-integration-baas-webservice/v1/charge';
+    const BILLET_URL = '/api-integration-baas-webservice/v1/charge';
+
 
     /**
      * @throws RequestException
@@ -19,7 +19,7 @@ class CelcoinBAASBillet extends CelcoinBaseApi
     public function createBillet(Billet $billet)
     {
         $data = Validator::validate($billet->toArray(), BilletRules::rules());
-        return $this->post(self::CREATE_BILLET_URL, $data);
+        return $this->post(self::BILLET_URL, $data);
     }
 
     /**
@@ -31,6 +31,14 @@ class CelcoinBAASBillet extends CelcoinBaseApi
             'transactionId' => $transaction_id,
             'externalId' => $external_id,
         ])->filter()->toArray();
-        return $this->get(self::GET_BILLET_URL, $body);
+        return $this->get(self::BILLET_URL, $body);
+    }
+
+    /**
+     * @throws RequestException
+     */
+    public function cancelBillet($transactionId)
+    {
+        return $this->delete(sprintf('%s/%s', self::BILLET_URL, $transactionId));
     }
 }

@@ -29,7 +29,7 @@ class CelcoinBASSBilletTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAASBillet::CREATE_BILLET_URL,
+                    CelcoinBAASBillet::BILLET_URL,
                 ) => self::successCreateBilletStub(),
             ],
         );
@@ -88,7 +88,7 @@ class CelcoinBASSBilletTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAASBillet::CREATE_BILLET_URL . '*',
+                    CelcoinBAASBillet::BILLET_URL . '*',
                 ) => self::successGetBilletStub(),
             ],
         );
@@ -181,7 +181,7 @@ class CelcoinBASSBilletTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAASBillet::CREATE_BILLET_URL . '*',
+                    CelcoinBAASBillet::BILLET_URL . '*',
                 ) => self::failedBilletStub(),
             ],
         );
@@ -189,7 +189,6 @@ class CelcoinBASSBilletTest extends TestCase
         $this->expectException(Exception::class);
         $billet = new CelcoinBAASBillet();
         $billet->createBillet(self::billetBodyRequest());
-
     }
 
     public static function failedBilletStub(): PromiseInterface
@@ -202,5 +201,24 @@ class CelcoinBASSBilletTest extends TestCase
                 "message" => "Ocorreu um erro interno durante a chamada da api."
             ]
         ], 401);
+    }
+
+    public function testSuccessDeleteBillet()
+    {
+        Http::fake(
+            [
+                config('celcoin.login_url') => GlobalStubs::loginResponse(),
+                sprintf(
+                    '%s%s',
+                    config('api_url'),
+                    CelcoinBAASBillet::BILLET_URL . '*',
+                ) => self::successCreateBilletStub(),
+            ],
+        );
+
+        $billet = new CelcoinBAASBillet();
+        $result = $billet->cancelBillet('ce9b8d9b-0617-42e1-b500-80bf9d8154cf');
+        $this->assertEquals('SUCCESS', $result['status']);
+        $this->assertEquals('ce9b8d9b-0617-42e1-b500-80bf9d8154cf', $result['body']['transactionId']);
     }
 }
