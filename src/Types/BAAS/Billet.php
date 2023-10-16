@@ -21,9 +21,9 @@ class Billet extends Data
      */
     public BilletReceiver $receiver;
     /**
-     * @var array<BilletInstruction | null>
+     * @var BilletInstruction | null
      */
-    public ?array $instructions;
+    public ?BilletInstruction $instructions;
     /**
      * @var array<BilletSplit | null>
      */

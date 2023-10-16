@@ -13,7 +13,6 @@ class BilletInstruction extends Data
 
     public function __construct(array $data = [])
     {
-        $data['discount'] = new BilletDiscount($data['discount']);
         parent::__construct($data);
     }
 }
