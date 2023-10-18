@@ -23,9 +23,9 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     const GET_PARTICIPANT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/participant';
     const GET_EXTERNAL_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/external/%s';
     const STATUS_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment/status';
-    const REGISTER_PIX_KEY_ENDPOINT = '/baas-pix-dict-webservice/v1/pix/dict/entry';
-    const SEARCH_PIX_KEY_ENDPOINT = '/baas-pix-dict-webservice/v1/pix/dict/entry/%s';
-    const DELETE_PIX_KEY_ENDPOINT = '/baas-pix-dict-webservice/v1/pix/dict/entry/%s';
+    const REGISTER_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry';
+    const SEARCH_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
+    const DELETE_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
     const REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse';
     const STATUS_REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse/status';
 
