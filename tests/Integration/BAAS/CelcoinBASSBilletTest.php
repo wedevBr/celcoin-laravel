@@ -203,6 +203,9 @@ class CelcoinBASSBilletTest extends TestCase
         ], 401);
     }
 
+    /**
+     * @throws RequestException
+     */
     public function testSuccessDeleteBillet()
     {
         Http::fake(
