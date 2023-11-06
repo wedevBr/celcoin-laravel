@@ -5,6 +5,7 @@ namespace WeDevBr\Celcoin\Tests\Feature;
 use WeDevBr\Celcoin\Celcoin;
 use WeDevBr\Celcoin\Clients\CelcoinAssistant;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Clients\CelcoinBAASBillPayment;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Clients\CelcoinBAASTED;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
@@ -153,5 +154,11 @@ class CelcoinClientInstancesTest extends TestCase
     {
         $instance = Celcoin::clientKyc();
         $this->assertInstanceOf(CelcoinKyc::class, $instance);
+    }
+
+    public function testSuccessCreateBaasBillPayment()
+    {
+        $instance = Celcoin::clientBAASBillPayment();
+        $this->assertInstanceOf(CelcoinBAASBillPayment::class, $instance);
     }
 }

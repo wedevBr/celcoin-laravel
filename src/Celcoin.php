@@ -4,6 +4,7 @@ namespace WeDevBr\Celcoin;
 
 use WeDevBr\Celcoin\Clients\CelcoinAssistant;
 use WeDevBr\Celcoin\Clients\CelcoinBAAS;
+use WeDevBr\Celcoin\Clients\CelcoinBAASBillPayment;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Clients\CelcoinBAASTED;
 use WeDevBr\Celcoin\Clients\CelcoinBAASWebhooks;
@@ -259,5 +260,14 @@ class Celcoin
     public static function clientKyc(?string $mtlsPassphrase = null): CelcoinKyc
     {
         return new CelcoinKyc($mtlsPassphrase);
+    }
+
+    /**
+     * @param string|null $mtlsPassphrase
+     * @return CelcoinBAASBillPayment
+     */
+    public static function clientBAASBillPayment(?string $mtlsPassphrase = null): CelcoinBAASBillPayment
+    {
+        return new CelcoinBAASBillPayment($mtlsPassphrase);
     }
 }
