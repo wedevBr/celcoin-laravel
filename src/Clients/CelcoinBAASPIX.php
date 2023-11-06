@@ -2,6 +2,7 @@
 
 namespace WeDevBr\Celcoin\Clients;
 
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Validator;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\BAAS\PixCashOut as BAASPixCashOut;
@@ -29,9 +30,12 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     const REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse';
     const STATUS_REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse/status';
 
+    /**
+     * @throws RequestException
+     */
     public function cashOut(PixCashOut $data)
     {
-        $body = Validator::validate($data->toArray(), BAASPixCashOut::rules());
+        $body = Validator::validate($data->toArray(), BAASPixCashOut::rules($data->initiationType->value));
         return $this->post(
             self::CASH_OUT_ENDPOINT,
             $body

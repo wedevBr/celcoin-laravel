@@ -31,7 +31,6 @@ class BAASPIXCashOutTest extends TestCase
             new PixCashOut([
                 "amount" => 5.55,
                 "clientCode" => "1234ab",
-                "transactionIdentification" => fake()->uuid(),
                 "endToEndId" => "E1393589320230724213001637810511",
                 "initiationType" => "DICT",
                 "paymentType" => "IMMEDIATE",
