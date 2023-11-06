@@ -21,7 +21,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
 {
 
     const CASH_OUT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment';
-    const GET_PARTICIPANT_ENDPOINT = '/celcoin-baas-wallet-transactions-webservice/v1/pix/participant';
+    const GET_PARTICIPANT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/participant';
     const GET_EXTERNAL_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/external/%s';
     const STATUS_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment/status';
     const REGISTER_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry';
@@ -42,7 +42,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
         );
     }
 
-    public function getParticipant(?string $ISPB, ?string $name)
+    public function getParticipant(?string $ISPB = null, ?string $name = null)
     {
         return $this->get(
             self::GET_PARTICIPANT_ENDPOINT,
