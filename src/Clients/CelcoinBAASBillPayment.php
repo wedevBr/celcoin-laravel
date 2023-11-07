@@ -19,7 +19,7 @@ use WeDevBr\Celcoin\Types\BAAS\GetPaymentStatusRequest;
 class CelcoinBAASBillPayment extends CelcoinBaseApi
 {
 
-    const MAKE_PAYMENT_ENDPOINT = '/api-integration-billpayment-webservice/v1/billpayment';
+    const MAKE_PAYMENT_ENDPOINT = '/baas/v2/billpayment';
     const GET_PAYMENT_STATUS = self::MAKE_PAYMENT_ENDPOINT . '/status';
 
     /**
