@@ -16,19 +16,19 @@ class CelcoinBaseApi
     /** @var Cache */
     public Cache $cache;
 
-    /** @var string */
+    /** @var ?string */
     public ?string $api_url;
 
-    /** @var string */
+    /** @var ?string */
     private ?string $token = null;
 
-    /** @var string */
+    /** @var ?string */
     private ?string $mtlsCert;
 
     /** @var string */
     private ?string $mtlsKey;
 
-    /** @var string */
+    /** @var ?string */
     private ?string $mtlsPassphrase;
 
     public function __construct(?string $mtlsPassphrase = null)
@@ -64,7 +64,7 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    protected function get(string $endpoint, array|string|null $query = null, $responseJson = true)
+    public function get(string $endpoint, array|string|null $query = null, $responseJson = true)
     {
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
@@ -86,7 +86,7 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    protected function post(string $endpoint, array $body = [])
+    public function post(string $endpoint, array $body = [])
     {
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token)
@@ -113,7 +113,7 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    protected function put(
+    public function put(
         string $endpoint,
         ?array $body = null,
     ): mixed
@@ -137,7 +137,7 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    protected function patch(
+    public function patch(
         string $endpoint,
         ?array $body = null,
         bool $asJson = false
@@ -164,7 +164,7 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    protected function delete(string $endpoint, ?array $body = null): mixed
+    public function delete(string $endpoint, ?array $body = null): mixed
     {
         $token = $this->getToken() ?? Auth::login()->getToken();
         $request = Http::withToken($token);
@@ -181,7 +181,7 @@ class CelcoinBaseApi
     /**
      * @return PendingRequest
      */
-    protected function setRequestMtls(PendingRequest $request): PendingRequest
+    public function setRequestMtls(PendingRequest $request): PendingRequest
     {
         return $request->withOptions([
             'cert' => $this->mtlsCert,
@@ -189,7 +189,7 @@ class CelcoinBaseApi
         ]);
     }
 
-    protected function getFinalUrl(string $endpoint): string
+    public function getFinalUrl(string $endpoint): string
     {
         $characters = " \t\n\r\0\x0B/";
         return rtrim($this->api_url, $characters) . "/" . ltrim($endpoint, $characters);
