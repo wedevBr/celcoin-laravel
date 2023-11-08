@@ -183,10 +183,26 @@ class CelcoinBaseApi
      */
     public function setRequestMtls(PendingRequest $request): PendingRequest
     {
-        return $request->withOptions([
-            'cert' => $this->mtlsCert,
-            'ssl_key' => [$this->mtlsKey, $this->mtlsPassphrase]
-        ]);
+        $options = [];
+
+        if ($this->mtlsCert) {
+            $options['cert'] = $this->mtlsCert;
+        }
+
+        if ($this->mtlsKey || $this->mtlsPassphrase) {
+            $options['ssl_key'] = [];
+            if ($this->mtlsKey) {
+                $options['ssl_key'][] = $this->mtlsKey;
+            }
+            if ($this->mtlsPassphrase) {
+                $options['ssl_key'][] = $this->mtlsPassphrase;
+            }
+        }
+
+        if ($options) {
+            $request = $request->withOptions($options);
+        }
+        return $request;
     }
 
     public function getFinalUrl(string $endpoint): string
