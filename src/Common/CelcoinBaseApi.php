@@ -25,18 +25,23 @@ class CelcoinBaseApi
     /** @var ?string */
     private ?string $mtlsCert;
 
-    /** @var string */
+    /** @var ?string */
     private ?string $mtlsKey;
 
     /** @var ?string */
     private ?string $mtlsPassphrase;
 
+    private readonly Auth $auth;
+
     public function __construct(?string $mtlsPassphrase = null)
     {
+        $this->auth = resolve(Auth::class)->login();
         $this->api_url = config('celcoin')['api_url'];
-        $this->mtlsCert = config('celcoin')['mtls_cert_path'] ?? null;
-        $this->mtlsKey = config('celcoin')['mtls_key_path'] ?? null;
-        $this->mtlsPassphrase = $mtlsPassphrase ?? config('celcoin')['mtls_passphrase'] ?? null;
+        $this->mtlsCert = $this->auth->getMtlsCertPath() ?? config('celcoin')['mtls_cert_path'] ?? null;
+        $this->mtlsKey = $this->auth->getMtlsKeyPath() ?? config('celcoin')['mtls_key_path'] ?? null;
+        $this->mtlsPassphrase = $this->auth->getMtlsPassphrase() ??
+            config('celcoin')['mtls_passphrase'] ??
+            null;
     }
 
     public function setToken(string $token): void
@@ -44,12 +49,15 @@ class CelcoinBaseApi
         $this->token = $token;
     }
 
-    public function getToken(): string|null
+    /**
+     * @throws RequestException
+     */
+    public function getToken(): ?string
     {
         if (Cache::has($this::CACHE_NAME)) {
             $this->token = Cache::get($this::CACHE_NAME);
         } else {
-            $this->token = Auth::login()->getToken();
+            $this->token = $this->auth->getToken();
             Cache::put($this::CACHE_NAME, $this->token, 2400);
         }
         return $this->token;
@@ -66,7 +74,7 @@ class CelcoinBaseApi
      */
     public function get(string $endpoint, array|string|null $query = null, $responseJson = true)
     {
-        $token = $this->getToken() ?? Auth::login()->getToken();
+        $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
                 'accept' => 'application/json',
@@ -88,7 +96,7 @@ class CelcoinBaseApi
      */
     public function post(string $endpoint, array $body = [])
     {
-        $token = $this->getToken() ?? Auth::login()->getToken();
+        $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
                 'accept' => 'application/json',
@@ -118,7 +126,7 @@ class CelcoinBaseApi
         ?array $body = null,
     ): mixed
     {
-        $token = $this->getToken() ?? Auth::login()->getToken();
+        $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
                 'accept' => 'application/json',
@@ -144,7 +152,7 @@ class CelcoinBaseApi
     ): mixed
     {
         $body_format = $asJson ? 'json' : 'form_params';
-        $token = $this->getToken() ?? Auth::login()->getToken();
+        $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
             ->bodyFormat($body_format)
             ->withHeaders([
@@ -166,7 +174,7 @@ class CelcoinBaseApi
      */
     public function delete(string $endpoint, ?array $body = null): mixed
     {
-        $token = $this->getToken() ?? Auth::login()->getToken();
+        $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token);
 
         if ($this->mtlsCert && $this->mtlsKey && $this->mtlsPassphrase) {

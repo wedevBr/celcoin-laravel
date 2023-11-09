@@ -14,36 +14,31 @@ use WeDevBr\Celcoin\Events\CelcoinAuthenticatedEvent;
 class Auth
 {
     /** @var self */
-    private static $login;
+    protected static $login;
 
     /** @var ?string */
     protected ?string $loginUrl = null;
 
     /** @var ?string */
-    private ?string $clientId = null;
+    protected ?string $clientId = null;
 
     /** @var ?string */
-    private ?string $clientSecret = null;
+    protected ?string $clientSecret = null;
 
     /** @var ?string */
     protected ?string $grantType = 'client_credentials';
 
     /** @var ?string */
-    private ?string $token = null;
+    protected ?string $token = null;
 
     /** @var ?string */
-    private ?string $tokenExpiry = null;
+    protected ?string $tokenExpiry = null;
     /**
      * @var ?string
      */
-    private ?string $mtlsPassphrase = null;
-    private ?string $mtlsCert = null;
-    private ?string $mtlsKey = null;
-
-    private function __construct()
-    {
-        //
-    }
+    protected ?string $mtlsPassphrase = null;
+    protected ?string $mtlsCert = null;
+    protected ?string $mtlsKey = null;
 
     /**
      * Returns the instance of this class
@@ -179,6 +174,32 @@ class Auth
     {
         $this->mtlsKey = $path;
         return $this;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getMtlsKeyPath(): ?string
+    {
+        return $this->mtlsKey;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getMtlsPassphrase(): ?string
+    {
+        return $this->mtlsPassphrase;
+    }
+
+
+    /**
+     * @return string|null
+     */
+    public function getMtlsCertPath(): ?string
+    {
+        return $this->mtlsCert;
     }
 
     /**
