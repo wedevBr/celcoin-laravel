@@ -39,245 +39,218 @@ class Celcoin
 {
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinAssistant
      */
-    public static function clientAssistant(?string $mtlsPassphrase = null): CelcoinAssistant
+    public static function clientAssistant(): CelcoinAssistant
     {
-        return new CelcoinAssistant($mtlsPassphrase);
+        return new CelcoinAssistant();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinBankTransfer
      */
-    public static function clientBankTransfer(?string $mtlsPassphrase = null): CelcoinBankTransfer
+    public static function clientBankTransfer(): CelcoinBankTransfer
     {
-        return new CelcoinBankTransfer($mtlsPassphrase);
+        return new CelcoinBankTransfer();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinBillPayment
      */
-    public static function clientBillPayment(?string $mtlsPassphrase = null): CelcoinBillPayment
+    public static function clientBillPayment(): CelcoinBillPayment
     {
-        return new CelcoinBillPayment($mtlsPassphrase);
+        return new CelcoinBillPayment();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinDDAInvoice
      */
-    public static function clientDDAInvoice(?string $mtlsPassphrase = null): CelcoinDDAInvoice
+    public static function clientDDAInvoice(): CelcoinDDAInvoice
     {
-        return new CelcoinDDAInvoice($mtlsPassphrase);
+        return new CelcoinDDAInvoice();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinDDAUser
      */
-    public static function clientDDAUser(?string $mtlsPassphrase = null): CelcoinDDAUser
+    public static function clientDDAUser(): CelcoinDDAUser
     {
-        return new CelcoinDDAUser($mtlsPassphrase);
+        return new CelcoinDDAUser();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinDDAWebhooks
      */
-    public static function clientDDAWebhooks(?string $mtlsPassphrase = null): CelcoinDDAWebhooks
+    public static function clientDDAWebhooks(): CelcoinDDAWebhooks
     {
-        return new CelcoinDDAWebhooks($mtlsPassphrase);
+        return new CelcoinDDAWebhooks();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinReport
      */
-    public static function clientCelcoinReport(?string $mtlsPassphrase = null): CelcoinReport
+    public static function clientCelcoinReport(): CelcoinReport
     {
-        return new CelcoinReport($mtlsPassphrase);
+        return new CelcoinReport();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinElectronicTransactions
      */
-    public static function clientElectronicTransactions(?string $mtlsPassphrase = null): CelcoinElectronicTransactions
+    public static function clientElectronicTransactions(): CelcoinElectronicTransactions
     {
-        return new CelcoinElectronicTransactions($mtlsPassphrase);
+        return new CelcoinElectronicTransactions();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinTopups
      */
-    public static function clientTopups(?string $mtlsPassphrase = null): CelcoinTopups
+    public static function clientTopups(): CelcoinTopups
     {
-        return new CelcoinTopups($mtlsPassphrase);
+        return new CelcoinTopups();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXQR
      */
-    public static function clientPIXQR(?string $mtlsPassphrase = null): CelcoinPIXQR
+    public static function clientPIXQR(): CelcoinPIXQR
     {
-        return new CelcoinPIXQR($mtlsPassphrase);
+        return new CelcoinPIXQR();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXParticipants
      */
-    public static function clientPIXParticipants(?string $mtlsPassphrase = null): CelcoinPIXParticipants
+    public static function clientPIXParticipants(): CelcoinPIXParticipants
     {
-        return new CelcoinPIXParticipants($mtlsPassphrase);
+        return new CelcoinPIXParticipants();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXDICT
      */
-    public static function clientPIXDICT(?string $mtlsPassphrase = null): CelcoinPIXDICT
+    public static function clientPIXDICT(): CelcoinPIXDICT
     {
-        return new CelcoinPIXDICT($mtlsPassphrase);
+        return new CelcoinPIXDICT();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPixStaticPayment
      */
-    public static function clientPixStaticPayment(?string $mtlsPassphrase = null): CelcoinPixStaticPayment
+    public static function clientPixStaticPayment(): CelcoinPixStaticPayment
     {
-        return new CelcoinPixStaticPayment($mtlsPassphrase);
+        return new CelcoinPixStaticPayment();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXCOBV
      */
-    public static function clientPixCOBV(?string $mtlsPassphrase = null): CelcoinPIXCOBV
+    public static function clientPixCOBV(): CelcoinPIXCOBV
     {
-        return new CelcoinPIXCOBV($mtlsPassphrase);
+        return new CelcoinPIXCOBV();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXCOB
      */
-    public static function clientPixCOB(?string $mtlsPassphrase = null): CelcoinPIXCOB
+    public static function clientPixCOB(): CelcoinPIXCOB
     {
-        return new CelcoinPIXCOB($mtlsPassphrase);
+        return new CelcoinPIXCOB();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinBAAS
      */
-    public static function clientBAAS(?string $mtlsPassphrase = null): CelcoinBAAS
+    public static function clientBAAS(): CelcoinBAAS
     {
-        return new CelcoinBAAS($mtlsPassphrase);
+        return new CelcoinBAAS();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinBAASPIX
      */
-    public static function clientBAASPIX(?string $mtlsPassphrase = null): CelcoinBAASPIX
+    public static function clientBAASPIX(): CelcoinBAASPIX
     {
-        return new CelcoinBAASPIX($mtlsPassphrase);
+        return new CelcoinBAASPIX();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinBAASTED
      */
-    public static function clientBAASTED(?string $mtlsPassphrase = null): CelcoinBAASTED
+    public static function clientBAASTED(): CelcoinBAASTED
     {
-        return new CelcoinBAASTED($mtlsPassphrase);
+        return new CelcoinBAASTED();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinBAASWebhooks
      */
-    public static function clientBAASWebhooks(?string $mtlsPassphrase = null): CelcoinBAASWebhooks
+    public static function clientBAASWebhooks(): CelcoinBAASWebhooks
     {
-        return new CelcoinBAASWebhooks($mtlsPassphrase);
+        return new CelcoinBAASWebhooks();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXDynamic
      */
-    public static function clientPIXDynamic(?string $mtlsPassphrase = null): CelcoinPIXDynamic
+    public static function clientPIXDynamic(): CelcoinPIXDynamic
     {
-        return new CelcoinPIXDynamic($mtlsPassphrase);
+        return new CelcoinPIXDynamic();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXPayment
      */
-    public static function clientPIXPayment(?string $mtlsPassphrase = null): CelcoinPIXPayment
+    public static function clientPIXPayment(): CelcoinPIXPayment
     {
-        return new CelcoinPIXPayment($mtlsPassphrase);
+        return new CelcoinPIXPayment();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXReceivement
      */
-    public static function clientPIXReceivement(?string $mtlsPassphrase = null): CelcoinPIXReceivement
+    public static function clientPIXReceivement(): CelcoinPIXReceivement
     {
-        return new CelcoinPIXReceivement($mtlsPassphrase);
+        return new CelcoinPIXReceivement();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPIXReverse
      */
-    public static function clientPIXReverse(?string $mtlsPassphrase = null): CelcoinPIXReverse
+    public static function clientPIXReverse(): CelcoinPIXReverse
     {
-        return new CelcoinPIXReverse($mtlsPassphrase);
+        return new CelcoinPIXReverse();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinPixWebhooks
      */
-    public static function clientPixWebhooks(?string $mtlsPassphrase = null): CelcoinPixWebhooks
+    public static function clientPixWebhooks(): CelcoinPixWebhooks
     {
-        return new CelcoinPixWebhooks($mtlsPassphrase);
+        return new CelcoinPixWebhooks();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinKyc
      */
-    public static function clientKyc(?string $mtlsPassphrase = null): CelcoinKyc
+    public static function clientKyc(): CelcoinKyc
     {
-        return new CelcoinKyc($mtlsPassphrase);
+        return new CelcoinKyc();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinBAASBillPayment
      */
-    public static function clientBAASBillPayment(?string $mtlsPassphrase = null): CelcoinBAASBillPayment
+    public static function clientBAASBillPayment(): CelcoinBAASBillPayment
     {
-        return new CelcoinBAASBillPayment($mtlsPassphrase);
+        return new CelcoinBAASBillPayment();
     }
 
     /**
-     * @param string|null $mtlsPassphrase
      * @return CelcoinBAASBillet
      */
-    public static function clientBAASBillet(?string $mtlsPassphrase = null): CelcoinBAASBillet
+    public static function clientBAASBillet(): CelcoinBAASBillet
     {
-        return new CelcoinBAASBillet($mtlsPassphrase);
+        return new CelcoinBAASBillet();
     }
 }
