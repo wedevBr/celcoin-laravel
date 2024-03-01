@@ -41,6 +41,8 @@ class CelcoinBAAS extends CelcoinBaseApi
     const GET_WALLET_MOVEMENT = '/baas-walletreports/v1/wallet/movement';
     const CREATE_RELEASE = '/baas-wallet-transactions-webservice/v1/wallet/entry/%s';
 
+    const INCOME_REPORT = '/baas-accountmanager/v1/account/income-report?Account=%s&CalendarYear=%s';
+
     public function createAccountNaturalPerson(AccountNaturalPerson $data)
     {
         $body = Validator::validate($data->toArray(), BAASAccountNaturalPerson::rules());
@@ -180,5 +182,16 @@ class CelcoinBAAS extends CelcoinBaseApi
             sprintf(self::CREATE_RELEASE, $account),
             $body
         );
+    }
+
+    /**
+     * @throws RequestException
+     */
+    public function getIncomeReport(string $account, Carbon $referenceYear): mixed
+    {
+        return $this
+            ->get(
+                sprintf(self::INCOME_REPORT, $account, $referenceYear->format('Y'))
+            );
     }
 }

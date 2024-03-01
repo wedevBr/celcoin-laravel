@@ -33,10 +33,10 @@ class CreateKyc extends Data
             $array['front'] = $this->front->file;
         }
 
-        if ($array['verse']) {
+        if (!empty($array['verse'])) {
             $array['verse'] = $this->verse->file;
         }
 
-        return $array;
+        return array_filter($array);
     }
 }
