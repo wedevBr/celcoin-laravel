@@ -15,7 +15,7 @@ class COBVGetTest extends TestCase
 {
     /**
      * @throws RequestException
-     * @dataProvider testGetCobvSuccessProvider
+     * @dataProvider getCobvSuccessProvider
      */
     final public function testGetCobvSuccess(array $search): void
     {
@@ -151,9 +151,9 @@ class COBVGetTest extends TestCase
 
     /**
      * @throws RequestException
-     * @dataProvider testGetCobvValidationKeysProvider
+     * @dataProvider getCobvValidationKeysProvider
      */
-    final public function testGetCobvValidationError(string $key): void
+    final public function getCobvValidationError(string $key): void
     {
         $search = [];
         Http::fake(
@@ -178,7 +178,7 @@ class COBVGetTest extends TestCase
         }
     }
 
-    private function testGetCobvValidationKeysProvider(): array
+    public static function getCobvValidationKeysProvider(): array
     {
         return [
             'transactionId' => ['transactionId'],
@@ -188,7 +188,7 @@ class COBVGetTest extends TestCase
     }
 
 
-    private function testGetCobvSuccessProvider(): array
+    public static function getCobvSuccessProvider(): array
     {
         return [
             'transactionId' => [

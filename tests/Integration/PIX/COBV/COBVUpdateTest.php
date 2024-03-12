@@ -133,7 +133,7 @@ class COBVUpdateTest extends TestCase
         }
     }
 
-    private function updateCobvErrorDataProvider(): array
+    public static function updateCobvErrorDataProvider(): array
     {
         return [
             'wrong calendar due date' => [

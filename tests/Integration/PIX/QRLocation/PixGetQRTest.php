@@ -86,7 +86,7 @@ class PixGetQRTest extends TestCase
     /**
      * @return array[]
      */
-    private function errorDataProvider(): array
+    public static function errorDataProvider(): array
     {
         return [
             'status code 400' => [

@@ -48,7 +48,7 @@ class PixPaymentStatusTest extends TestCase
         $this->assertEquals($status, $result['status']);
     }
 
-    private function stubSuccessStatuses(): array
+    public static function stubSuccessStatuses(): array
     {
         return [
             'PROCESSING' => ['PROCESSING', fn() => self::stubSuccess('PROCESSING')],
@@ -57,7 +57,7 @@ class PixPaymentStatusTest extends TestCase
         ];
     }
 
-    private static function stubSuccess(string $status): PromiseInterface
+    public static function stubSuccess(string $status): PromiseInterface
     {
         $body = [
             'transactionId' => 9193070,

@@ -114,7 +114,7 @@ class PixCreateStaticPaymentTest extends TestCase
     /**
      * @return array[]
      */
-    private function errorDataProvider(): array
+    public static function errorDataProvider(): array
     {
         return [
             // Status 500 - Internal server error return empty array

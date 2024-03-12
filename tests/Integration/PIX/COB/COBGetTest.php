@@ -149,7 +149,7 @@ class COBGetTest extends TestCase
         }
     }
 
-    private function paramErrosDataProvider(): array
+    public static function paramErrosDataProvider(): array
     {
         return [
             'transactionId' => ['transactionId'],
@@ -158,7 +158,7 @@ class COBGetTest extends TestCase
         ];
     }
 
-    private function searchDataProvider(): array
+    public static function searchDataProvider(): array
     {
         return [
             'transactionId' => [['transactionId' => 123456]],
