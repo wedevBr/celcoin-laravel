@@ -178,7 +178,7 @@ class PixDynamicUpdateTest extends TestCase
     /**
      * @return array[]
      */
-    final public function updateErrorDataProvider(): array
+    final public static function updateErrorDataProvider(): array
     {
         return [
             'required key' => ['key'],

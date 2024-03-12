@@ -206,7 +206,7 @@ class PixDynamicCreateTest extends TestCase
     /**
      * @return array[]
      */
-    final public function createErrorDataProvider(): array
+    final public static function createErrorDataProvider(): array
     {
         return [
             'required clientRequestId' => ['clientRequestId'],

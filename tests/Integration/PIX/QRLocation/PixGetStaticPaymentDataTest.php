@@ -158,7 +158,7 @@ class PixGetStaticPaymentDataTest extends TestCase
     /**
      * @return array[]
      */
-    final public function createErrorDataProvider(): array
+    final public static function createErrorDataProvider(): array
     {
         return [
             'required transactionIdBrcode' => ['transactionIdBrcode'],
@@ -166,7 +166,7 @@ class PixGetStaticPaymentDataTest extends TestCase
         ];
     }
 
-    private function searchDataProvider(): array
+    public static function searchDataProvider(): array
     {
         return [
             'searching by transactionIdBrcode' => [
@@ -181,7 +181,7 @@ class PixGetStaticPaymentDataTest extends TestCase
     /**
      * @return array[]
      */
-    private function errorDataProvider(): array
+    public static function errorDataProvider(): array
     {
         return [
             'status code 400' => [
