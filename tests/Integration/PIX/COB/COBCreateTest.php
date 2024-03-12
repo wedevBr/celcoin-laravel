@@ -209,7 +209,7 @@ class COBCreateTest extends TestCase
     /**
      * @return array[]
      */
-    final public function createErrorDataProvider(): array
+    final public static function createErrorDataProvider(): array
     {
         return [
             'required amount' => ['amount'],
@@ -226,7 +226,7 @@ class COBCreateTest extends TestCase
         ];
     }
 
-    final public function statusErrorDataProvider(): array
+    final public static function statusErrorDataProvider(): array
     {
         return [
             'PBE318' => [fn() => self::locationInUseStub(), 'PBE318'],
@@ -235,16 +235,16 @@ class COBCreateTest extends TestCase
             'VLI001' => [fn() => self::originalAmountIsRequired(), 'VLI001'],
             'VLI002' => [fn() => self::prohibitSimultaneousSendChangeAndWithdrawal(), 'VLI002'],
             'VLI010' => [fn() => self::cashValueIsMandatory(), 'VLI010'],
-            'VLI004' => [fn() => self::testWithdrawalAmountOriginalGreaterThanZero(), 'VLI004'],
-            'VLI005' => [fn() => self::testWithdrawalAmountOriginalNotGreaterThanZero(), 'VLI005'],
-            'VLI006' => [fn() => self::testWithdrawalIspbCodePattern(), 'VLI006'],
-            'VLI007' => [fn() => self::testWithdrawalAgentModeRequired(), 'VLI007'],
-            'VLI008' => [fn() => self::testWithdrawalAgentModeValidOptions(), 'VLI008'],
-            'VLI009' => [fn() => self::testWithdrawalRequiredCashValue(), 'VLI009'],
+            'VLI004' => [fn() => self::withdrawalAmountOriginalGreaterThanZero(), 'VLI004'],
+            'VLI005' => [fn() => self::withdrawalAmountOriginalNotGreaterThanZero(), 'VLI005'],
+            'VLI006' => [fn() => self::withdrawalIspbCodePattern(), 'VLI006'],
+            'VLI007' => [fn() => self::withdrawalAgentModeRequired(), 'VLI007'],
+            'VLI008' => [fn() => self::withdrawalAgentModeValidOptions(), 'VLI008'],
+            'VLI009' => [fn() => self::withdrawalRequiredCashValue(), 'VLI009'],
         ];
     }
 
-    private function locationInUseStub(): PromiseInterface
+    public static function locationInUseStub(): PromiseInterface
     {
         return Http::response(
             [
@@ -255,7 +255,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function locationNotReturned(): PromiseInterface
+    public static function locationNotReturned(): PromiseInterface
     {
         return Http::response(
             [
@@ -266,7 +266,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function keyNotRegistered(): PromiseInterface
+    public static function keyNotRegistered(): PromiseInterface
     {
         return Http::response(
             [
@@ -277,7 +277,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function originalAmountIsRequired(): PromiseInterface
+    public static function originalAmountIsRequired(): PromiseInterface
     {
         return Http::response(
             [
@@ -288,7 +288,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function prohibitSimultaneousSendChangeAndWithdrawal(): PromiseInterface
+    public static function prohibitSimultaneousSendChangeAndWithdrawal(): PromiseInterface
     {
         return Http::response(
             [
@@ -299,7 +299,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function cashValueIsMandatory(): PromiseInterface
+    public static function cashValueIsMandatory(): PromiseInterface
     {
         return Http::response(
             [
@@ -311,7 +311,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function testWithdrawalAmountOriginalGreaterThanZero(): PromiseInterface
+    public static function withdrawalAmountOriginalGreaterThanZero(): PromiseInterface
     {
         return Http::response(
             [
@@ -322,7 +322,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function testWithdrawalAmountOriginalNotGreaterThanZero(): PromiseInterface
+    public static function withdrawalAmountOriginalNotGreaterThanZero(): PromiseInterface
     {
         return Http::response(
             [
@@ -333,7 +333,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function testWithdrawalIspbCodePattern(): PromiseInterface
+    public static function withdrawalIspbCodePattern(): PromiseInterface
     {
         return Http::response(
             [
@@ -345,7 +345,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function testWithdrawalAgentModeRequired(): PromiseInterface
+    public static function withdrawalAgentModeRequired(): PromiseInterface
     {
         return Http::response(
             [
@@ -356,7 +356,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function testWithdrawalAgentModeValidOptions(): PromiseInterface
+    public static function withdrawalAgentModeValidOptions(): PromiseInterface
     {
         return Http::response(
             [
@@ -367,7 +367,7 @@ class COBCreateTest extends TestCase
         );
     }
 
-    private function testWithdrawalRequiredCashValue(): PromiseInterface
+    public static function withdrawalRequiredCashValue(): PromiseInterface
     {
         return Http::response(
             [

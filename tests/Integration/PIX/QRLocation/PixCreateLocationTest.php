@@ -120,7 +120,7 @@ class PixCreateLocationTest extends TestCase
      * @uses https://developers.celcoin.com.br/reference/criar-um-qrcode-location
      * @return array[]
      */
-    private function errorDataProvider(): array
+    public static function errorDataProvider(): array
     {
         return [
             'status code 400' => [fn() => self::stubConvertingError(), '400'],

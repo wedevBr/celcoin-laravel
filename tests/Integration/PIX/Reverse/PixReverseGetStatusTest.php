@@ -16,7 +16,7 @@ use WeDevBr\Celcoin\Types\PIX as Types;
 class PixReverseGetStatusTest extends TestCase
 {
 
-    final public function notFoundErrorProvider(): array
+    final public static function notFoundErrorProvider(): array
     {
         return [
             'Original transaction not found' => ['11', fn() => self::stubErrorOriginalTransactionNotFound()],

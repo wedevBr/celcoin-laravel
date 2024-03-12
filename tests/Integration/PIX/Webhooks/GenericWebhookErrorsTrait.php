@@ -128,7 +128,7 @@ trait GenericWebhookErrorsTrait
         );
     }
 
-    public final function notFoundErrorProvider(): array
+    public final static function notFoundErrorProvider(): array
     {
         return [
             'Webhook required' => [
