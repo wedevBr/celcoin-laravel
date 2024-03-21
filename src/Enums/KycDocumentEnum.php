@@ -12,4 +12,5 @@ enum KycDocumentEnum: string
     case BALANCO = 'BALANCO';
     case FATURAMENTO = 'FATURAMENTO';
     case KYC_EXTERNO = 'KYC_EXTERNO';
+    case SELFIE = 'SELFIE';
 }
