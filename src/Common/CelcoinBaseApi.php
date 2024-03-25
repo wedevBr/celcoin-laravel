@@ -8,6 +8,7 @@ use Illuminate\Http\File;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
 use WeDevBr\Celcoin\Auth\Auth;
+use WeDevBr\Celcoin\Interfaces\Attachable;
 
 class CelcoinBaseApi
 {
@@ -94,7 +95,7 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    public function post(string $endpoint, array $body = [])
+    public function post(string $endpoint, array $body = [], Attachable $attachment = null)
     {
         $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
@@ -111,6 +112,10 @@ class CelcoinBaseApi
             if ($document instanceof File) {
                 $request->attach($field, $document->getContent(), $document->getFileName());
             }
+        }
+
+        if ($attachment) {
+            $request->attach($attachment->getField(), $attachment->getContents(), $attachment->getFileName());
         }
 
         return $request->post($this->getFinalUrl($endpoint), $body)
