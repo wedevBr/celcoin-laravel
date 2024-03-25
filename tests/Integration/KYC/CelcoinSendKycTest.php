@@ -46,11 +46,16 @@ class CelcoinSendKycTest extends TestCase
     {
         Http::fake([
             config('celcoin.login_url') => GlobalStubs::loginResponse(),
+            sprintf(
+                '%s%s',
+                config('celcoin.api_url'),
+                CelcoinKyc::CREATE_KYC_ENDPOINT
+            ) => static::successResponse(),
         ]);
 
         $kyc = new CelcoinKyc();
         $body = static::getKycBody();
-        unset($body['front']);
+        unset($body['documentnumber']);
         $this->expectException(ValidationException::class);
         $kyc->createKyc(new CreateKyc($body));
     }
@@ -132,6 +137,6 @@ class CelcoinSendKycTest extends TestCase
 
     public function getFile(string $path = null): KycDocument
     {
-        return new KycDocument(new File($path));
+        return new KycDocument(new File($path), 'verse');
     }
 }
