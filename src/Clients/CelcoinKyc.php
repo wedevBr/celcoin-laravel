@@ -11,7 +11,7 @@ use WeDevBr\Celcoin\Types\KYC\CreateKyc;
 
 class CelcoinKyc extends CelcoinBaseApi
 {
-    public const CREATE_KYC_ENDPOINT = '/v1/fileupload';
+    public const CREATE_KYC_ENDPOINT = '/celcoinkyc/document/v1/fileupload';
 
     /**
      * @throws RequestException
