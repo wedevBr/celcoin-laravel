@@ -9,13 +9,17 @@ class KycDocument extends Data
 {
     public string $fileName;
     public string $contents;
-    public File $file;
+    public ?File $file;
 
-    public function __construct(File $file)
+    public function __construct(?File $file)
     {
-        $data['contents'] = $file->getContent();
-        $data['fileName'] = $file->getFilename();
-        $data['file'] = $file;
+        $data = [];
+        if (!empty($file)) {
+            $data['contents'] = $file->getContent();
+            $data['fileName'] = $file->getFilename();
+            $data['file'] = $file;
+        }
+
         parent::__construct($data);
     }
 
