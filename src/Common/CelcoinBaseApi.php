@@ -115,7 +115,12 @@ class CelcoinBaseApi
         }
 
         if ($attachment) {
-            $request->attach($attachment->getField(), $attachment->getContents(), $attachment->getFileName());
+            $request->attach(
+                $attachment->getField(),
+                $attachment->getContents(),
+                $attachment->getFileName(),
+                $attachment->getHeaders()
+            );
         }
 
         return $request->post($this->getFinalUrl($endpoint), $body)

@@ -9,4 +9,6 @@ interface Attachable
     public function getContents();
 
     public function getFileName();
+
+    public function getHeaders(): array;
 }
