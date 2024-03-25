@@ -77,10 +77,8 @@ class CelcoinBaseApi
     {
         $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
-            ->withHeaders([
-                'accept' => 'application/json',
-                'content-type' => 'application/json',
-            ]);
+            ->asJson()
+            ->acceptJson();
 
         if ($this->mtlsCert && $this->mtlsKey && $this->mtlsPassphrase) {
             $request = $this->setRequestMtls($request);
@@ -99,10 +97,8 @@ class CelcoinBaseApi
     {
         $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
-            ->withHeaders([
-                'accept' => 'application/json',
-                'content-type' => 'application/json'
-            ]);
+            ->asJson()
+            ->acceptJson();
 
         if ($this->mtlsCert && $this->mtlsKey && $this->mtlsPassphrase) {
             $request = $this->setRequestMtls($request);
@@ -115,7 +111,12 @@ class CelcoinBaseApi
         }
 
         if ($attachment) {
-            $request->attach($attachment->getField(), $attachment->getContents(), $attachment->getFileName());
+            $request->attach(
+                $attachment->getField(),
+                $attachment->getContents(),
+                $attachment->getFileName(),
+                $attachment->getHeaders()
+            );
         }
 
         return $request->post($this->getFinalUrl($endpoint), $body)
@@ -133,10 +134,8 @@ class CelcoinBaseApi
     {
         $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
-            ->withHeaders([
-                'accept' => 'application/json',
-                'content-type' => 'application/json',
-            ]);
+            ->asJson()
+            ->acceptJson();
 
         if ($this->mtlsCert && $this->mtlsKey && $this->mtlsPassphrase) {
             $request = $this->setRequestMtls($request);
@@ -159,11 +158,9 @@ class CelcoinBaseApi
         $body_format = $asJson ? 'json' : 'form_params';
         $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
-            ->bodyFormat($body_format)
-            ->withHeaders([
-                'accept' => 'application/json',
-                'content-type' => 'application/json',
-            ]);
+            ->asJson()
+            ->acceptJson()
+            ->bodyFormat($body_format);
 
         if ($this->mtlsCert && $this->mtlsKey && $this->mtlsPassphrase) {
             $request = $this->setRequestMtls($request);
