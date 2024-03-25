@@ -107,6 +107,7 @@ class CelcoinBaseApi
         foreach ($body as $field => $document) {
             if ($document instanceof File) {
                 $request->attach($field, $document->getContent(), $document->getFileName());
+                $request->contentType('multipart/form-data');
             }
         }
 
@@ -117,6 +118,7 @@ class CelcoinBaseApi
                 $attachment->getFileName(),
                 $attachment->getHeaders()
             );
+            $request->contentType('multipart/form-data');
         }
 
         return $request->post($this->getFinalUrl($endpoint), $body)
