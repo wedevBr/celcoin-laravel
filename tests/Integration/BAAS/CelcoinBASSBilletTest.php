@@ -46,10 +46,8 @@ class CelcoinBASSBilletTest extends TestCase
         return new Billet([
             "externalId" => "externalId1",
             "expirationAfterPayment" => 1,
-            "merchantCatagoryCode" => "0000",
             "dueDate" => now()->format('Y-m-d'),
             "amount" => 12.5,
-            "key" => "testepix@celcoin.com.br",
             "debtor" => new BilletDebtor([
                 "name" => "João teste de teste",
                 "document" => "12345678910",
