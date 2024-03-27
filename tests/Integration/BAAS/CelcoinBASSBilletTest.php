@@ -47,7 +47,7 @@ class CelcoinBASSBilletTest extends TestCase
             "externalId" => "externalId1",
             "expirationAfterPayment" => 1,
             "merchantCatagoryCode" => "0000",
-            "duedate" => "2023-12-30T00:00:00.0000000",
+            "dueDate" => now()->format('Y-m-d'),
             "amount" => 12.5,
             "key" => "testepix@celcoin.com.br",
             "debtor" => new BilletDebtor([
