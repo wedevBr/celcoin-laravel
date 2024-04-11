@@ -86,16 +86,6 @@ class PixKeyClaimConsultTest extends TestCase
         );
     }
 
-    private function fakeClaimBody(): Claim
-    {
-        return new Claim([
-            'key' => 'key@email.com',
-	        'keyType' => 'EMAIL',
-	        'account' => '3005913742139',
-	        'claimType' => 'PORTABILITY'
-        ]);
-    }
-
     public function testClaimBadRequest()
     {
         Http::fake(
@@ -108,7 +98,7 @@ class PixKeyClaimConsultTest extends TestCase
         $this->expectException(RequestException::class);
 
         $pixDict = new CelcoinPIXDICT();
-        $result = $pixDict->claim($this->fakeClaimBody());
+	    $result = $pixDict->claimConsult($this->uuid);
 		assertEquals('ERROR', $result['status']);
 	    assertEquals('CBE320', $result['error']['errorCode']);
     }
