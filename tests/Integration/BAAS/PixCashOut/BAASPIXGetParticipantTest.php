@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXGetParticipantTest extends TestCase
 {
-
     final public function testSuccess(): void
     {
         Http::fake(
@@ -31,16 +30,16 @@ class BAASPIXGetParticipantTest extends TestCase
         $this->assertCount(1, $response);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
                 [
-                    "date" => "2022-03-23T00:00:00",
-                    "type" => "IDRT",
-                    "name" => "COOPERATIVA CENTRAL DE CRÉDITO DE MINAS GERAIS LTDA. - SICOOB CENTRAL CREDIMINAS",
-                    "startOperationDatetime" => "2020-11-03T09:30:00+00:00",
-                    "ispb" => "25683434",
+                    'date' => '2022-03-23T00:00:00',
+                    'type' => 'IDRT',
+                    'name' => 'COOPERATIVA CENTRAL DE CRÉDITO DE MINAS GERAIS LTDA. - SICOOB CENTRAL CREDIMINAS',
+                    'startOperationDatetime' => '2020-11-03T09:30:00+00:00',
+                    'ispb' => '25683434',
                 ],
             ],
             Response::HTTP_OK,

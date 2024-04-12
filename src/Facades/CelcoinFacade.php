@@ -31,14 +31,11 @@ use Illuminate\Support\Facades\Facade;
  * @uses Celcoin::clientPIXReverse
  * @uses Celcoin::clientPixWebhooks
  * @uses Celcoin::clientKyc
- *
  */
 class CelcoinFacade extends Facade
 {
     /**
      * Get the registered name of the component.
-     *
-     * @return string
      */
     protected static function getFacadeAccessor(): string
     {

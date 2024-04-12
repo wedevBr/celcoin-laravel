@@ -121,12 +121,10 @@ class COBVPayloadTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
     private static function stubNotFound(): PromiseInterface
     {
-        return Http::response([
+        return Http::response(
+            [
             'message' => 'The BRCode is expired and can\'t be paid.',
             'errorCode' => '400',
         ],

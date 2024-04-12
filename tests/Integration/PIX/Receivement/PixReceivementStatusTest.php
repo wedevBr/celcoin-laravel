@@ -2,7 +2,6 @@
 
 namespace WeDevBr\Celcoin\Tests\Integration\PIX\Receivement;
 
-
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
@@ -46,7 +45,7 @@ class PixReceivementStatusTest extends TestCase
         }
     }
 
-    static public function stubErrorNotFound(): PromiseInterface
+    public static function stubErrorNotFound(): PromiseInterface
     {
         return Http::response(
             [

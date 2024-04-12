@@ -8,13 +8,14 @@ use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 /**
  * Class CelcoinReport
  * Essa API possibilita que seja realizada a consulta de tipos de arquivos de conciliação e consulta de extrato consolidado..
- * @package WeDevBr\Celcoin
  */
 class CelcoinReport extends CelcoinBaseApi
 {
-    const GET_CONCILIATION_FILE_TYPES_ENDPOINT = '/tools-conciliation/v1/exportfile/types';
-    const CONCILIATION_FILE_ENDPOINT = '/tools-conciliation/v1/exportfile';
-    const CONSOLIDATED_STATEMENT_ENDPOINT = '/tools-conciliation/v1/ConsolidatedStatement';
+    public const GET_CONCILIATION_FILE_TYPES_ENDPOINT = '/tools-conciliation/v1/exportfile/types';
+
+    public const CONCILIATION_FILE_ENDPOINT = '/tools-conciliation/v1/exportfile';
+
+    public const CONSOLIDATED_STATEMENT_ENDPOINT = '/tools-conciliation/v1/ConsolidatedStatement';
 
     public function getConciliationFileTypes()
     {

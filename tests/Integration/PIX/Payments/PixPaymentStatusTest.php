@@ -15,6 +15,7 @@ class PixPaymentStatusTest extends TestCase
 {
     /**
      * @throws RequestException
+     *
      * @dataProvider stubSuccessStatuses
      */
     final public function testStatusSuccess(string $status, Closure $response): void
@@ -51,9 +52,9 @@ class PixPaymentStatusTest extends TestCase
     public static function stubSuccessStatuses(): array
     {
         return [
-            'PROCESSING' => ['PROCESSING', fn() => self::stubSuccess('PROCESSING')],
-            'CONFIRMED' => ['CONFIRMED', fn() => self::stubSuccess('CONFIRMED')],
-            'ERROR' => ['ERROR', fn() => self::stubSuccess('ERROR')],
+            'PROCESSING' => ['PROCESSING', fn () => self::stubSuccess('PROCESSING')],
+            'CONFIRMED' => ['CONFIRMED', fn () => self::stubSuccess('CONFIRMED')],
+            'ERROR' => ['ERROR', fn () => self::stubSuccess('ERROR')],
         ];
     }
 

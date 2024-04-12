@@ -12,10 +12,13 @@ use WeDevBr\Celcoin\Types\PIX\QRStaticPayment;
 
 class CelcoinPixStaticPayment extends CelcoinBaseApi
 {
-    const CREATE_STATIC_PAYMENT_ENDPOINT = '/pix/v1/brcode/static';
-    const GET_STATIC_PAYMENT_ENDPOINT = '/pix/v1/brcode/static/%d';
-    const GET_STATIC_PAYMENT_QR_ENDPOINT = '/pix/v1/brcode/static/%d/base64';
-    const GET_STATIC_PAYMENT_DATA_ENDPOINT = '/pix/v1/brcode/static';
+    public const CREATE_STATIC_PAYMENT_ENDPOINT = '/pix/v1/brcode/static';
+
+    public const GET_STATIC_PAYMENT_ENDPOINT = '/pix/v1/brcode/static/%d';
+
+    public const GET_STATIC_PAYMENT_QR_ENDPOINT = '/pix/v1/brcode/static/%d/base64';
+
+    public const GET_STATIC_PAYMENT_DATA_ENDPOINT = '/pix/v1/brcode/static';
 
     /**
      * @throws RequestException
@@ -23,6 +26,7 @@ class CelcoinPixStaticPayment extends CelcoinBaseApi
     final public function create(QRStaticPayment $payment): ?array
     {
         $body = Validator::validate($payment->toArray(), QRStaticPaymentCreate::rules());
+
         return $this->post(
             self::CREATE_STATIC_PAYMENT_ENDPOINT,
             $body
@@ -30,8 +34,6 @@ class CelcoinPixStaticPayment extends CelcoinBaseApi
     }
 
     /**
-     * @param int $transactionId
-     * @return array|null
      * @throws RequestException
      */
     final public function getStaticPix(int $transactionId): ?array
@@ -42,9 +44,6 @@ class CelcoinPixStaticPayment extends CelcoinBaseApi
     }
 
     /**
-     * @param int $transactionId
-     * @param array $params
-     * @return array|null
      * @throws RequestException
      */
     final public function getStaticPaymentQR(int $transactionId, array $params = []): ?array
@@ -52,14 +51,13 @@ class CelcoinPixStaticPayment extends CelcoinBaseApi
         $params = Validator::validate($params, QRStaticPaymentGetQR::rules());
 
         $url = sprintf(self::GET_STATIC_PAYMENT_QR_ENDPOINT, $transactionId);
+
         return $this->get(
             sprintf('%s?%s', $url, http_build_query($params))
         );
     }
 
     /**
-     * @param array $params
-     * @return array|null
      * @throws RequestException
      */
     final public function getStaticPaymentData(array $params): ?array

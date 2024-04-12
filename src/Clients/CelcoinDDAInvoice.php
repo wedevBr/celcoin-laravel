@@ -10,15 +10,15 @@ use WeDevBr\Celcoin\Types\DDA\RegisterInvoice;
 /**
  * Class CelcoinWebhooks
  * Essa API permite gerar boletos para um usuário cadastrado no DDA
- * @package WeDevBr\Celcoin
  */
 class CelcoinDDAInvoice extends CelcoinBaseApi
 {
-    const REGISTER_ENDPOINT = '/dda-serviceinvoice-webservice/v1/invoice/register';
+    public const REGISTER_ENDPOINT = '/dda-serviceinvoice-webservice/v1/invoice/register';
 
     public function register(RegisterInvoice $data)
     {
         $body = Validator::validate($data->toArray(), DDARegisterInvoice::rules());
+
         return $this->post(
             self::REGISTER_ENDPOINT,
             $body

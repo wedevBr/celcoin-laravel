@@ -10,17 +10,17 @@ use WeDevBr\Celcoin\Types\DDA\RegisterWebhooks;
 /**
  * Class CelcoinWebhooks
  * Depois que uma solicitação é enviada, ela passa por vários status. Toda vez que essa alteração ocorre, um webhook é acionado para que o originador possa manter o controle do processo de originação.
- * @package WeDevBr\Celcoin
  */
 class CelcoinDDAWebhooks extends CelcoinBaseApi
 {
+    public const REGISTER_ENDPOINT = '/dda-servicewebhook-webservice/v1/webhook/register';
 
-    const REGISTER_ENDPOINT = '/dda-servicewebhook-webservice/v1/webhook/register';
-    const LIST_ENDPOINT = '/dda-servicewebhook-webservice/v1/webhook/routes';
+    public const LIST_ENDPOINT = '/dda-servicewebhook-webservice/v1/webhook/routes';
 
     public function register(RegisterWebhooks $data)
     {
         $body = Validator::validate($data->toArray(), DDARegisterWebhooks::rules());
+
         return $this->post(
             self::REGISTER_ENDPOINT,
             $body

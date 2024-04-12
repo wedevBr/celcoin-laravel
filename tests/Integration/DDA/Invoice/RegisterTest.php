@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Types\DDA\RegisterInvoice;
 
 class RegisterTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -32,9 +31,9 @@ class RegisterTest extends TestCase
         $dda = new CelcoinDDAInvoice();
         $response = $dda->register(
             new RegisterInvoice([
-                "document" => [
-                    "28935923095",
-                    "85429850012",
+                'document' => [
+                    '28935923095',
+                    '85429850012',
                 ],
             ]),
         );
@@ -42,19 +41,19 @@ class RegisterTest extends TestCase
         $this->assertEquals(201, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => 201,
-                "body" => [
+                'status' => 201,
+                'body' => [
                     [
-                        "document" => "28935923095",
-                        "status" => "Success",
+                        'document' => '28935923095',
+                        'status' => 'Success',
                     ],
                     [
-                        "document" => "85429850012",
-                        "status" => "Success",
+                        'document' => '85429850012',
+                        'status' => 'Success',
                     ],
                 ],
             ],

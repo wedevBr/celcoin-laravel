@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBVUnlinkTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */
@@ -37,7 +36,7 @@ class COBVUnlinkTest extends TestCase
         }
     }
 
-    static private function stubNotFoundError(): PromiseInterface
+    private static function stubNotFoundError(): PromiseInterface
     {
         return Http::response(
             [
@@ -67,7 +66,7 @@ class COBVUnlinkTest extends TestCase
         $this->assertEquals(15.63, $result['body']['amount']['original']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [

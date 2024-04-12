@@ -4,7 +4,6 @@ namespace WeDevBr\Celcoin\Enums;
 
 enum ClaimTypeEnum: string
 {
-
-	case PORTABILITY = 'PORTABILITY';
-	case OWNERSHIP = 'OWNERSHIP';
+    case PORTABILITY = 'PORTABILITY';
+    case OWNERSHIP = 'OWNERSHIP';
 }

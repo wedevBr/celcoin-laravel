@@ -14,9 +14,9 @@ use WeDevBr\Celcoin\Types\PIX\COBGet;
 
 class COBGetTest extends TestCase
 {
-
     /**
      * @throws RequestException
+     *
      * @dataProvider searchDataProvider
      */
     final public function testGetCob(array $searchParam): void
@@ -90,6 +90,7 @@ class COBGetTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider searchDataProvider
      */
     final public function testGetCobNotFound(array $searchParam): void
@@ -128,6 +129,7 @@ class COBGetTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider paramErrosDataProvider
      */
     final public function testGetCobParamsError(string $key): void

@@ -12,8 +12,8 @@ class CreateKycRule
         return [
             'documentnumber' => ['required', 'digits:11,14'],
             'filetype' => ['required', Rule::enum(KycDocumentEnum::class)],
-            'front' => ['sometimes',],
-            'verse' => ['sometimes',],
+            'front' => ['sometimes'],
+            'verse' => ['sometimes'],
             'cnpj' => ['sometimes', 'digits:11,14'],
         ];
     }

@@ -2,8 +2,6 @@
 
 namespace WeDevBr\Celcoin\Rules\PIX;
 
-use Illuminate\Validation\Rule;
-
 class QRStaticPaymentCreate
 {
     /**

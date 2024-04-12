@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class ActiveAccountTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -29,17 +28,17 @@ class ActiveAccountTest extends TestCase
         );
 
         $baas = new CelcoinBAAS();
-        $response = $baas->activeAccount('Ativando', '300541976902',);
+        $response = $baas->activeAccount('Ativando', '300541976902');
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "version" => "1.0.0",
-                "status" => "SUCCESS",
+                'version' => '1.0.0',
+                'status' => 'SUCCESS',
             ],
             Response::HTTP_OK,
         );

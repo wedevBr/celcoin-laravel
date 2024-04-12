@@ -8,8 +8,11 @@ use WeDevBr\Celcoin\Types\Data;
 class EditWebhooks extends Data
 {
     public EntityWebhookBAASEnum $entity;
+
     public string $webhookUrl;
+
     public ?Auth $auth;
+
     public ?bool $active;
 
     public function __construct(array $data = [])

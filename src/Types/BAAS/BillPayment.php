@@ -25,7 +25,7 @@ class BillPayment extends Data
     public function __construct(array $data = [])
     {
         $data['barCodeInfo'] = new BarCode($data['barCodeInfo'] ?? []);
-        $data['tags'] = collect($data['tags'] ?? [])->each(fn($tag) => new Tag($tag))->toArray();
+        $data['tags'] = collect($data['tags'] ?? [])->each(fn ($tag) => new Tag($tag))->toArray();
 
         parent::__construct($data);
     }

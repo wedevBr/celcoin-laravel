@@ -10,7 +10,7 @@ class PaymentEndToEndRules
     public static function rules(): array
     {
         return [
-            'dpp' => ['required', 'date']
+            'dpp' => ['required', 'date'],
         ];
     }
 }

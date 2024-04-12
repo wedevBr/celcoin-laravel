@@ -8,7 +8,9 @@ use WeDevBr\Celcoin\Types\Data;
 class RegisterWebhooks extends Data
 {
     public EntityWebhookBAASEnum $entity;
+
     public string $webhookUrl;
+
     public ?Auth $auth;
 
     public function __construct(array $data = [])

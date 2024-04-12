@@ -16,7 +16,6 @@ use function PHPUnit\Framework\assertEquals;
 
 class PixDICTVerifyTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */
@@ -39,19 +38,19 @@ class PixDICTVerifyTest extends TestCase
     {
         return Http::response(
             [
-                "status" => "SUCCESS",
-                "keys" => [
+                'status' => 'SUCCESS',
+                'keys' => [
                     [
-                        "key" => "+551199995555",
-                        "hasEntry" => false,
+                        'key' => '+551199995555',
+                        'hasEntry' => false,
                     ],
                     [
-                        "key" => "key@email.com",
-                        "hasEntry" => false,
+                        'key' => 'key@email.com',
+                        'hasEntry' => false,
                     ],
                     [
-                        "key" => "11000893000109",
-                        "hasEntry" => true,
+                        'key' => '11000893000109',
+                        'hasEntry' => true,
                     ],
                 ],
             ],
@@ -62,15 +61,15 @@ class PixDICTVerifyTest extends TestCase
     private function fakeDictBody(): DICT
     {
         return new DICT([
-            "keys" => [
+            'keys' => [
                 [
-                    "key" => "+551199995555",
+                    'key' => '+551199995555',
                 ],
                 [
-                    "key" => "key@email.com",
+                    'key' => 'key@email.com',
                 ],
                 [
-                    "key" => "11000893000109",
+                    'key' => '11000893000109',
                 ],
             ],
         ]);
@@ -94,8 +93,8 @@ class PixDICTVerifyTest extends TestCase
     private static function StubNotFound(): PromiseInterface
     {
         return Http::response([
-            "statusCode" => 404,
-            "message" => "Resource not found",
+            'statusCode' => 404,
+            'message' => 'Resource not found',
         ], Response::HTTP_NOT_FOUND);
     }
 

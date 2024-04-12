@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetListInfoAccountNaturalPersonTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -39,67 +38,67 @@ class GetListInfoAccountNaturalPersonTest extends TestCase
         $this->assertEquals('SUCCESS', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "version" => "1.0.0",
-                "status" => "SUCCESS",
-                "totalItems" => 3,
-                "currentPage" => 1,
-                "totalPages" => 1,
-                "dateFrom" => "22/10/2022 00:00:00",
-                "dateTo" => "28/10/2022 23:59:59",
-                "subAccounts" => [
+                'version' => '1.0.0',
+                'status' => 'SUCCESS',
+                'totalItems' => 3,
+                'currentPage' => 1,
+                'totalPages' => 1,
+                'dateFrom' => '22/10/2022 00:00:00',
+                'dateTo' => '28/10/2022 23:59:59',
+                'subAccounts' => [
                     [
-                        "statusAccount" => "ATIVO",
-                        "documentNumber" => "25400754015",
-                        "phoneNumber" => "+5512981175704",
-                        "email" => "email4@email.com",
-                        "motherName" => "Nome Sobrenome",
-                        "fullName" => "Nome Sobrenome",
-                        "socialName" => "Nome",
-                        "birthDate" => "31-12-1984",
-                        "address" => [
-                            "postalCode" => "06455030",
-                            "street" => "Rua das Andorinhas",
-                            "number" => "343",
-                            "addressComplement" => "proximo a lanchonete do zeca",
-                            "neighborhood" => "Rua das Maravilhas",
-                            "city" => "Sao Paulo",
-                            "state" => "SP",
-                            "longitude" => null,
-                            "latitude" => null,
+                        'statusAccount' => 'ATIVO',
+                        'documentNumber' => '25400754015',
+                        'phoneNumber' => '+5512981175704',
+                        'email' => 'email4@email.com',
+                        'motherName' => 'Nome Sobrenome',
+                        'fullName' => 'Nome Sobrenome',
+                        'socialName' => 'Nome',
+                        'birthDate' => '31-12-1984',
+                        'address' => [
+                            'postalCode' => '06455030',
+                            'street' => 'Rua das Andorinhas',
+                            'number' => '343',
+                            'addressComplement' => 'proximo a lanchonete do zeca',
+                            'neighborhood' => 'Rua das Maravilhas',
+                            'city' => 'Sao Paulo',
+                            'state' => 'SP',
+                            'longitude' => null,
+                            'latitude' => null,
                         ],
-                        "isPoliticallyExposedPerson" => false,
-                        "createDate" => "2022-10-25T20:33:34",
-                        "closeDate" => "2022-10-25T20:33:47",
-                        "closeReason" => "Motivo X",
+                        'isPoliticallyExposedPerson' => false,
+                        'createDate' => '2022-10-25T20:33:34',
+                        'closeDate' => '2022-10-25T20:33:47',
+                        'closeReason' => 'Motivo X',
                     ],
                     [
-                        "statusAccount" => "ATIVO",
-                        "documentNumber" => "25400754015",
-                        "phoneNumber" => "+5512981175704",
-                        "email" => "email4@email.com",
-                        "motherName" => "Nome Sobrenome",
-                        "fullName" => "Nome Sobrenome",
-                        "socialName" => "Nome",
-                        "birthDate" => "31-12-1984",
-                        "address" => [
-                            "postalCode" => "06455030",
-                            "street" => "Rua das Andorinhas",
-                            "number" => "343",
-                            "addressComplement" => "proximo a lanchonete do zeca",
-                            "neighborhood" => "Rua das Maravilhas",
-                            "city" => "Sao Paulo",
-                            "state" => "SP",
-                            "longitude" => null,
-                            "latitude" => null,
+                        'statusAccount' => 'ATIVO',
+                        'documentNumber' => '25400754015',
+                        'phoneNumber' => '+5512981175704',
+                        'email' => 'email4@email.com',
+                        'motherName' => 'Nome Sobrenome',
+                        'fullName' => 'Nome Sobrenome',
+                        'socialName' => 'Nome',
+                        'birthDate' => '31-12-1984',
+                        'address' => [
+                            'postalCode' => '06455030',
+                            'street' => 'Rua das Andorinhas',
+                            'number' => '343',
+                            'addressComplement' => 'proximo a lanchonete do zeca',
+                            'neighborhood' => 'Rua das Maravilhas',
+                            'city' => 'Sao Paulo',
+                            'state' => 'SP',
+                            'longitude' => null,
+                            'latitude' => null,
                         ],
-                        "isPoliticallyExposedPerson" => false,
-                        "createDate" => "2022-10-25T20:33:54",
-                        "closeDate" => "2022-10-25T20:34:06",
-                        "closeReason" => "Desejo encerrar a conta...",
+                        'isPoliticallyExposedPerson' => false,
+                        'createDate' => '2022-10-25T20:33:54',
+                        'closeDate' => '2022-10-25T20:34:06',
+                        'closeReason' => 'Desejo encerrar a conta...',
                     ],
                 ],
             ],

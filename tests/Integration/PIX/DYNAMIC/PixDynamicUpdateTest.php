@@ -18,7 +18,6 @@ class PixDynamicUpdateTest extends TestCase
 {
     // Todo: não tem erros esse endpoint? 404? 422?
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testUpdateDynamicQRCodeInvalidKey(): void
@@ -42,10 +41,7 @@ class PixDynamicUpdateTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubInvalidKey(): PromiseInterface
+    private static function stubInvalidKey(): PromiseInterface
     {
         return Http::response(
             [
@@ -56,12 +52,9 @@ class PixDynamicUpdateTest extends TestCase
         );
     }
 
-    /**
-     * @return DynamicQRUpdate
-     */
-    static private function fakeBody(): DynamicQRUpdate
+    private static function fakeBody(): DynamicQRUpdate
     {
-        $dynamic = new DynamicQRUpdate;
+        $dynamic = new DynamicQRUpdate();
         $dynamic->key = 'testepix@celcoin.com.br';
         $dynamic->amount = 15.63;
 
@@ -90,6 +83,7 @@ class PixDynamicUpdateTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider updateErrorDataProvider
      */
     final public function testUpdateDynamicQRCodeWithoutField(string $unsetValue): void
@@ -116,10 +110,7 @@ class PixDynamicUpdateTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
@@ -186,7 +177,6 @@ class PixDynamicUpdateTest extends TestCase
     }
 
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testUpdateDynamicQRCodeSuccess(): void
@@ -205,5 +195,4 @@ class PixDynamicUpdateTest extends TestCase
         $this->assertEquals(201, $response['status']);
         $this->assertEquals('ACTIVE', $response['body']['status']);
     }
-
 }

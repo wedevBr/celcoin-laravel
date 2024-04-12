@@ -7,13 +7,13 @@ use WeDevBr\Celcoin\Types\Data;
 
 class ClaimAnswer extends Data
 {
-	public string $id;
-	public ClaimAnswerReasonEnum $reason;
+    public string $id;
 
-	public function __construct(array $data)
-	{
-		parent::__construct($data);
-		$this->reason = ClaimAnswerReasonEnum::from($data['reason']);
-	}
+    public ClaimAnswerReasonEnum $reason;
 
+    public function __construct(array $data)
+    {
+        parent::__construct($data);
+        $this->reason = ClaimAnswerReasonEnum::from($data['reason']);
+    }
 }

@@ -13,13 +13,19 @@ use WeDevBr\Celcoin\Types\PIX\COBGet as COBGetInput;
 
 class CelcoinPIXCOB extends CelcoinBaseApi
 {
-    const CREATE_COB_PIX_URL = '/pix/v1/collection/immediate';
-    const UPDATE_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
-    const DELETE_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
-    const GET_COB_PIX_URL = '/pix/v1/collection/pi/immediate';
-    const UNLINK_COB_PIX_URL = '/pix/v1/collection/pi/immediate/%d/unlink';
-    const FETCH_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
-    const PAYLOAD_COB_PIX_URL = '/pix/v1/collection/immediate/payload/%s';
+    public const CREATE_COB_PIX_URL = '/pix/v1/collection/immediate';
+
+    public const UPDATE_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
+
+    public const DELETE_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
+
+    public const GET_COB_PIX_URL = '/pix/v1/collection/pi/immediate';
+
+    public const UNLINK_COB_PIX_URL = '/pix/v1/collection/pi/immediate/%d/unlink';
+
+    public const FETCH_COB_PIX_URL = '/pix/v1/collection/immediate/%d';
+
+    public const PAYLOAD_COB_PIX_URL = '/pix/v1/collection/immediate/payload/%s';
 
     /**
      * @throws RequestException
@@ -27,6 +33,7 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     final public function createCOBPIX(COB $cob): array
     {
         $body = Validator::validate($cob->toArray(), COBCreate::rules());
+
         return $this->post(
             self::CREATE_COB_PIX_URL,
             $body
@@ -39,6 +46,7 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     final public function updateCOBPIX(int $transactionId, COB $cob): array
     {
         $body = Validator::validate($cob->toArray(), COBUpdate::rules());
+
         return $this->put(
             sprintf(self::UPDATE_COB_PIX_URL, $transactionId),
             $body
@@ -51,8 +59,10 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     final public function getCOBPIX(COBGetInput $data): array
     {
         $params = Validator::validate($data->toArray(), COBGet::rules());
+
         return $this->get(
-            sprintf('%s?%s',
+            sprintf(
+                '%s?%s',
                 self::GET_COB_PIX_URL,
                 http_build_query($params)
             )
@@ -70,8 +80,6 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     }
 
     /**
-     * @param int $transactionId
-     * @return array
      * @throws RequestException
      */
     final public function unlinkCOBPIX(int $transactionId): array
@@ -82,8 +90,6 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     }
 
     /**
-     * @param int $transactionId
-     * @return array
      * @throws RequestException
      */
     final public function fetchCOBPIX(int $transactionId): array
@@ -94,8 +100,6 @@ class CelcoinPIXCOB extends CelcoinBaseApi
     }
 
     /**
-     * @param string $url
-     * @return array
      * @throws RequestException
      */
     final public function payloadCOBPIX(string $url): array

@@ -7,12 +7,11 @@ use WeDevBr\Celcoin\Enums\ClaimAnswerReasonEnum;
 
 class ClaimAnswer
 {
-	public static function rules(): array
-	{
-		return [
-			'id' => ['required', 'uuid'],
-			'reason' => ['required', Rule::enum(ClaimAnswerReasonEnum::class)],
-		];
-	}
-
+    public static function rules(): array
+    {
+        return [
+            'id' => ['required', 'uuid'],
+            'reason' => ['required', Rule::enum(ClaimAnswerReasonEnum::class)],
+        ];
+    }
 }

@@ -15,15 +15,18 @@ use WeDevBr\Celcoin\Types\InternationalTopups\Create;
 /**
  * Class CelcoinInternationalTopups
  * Essa funcionalidade é usada para disponibilizar aos seus usuários a possibilidade de realizar recargas de celulares internacionais.
- * @package WeDevBr\Celcoin
  */
 class CelcoinInternationalTopups extends CelcoinBaseApi
 {
-    const GET_COUNTRIES_ENDPOINT = '/v5/transactions/internationaltopups/countrys';
-    const GET_VALUES_ENDPOINT = '/v5/transactions/internationaltopups/values';
-    const CREATE_ENDPOINT = '/v5/transactions/internationaltopups';
-    const CONFIRM_ENDPOINT = '/v5/transactions/internationaltopups/%d/capture';
-    const CANCEL_ENDPOINT = '/v5/transactions/internationaltopups/%d/void';
+    public const GET_COUNTRIES_ENDPOINT = '/v5/transactions/internationaltopups/countrys';
+
+    public const GET_VALUES_ENDPOINT = '/v5/transactions/internationaltopups/values';
+
+    public const CREATE_ENDPOINT = '/v5/transactions/internationaltopups';
+
+    public const CONFIRM_ENDPOINT = '/v5/transactions/internationaltopups/%d/capture';
+
+    public const CANCEL_ENDPOINT = '/v5/transactions/internationaltopups/%d/void';
 
     public function getCountries(int $page = 1, int $size = 50): mixed
     {
@@ -36,7 +39,7 @@ class CelcoinInternationalTopups extends CelcoinBaseApi
         );
     }
 
-    public function getValues(?string $countryCode = null, string $phoneNumber = null): mixed
+    public function getValues(?string $countryCode = null, ?string $phoneNumber = null): mixed
     {
         return $this->get(
             self::GET_VALUES_ENDPOINT,
@@ -49,11 +52,13 @@ class CelcoinInternationalTopups extends CelcoinBaseApi
 
     /**
      * @return array|mixed
+     *
      * @throws RequestException
      */
     public function create(Create $data): mixed
     {
         $body = Validator::validate($data->toArray(), InternationalTopupsCreate::rules());
+
         return $this->post(
             self::CREATE_ENDPOINT,
             $body
@@ -63,6 +68,7 @@ class CelcoinInternationalTopups extends CelcoinBaseApi
     public function confirm(int $transactionId, Confirm $data): mixed
     {
         $body = Validator::validate($data->toArray(), InternationalTopupsConfirm::rules());
+
         return $this->put(
             sprintf(self::CONFIRM_ENDPOINT, $transactionId),
             $body
@@ -72,6 +78,7 @@ class CelcoinInternationalTopups extends CelcoinBaseApi
     public function cancel(int $transactionId, Cancel $data): mixed
     {
         $body = Validator::validate($data->toArray(), InternationalTopupsCancel::rules());
+
         return $this->delete(
             sprintf(self::CANCEL_ENDPOINT, $transactionId),
             $body

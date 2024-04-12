@@ -13,7 +13,6 @@ use WeDevBr\Celcoin\Types\BAAS\TEDTransfer;
 
 class BAASTEDTransferTest extends TestCase
 {
-
     final public function testSuccess(): void
     {
         Http::fake(
@@ -30,55 +29,55 @@ class BAASTEDTransferTest extends TestCase
         $ted = new CelcoinBAASTED();
         $response = $ted->transfer(
             new TEDTransfer([
-                "amount" => 4.00,
-                "clientCode" => "1234",
-                "debitParty" => [
-                    "account" => "300541976902",
+                'amount' => 4.00,
+                'clientCode' => '1234',
+                'debitParty' => [
+                    'account' => '300541976902',
                 ],
-                "creditParty" => [
-                    "bank" => "30306294",
-                    "account" => "300541976910",
-                    "branch" => "0001",
-                    "taxId" => "00558856756",
-                    "name" => "Noelí Valência",
-                    "accountType" => "CC",
-                    "personType" => "J",
+                'creditParty' => [
+                    'bank' => '30306294',
+                    'account' => '300541976910',
+                    'branch' => '0001',
+                    'taxId' => '00558856756',
+                    'name' => 'Noelí Valência',
+                    'accountType' => 'CC',
+                    'personType' => 'J',
                 ],
-                "clientFinality" => ClientFinalityEnum::ACCOUNT_CREDIT,
-                "description" => "",
+                'clientFinality' => ClientFinalityEnum::ACCOUNT_CREDIT,
+                'description' => '',
             ]),
         );
 
         $this->assertEquals('PROCESSING', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => "PROCESSING",
-                "version" => "1.0.0",
-                "body" => [
-                    "id" => "222dbad8-c309-4f52-af62-8bfbe945ca2d",
-                    "amount" => 4,
-                    "clientCode" => "1234",
-                    "debitParty" => [
-                        "account" => "300541976902",
-                        "branch" => "0001",
-                        "taxId" => "17938715000192",
-                        "name" => "Mateus",
-                        "accountType" => "CC",
-                        "personType" => "J",
-                        "bank" => "13935893",
+                'status' => 'PROCESSING',
+                'version' => '1.0.0',
+                'body' => [
+                    'id' => '222dbad8-c309-4f52-af62-8bfbe945ca2d',
+                    'amount' => 4,
+                    'clientCode' => '1234',
+                    'debitParty' => [
+                        'account' => '300541976902',
+                        'branch' => '0001',
+                        'taxId' => '17938715000192',
+                        'name' => 'Mateus',
+                        'accountType' => 'CC',
+                        'personType' => 'J',
+                        'bank' => '13935893',
                     ],
-                    "creditParty" => [
-                        "bank" => "30306294",
-                        "account" => "300541976910",
-                        "branch" => "0001",
-                        "taxId" => "00558856756",
-                        "name" => "Noelí Valência",
-                        "accountType" => "CC",
-                        "personType" => "J",
+                    'creditParty' => [
+                        'bank' => '30306294',
+                        'account' => '300541976910',
+                        'branch' => '0001',
+                        'taxId' => '00558856756',
+                        'name' => 'Noelí Valência',
+                        'accountType' => 'CC',
+                        'personType' => 'J',
                     ],
                 ],
             ],

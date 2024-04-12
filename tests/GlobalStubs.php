@@ -8,10 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class GlobalStubs
 {
-    /**
-     * @return PromiseInterface
-     */
-    final static public function loginResponse(): PromiseInterface
+    final public static function loginResponse(): PromiseInterface
     {
         return Http::response(
             [

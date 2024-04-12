@@ -17,10 +17,10 @@ class BillPaymentRule
             'tags' => ['sometimes', 'nullable', 'array'],
             'tags.*.key' => ['required_if:tags', 'string'],
             'tags.*.value' => ['required_if:tags', 'string'],
-            "barCodeInfo" => ['required', 'array'],
-            "barCodeInfo.type" => ['required', Rule::in(array_column(BarCodeTypeEnum::cases(), 'value'))],
-            "barCodeInfo.digitable" => ['nullable', 'string'],
-            "barCodeInfo.barCode" => ['nullable', 'string'],
+            'barCodeInfo' => ['required', 'array'],
+            'barCodeInfo.type' => ['required', Rule::in(array_column(BarCodeTypeEnum::cases(), 'value'))],
+            'barCodeInfo.digitable' => ['nullable', 'string'],
+            'barCodeInfo.barCode' => ['nullable', 'string'],
         ];
     }
 }

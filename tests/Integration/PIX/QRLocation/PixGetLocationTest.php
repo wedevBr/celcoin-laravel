@@ -13,9 +13,7 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixGetLocationTest extends TestCase
 {
-
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testSuccess(): void
@@ -40,10 +38,7 @@ class PixGetLocationTest extends TestCase
         $this->assertEquals($locationId, $response['locationId']);
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
@@ -65,11 +60,10 @@ class PixGetLocationTest extends TestCase
     }
 
     /**
-     * @param Closure $response
-     * @param string $status
+     * @param  string  $status
      *
-     * @return void
      * @dataProvider errorDataProvider
+     *
      * @throws RequestException
      */
     final public function testErrors(Closure $response, mixed $status): void
@@ -101,23 +95,18 @@ class PixGetLocationTest extends TestCase
     {
         return [
             'status code 400' => [
-                fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST),
+                fn () => self::stubGenericError(Response::HTTP_BAD_REQUEST),
                 Response::HTTP_BAD_REQUEST,
             ],
-            'status code 404' => [fn() => self::stubGenericError(Response::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND],
+            'status code 404' => [fn () => self::stubGenericError(Response::HTTP_NOT_FOUND), Response::HTTP_NOT_FOUND],
             'status code 500' => [
-                fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR),
+                fn () => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR),
                 Response::HTTP_INTERNAL_SERVER_ERROR,
             ],
         ];
     }
 
-    /**
-     * @param int $status
-     *
-     * @return PromiseInterface
-     */
-    static private function stubGenericError(int $status): PromiseInterface
+    private static function stubGenericError(int $status): PromiseInterface
     {
         return Http::response(
             [
@@ -126,5 +115,4 @@ class PixGetLocationTest extends TestCase
             ],
         );
     }
-
 }

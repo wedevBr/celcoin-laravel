@@ -11,24 +11,25 @@ use WeDevBr\Celcoin\Types\PIX as Types;
 
 class CelcoinPixWebhooks extends CelcoinBaseApi
 {
-    const PIX_WEBHOOK_GET_LIST_ENDPOINT = '/webhook-manager-webservice/v1/webhook/%s';
-    const PIX_REACTIVATE_RESEND_PENDING_ENDPOINT = '/webhook-manager-webservice/v1/webhook/resend/%s';
-    const RESEND_TRANSACTION_LIST_WEBHOOK = '/webhook-manager-webservice/v1/webhook/resendTransactionList/%s';
+    public const PIX_WEBHOOK_GET_LIST_ENDPOINT = '/webhook-manager-webservice/v1/webhook/%s';
+
+    public const PIX_REACTIVATE_RESEND_PENDING_ENDPOINT = '/webhook-manager-webservice/v1/webhook/resend/%s';
+
+    public const RESEND_TRANSACTION_LIST_WEBHOOK = '/webhook-manager-webservice/v1/webhook/resendTransactionList/%s';
 
     /**
      * @throws RequestException
      */
     final public function getList(
-        WebhookEventEnum        $webhookEvent,
+        WebhookEventEnum $webhookEvent,
         Types\PixWebhookGetList $webhookGetList
-    ): ?array
-    {
+    ): ?array {
         $params = Validator::validate($webhookGetList->toArray(), Rules\WebhookGetList::rules());
 
         $url = sprintf(self::PIX_WEBHOOK_GET_LIST_ENDPOINT, $webhookEvent->value);
 
         if ($params) {
-            $url .= '?' . http_build_query($params);
+            $url .= '?'.http_build_query($params);
         }
 
         return $this->get(
@@ -40,10 +41,9 @@ class CelcoinPixWebhooks extends CelcoinBaseApi
      * @throws RequestException
      */
     final public function reactivateAndResendAllPendingMessages(
-        WebhookEventEnum                               $webhookEvent,
+        WebhookEventEnum $webhookEvent,
         Types\PixReactivateAndResendAllPendingMessages $allPendingMessages
-    ): ?array
-    {
+    ): ?array {
         $params = Validator::validate(
             $allPendingMessages->toArray(),
             Rules\PixReactivateAndResendAllPendingMessages::rules()
@@ -52,7 +52,7 @@ class CelcoinPixWebhooks extends CelcoinBaseApi
         $url = sprintf(self::PIX_REACTIVATE_RESEND_PENDING_ENDPOINT, $webhookEvent->value);
 
         if ($params) {
-            $url .= '?' . http_build_query($params);
+            $url .= '?'.http_build_query($params);
         }
 
         return $this->post(
@@ -65,10 +65,9 @@ class CelcoinPixWebhooks extends CelcoinBaseApi
      * @throws RequestException
      */
     final public function reactivateEventAndResendSpecifiedMessagesInList(
-        WebhookEventEnum                                         $webhookEvent,
+        WebhookEventEnum $webhookEvent,
         Types\PixReactivateEventAndResendSpecifiedMessagesInList $resendSpecifiedMessagesInList
-    ): ?array
-    {
+    ): ?array {
         $params = Validator::validate(
             $resendSpecifiedMessagesInList->toArray(),
             Rules\PixReactivateEventAndResendSpecifiedMessagesInList::rules()
@@ -81,5 +80,4 @@ class CelcoinPixWebhooks extends CelcoinBaseApi
             $params
         );
     }
-
 }

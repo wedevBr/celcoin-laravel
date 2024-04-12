@@ -10,7 +10,7 @@ use WeDevBr\Celcoin\Types\PIX\PixReceivementStatus;
 
 class CelcoinPIXReceivement extends CelcoinBaseApi
 {
-    const PIX_RECEIVEMENT_STATUS_ENDPOINT = '/pix/v1/receivement/status';
+    public const PIX_RECEIVEMENT_STATUS_ENDPOINT = '/pix/v1/receivement/status';
 
     /**
      * @throws RequestException
@@ -18,8 +18,10 @@ class CelcoinPIXReceivement extends CelcoinBaseApi
     final public function getStatus(PixReceivementStatus $pixReceivementStatus): ?array
     {
         $params = Validator::validate($pixReceivementStatus->toArray(), PixReceivementStatusGet::rules());
+
         return $this->get(
-            sprintf('%s?%s',
+            sprintf(
+                '%s?%s',
                 self::PIX_RECEIVEMENT_STATUS_ENDPOINT,
                 http_build_query($params)
             )

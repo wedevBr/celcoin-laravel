@@ -4,7 +4,6 @@ namespace WeDevBr\Celcoin\Types;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Psr\Http\Message\ResponseInterface;
-use ReflectionClass;
 use ReflectionProperty;
 use UnitEnum;
 
@@ -24,6 +23,7 @@ abstract class Data implements Arrayable
                     $val = call_user_func([$rp->getType()->getName(), 'from'], $val);
                 }
                 $this->$key = $val;
+
                 continue;
             }
 
@@ -33,8 +33,6 @@ abstract class Data implements Arrayable
 
     /**
      * Set a value
-     * @param string $key
-     * @param mixed $value
      */
     public function __set(string $key, mixed $value)
     {
@@ -43,7 +41,7 @@ abstract class Data implements Arrayable
 
     /**
      * Get a value
-     * @param string $key
+     *
      * @return mixed
      */
     public function __get(string $key)
@@ -53,7 +51,7 @@ abstract class Data implements Arrayable
 
     /**
      * Check if a key is set
-     * @param string $key
+     *
      * @return bool
      */
     public function __isset(string $key)
@@ -61,9 +59,6 @@ abstract class Data implements Arrayable
         return isset($this->attributes[$key]);
     }
 
-    /**
-     * @return array
-     */
     public function toArray(): array
     {
         $vars = get_object_vars($this);
@@ -72,13 +67,13 @@ abstract class Data implements Arrayable
         foreach ($vars as $key => $value) {
             if ($value instanceof self) {
                 $value = $value->toArray();
-            } else if (is_array($value) && $key != 'attributes') {
+            } elseif (is_array($value) && $key != 'attributes') {
                 foreach ($value as &$valueVal) {
                     if ($valueVal instanceof self) {
                         $valueVal = $valueVal->toArray();
                     }
                 }
-            } else if ($value instanceof UnitEnum) {
+            } elseif ($value instanceof UnitEnum) {
                 $value = $value->value;
             }
             $array[$key] = $value;

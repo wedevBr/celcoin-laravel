@@ -13,7 +13,7 @@ class CelcoinServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/config.php' => config_path('celcoin.php'),
+                __DIR__.'/../config/config.php' => config_path('celcoin.php'),
             ], 'config');
         }
     }
@@ -24,7 +24,7 @@ class CelcoinServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'celcoin');
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'celcoin');
 
         // Register the card management class to use with the facade
         $this->app->singleton('celcoin', function () {

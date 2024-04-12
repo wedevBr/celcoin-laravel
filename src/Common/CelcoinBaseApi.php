@@ -14,7 +14,6 @@ class CelcoinBaseApi
 {
     public const CACHE_NAME = 'celcoin_login_token';
 
-    /** @var Cache */
     public Cache $cache;
 
     /** @var ?string */
@@ -61,12 +60,14 @@ class CelcoinBaseApi
             $this->token = $this->auth->getToken();
             Cache::put($this::CACHE_NAME, $this->token, 2400);
         }
+
         return $this->token;
     }
 
     public function setPassphrase(string $passPhrase): self
     {
         $this->mtlsPassphrase = $passPhrase;
+
         return $this;
     }
 
@@ -95,13 +96,13 @@ class CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    public function post(string $endpoint, array $body = [], Attachable $attachment = null)
+    public function post(string $endpoint, array $body = [], ?Attachable $attachment = null)
     {
         $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
                 'accept' => 'application/json',
-                'content-type' => 'application/json'
+                'content-type' => 'application/json',
             ]);
 
         if ($this->mtlsCert && $this->mtlsKey && $this->mtlsPassphrase) {
@@ -129,8 +130,7 @@ class CelcoinBaseApi
     public function put(
         string $endpoint,
         ?array $body = null,
-    ): mixed
-    {
+    ): mixed {
         $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
             ->withHeaders([
@@ -154,8 +154,7 @@ class CelcoinBaseApi
         string $endpoint,
         ?array $body = null,
         bool $asJson = false
-    ): mixed
-    {
+    ): mixed {
         $body_format = $asJson ? 'json' : 'form_params';
         $token = $this->getToken() ?? $this->auth->getToken();
         $request = Http::withToken($token)
@@ -191,9 +190,6 @@ class CelcoinBaseApi
             ->json();
     }
 
-    /**
-     * @return PendingRequest
-     */
     public function setRequestMtls(PendingRequest $request): PendingRequest
     {
         $options = [];
@@ -215,12 +211,14 @@ class CelcoinBaseApi
         if ($options) {
             $request = $request->withOptions($options);
         }
+
         return $request;
     }
 
     public function getFinalUrl(string $endpoint): string
     {
         $characters = " \t\n\r\0\x0B/";
-        return rtrim($this->api_url, $characters) . "/" . ltrim($endpoint, $characters);
+
+        return rtrim($this->api_url, $characters).'/'.ltrim($endpoint, $characters);
     }
 }

@@ -12,17 +12,17 @@ use WeDevBr\Celcoin\Types\DDA\RemoveUser;
 /**
  * Class CelcoinDDAUser
  * A API de subscription permite acesso de forma eletrônica aos boletos emitidos em um determinado CPF ou CNPJ.
- * @package WeDevBr\Celcoin
  */
 class CelcoinDDAUser extends CelcoinBaseApi
 {
+    public const REGISTER_ENDPOINT = '/dda-subscription-webservice/v1/subscription/Register';
 
-    const REGISTER_ENDPOINT = '/dda-subscription-webservice/v1/subscription/Register';
-    const REMOVE_ENDPOINT = 'dda-subscription-webservice/v1/subscription/Register';
+    public const REMOVE_ENDPOINT = 'dda-subscription-webservice/v1/subscription/Register';
 
     public function register(RegisterUser $data)
     {
         $body = Validator::validate($data->toArray(), DDARegisterUser::rules());
+
         return $this->post(
             self::REGISTER_ENDPOINT,
             $body
@@ -32,6 +32,7 @@ class CelcoinDDAUser extends CelcoinBaseApi
     public function remove(RemoveUser $data)
     {
         $body = Validator::validate($data->toArray(), DDARemoveUser::rules());
+
         return $this->delete(
             self::REMOVE_ENDPOINT,
             $body

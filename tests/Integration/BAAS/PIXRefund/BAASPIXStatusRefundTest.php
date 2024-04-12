@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXStatusRefundTest extends TestCase
 {
-
     final public function testSuccess(): void
     {
         Http::fake(
@@ -31,21 +30,21 @@ class BAASPIXStatusRefundTest extends TestCase
         $this->assertEquals('PROCESSING', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => "PROCESSING",
-                "version" => "1.0.0",
-                "body" => [
-                    "id" => "34fee7bc-4d40-4605-9af8-398ed7d0d6b4",
-                    "amount" => 25.55,
-                    "clientCode" => "1458854",
-                    "originalPaymentId" => "34fee7bc-4d40-4605-9af8-398ed7d0d6b5",
-                    "endToEndId" => "E3030629420200808185300887639654",
-                    "returnIdentification" => "D3030629420200808185300887639654",
-                    "reason" => "MD06",
-                    "reversalDescription" => "Devolução do churrasco",
+                'status' => 'PROCESSING',
+                'version' => '1.0.0',
+                'body' => [
+                    'id' => '34fee7bc-4d40-4605-9af8-398ed7d0d6b4',
+                    'amount' => 25.55,
+                    'clientCode' => '1458854',
+                    'originalPaymentId' => '34fee7bc-4d40-4605-9af8-398ed7d0d6b5',
+                    'endToEndId' => 'E3030629420200808185300887639654',
+                    'returnIdentification' => 'D3030629420200808185300887639654',
+                    'reason' => 'MD06',
+                    'reversalDescription' => 'Devolução do churrasco',
                 ],
             ],
             Response::HTTP_OK,

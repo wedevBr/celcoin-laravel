@@ -7,7 +7,7 @@ class RegisterInvoice
     public static function rules()
     {
         return [
-            "document" => ['required', 'array'],
+            'document' => ['required', 'array'],
         ];
     }
 }

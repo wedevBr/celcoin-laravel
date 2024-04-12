@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class CelcoinAuthEventFiredTest extends TestCase
 {
-
     public function testSuccess()
     {
         Event::fake();

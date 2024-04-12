@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class OcurrencyTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -36,19 +35,19 @@ class OcurrencyTest extends TestCase
         $this->assertArrayHasKey('occurrences', $response);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "occurrences" => [
-                    "date" => "2021-06-24T19:03:43",
-                    "createDate" => "2021-06-24T15:54:14",
-                    "descriptionMotivo" => "Recusado pelo beneficiário",
-                    "externalNSU" => 1234,
-                    "transactionId" => 7061967,
-                    "externalTerminal" => "11122233344",
-                    "linhaDigitavel" => "34191090080012213037050059980008586260000065000 ",
-                    "value" => "20",
+                'occurrences' => [
+                    'date' => '2021-06-24T19:03:43',
+                    'createDate' => '2021-06-24T15:54:14',
+                    'descriptionMotivo' => 'Recusado pelo beneficiário',
+                    'externalNSU' => 1234,
+                    'transactionId' => 7061967,
+                    'externalTerminal' => '11122233344',
+                    'linhaDigitavel' => '34191090080012213037050059980008586260000065000 ',
+                    'value' => '20',
                 ],
             ],
             Response::HTTP_OK,

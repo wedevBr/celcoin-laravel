@@ -13,13 +13,7 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixGetStaticPaymentTransactionTest extends TestCase
 {
-
-    /**
-     * @param int $status
-     *
-     * @return PromiseInterface
-     */
-    static private function stubGenericError(int $status): PromiseInterface
+    private static function stubGenericError(int $status): PromiseInterface
     {
         return Http::response(
             [
@@ -30,7 +24,6 @@ class PixGetStaticPaymentTransactionTest extends TestCase
     }
 
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testSuccess(): void
@@ -61,35 +54,31 @@ class PixGetStaticPaymentTransactionTest extends TestCase
         $this->assertArrayHasKey('emvqrcps', $response);
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "merchantAccountInformation" => [
-                    "key" => "testepix@celcoin.com.br",
-                    "additionalInformation" => null,
+                'merchantAccountInformation' => [
+                    'key' => 'testepix@celcoin.com.br',
+                    'additionalInformation' => null,
                 ],
-                "merchantCategoryCode" => 0,
-                "transactionCurrency" => 986,
-                "transactionAmount" => 0,
-                "countryCode" => "BR",
-                "merchantName" => "Celcoin",
-                "postalCode" => "01201005",
-                "emvqrcps" => "00020126450014br.gov.bcb.pix0123testepix@celcoin.com.br5204000053039865802BR5907Celcoin6007Barueri61080120100562070503***6304FD53",
+                'merchantCategoryCode' => 0,
+                'transactionCurrency' => 986,
+                'transactionAmount' => 0,
+                'countryCode' => 'BR',
+                'merchantName' => 'Celcoin',
+                'postalCode' => '01201005',
+                'emvqrcps' => '00020126450014br.gov.bcb.pix0123testepix@celcoin.com.br5204000053039865802BR5907Celcoin6007Barueri61080120100562070503***6304FD53',
             ],
             Response::HTTP_OK,
         );
     }
 
     /**
-     * @param Closure $response
-     * @param string $status
+     * @param  string  $status
      *
-     * @return void
      * @dataProvider errorDataProvider
+     *
      * @throws RequestException
      */
     final public function testErrors(Closure $response, mixed $status): void
@@ -125,7 +114,7 @@ class PixGetStaticPaymentTransactionTest extends TestCase
     {
         return [
             'status·code·500' => [
-                fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR),
+                fn () => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR),
                 Response::HTTP_INTERNAL_SERVER_ERROR,
             ],
         ];

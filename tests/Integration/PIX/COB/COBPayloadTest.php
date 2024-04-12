@@ -94,12 +94,10 @@ class COBPayloadTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
     private static function stubNotFound(): PromiseInterface
     {
-        return Http::response([
+        return Http::response(
+            [
             'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
             'errorCode' => 'VL002',
         ],

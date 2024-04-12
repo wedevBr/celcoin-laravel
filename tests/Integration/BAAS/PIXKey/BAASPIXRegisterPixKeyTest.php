@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Types\BAAS\RegisterPixKey;
 
 class BAASPIXRegisterPixKeyTest extends TestCase
 {
-
     final public function testSuccess(): void
     {
         Http::fake(
@@ -37,26 +36,26 @@ class BAASPIXRegisterPixKeyTest extends TestCase
         $this->assertEquals('CONFIRMED', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "version" => "1.0.0",
-                "status" => "CONFIRMED",
-                "body" => [
-                    "keyType" => "EMAIL",
-                    "key" => "testebaas@cecloin.com.br",
-                    "account" => [
-                        "participant" => "30306294",
-                        "branch" => "0001",
-                        "account" => "10545584",
-                        "accountType" => "TRAN",
-                        "createDate" => "2020-11-03T06:30:00-03:00",
+                'version' => '1.0.0',
+                'status' => 'CONFIRMED',
+                'body' => [
+                    'keyType' => 'EMAIL',
+                    'key' => 'testebaas@cecloin.com.br',
+                    'account' => [
+                        'participant' => '30306294',
+                        'branch' => '0001',
+                        'account' => '10545584',
+                        'accountType' => 'TRAN',
+                        'createDate' => '2020-11-03T06:30:00-03:00',
                     ],
-                    "owner" => [
-                        "type" => "NATURAL_PERSON",
-                        "documentNumber" => "34335125070",
-                        "name" => "Carlos Henrique da Silva",
+                    'owner' => [
+                        'type' => 'NATURAL_PERSON',
+                        'documentNumber' => '34335125070',
+                        'name' => 'Carlos Henrique da Silva',
                     ],
                 ],
             ],

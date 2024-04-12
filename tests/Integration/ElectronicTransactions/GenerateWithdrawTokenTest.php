@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Types\ElectronicTransactions\WithdrawToken;
 
 class GenerateWithdrawTokenTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -32,29 +31,29 @@ class GenerateWithdrawTokenTest extends TestCase
         $electronicTransaction = new CelcoinElectronicTransactions();
         $response = $electronicTransaction->generateWithdrawToken(
             new WithdrawToken([
-                "externalNSU" => 1234,
-                "externalTerminal" => "teste2",
-                "receivingDocument" => "11122233344",
-                "receivingName" => "Fulano de tal",
-                "value" => 150,
+                'externalNSU' => 1234,
+                'externalTerminal' => 'teste2',
+                'receivingDocument' => '11122233344',
+                'receivingName' => 'Fulano de tal',
+                'value' => 150,
             ]),
         );
 
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "convenant" => "0720",
-                "transactionIdentifier" => "05e07b49-f57a-453c-b5e7-46ebe7bc5037",
-                "transactionId" => "816055940",
-                "token" => "string",
-                "value" => "150",
-                "erroCode" => "000",
-                "message" => "SUCCESS",
-                "status" => 0,
+                'convenant' => '0720',
+                'transactionIdentifier' => '05e07b49-f57a-453c-b5e7-46ebe7bc5037',
+                'transactionId' => '816055940',
+                'token' => 'string',
+                'value' => '150',
+                'erroCode' => '000',
+                'message' => 'SUCCESS',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );
