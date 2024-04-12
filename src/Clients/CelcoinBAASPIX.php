@@ -84,7 +84,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
 
     public function registerPixKey(RegisterPixKey $data)
     {
-        $body = Validator::validate($data->toArray(), BAASRegisterPixKey::rules());
+        $body = Validator::validate(array_filter($data->toArray()), BAASRegisterPixKey::rules());
 
         return $this->post(
             self::REGISTER_PIX_KEY_ENDPOINT,
