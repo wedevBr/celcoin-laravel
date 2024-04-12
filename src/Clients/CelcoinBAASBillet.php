@@ -10,7 +10,7 @@ use WeDevBr\Celcoin\Types\BAAS\Billet;
 
 class CelcoinBAASBillet extends CelcoinBaseApi
 {
-    const BILLET_URL = '/baas/v2/Charge';
+    public const BILLET_URL = '/baas/v2/Charge';
 
     /**
      * @throws RequestException
