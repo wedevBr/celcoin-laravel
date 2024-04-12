@@ -33,10 +33,10 @@ class COBDeteleTest extends TestCase
     {
         return Http::response(
             [
-            'transactionId' => 817849688,
-            'status' => 200,
-            'message' => '200',
-        ],
+                'transactionId' => 817849688,
+                'status' => 200,
+                'message' => '200',
+            ],
             Response::HTTP_OK,
         );
     }
@@ -71,9 +71,9 @@ class COBDeteleTest extends TestCase
     {
         return Http::response(
             [
-            'statusCode' => 404,
-            'message' => 'Resource not found',
-        ],
+                'statusCode' => 404,
+                'message' => 'Resource not found',
+            ],
             Response::HTTP_NOT_FOUND,
         );
     }

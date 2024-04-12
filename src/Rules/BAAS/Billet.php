@@ -8,11 +8,9 @@ class Billet
     {
         return [
             'externalId' => ['required'],
-            'merchantCategoryCode' => ['sometimes', 'required'],
             'expirationAfterPayment' => ['required', 'numeric', 'min:1'],
-            'duedate' => ['required', 'date'],
+            'dueDate' => ['required', 'date', 'after:yesterday'],
             'amount' => ['required', 'decimal:0,2'],
-            'key' => ['required'],
             'debtor' => ['required', 'array'],
             'debtor.name' => ['required', 'string', 'max: 25'],
             'debtor.document' => ['required'],

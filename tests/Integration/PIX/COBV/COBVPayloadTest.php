@@ -125,9 +125,9 @@ class COBVPayloadTest extends TestCase
     {
         return Http::response(
             [
-            'message' => 'The BRCode is expired and can\'t be paid.',
-            'errorCode' => '400',
-        ],
+                'message' => 'The BRCode is expired and can\'t be paid.',
+                'errorCode' => '400',
+            ],
             Response::HTTP_BAD_REQUEST,
         );
     }

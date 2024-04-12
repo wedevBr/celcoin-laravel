@@ -98,9 +98,9 @@ class COBPayloadTest extends TestCase
     {
         return Http::response(
             [
-            'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
-            'errorCode' => 'VL002',
-        ],
+                'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
+                'errorCode' => 'VL002',
+            ],
             Response::HTTP_BAD_REQUEST,
         );
     }

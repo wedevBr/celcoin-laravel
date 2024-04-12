@@ -143,9 +143,9 @@ class COBCreateTest extends TestCase
     {
         return Http::response(
             [
-            'message' => 'Can\'t create a new PixImmediateCollection when the location type is COB',
-            'errorCode' => 'PBE410',
-        ],
+                'message' => 'Can\'t create a new PixImmediateCollection when the location type is COB',
+                'errorCode' => 'PBE410',
+            ],
             Response::HTTP_BAD_REQUEST,
         );
     }
