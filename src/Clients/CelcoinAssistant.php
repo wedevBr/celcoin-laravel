@@ -11,17 +11,22 @@ use WeDevBr\Celcoin\Enums\InstitutionsTypeEnum;
 /**
  * Class CelcoinAssistant
  * A API de Recargas Nacionais disponibiliza aos seus usuários a possibilidade de realizar recargas de telefonia e conteúdos digitais listados abaixo:
- * @package WeDevBr\Celcoin
  */
 class CelcoinAssistant extends CelcoinBaseApi
 {
-    const GET_BALANCE_ENDPOINT = '/v5/merchant/balance';
-    const STATUS_CONSULT_ENDPOINT = '/v5/transactions/status-consult';
-    const GET_RECEIPT_ENDPOINT = '/v5/transactions/receipt/%s';
-    const FIND_INSTITUTIONS_ENDPOINT = '/v5/transactions/institutions';
-    const HEALTH_CHECK_ENDPOINT = '/v5/transactions/healthcheck';
-    const GET_BANKS_ENDPOINT = '/v5/transactions/banks';
-    const GET_PENDENCIES_LIST_ENDPOINT = '/v5/transactions/pendency';
+    public const GET_BALANCE_ENDPOINT = '/v5/merchant/balance';
+
+    public const STATUS_CONSULT_ENDPOINT = '/v5/transactions/status-consult';
+
+    public const GET_RECEIPT_ENDPOINT = '/v5/transactions/receipt/%s';
+
+    public const FIND_INSTITUTIONS_ENDPOINT = '/v5/transactions/institutions';
+
+    public const HEALTH_CHECK_ENDPOINT = '/v5/transactions/healthcheck';
+
+    public const GET_BANKS_ENDPOINT = '/v5/transactions/banks';
+
+    public const GET_PENDENCIES_LIST_ENDPOINT = '/v5/transactions/pendency';
 
     public function getBalance()
     {
@@ -40,7 +45,7 @@ class CelcoinAssistant extends CelcoinBaseApi
                 'transactionId' => $transactionId,
                 'externalNSU' => $externalNSU,
                 'externalTerminal' => $externalTerminal,
-                'operationDate' => !empty($operationDate) ? $operationDate->format("Y-m-d") : null,
+                'operationDate' => ! empty($operationDate) ? $operationDate->format('Y-m-d') : null,
             ]
         );
     }
@@ -53,16 +58,16 @@ class CelcoinAssistant extends CelcoinBaseApi
     public function findInstitutions(?InstitutionsTypeEnum $type = null, ?array $uf = null)
     {
         return $this->get(self::FIND_INSTITUTIONS_ENDPOINT, [
-            "Type" => $type?->value,
-            "UF" => $uf,
+            'Type' => $type?->value,
+            'UF' => $uf,
         ]);
     }
 
     public function healthCheck(?HealthCheckTypeEnum $type = null, ?HealthCheckPeriodEnum $period = null)
     {
         return $this->get(self::HEALTH_CHECK_ENDPOINT, [
-            "type" => $type?->value,
-            "period" => $period?->value,
+            'type' => $type?->value,
+            'period' => $period?->value,
         ]);
     }
 

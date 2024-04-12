@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class BAASPIXDeletePixKeyTest extends TestCase
 {
-
     final public function testSuccess(): void
     {
         Http::fake(
@@ -31,12 +30,12 @@ class BAASPIXDeletePixKeyTest extends TestCase
         $this->assertEquals('SUCCESS', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => "SUCCESS",
-                "version" => "1.0.0",
+                'status' => 'SUCCESS',
+                'version' => '1.0.0',
             ],
             Response::HTTP_OK,
         );

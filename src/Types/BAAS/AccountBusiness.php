@@ -7,18 +7,24 @@ use WeDevBr\Celcoin\Types\Data;
 
 class AccountBusiness extends Data
 {
-
     public string $clientCode;
+
     public AccountOnboardingTypeEnum $accountOnboardingType;
+
     public string $documentNumber;
+
     public string $contactNumber;
+
     public string $businessEmail;
+
     public string $businessName;
+
     public string $tradingName;
+
     // /** @var Owner[] */
     public ?array $owner;
-    public ?Address $businessAddress;
 
+    public ?Address $businessAddress;
 
     public function __construct(array $data = [])
     {

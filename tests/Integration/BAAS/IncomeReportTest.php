@@ -8,7 +8,7 @@ use WeDevBr\Celcoin\Clients\CelcoinBAAS;
 use WeDevBr\Celcoin\Tests\GlobalStubs;
 use WeDevBr\Celcoin\Tests\TestCase;
 
-class IncomeReportTest  extends TestCase
+class IncomeReportTest extends TestCase
 {
     public function testSuccess()
     {
@@ -32,34 +32,34 @@ class IncomeReportTest  extends TestCase
     public static function stubSuccess(): array
     {
         return [
-            "version" => "1.0.0",
-            "status" => "SUCCESS",
-            "body" => [
-                "payerSource" => [
-                    "name" => "Celcoin Teste S/A",
-                    "documentNumber" => "123456"
+            'version' => '1.0.0',
+            'status' => 'SUCCESS',
+            'body' => [
+                'payerSource' => [
+                    'name' => 'Celcoin Teste S/A',
+                    'documentNumber' => '123456',
                 ],
-                "owner" => [
-                    "documentNumber" => "01234567890",
-                    "name" => "Nome Completo",
-                    "type" => "NATURAL_PERSON",
-                    "createDate" => "15-07-1986"
+                'owner' => [
+                    'documentNumber' => '01234567890',
+                    'name' => 'Nome Completo',
+                    'type' => 'NATURAL_PERSON',
+                    'createDate' => '15-07-1986',
                 ],
-                "account" => [
-                    "branch" => "1234",
-                    "account" => "123456"
+                'account' => [
+                    'branch' => '1234',
+                    'account' => '123456',
                 ],
-                "balances" => [
+                'balances' => [
                     [
-                        "calendarYear" => "2025",
-                        "amount" => 10.5,
-                        "currency" => "BRL",
-                        "type" => "SALDO"
-                    ]
+                        'calendarYear' => '2025',
+                        'amount' => 10.5,
+                        'currency' => 'BRL',
+                        'type' => 'SALDO',
+                    ],
                 ],
-                "incomeFile" => "string",
-                "fileType" => "string"
-            ]
+                'incomeFile' => 'string',
+                'fileType' => 'string',
+            ],
         ];
     }
 }

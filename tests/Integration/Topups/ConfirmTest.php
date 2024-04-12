@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Types\Topups\Confirm;
 
 class ConfirmTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -33,20 +32,20 @@ class ConfirmTest extends TestCase
         $response = $topups->confirm(
             817981234,
             new Confirm([
-                "externalNSU" => 1234,
-                "externalTerminal" => "teste2",
+                'externalNSU' => 1234,
+                'externalTerminal' => 'teste2',
             ]),
         );
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

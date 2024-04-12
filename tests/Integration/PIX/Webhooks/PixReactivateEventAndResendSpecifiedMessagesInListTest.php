@@ -26,7 +26,7 @@ class PixReactivateEventAndResendSpecifiedMessagesInListTest extends TestCase
          * @var Types\PixReactivateEventAndResendSpecifiedMessagesInList $params
          * @var WebhookEventEnum $webhookEventEnum
          */
-        [$params, $webhookEventEnum] = $this->callWebhookBase(fn() => self::stubSuccess());
+        [$params, $webhookEventEnum] = $this->callWebhookBase(fn () => self::stubSuccess());
 
         $pix = new Clients\CelcoinPixWebhooks();
         $response = $pix->reactivateEventAndResendSpecifiedMessagesInList($webhookEventEnum, $params);
@@ -34,9 +34,7 @@ class PixReactivateEventAndResendSpecifiedMessagesInListTest extends TestCase
     }
 
     /**
-     * @param Closure<PromiseInterface> $stub
-     * @param WebhookEventEnum $webhookEventEnum
-     *
+     * @param  Closure<PromiseInterface>  $stub
      * @return array<Types\PixReactivateEventAndResendSpecifiedMessagesInList, WebhookEventEnum>
      */
     private function callWebhookBase(
@@ -57,6 +55,7 @@ class PixReactivateEventAndResendSpecifiedMessagesInListTest extends TestCase
                 ) => $stub,
             ],
         );
+
         return [$params, $webhookEventEnum];
     }
 
@@ -76,6 +75,7 @@ class PixReactivateEventAndResendSpecifiedMessagesInListTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider notFoundErrorProvider
      */
     final public function testWebhookErrorNotFound(string $returnCode, Closure $stub): void

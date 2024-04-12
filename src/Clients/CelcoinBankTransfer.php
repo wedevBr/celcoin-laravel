@@ -11,16 +11,17 @@ use WeDevBr\Celcoin\Types\BankTransfer\Create;
 /**
  * Class BankTransfer
  * Essa funcionalidade permite realizar transferências de forma online, fazendo com que o envio junto ao banco destino seja realizado imediatamente e o cliente receba o status desta transferência no mesmo instante.
- * @package WeDevBr\Celcoin
  */
 class CelcoinBankTransfer extends CelcoinBaseApi
 {
-    const CREATE_ENDPOINT = '/v5/transactions/banktransfer';
-    const GET_STATUS_TRANSFER_ENDPOINT = '/v5/transactions/banktransfer/status-transfer/%d';
+    public const CREATE_ENDPOINT = '/v5/transactions/banktransfer';
+
+    public const GET_STATUS_TRANSFER_ENDPOINT = '/v5/transactions/banktransfer/status-transfer/%d';
 
     public function create(Create $data)
     {
         $body = Validator::validate($data->toArray(), BankTransferCreate::rules());
+
         return $this->post(
             self::CREATE_ENDPOINT,
             $body
@@ -34,7 +35,7 @@ class CelcoinBankTransfer extends CelcoinBaseApi
             [
                 'nsuExterno' => $nsuExterno,
                 'terminalIdExterno' => $terminalIdExterno,
-                'dataOperacao' => !empty($dataOperacao) ? $dataOperacao->format('Y-m-d') : null,
+                'dataOperacao' => ! empty($dataOperacao) ? $dataOperacao->format('Y-m-d') : null,
             ]
         );
     }

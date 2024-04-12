@@ -20,32 +20,45 @@ use WeDevBr\Celcoin\Types\BAAS\AccountRelease;
 /**
  * Class CelcoinBAAS
  * Banking as a Service, ou BaaS, é uma tecnologia cujo objetivo é permitir que qualquer empresa – independentemente do seu ramo de atuação – comece a oferecer produtos financeiros sem a necessidade de ser um banco ou instituição financeira.
- * @package WeDevBr\Celcoin
  */
 class CelcoinBAAS extends CelcoinBaseApi
 {
+    public const CREATE_ACCOUNT_NATURAL_PERSON = '/baas-onboarding/v1/account/natural-person/create';
 
-    const CREATE_ACCOUNT_NATURAL_PERSON = '/baas-onboarding/v1/account/natural-person/create';
-    const UPDATE_ACCOUNT_NATURAL_PERSON = '/baas-accountmanager/v1/account/natural-person?Account=%s&DocumentNumber=%s';
-    const GET_INFO_ACCOUNT_NATURAL_PERSON = '/baas-accountmanager/v1/account/fetch';
-    const GET_LIST_INFO_ACCOUNT_NATURAL_PERSON = '/baas-accountmanager/v1/account/fetch-all';
-    const CREATE_ACCOUNT_BUSINESS = '/baas-onboarding/v1/account/business/create';
-    const UPDATE_ACCOUNT_BUSINESS = '/baas-accountmanager/v1/account/business?Account=%s&DocumentNumber=%s';
-    const GET_INFO_ACCOUNT_BUSINESS = '/baas-accountmanager/v1/account/fetch-business';
-    const GET_LIST_INFO_ACCOUNT_BUSINESS = '/baas-accountmanager/v1/account/fetch-all-business';
-    const ACCOUNT_CHECK = '/baas-onboarding/v1/account/check';
-    const DISABLE_ACCOUNT = '/baas-accountmanager/v1/account/status?Account=%s&DocumentNumber=%s';
-    const ACTIVE_ACCOUNT = '/baas-accountmanager/v1/account/status?Account=%s&DocumentNumber=%s';
-    const DELETE_ACCOUNT = '/baas-accountmanager/v1/account/close?%s';
-    const GET_WALLET_BALANCE = '/baas-walletreports/v1/wallet/balance?Account=%s&DocumentNumber=%s';
-    const GET_WALLET_MOVEMENT = '/baas-walletreports/v1/wallet/movement';
-    const CREATE_RELEASE = '/baas-wallet-transactions-webservice/v1/wallet/entry/%s';
+    public const UPDATE_ACCOUNT_NATURAL_PERSON = '/baas-accountmanager/v1/account/natural-person?Account=%s&DocumentNumber=%s';
 
-    const INCOME_REPORT = '/baas-accountmanager/v1/account/income-report?Account=%s&CalendarYear=%s';
+    public const GET_INFO_ACCOUNT_NATURAL_PERSON = '/baas-accountmanager/v1/account/fetch';
+
+    public const GET_LIST_INFO_ACCOUNT_NATURAL_PERSON = '/baas-accountmanager/v1/account/fetch-all';
+
+    public const CREATE_ACCOUNT_BUSINESS = '/baas-onboarding/v1/account/business/create';
+
+    public const UPDATE_ACCOUNT_BUSINESS = '/baas-accountmanager/v1/account/business?Account=%s&DocumentNumber=%s';
+
+    public const GET_INFO_ACCOUNT_BUSINESS = '/baas-accountmanager/v1/account/fetch-business';
+
+    public const GET_LIST_INFO_ACCOUNT_BUSINESS = '/baas-accountmanager/v1/account/fetch-all-business';
+
+    public const ACCOUNT_CHECK = '/baas-onboarding/v1/account/check';
+
+    public const DISABLE_ACCOUNT = '/baas-accountmanager/v1/account/status?Account=%s&DocumentNumber=%s';
+
+    public const ACTIVE_ACCOUNT = '/baas-accountmanager/v1/account/status?Account=%s&DocumentNumber=%s';
+
+    public const DELETE_ACCOUNT = '/baas-accountmanager/v1/account/close?%s';
+
+    public const GET_WALLET_BALANCE = '/baas-walletreports/v1/wallet/balance?Account=%s&DocumentNumber=%s';
+
+    public const GET_WALLET_MOVEMENT = '/baas-walletreports/v1/wallet/movement';
+
+    public const CREATE_RELEASE = '/baas-wallet-transactions-webservice/v1/wallet/entry/%s';
+
+    public const INCOME_REPORT = '/baas-accountmanager/v1/account/income-report?Account=%s&CalendarYear=%s';
 
     public function createAccountNaturalPerson(AccountNaturalPerson $data)
     {
         $body = Validator::validate($data->toArray(), BAASAccountNaturalPerson::rules());
+
         return $this->post(
             self::CREATE_ACCOUNT_NATURAL_PERSON,
             $body
@@ -55,6 +68,7 @@ class CelcoinBAAS extends CelcoinBaseApi
     public function updateAccountNaturalPerson(string $account, string $documentNumber, AccountManagerNaturalPerson $data)
     {
         $body = Validator::validate($data->toArray(), BAASAccountManagerNaturalPerson::rules());
+
         return $this->put(
             sprintf(self::UPDATE_ACCOUNT_NATURAL_PERSON, $account, $documentNumber),
             $body
@@ -80,6 +94,7 @@ class CelcoinBAAS extends CelcoinBaseApi
     public function createAccountBusiness(AccountBusiness $data)
     {
         $body = Validator::validate($data->toArray(), BAASAccountBusiness::rules());
+
         return $this->post(
             self::CREATE_ACCOUNT_BUSINESS,
             $body
@@ -89,6 +104,7 @@ class CelcoinBAAS extends CelcoinBaseApi
     public function updateAccountBusiness(string $account, string $documentNumber, AccountManagerBusiness $data)
     {
         $body = Validator::validate($data->toArray(), BAASAccountManagerBusiness::rules());
+
         return $this->put(
             sprintf(self::UPDATE_ACCOUNT_BUSINESS, $account, $documentNumber),
             $body
@@ -144,6 +160,7 @@ class CelcoinBAAS extends CelcoinBaseApi
                 'Reason' => $reason,
             ]
         );
+
         return $this->delete(
             sprintf(self::DELETE_ACCOUNT, $params),
         );
@@ -166,18 +183,20 @@ class CelcoinBAAS extends CelcoinBaseApi
                 'DateFrom' => $dateFrom->format('Y-m-d'),
                 'DateTo' => $dateTo->format('Y-m-d'),
                 'Page' => $page,
-                'Limite' => $limit
+                'Limite' => $limit,
             ]
         );
     }
 
     /**
      * @return array|mixed
+     *
      * @throws RequestException
      */
     public function createRelease(string $account, AccountRelease $data)
     {
         $body = Validator::validate($data->toArray(), BAASAccountRelease::rules());
+
         return $this->post(
             sprintf(self::CREATE_RELEASE, $account),
             $body

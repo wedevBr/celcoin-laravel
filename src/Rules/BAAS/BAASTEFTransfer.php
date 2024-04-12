@@ -10,9 +10,9 @@ class BAASTEFTransfer
             'amount' => ['required', 'decimal:0,2', 'min:0.01'],
             'clientRequestId' => ['required', 'string', 'max:200'],
             'debitParty' => ['required', 'array'],
-            'debitParty.account' => ['required', 'string',],
+            'debitParty.account' => ['required', 'string'],
             'creditParty' => ['required', 'array'],
-            'creditParty.account' => ['required', 'string', 'different:debitParty.account',],
+            'creditParty.account' => ['required', 'string', 'different:debitParty.account'],
             'description' => ['sometimes', 'string'],
         ];
     }

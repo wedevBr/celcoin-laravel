@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBDeteleTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */
@@ -32,11 +31,12 @@ class COBDeteleTest extends TestCase
 
     private function stubSuccess(): PromiseInterface
     {
-        return Http::response([
-            'transactionId' => 817849688,
-            'status' => 200,
-            'message' => '200',
-        ],
+        return Http::response(
+            [
+                'transactionId' => 817849688,
+                'status' => 200,
+                'message' => '200',
+            ],
             Response::HTTP_OK,
         );
     }
@@ -69,10 +69,11 @@ class COBDeteleTest extends TestCase
 
     private function stubError(): PromiseInterface
     {
-        return Http::response([
-            'statusCode' => 404,
-            'message' => 'Resource not found',
-        ],
+        return Http::response(
+            [
+                'statusCode' => 404,
+                'message' => 'Resource not found',
+            ],
             Response::HTTP_NOT_FOUND,
         );
     }

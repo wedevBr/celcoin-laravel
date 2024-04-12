@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class RemoveWebhooksTest extends TestCase
 {
-
     final public function testSuccess(): void
     {
         Http::fake(
@@ -32,12 +31,12 @@ class RemoveWebhooksTest extends TestCase
         $this->assertEquals('SUCCESS', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "version" => "1.0.0",
-                "status" => "SUCCESS",
+                'version' => '1.0.0',
+                'status' => 'SUCCESS',
             ],
             Response::HTTP_OK,
         );

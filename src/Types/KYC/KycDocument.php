@@ -9,7 +9,9 @@ use WeDevBr\Celcoin\Types\Data;
 class KycDocument extends Data implements Attachable
 {
     public string $fileName;
+
     public string $contents;
+
     public ?File $file;
 
     public string $field;
@@ -17,7 +19,7 @@ class KycDocument extends Data implements Attachable
     public function __construct(?File $file, string $field)
     {
         $data = [];
-        if (!empty($file)) {
+        if (! empty($file)) {
             $data['contents'] = $file->getContent();
             $data['fileName'] = $file->getFilename();
             $data['field'] = $field;

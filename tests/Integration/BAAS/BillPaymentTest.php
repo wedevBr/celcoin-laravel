@@ -45,7 +45,6 @@ class BillPaymentTest extends TestCase
 
         $result = $client->makePayment($billet);
 
-
         $this->assertEquals('PROCESSING', $result['status']);
         $this->assertEquals('ce9b8d9b-0617-42e1-b500-80bf9d8154cf', $result['body']['id']);
     }
@@ -82,49 +81,49 @@ class BillPaymentTest extends TestCase
     public static function makePaymentStubSuccess(): PromiseInterface
     {
         return Http::response([
-            "body" => [
-                "id" => "ce9b8d9b-0617-42e1-b500-80bf9d8154cf",
-                "clientRequestId" => "5555",
-                "amount" => 59.9,
-                "transactionIdAuthorize" => 1234,
-                "tags" => [
+            'body' => [
+                'id' => 'ce9b8d9b-0617-42e1-b500-80bf9d8154cf',
+                'clientRequestId' => '5555',
+                'amount' => 59.9,
+                'transactionIdAuthorize' => 1234,
+                'tags' => [
                     [
-                        "key" => "PaymentType",
-                        "value" => "Contas Internas",
+                        'key' => 'PaymentType',
+                        'value' => 'Contas Internas',
                     ],
                 ],
-                "barCodeInfo" => [
-                    "digitable" => "23793381286008301352856000063307789840000150000",
+                'barCodeInfo' => [
+                    'digitable' => '23793381286008301352856000063307789840000150000',
                 ],
             ],
-            "status" => "PROCESSING",
-            "version" => "1.0.0",
+            'status' => 'PROCESSING',
+            'version' => '1.0.0',
         ], 200);
     }
 
     public static function getPaymentStubSuccess(): PromiseInterface
     {
         return Http::response([
-            "body" => [
-                "id" => "10a806a1-267g-5803-93e3-fc215a8b156f",
-                "clientRequestId" => "clientRequest01",
-                "account" => 321,
-                "amount" => 5,
-                "transactionIdAuthorize" => 123,
-                "hasOccurrence" => false,
-                "tags" => [
+            'body' => [
+                'id' => '10a806a1-267g-5803-93e3-fc215a8b156f',
+                'clientRequestId' => 'clientRequest01',
+                'account' => 321,
+                'amount' => 5,
+                'transactionIdAuthorize' => 123,
+                'hasOccurrence' => false,
+                'tags' => [
                     [
-                        "key" => "PaymentType",
-                        "value" => "Contas Internas",
+                        'key' => 'PaymentType',
+                        'value' => 'Contas Internas',
                     ],
                 ],
-                "barCodeInfo" => [
-                    "digitable" => "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+                'barCodeInfo' => [
+                    'digitable' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
                 ],
-                "paymentDate" => "2023-09-01T00:00:00Z",
+                'paymentDate' => '2023-09-01T00:00:00Z',
             ],
-            "status" => "CONFIRMED",
-            "version" => "1.1.0",
+            'status' => 'CONFIRMED',
+            'version' => '1.1.0',
         ], 200);
     }
 }

@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetStatusTransferTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -33,21 +32,21 @@ class GetStatusTransferTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "authentication" => 0,
-                "createDate" => "2023-07-14T18:15:24",
-                "refundReason" => "Value in Creditor Identifier is incorrect",
-                "externalNSU" => "1234",
-                "transactionId" => 817981763,
-                "stateCompensation" => "Processado com erro",
-                "externalTerminal" => "teste2",
-                "typeTransactions" => null,
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'authentication' => 0,
+                'createDate' => '2023-07-14T18:15:24',
+                'refundReason' => 'Value in Creditor Identifier is incorrect',
+                'externalNSU' => '1234',
+                'transactionId' => 817981763,
+                'stateCompensation' => 'Processado com erro',
+                'externalTerminal' => 'teste2',
+                'typeTransactions' => null,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

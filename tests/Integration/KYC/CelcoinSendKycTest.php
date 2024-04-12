@@ -84,17 +84,16 @@ class CelcoinSendKycTest extends TestCase
     }
 
     public function getKycBody(
-        string $nifNumber = null,
-        KycDocumentEnum $fileType = null,
-        string $fileFront = null,
-        string $cnpj = null,
+        ?string $nifNumber = null,
+        ?KycDocumentEnum $fileType = null,
+        ?string $fileFront = null,
+        ?string $cnpj = null,
         bool $addVerse = true
-    ): array
-    {
+    ): array {
         $file = $this->front;
 
         $body = [
-            'documentnumber' => $nifNumber ?? "11122233344",
+            'documentnumber' => $nifNumber ?? '11122233344',
             'filetype' => $fileType ?? KycDocumentEnum::CONTRATO_SOCIAL,
             'front' => $fileFront ?? $this->getFile($file->path()),
         ];
@@ -115,7 +114,7 @@ class CelcoinSendKycTest extends TestCase
     {
         return Http::response([
             'status' => 200,
-            'message' => "Arquivo enviado com sucesso",
+            'message' => 'Arquivo enviado com sucesso',
         ]);
     }
 
@@ -135,7 +134,7 @@ class CelcoinSendKycTest extends TestCase
         ], 500);
     }
 
-    public function getFile(string $path = null): KycDocument
+    public function getFile(?string $path = null): KycDocument
     {
         return new KycDocument(new File($path), 'verse');
     }

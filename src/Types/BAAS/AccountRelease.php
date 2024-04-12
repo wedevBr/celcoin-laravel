@@ -8,8 +8,11 @@ use WeDevBr\Celcoin\Types\Data;
 class AccountRelease extends Data
 {
     public string $clientCode;
+
     public float $amount;
+
     public TypeReleaseEnum $type;
+
     public ?string $description;
 
     public function __construct(array $data = [])

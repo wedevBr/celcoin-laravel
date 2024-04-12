@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetWalletBalanceTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -33,14 +32,14 @@ class GetWalletBalanceTest extends TestCase
         $this->assertEquals('SUCCESS', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => "SUCCESS",
-                "version" => "1.0.0",
-                "body" => [
-                    "amount" => 1.1,
+                'status' => 'SUCCESS',
+                'version' => '1.0.0',
+                'body' => [
+                    'amount' => 1.1,
                 ],
             ],
             Response::HTTP_OK,

@@ -7,12 +7,19 @@ use WeDevBr\Celcoin\Types\Data;
 class COB extends Data
 {
     public string $clientRequestId;
+
     public string $payerQuestion;
+
     public string $key;
+
     public string $locationId;
+
     public Debtor $debtor;
+
     public Amount|float $amount;
+
     public Calendar $calendar;
+
     /**
      * @var AdditionalInformation[]
      */

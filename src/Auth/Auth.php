@@ -8,8 +8,6 @@ use WeDevBr\Celcoin\Events\CelcoinAuthenticatedEvent;
 
 /**
  * Class Auth
- *
- * @package WeDevBr\Celcoin
  */
 class Auth
 {
@@ -33,17 +31,18 @@ class Auth
 
     /** @var ?string */
     protected ?string $tokenExpiry = null;
+
     /**
      * @var ?string
      */
     protected ?string $mtlsPassphrase = null;
+
     protected ?string $mtlsCert = null;
+
     protected ?string $mtlsKey = null;
 
     /**
      * Returns the instance of this class
-     *
-     * @return self
      */
     public static function login(): self
     {
@@ -56,104 +55,95 @@ class Auth
         return self::$login;
     }
 
-    /**
-     * @return self
-     */
     public function setClientCredentials(): self
     {
         $this->clientId = $this->clientId ?? config('celcoin')['client_id'];
         $this->clientSecret = $this->clientSecret ?? config('celcoin')['client_secret'];
         $this->mtlsPassphrase = $this->mtlsPassphrase ?? config('celcoin.mtls_passphrase');
+
         return $this;
     }
 
     /**
-     * @param null|string $clientId
+     * @param  null|string  $clientId
      * @return self
      */
     public function setClientId($clientId)
     {
         $this->clientId = $clientId;
+
         return $this;
     }
 
     /**
-     * @param null|string $clientSecret
+     * @param  null|string  $clientSecret
      * @return self
      */
     public function setClientSecret($clientSecret)
     {
         $this->clientSecret = $clientSecret;
+
         return $this;
     }
 
     /**
-     * @param string $grantType
      * @return self
      */
     public function setGrantType(string $grantType)
     {
         $this->grantType = $grantType;
+
         return $this;
     }
 
     /**
-     * @param string $passPhrase
      * @return $this
      */
     public function setPassphrase(string $passPhrase): self
     {
         $this->mtlsPassphrase = $passPhrase;
+
         return $this;
     }
 
-    /**
-     * @param string $token
-     * @return self
-     */
     public function setToken(string $token): self
     {
         $this->token = $token;
+
         return $this;
     }
 
     /**
      * Reset token for new request
-     *
-     * @return self
      */
     public function resetToken(): self
     {
         $this->token = null;
+
         return $this;
     }
 
     /**
      * @return ?string
+     *
      * @throws RequestException
      */
     public function getToken(): ?string
     {
-        if (now()->unix() > $this->tokenExpiry || !$this->token) {
+        if (now()->unix() > $this->tokenExpiry || ! $this->token) {
             $this->auth();
         }
 
         return $this->token;
     }
 
-    /**
-     * @param string $tokenExpiry
-     * @return self
-     */
     public function setTokenExpiry(string $tokenExpiry): self
     {
         $this->tokenExpiry = $tokenExpiry;
+
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
     public function getTokenExpiry(): mixed
     {
         return $this->tokenExpiry;
@@ -162,48 +152,36 @@ class Auth
     public function setCertPath(string $path): self
     {
         $this->mtlsCert = $path;
+
         return $this;
     }
 
     /**
      * Set the cert.pem file path
-     * @param string $path
-     * @return self
      */
     public function setKeyPath(string $path): self
     {
         $this->mtlsKey = $path;
+
         return $this;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getMtlsKeyPath(): ?string
     {
         return $this->mtlsKey;
     }
 
-    /**
-     * @return string|null
-     */
     public function getMtlsPassphrase(): ?string
     {
         return $this->mtlsPassphrase;
     }
 
-
-    /**
-     * @return string|null
-     */
     public function getMtlsCertPath(): ?string
     {
         return $this->mtlsCert;
     }
 
     /**
-     * @return void
      * @throws RequestException
      */
     private function auth(): void
@@ -213,7 +191,7 @@ class Auth
         $body = [
             'grant_type' => $this->grantType,
             'client_secret' => $this->clientSecret,
-            'client_id' => $this->clientId
+            'client_id' => $this->clientId,
         ];
 
         $request = Http::asForm();
@@ -244,5 +222,4 @@ class Auth
 
         event(new CelcoinAuthenticatedEvent($this->token, $this->tokenExpiry));
     }
-
 }

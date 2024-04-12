@@ -33,26 +33,26 @@ class HealthCheckTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "HealthCheck" => [
+                'HealthCheck' => [
                     [
-                        "kpiAvailability" => -1.0,
-                        "statusKPIAvailability" => -1,
-                        "statusAverageTime" => -1,
-                        "averageTime" => -1.0,
-                        "thresholdKPIAvailabilityDown" => 80.0,
-                        "thresholdKPIAvailabilityUP" => 99.0,
-                        "thresholdAverageTimeDown" => 12.0,
-                        "thresholdAverageTimeUP" => 2.5,
-                        "transaction" => "CONSULTADADOSCONTA",
+                        'kpiAvailability' => -1.0,
+                        'statusKPIAvailability' => -1,
+                        'statusAverageTime' => -1,
+                        'averageTime' => -1.0,
+                        'thresholdKPIAvailabilityDown' => 80.0,
+                        'thresholdKPIAvailabilityUP' => 99.0,
+                        'thresholdAverageTimeDown' => 12.0,
+                        'thresholdAverageTimeUP' => 2.5,
+                        'transaction' => 'CONSULTADADOSCONTA',
                     ],
                 ],
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

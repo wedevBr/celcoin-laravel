@@ -32,20 +32,20 @@ class BanksTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "banks" => [
+                'banks' => [
                     [
-                        "institutionCode" => 604,
-                        "description" => "604 - 604 - BANCO INDUSTRIAL DO BRASIL S. A.",
-                        "institutionName" => "604 - BANCO INDUSTRIAL DO BRASIL S. A.",
+                        'institutionCode' => 604,
+                        'description' => '604 - 604 - BANCO INDUSTRIAL DO BRASIL S. A.',
+                        'institutionName' => '604 - BANCO INDUSTRIAL DO BRASIL S. A.',
                     ],
                 ],
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

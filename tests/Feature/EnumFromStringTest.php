@@ -8,7 +8,6 @@ use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
 class EnumFromStringTest extends TestCase
 {
-
     /**
      * @return void
      */

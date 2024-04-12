@@ -17,7 +17,7 @@ class Create
             'phone' => ['required', 'array'],
             'phone.stateCode' => ['required', 'numeric'],
             'phone.countryCode' => ['required', 'numeric'],
-            'phone.number' => ['required', 'string']
+            'phone.number' => ['required', 'string'],
         ];
     }
 }

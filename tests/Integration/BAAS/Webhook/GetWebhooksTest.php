@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetWebhooksTest extends TestCase
 {
-
     final public function testSuccess(): void
     {
         Http::fake(
@@ -32,25 +31,25 @@ class GetWebhooksTest extends TestCase
         $this->assertEquals('SUCCESS', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "body" => [
-                    "subscriptions" => [
+                'body' => [
+                    'subscriptions' => [
                         0 => [
-                            "subscriptionId" => "64b13326a90a5b4a702dac3f",
-                            "entity" => "pix-payment-out",
-                            "webhookUrl" => "http://uoleti.io/transaction/webhook/LEKMZqMJUjBaVen1kyb9",
-                            "active" => true,
-                            "createDate" => "2023-07-14T08:36:06.292Z",
-                            "lastUpdateDate" => null,
-                            "auth" => null,
+                            'subscriptionId' => '64b13326a90a5b4a702dac3f',
+                            'entity' => 'pix-payment-out',
+                            'webhookUrl' => 'http://uoleti.io/transaction/webhook/LEKMZqMJUjBaVen1kyb9',
+                            'active' => true,
+                            'createDate' => '2023-07-14T08:36:06.292Z',
+                            'lastUpdateDate' => null,
+                            'auth' => null,
                         ],
                     ],
                 ],
-                "status" => "SUCCESS",
-                "version" => "1.0.0",
+                'status' => 'SUCCESS',
+                'version' => '1.0.0',
             ],
             Response::HTTP_OK,
         );

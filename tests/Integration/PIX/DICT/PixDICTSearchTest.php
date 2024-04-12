@@ -16,7 +16,6 @@ use function PHPUnit\Framework\assertEquals;
 
 class PixDICTSearchTest extends TestCase
 {
-
     public function testSearchDICT()
     {
         Http::fake(
@@ -35,112 +34,112 @@ class PixDICTSearchTest extends TestCase
     private static function stubSuccess(): PromiseInterface
     {
         return Http::response([
-            "key" => "testepix@celcoin.com.br",
-            "keyType" => "EMAIL",
-            "account" => [
-                "openingDate" => "2020-08-13T13:49:03Z",
-                "participant" => "30306294",
-                "branch" => 20,
-                "accountNumber" => "42161",
-                "accountType" => "CACC",
+            'key' => 'testepix@celcoin.com.br',
+            'keyType' => 'EMAIL',
+            'account' => [
+                'openingDate' => '2020-08-13T13:49:03Z',
+                'participant' => '30306294',
+                'branch' => 20,
+                'accountNumber' => '42161',
+                'accountType' => 'CACC',
             ],
-            "owner" => [
-                "taxIdNumber" => "12312312300",
-                "type" => "NATURAL_PERSON",
-                "name" => "Teste Celcoin",
-                "tradeName" => "",
+            'owner' => [
+                'taxIdNumber' => '12312312300',
+                'type' => 'NATURAL_PERSON',
+                'name' => 'Teste Celcoin',
+                'tradeName' => '',
             ],
-            "endtoendid" => "E1393589320220720205100627741380",
-            "creationDate" => "2021-02-24T20:58:27.376Z",
-            "keyOwnershipDate" => "2021-02-24T20:58:27.375Z",
-            "responseTime" => "2022-07-20T20:51:59.427Z",
-            "openClaimCreationDate" => null,
-            "statistics" => [
-                "lastUpdated" => "2022-07-20T09:01:10.426Z",
-                "counters" => [
+            'endtoendid' => 'E1393589320220720205100627741380',
+            'creationDate' => '2021-02-24T20:58:27.376Z',
+            'keyOwnershipDate' => '2021-02-24T20:58:27.375Z',
+            'responseTime' => '2022-07-20T20:51:59.427Z',
+            'openClaimCreationDate' => null,
+            'statistics' => [
+                'lastUpdated' => '2022-07-20T09:01:10.426Z',
+                'counters' => [
                     [
-                        "type" => "SETTLEMENTS",
-                        "by" => "KEY",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'SETTLEMENTS',
+                        'by' => 'KEY',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "SETTLEMENTS",
-                        "by" => "OWNER",
-                        "d3" => "0",
-                        "d30" => "2",
-                        "m6" => "78",
+                        'type' => 'SETTLEMENTS',
+                        'by' => 'OWNER',
+                        'd3' => '0',
+                        'd30' => '2',
+                        'm6' => '78',
                     ],
                     [
-                        "type" => "SETTLEMENTS",
-                        "by" => "ACCOUNT",
-                        "d3" => "0",
-                        "d30" => "2",
-                        "m6" => "78",
+                        'type' => 'SETTLEMENTS',
+                        'by' => 'ACCOUNT',
+                        'd3' => '0',
+                        'd30' => '2',
+                        'm6' => '78',
                     ],
                     [
-                        "type" => "REPORTED_FRAUDS",
-                        "by" => "KEY",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'REPORTED_FRAUDS',
+                        'by' => 'KEY',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "REPORTED_FRAUDS",
-                        "by" => "OWNER",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'REPORTED_FRAUDS',
+                        'by' => 'OWNER',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "REPORTED_FRAUDS",
-                        "by" => "ACCOUNT",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'REPORTED_FRAUDS',
+                        'by' => 'ACCOUNT',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "CONFIRMED_FRAUDS",
-                        "by" => "KEY",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'CONFIRMED_FRAUDS',
+                        'by' => 'KEY',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "CONFIRMED_FRAUDS",
-                        "by" => "OWNER",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'CONFIRMED_FRAUDS',
+                        'by' => 'OWNER',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "CONFIRMED_FRAUDS",
-                        "by" => "ACCOUNT",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'CONFIRMED_FRAUDS',
+                        'by' => 'ACCOUNT',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "REJECTED",
-                        "by" => "KEY",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'REJECTED',
+                        'by' => 'KEY',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "REJECTED",
-                        "by" => "OWNER",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'REJECTED',
+                        'by' => 'OWNER',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                     [
-                        "type" => "REJECTED",
-                        "by" => "ACCOUNT",
-                        "d3" => "0",
-                        "d30" => "0",
-                        "m6" => "0",
+                        'type' => 'REJECTED',
+                        'by' => 'ACCOUNT',
+                        'd3' => '0',
+                        'd30' => '0',
+                        'm6' => '0',
                     ],
                 ],
             ],
@@ -174,8 +173,8 @@ class PixDICTSearchTest extends TestCase
     private static function stubNotFoundData(): PromiseInterface
     {
         return Http::response([
-            "code" => "909",
-            "description" => "Não foram encontrados dados para a chave informada",
+            'code' => '909',
+            'description' => 'Não foram encontrados dados para a chave informada',
         ], Response::HTTP_BAD_REQUEST);
     }
 
@@ -197,8 +196,8 @@ class PixDICTSearchTest extends TestCase
     private static function stubTechnicalProblem(): PromiseInterface
     {
         return Http::response([
-            "code" => "513",
-            "description" => "Ocorreu um problema ao tentar comunicar o parceiro.",
+            'code' => '513',
+            'description' => 'Ocorreu um problema ao tentar comunicar o parceiro.',
         ], Response::HTTP_BAD_REQUEST);
     }
 

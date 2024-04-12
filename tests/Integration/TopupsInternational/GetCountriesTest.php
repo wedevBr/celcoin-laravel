@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetCountriesTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -33,20 +32,20 @@ class GetCountriesTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "countrys" => [
+                'countrys' => [
                     [
-                        "flagURL" => "https://restcountries.eu/data/guf.svg",
-                        "code" => "+594",
-                        "name" => "French Guiana",
+                        'flagURL' => 'https://restcountries.eu/data/guf.svg',
+                        'code' => '+594',
+                        'name' => 'French Guiana',
                     ],
                 ],
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

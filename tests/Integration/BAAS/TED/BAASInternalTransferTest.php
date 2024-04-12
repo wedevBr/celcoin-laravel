@@ -29,15 +29,15 @@ class BAASInternalTransferTest extends TestCase
 
         $response = $ted->internalTransfer(
             new TEFTransfer([
-                "amount" => 4.00,
-                "clientRequestId" => "1234",
-                "debitParty" => [
-                    "account" => "300541976902",
+                'amount' => 4.00,
+                'clientRequestId' => '1234',
+                'debitParty' => [
+                    'account' => '300541976902',
                 ],
-                "creditParty" => [
-                    "account" => "300541976910",
+                'creditParty' => [
+                    'account' => '300541976910',
                 ],
-                "description" => "transferencia para o churrasco",
+                'description' => 'transferencia para o churrasco',
             ]),
         );
 
@@ -52,7 +52,7 @@ class BAASInternalTransferTest extends TestCase
                 sprintf(
                     '%s%s',
                     config('api_url'),
-                    CelcoinBAASTED::GET_STATUS_INTERNAL_TRANSFER_ENDPOINT . '?Id=222dbad8-c309-4f52-af62-8bfbe945ca2d',
+                    CelcoinBAASTED::GET_STATUS_INTERNAL_TRANSFER_ENDPOINT.'?Id=222dbad8-c309-4f52-af62-8bfbe945ca2d',
                 ) => self::stubSuccess(),
             ],
         );
@@ -63,32 +63,32 @@ class BAASInternalTransferTest extends TestCase
         $this->assertEquals('222dbad8-c309-4f52-af62-8bfbe945ca2d', $response['body']['id']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => "PROCESSING",
-                "version" => "1.0.0",
-                "body" => [
-                    "id" => "222dbad8-c309-4f52-af62-8bfbe945ca2d",
-                    "amount" => 4,
-                    "clientRequestId" => "1234",
-                    "endToEndId" => "string",
-                    "debitParty" => [
-                        "account" => "300541976902",
-                        "branch" => "0001",
-                        "taxId" => "09876543210",
-                        "name" => "Mateus",
-                        "bank" => "13935893",
+                'status' => 'PROCESSING',
+                'version' => '1.0.0',
+                'body' => [
+                    'id' => '222dbad8-c309-4f52-af62-8bfbe945ca2d',
+                    'amount' => 4,
+                    'clientRequestId' => '1234',
+                    'endToEndId' => 'string',
+                    'debitParty' => [
+                        'account' => '300541976902',
+                        'branch' => '0001',
+                        'taxId' => '09876543210',
+                        'name' => 'Mateus',
+                        'bank' => '13935893',
                     ],
-                    "creditParty" => [
-                        "bank" => "30306294",
-                        "account" => "300541976910",
-                        "branch" => "0001",
-                        "taxId" => "01234567890",
-                        "name" => "Noelí Valência",
+                    'creditParty' => [
+                        'bank' => '30306294',
+                        'account' => '300541976910',
+                        'branch' => '0001',
+                        'taxId' => '01234567890',
+                        'name' => 'Noelí Valência',
                     ],
-                    "description" => "transferencia para o churrasco",
+                    'description' => 'transferencia para o churrasco',
                 ],
             ],
             Response::HTTP_OK,

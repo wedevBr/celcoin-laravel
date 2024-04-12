@@ -4,6 +4,7 @@ namespace WeDevBr\Celcoin\Tests;
 
 use Dotenv\Dotenv;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Illuminate\Support\Facades\Http;
 use Orchestra\Testbench\Concerns\CreatesApplication;
 use WeDevBr\Celcoin\CelcoinServiceProvider;
 
@@ -11,12 +12,10 @@ abstract class TestCase extends BaseTestCase
 {
     use CreatesApplication;
 
-    /**
-     * @return void
-     */
     public function setUp(): void
     {
         parent::setUp();
+        Http::preventStrayRequests();
     }
 
     protected function getPackageProviders($app)
@@ -28,7 +27,7 @@ abstract class TestCase extends BaseTestCase
 
     protected function getEnvironmentSetUp($app)
     {
-        $root = __DIR__ . '/../';
+        $root = __DIR__.'/../';
         $dotenv = Dotenv::createImmutable($root);
         $dotenv->safeLoad();
         $app['config']->set('cache.default', env('CACHE_DRIVER', 'file'));

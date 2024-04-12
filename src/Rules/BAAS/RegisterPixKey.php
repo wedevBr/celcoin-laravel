@@ -11,9 +11,9 @@ class RegisterPixKey extends Data
     public static function rules()
     {
         return [
-            "account" => ['required', 'string'],
-            "keyType" => ['required', Rule::enum(PixKeyTypeEnum::class)],
-            "key" => ['required_unless:keyType,EVP', 'string'],
+            'account' => ['required', 'string'],
+            'keyType' => ['required', Rule::enum(PixKeyTypeEnum::class)],
+            'key' => ['required_unless:keyType,EVP', 'string', 'nullable'],
         ];
     }
 }

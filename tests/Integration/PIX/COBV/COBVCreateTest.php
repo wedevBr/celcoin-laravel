@@ -38,59 +38,59 @@ class COBVCreateTest extends TestCase
     private static function stubSuccess(): PromiseInterface
     {
         return Http::response([
-            "transactionIdentification" => "kk6g232xel65a0daee4dd13kk9189382",
-            "transactionId" => 9189382,
-            "clientRequestId" => "9b26edb7cf254db09f5449c94bf13abc",
-            "status" => "ACTIVE",
-            "lastUpdate" => "2022-03-21T14:27:58.2106288+00:00",
-            "payerQuestion" => null,
-            "additionalInformation" => null,
-            "debtor" => [
-                "name" => "Fulano de Tal",
-                "cpf" => null,
-                "cnpj" => "61360961000100",
+            'transactionIdentification' => 'kk6g232xel65a0daee4dd13kk9189382',
+            'transactionId' => 9189382,
+            'clientRequestId' => '9b26edb7cf254db09f5449c94bf13abc',
+            'status' => 'ACTIVE',
+            'lastUpdate' => '2022-03-21T14:27:58.2106288+00:00',
+            'payerQuestion' => null,
+            'additionalInformation' => null,
+            'debtor' => [
+                'name' => 'Fulano de Tal',
+                'cpf' => null,
+                'cnpj' => '61360961000100',
             ],
-            "amount" => [
-                "original" => 15.63,
-                "discount" => [
-                    "discountDateFixed" => [
+            'amount' => [
+                'original' => 15.63,
+                'discount' => [
+                    'discountDateFixed' => [
                         [
-                            "date" => "2022-03-21T00:00:00",
-                            "amountPerc" => "1.00",
+                            'date' => '2022-03-21T00:00:00',
+                            'amountPerc' => '1.00',
                         ],
                     ],
-                    "modality" => "FIXED_VALUE_UNTIL_THE_DATES_INFORMED",
+                    'modality' => 'FIXED_VALUE_UNTIL_THE_DATES_INFORMED',
                 ],
-                "abatement" => null,
-                "fine" => null,
-                "interest" => null,
+                'abatement' => null,
+                'fine' => null,
+                'interest' => null,
             ],
-            "location" => [
-                "merchant" => [
-                    "postalCode" => "01201005",
-                    "city" => "Barueri",
-                    "merchantCategoryCode" => "0000",
-                    "name" => "Celcoin Pagamentos",
+            'location' => [
+                'merchant' => [
+                    'postalCode' => '01201005',
+                    'city' => 'Barueri',
+                    'merchantCategoryCode' => '0000',
+                    'name' => 'Celcoin Pagamentos',
                 ],
-                "url" => "api-h.developer.btgpactual.com/v1/p/v2/cobv/8767107ce1db49fdb1058224e00c4ab1",
-                "emv" => "00020101021226980014br.gov.bcb.pix2576api-h.developer.btgpactual.com/v1/p/v2/cobv/8767107ce1db49fdb1058224e00c4ab15204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***630411F9",
-                "type" => "COBV",
-                "locationId" => "55845",
-                "id" => null,
+                'url' => 'api-h.developer.btgpactual.com/v1/p/v2/cobv/8767107ce1db49fdb1058224e00c4ab1',
+                'emv' => '00020101021226980014br.gov.bcb.pix2576api-h.developer.btgpactual.com/v1/p/v2/cobv/8767107ce1db49fdb1058224e00c4ab15204000053039865802BR5918Celcoin Pagamentos6007Barueri61080120100562070503***630411F9',
+                'type' => 'COBV',
+                'locationId' => '55845',
+                'id' => null,
             ],
-            "key" => "testepix@celcoin.com.br",
-            "receiver" => [
-                "name" => "João da Silva",
-                "fantasyName" => "Nome de Comercial",
-                "cpf" => null,
-                "cnpj" => "60904237000129",
+            'key' => 'testepix@celcoin.com.br',
+            'receiver' => [
+                'name' => 'João da Silva',
+                'fantasyName' => 'Nome de Comercial',
+                'cpf' => null,
+                'cnpj' => '60904237000129',
             ],
-            "calendar" => [
-                "expirationAfterPayment" => "10",
-                "createdAt" => "0001-01-01T00:00:00",
-                "dueDate" => "2022-03-22T00:00:00",
+            'calendar' => [
+                'expirationAfterPayment' => '10',
+                'createdAt' => '0001-01-01T00:00:00',
+                'dueDate' => '2022-03-22T00:00:00',
             ],
-            "createAt" => "2022-03-21T14:27:58.2106288+00:00",
+            'createAt' => '2022-03-21T14:27:58.2106288+00:00',
         ], Response::HTTP_OK);
     }
 
@@ -105,7 +105,7 @@ class COBVCreateTest extends TestCase
         ]);
         $cobv->debtor = new Debtor([
             'name' => 'Fulano de Tal',
-            "cnpj" => "61360961000100",
+            'cnpj' => '61360961000100',
             'city' => 'Barueri',
             'publicArea' => 'Avenida Brasil',
             'state' => 'SP',
@@ -119,7 +119,7 @@ class COBVCreateTest extends TestCase
             'city' => 'Barueri',
             'publicArea' => 'Avenida Brasil',
             'state' => 'SP',
-            'fantasyName' => "Nome de Comercial",
+            'fantasyName' => 'Nome de Comercial',
         ]);
 
         return $cobv;
@@ -147,8 +147,8 @@ class COBVCreateTest extends TestCase
     private static function stubDueDateLessCurrentDate(): PromiseInterface
     {
         return Http::response([
-            "message" => "The Calendar.DueDate field cannot be less than the current date.",
-            "errorCode" => "PCE003",
+            'message' => 'The Calendar.DueDate field cannot be less than the current date.',
+            'errorCode' => 'PCE003',
         ], Response::HTTP_BAD_REQUEST);
     }
 
@@ -181,8 +181,8 @@ class COBVCreateTest extends TestCase
     private static function stubDiscountDateFixedLessCurrentDate(): PromiseInterface
     {
         return Http::response([
-            "message" => "The Discount.DiscountDateFixed.AmountPerc field cannot be less than the current date.",
-            "errorCode" => "PCE003",
+            'message' => 'The Discount.DiscountDateFixed.AmountPerc field cannot be less than the current date.',
+            'errorCode' => 'PCE003',
         ], Response::HTTP_BAD_REQUEST);
     }
 
@@ -204,8 +204,8 @@ class COBVCreateTest extends TestCase
     private static function stubPixCollectionForSameLocation(): PromiseInterface
     {
         return Http::response([
-            "message" => "Can't create a new PixCollectionDueDate when there is another Pix Collection active with the same location.",
-            "errorCode" => "PBE318",
+            'message' => "Can't create a new PixCollectionDueDate when there is another Pix Collection active with the same location.",
+            'errorCode' => 'PBE318',
         ], Response::HTTP_BAD_REQUEST);
     }
 }

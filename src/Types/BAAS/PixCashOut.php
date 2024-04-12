@@ -11,15 +11,25 @@ use WeDevBr\Celcoin\Types\Data;
 class PixCashOut extends Data
 {
     public float $amount;
+
     public string $clientCode;
+
     public ?string $transactionIdentification;
+
     public ?string $endToEndId;
+
     public InitiationTypeEnum $initiationType;
+
     public PaymentTypeEnum $paymentType;
+
     public UrgencyEnum $urgency;
+
     public TransactionTypeEnum $transactionType;
+
     public DebitParty $debitParty;
+
     public CreditParty $creditParty;
+
     public ?string $remittanceInformation;
 
     public function __construct(array $data = [])

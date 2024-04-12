@@ -99,15 +99,13 @@ class COBFetchTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
     private static function stubNotFound(): PromiseInterface
     {
-        return Http::response([
-            'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
-            'errorCode' => 'VL002',
-        ],
+        return Http::response(
+            [
+                'message' => 'Não foi possível localizar a cobrança associada ao parâmetro informado.',
+                'errorCode' => 'VL002',
+            ],
             Response::HTTP_BAD_REQUEST,
         );
     }

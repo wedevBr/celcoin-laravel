@@ -22,7 +22,7 @@ class TEDTransfer
             'creditParty.accountType' => ['required', 'string'],
             'creditParty.personType' => ['required', 'string'],
             'clientFinality' => ['required', 'string'],
-            'description' => ['some', 'required_if:clientFinality,' . ClientFinalityEnum::OTHERS->value, 'string'],
+            'description' => ['some', 'required_if:clientFinality,'.ClientFinalityEnum::OTHERS->value, 'string'],
         ];
     }
 }

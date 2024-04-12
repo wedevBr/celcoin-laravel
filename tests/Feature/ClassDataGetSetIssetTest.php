@@ -9,7 +9,6 @@ use WeDevBr\Celcoin\Types\BAAS\RegisterWebhooks;
 
 class ClassDataGetSetIssetTest extends TestCase
 {
-
     public function testSuccessGetSetData()
     {
         $data = new RegisterWebhooks([
@@ -45,132 +44,132 @@ class ClassDataGetSetIssetTest extends TestCase
                 'login' => 'login_teste',
                 'pwd' => 'pwd_teste',
                 'type' => 'type_teste',
-                "attributes" => [],
+                'attributes' => [],
             ],
-            "attributes" => [],
+            'attributes' => [],
         ], $data->toArray());
     }
 
     public function testSuccessToArrayWithNullableProperty()
     {
         $data = new AccountManagerBusiness([
-            "contactNumber" => 'a',
-            "businessEmail" => 'b',
-            "businessAddress" => [
-                "postalCode" => 's',
-                "street" => 't',
-                "number" => 'u',
-                "addressComplement" => "v",
-                "neighborhood" => 'x',
-                "city" => 'z',
-                "state" => '1',
-                "longitude" => '2',
-                "latitude" => '3',
+            'contactNumber' => 'a',
+            'businessEmail' => 'b',
+            'businessAddress' => [
+                'postalCode' => 's',
+                'street' => 't',
+                'number' => 'u',
+                'addressComplement' => 'v',
+                'neighborhood' => 'x',
+                'city' => 'z',
+                'state' => '1',
+                'longitude' => '2',
+                'latitude' => '3',
             ],
         ]);
 
         $this->assertEquals([
-            "contactNumber" => 'a',
-            "businessEmail" => 'b',
-            "owners" => [],
-            "businessAddress" => [
-                "postalCode" => 's',
-                "street" => 't',
-                "number" => 'u',
-                "addressComplement" => "v",
-                "neighborhood" => 'x',
-                "city" => 'z',
-                "state" => '1',
-                "longitude" => '2',
-                "latitude" => '3',
-                "attributes" => [],
+            'contactNumber' => 'a',
+            'businessEmail' => 'b',
+            'owners' => [],
+            'businessAddress' => [
+                'postalCode' => 's',
+                'street' => 't',
+                'number' => 'u',
+                'addressComplement' => 'v',
+                'neighborhood' => 'x',
+                'city' => 'z',
+                'state' => '1',
+                'longitude' => '2',
+                'latitude' => '3',
+                'attributes' => [],
             ],
-            "attributes" => [],
+            'attributes' => [],
         ], $data->toArray());
     }
 
     public function testSuccessToArray()
     {
         $data = new AccountManagerBusiness([
-            "contactNumber" => 'a',
-            "businessEmail" => 'b',
-            "owners" => [
+            'contactNumber' => 'a',
+            'businessEmail' => 'b',
+            'owners' => [
                 [
-                    "documentNumber" => 'c',
-                    "phoneNumber" => 'd',
-                    "email" => 'e',
-                    "fullName" => 'f',
-                    "socialName" => 'g',
-                    "birthDate" => 'h',
-                    "motherName" => 'i',
-                    "address" => [
-                        "postalCode" => 'j',
-                        "street" => 'k',
-                        "number" => 'l',
-                        "addressComplement" => "m",
-                        "neighborhood" => 'n',
-                        "city" => 'o',
-                        "state" => 'p',
-                        "longitude" => 'q',
-                        "latitude" => 'r',
+                    'documentNumber' => 'c',
+                    'phoneNumber' => 'd',
+                    'email' => 'e',
+                    'fullName' => 'f',
+                    'socialName' => 'g',
+                    'birthDate' => 'h',
+                    'motherName' => 'i',
+                    'address' => [
+                        'postalCode' => 'j',
+                        'street' => 'k',
+                        'number' => 'l',
+                        'addressComplement' => 'm',
+                        'neighborhood' => 'n',
+                        'city' => 'o',
+                        'state' => 'p',
+                        'longitude' => 'q',
+                        'latitude' => 'r',
                     ],
-                    "isPoliticallyExposedPerson" => false,
+                    'isPoliticallyExposedPerson' => false,
                 ],
             ],
-            "businessAddress" => [
-                "postalCode" => 's',
-                "street" => 't',
-                "number" => 'u',
-                "addressComplement" => "v",
-                "neighborhood" => 'x',
-                "city" => 'z',
-                "state" => '1',
-                "longitude" => '2',
-                "latitude" => '3',
+            'businessAddress' => [
+                'postalCode' => 's',
+                'street' => 't',
+                'number' => 'u',
+                'addressComplement' => 'v',
+                'neighborhood' => 'x',
+                'city' => 'z',
+                'state' => '1',
+                'longitude' => '2',
+                'latitude' => '3',
             ],
         ]);
 
         $this->assertEquals([
-            "contactNumber" => 'a',
-            "businessEmail" => 'b',
-            "owners" => [
+            'contactNumber' => 'a',
+            'businessEmail' => 'b',
+            'owners' => [
                 [
-                    "documentNumber" => 'c',
-                    "phoneNumber" => 'd',
-                    "email" => 'e',
-                    "fullName" => 'f',
-                    "socialName" => 'g',
-                    "birthDate" => 'h',
-                    "motherName" => 'i',
-                    "address" => [
-                        "postalCode" => 'j',
-                        "street" => 'k',
-                        "number" => 'l',
-                        "addressComplement" => "m",
-                        "neighborhood" => 'n',
-                        "city" => 'o',
-                        "state" => 'p',
-                        "longitude" => 'q',
-                        "latitude" => 'r',
-                        "attributes" => [],
+                    'documentNumber' => 'c',
+                    'phoneNumber' => 'd',
+                    'email' => 'e',
+                    'fullName' => 'f',
+                    'socialName' => 'g',
+                    'birthDate' => 'h',
+                    'motherName' => 'i',
+                    'address' => [
+                        'postalCode' => 'j',
+                        'street' => 'k',
+                        'number' => 'l',
+                        'addressComplement' => 'm',
+                        'neighborhood' => 'n',
+                        'city' => 'o',
+                        'state' => 'p',
+                        'longitude' => 'q',
+                        'latitude' => 'r',
+                        'attributes' => [],
                     ],
-                    "isPoliticallyExposedPerson" => false,
-                    "attributes" => [],
+                    'isPoliticallyExposedPerson' => false,
+                    'attributes' => [],
                 ],
             ],
-            "businessAddress" => [
-                "postalCode" => 's',
-                "street" => 't',
-                "number" => 'u',
-                "addressComplement" => "v",
-                "neighborhood" => 'x',
-                "city" => 'z',
-                "state" => '1',
-                "longitude" => '2',
-                "latitude" => '3',
-                "attributes" => [],
+            'businessAddress' => [
+                'postalCode' => 's',
+                'street' => 't',
+                'number' => 'u',
+                'addressComplement' => 'v',
+                'neighborhood' => 'x',
+                'city' => 'z',
+                'state' => '1',
+                'longitude' => '2',
+                'latitude' => '3',
+                'attributes' => [],
             ],
-            "attributes" => [],
+            'attributes' => [],
         ], $data->toArray());
     }
 

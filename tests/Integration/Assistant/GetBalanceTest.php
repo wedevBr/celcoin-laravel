@@ -32,18 +32,18 @@ class GetBalanceTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "anticipated" => 0,
-                "reconcileExecuting" => "N",
-                "consumed" => 0,
-                "credit" => 0.01,
-                "balance" => 999999999.01,
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'anticipated' => 0,
+                'reconcileExecuting' => 'N',
+                'consumed' => 0,
+                'credit' => 0.01,
+                'balance' => 999999999.01,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

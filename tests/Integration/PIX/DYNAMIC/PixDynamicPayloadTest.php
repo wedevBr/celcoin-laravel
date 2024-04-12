@@ -74,7 +74,6 @@ class PixDynamicPayloadTest extends TestCase
     }
 
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testPixDynamicPayloadInvalidUrlParameter(): void

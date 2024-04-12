@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class FindProvidersTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -33,15 +32,15 @@ class FindProvidersTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "nameProvider" => "Vivo",
-                "providerId" => 2088,
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'nameProvider' => 'Vivo',
+                'providerId' => 2088,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

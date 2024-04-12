@@ -4,14 +4,8 @@ namespace WeDevBr\Celcoin\Events;
 
 class CelcoinAuthenticatedEvent
 {
-    /**
-     * @var string
-     */
     public string $token;
 
-    /**
-     * @var string
-     */
     public string $tokenExpiry;
 
     /**

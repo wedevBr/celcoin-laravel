@@ -16,7 +16,7 @@ class CelcoinKyc extends CelcoinBaseApi
     /**
      * @throws RequestException
      */
-    public function createKyc(CreateKyc $data, Attachable $attachable = null): array
+    public function createKyc(CreateKyc $data, ?Attachable $attachable = null): array
     {
         $body = Validator::validate($data->toArray(), CreateKycRule::rules());
 

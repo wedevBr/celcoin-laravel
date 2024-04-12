@@ -19,7 +19,6 @@ use WeDevBr\Celcoin\Types\PIX\Debtor;
 
 class COBCreateTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */
@@ -109,6 +108,7 @@ class COBCreateTest extends TestCase
         $cob->calendar = new Calendar([
             'expiration' => 84000,
         ]);
+
         return $cob;
     }
 
@@ -141,16 +141,18 @@ class COBCreateTest extends TestCase
 
     private static function stubCOBError(): PromiseInterface
     {
-        return Http::response([
-            'message' => 'Can\'t create a new PixImmediateCollection when the location type is COB',
-            'errorCode' => 'PBE410',
-        ],
+        return Http::response(
+            [
+                'message' => 'Can\'t create a new PixImmediateCollection when the location type is COB',
+                'errorCode' => 'PBE410',
+            ],
             Response::HTTP_BAD_REQUEST,
         );
     }
 
     /**
      * @throws RequestException
+     *
      * @dataProvider createErrorDataProvider
      */
     final public function testCreateCobWithoutField(string $unsetValue): void
@@ -179,6 +181,7 @@ class COBCreateTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider statusErrorDataProvider
      */
     final public function testCreateErrors(
@@ -229,18 +232,18 @@ class COBCreateTest extends TestCase
     final public static function statusErrorDataProvider(): array
     {
         return [
-            'PBE318' => [fn() => self::locationInUseStub(), 'PBE318'],
-            'CI002' => [fn() => self::locationNotReturned(), 'CI002'],
-            'CI003' => [fn() => self::keyNotRegistered(), 'CI003'],
-            'VLI001' => [fn() => self::originalAmountIsRequired(), 'VLI001'],
-            'VLI002' => [fn() => self::prohibitSimultaneousSendChangeAndWithdrawal(), 'VLI002'],
-            'VLI010' => [fn() => self::cashValueIsMandatory(), 'VLI010'],
-            'VLI004' => [fn() => self::withdrawalAmountOriginalGreaterThanZero(), 'VLI004'],
-            'VLI005' => [fn() => self::withdrawalAmountOriginalNotGreaterThanZero(), 'VLI005'],
-            'VLI006' => [fn() => self::withdrawalIspbCodePattern(), 'VLI006'],
-            'VLI007' => [fn() => self::withdrawalAgentModeRequired(), 'VLI007'],
-            'VLI008' => [fn() => self::withdrawalAgentModeValidOptions(), 'VLI008'],
-            'VLI009' => [fn() => self::withdrawalRequiredCashValue(), 'VLI009'],
+            'PBE318' => [fn () => self::locationInUseStub(), 'PBE318'],
+            'CI002' => [fn () => self::locationNotReturned(), 'CI002'],
+            'CI003' => [fn () => self::keyNotRegistered(), 'CI003'],
+            'VLI001' => [fn () => self::originalAmountIsRequired(), 'VLI001'],
+            'VLI002' => [fn () => self::prohibitSimultaneousSendChangeAndWithdrawal(), 'VLI002'],
+            'VLI010' => [fn () => self::cashValueIsMandatory(), 'VLI010'],
+            'VLI004' => [fn () => self::withdrawalAmountOriginalGreaterThanZero(), 'VLI004'],
+            'VLI005' => [fn () => self::withdrawalAmountOriginalNotGreaterThanZero(), 'VLI005'],
+            'VLI006' => [fn () => self::withdrawalIspbCodePattern(), 'VLI006'],
+            'VLI007' => [fn () => self::withdrawalAgentModeRequired(), 'VLI007'],
+            'VLI008' => [fn () => self::withdrawalAgentModeValidOptions(), 'VLI008'],
+            'VLI009' => [fn () => self::withdrawalRequiredCashValue(), 'VLI009'],
         ];
     }
 
@@ -377,5 +380,4 @@ class COBCreateTest extends TestCase
             Response::HTTP_BAD_REQUEST,
         );
     }
-
 }

@@ -15,20 +15,26 @@ use WeDevBr\Celcoin\Types\BAAS\RegisterPixKey;
 /**
  * Class CelcoinBAASPIX
  * API de Pix do BaaS possui o modulo de Pix Cash-out, através desse modulo você consegue realizar as seguintes operações:
- * @package WeDevBr\Celcoin
  */
 class CelcoinBAASPIX extends CelcoinBaseApi
 {
+    public const CASH_OUT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment';
 
-    const CASH_OUT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment';
-    const GET_PARTICIPANT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/participant';
-    const GET_EXTERNAL_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/external/%s';
-    const STATUS_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment/status';
-    const REGISTER_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry';
-    const SEARCH_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
-    const DELETE_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
-    const REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse';
-    const STATUS_REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse/status';
+    public const GET_PARTICIPANT_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/participant';
+
+    public const GET_EXTERNAL_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/external/%s';
+
+    public const STATUS_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/payment/status';
+
+    public const REGISTER_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry';
+
+    public const SEARCH_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
+
+    public const DELETE_PIX_KEY_ENDPOINT = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/entry/%s';
+
+    public const REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse';
+
+    public const STATUS_REFUND_PIX_ENDPOINT = '/baas-wallet-transactions-webservice/v1/pix/reverse/status';
 
     /**
      * @throws RequestException
@@ -36,6 +42,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     public function cashOut(PixCashOut $data)
     {
         $body = Validator::validate($data->toArray(), BAASPixCashOut::rules($data->initiationType->value));
+
         return $this->post(
             self::CASH_OUT_ENDPOINT,
             $body
@@ -77,7 +84,8 @@ class CelcoinBAASPIX extends CelcoinBaseApi
 
     public function registerPixKey(RegisterPixKey $data)
     {
-        $body = Validator::validate($data->toArray(), BAASRegisterPixKey::rules());
+        $body = Validator::validate(array_filter($data->toArray()), BAASRegisterPixKey::rules());
+
         return $this->post(
             self::REGISTER_PIX_KEY_ENDPOINT,
             $body
@@ -104,6 +112,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     public function refundPix(RefundPix $data)
     {
         $body = Validator::validate($data->toArray(), BAASRefundPix::rules());
+
         return $this->post(
             self::REFUND_PIX_ENDPOINT,
             $body

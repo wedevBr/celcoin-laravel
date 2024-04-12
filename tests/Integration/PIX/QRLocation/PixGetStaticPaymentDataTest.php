@@ -14,12 +14,9 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixGetStaticPaymentDataTest extends TestCase
 {
-
     /**
-     * @param array $search
-     *
-     * @return void
      * @throws RequestException
+     *
      * @dataProvider searchDataProvider
      */
     final public function testSuccess(array $search): void
@@ -45,10 +42,7 @@ class PixGetStaticPaymentDataTest extends TestCase
         $this->assertArrayHasKey($keyName, $response);
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
@@ -99,10 +93,8 @@ class PixGetStaticPaymentDataTest extends TestCase
     }
 
     /**
-     * @param string $key
-     *
-     * @return void
      * @throws RequestException
+     *
      * @dataProvider createErrorDataProvider
      */
     final public function testValidationError(string $key): void
@@ -128,12 +120,8 @@ class PixGetStaticPaymentDataTest extends TestCase
     }
 
     /**
-     * @param Closure $response
-     * @param int $status
-     * @param array $params
-     *
-     * @return void
      * @throws RequestException
+     *
      * @dataProvider errorDataProvider
      */
     final public function testErrors(Closure $response, int $status, array $params): void
@@ -185,29 +173,24 @@ class PixGetStaticPaymentDataTest extends TestCase
     {
         return [
             'status code 400' => [
-                fn() => self::stubGenericError(Response::HTTP_BAD_REQUEST),
+                fn () => self::stubGenericError(Response::HTTP_BAD_REQUEST),
                 Response::HTTP_BAD_REQUEST,
                 ['transactionIdBrcode' => 12345345],
             ],
             'status code 404' => [
-                fn() => self::stubGenericError(Response::HTTP_NOT_FOUND),
+                fn () => self::stubGenericError(Response::HTTP_NOT_FOUND),
                 Response::HTTP_NOT_FOUND,
                 ['transactionIdBrcode' => 12345345],
             ],
             'status code 500' => [
-                fn() => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR),
+                fn () => self::stubGenericError(Response::HTTP_INTERNAL_SERVER_ERROR),
                 Response::HTTP_INTERNAL_SERVER_ERROR,
                 ['transactionIdBrcode' => 12345345],
             ],
         ];
     }
 
-    /**
-     * @param int $status
-     *
-     * @return PromiseInterface
-     */
-    static private function stubGenericError(int $status): PromiseInterface
+    private static function stubGenericError(int $status): PromiseInterface
     {
         return Http::response(
             [

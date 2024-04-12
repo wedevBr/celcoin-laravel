@@ -18,7 +18,6 @@ class PixDynamicCreateTest extends TestCase
 {
     // Todo: não tem erros esse endpoint? 404? 422?
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testCreateDynamicQRCodeInvalidKey(): void
@@ -40,10 +39,7 @@ class PixDynamicCreateTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubInvalidKey(): PromiseInterface
+    private static function stubInvalidKey(): PromiseInterface
     {
         return Http::response(
             [
@@ -54,10 +50,7 @@ class PixDynamicCreateTest extends TestCase
         );
     }
 
-    /**
-     * @return DynamicQRCreate
-     */
-    static public function fakeBody(): DynamicQRCreate
+    public static function fakeBody(): DynamicQRCreate
     {
         $dynamic = new DynamicQRCreate();
         $dynamic->clientRequestId = '9b26edb7cf254db09f5449c94bf13abc';
@@ -117,10 +110,7 @@ class PixDynamicCreateTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
@@ -178,6 +168,7 @@ class PixDynamicCreateTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider createErrorDataProvider
      */
     final public function testCreateDynamicQRCodeWithoutField(string $unsetValue): void
@@ -218,7 +209,6 @@ class PixDynamicCreateTest extends TestCase
     }
 
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testCreateDynamicQRCodeSuccess(): void
@@ -236,5 +226,4 @@ class PixDynamicCreateTest extends TestCase
         $this->assertEquals(Response::HTTP_OK, $response['status']);
         $this->assertEquals('ACTIVE', $response['body']['status']);
     }
-
 }

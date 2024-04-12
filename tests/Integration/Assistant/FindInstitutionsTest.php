@@ -32,25 +32,25 @@ class FindInstitutionsTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "convenants" => [
+                'convenants' => [
                     [
-                        "timeLimit" => "12:00",
-                        "mask" => "99______________9999____________________________",
-                        "nomeconvenant" => "EXEMPLO 1",
-                        "type" => "ESTADUAL",
-                        "UF" => [
-                            "SP",
-                            "RJ",
+                        'timeLimit' => '12:00',
+                        'mask' => '99______________9999____________________________',
+                        'nomeconvenant' => 'EXEMPLO 1',
+                        'type' => 'ESTADUAL',
+                        'UF' => [
+                            'SP',
+                            'RJ',
                         ],
                     ],
                 ],
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

@@ -128,42 +128,41 @@ trait GenericWebhookErrorsTrait
         );
     }
 
-    public final static function notFoundErrorProvider(): array
+    final public static function notFoundErrorProvider(): array
     {
         return [
             'Webhook required' => [
                 'WEBHMVAL01',
-                fn() => self::stubErrorWebhookRequiredNotFound(),
+                fn () => self::stubErrorWebhookRequiredNotFound(),
             ],
             'Invalid Webhook' => [
                 'WEBHMVAL02',
-                fn() => self::stubInvalidWebhookError(),
+                fn () => self::stubInvalidWebhookError(),
             ],
             'DateFrom cannot be greater than dateTo' => [
                 'WEBHMVAL03',
-                fn() => self::stubDateFromCannotBeGreaterThanDateToError(),
+                fn () => self::stubDateFromCannotBeGreaterThanDateToError(),
             ],
             'Invalid date interval' => [
                 'WEBHMVAL04',
-                fn() => self::stubInvalidDateIntervalError(),
+                fn () => self::stubInvalidDateIntervalError(),
             ],
             'Invalid dateFrom' => [
                 'WEBHMVAL05',
-                fn() => self::stubInvalidDateFromError(),
+                fn () => self::stubInvalidDateFromError(),
             ],
             'Invalid dateTo' => [
                 'WEBHMVAL06',
-                fn() => self::stubInvalidDateToError(),
+                fn () => self::stubInvalidDateToError(),
             ],
             'Limit field value should not exceed 100' => [
                 'WEBHMVAL08',
-                fn() => self::stubErrorLimitFieldValueShouldNotExceed100(),
+                fn () => self::stubErrorLimitFieldValueShouldNotExceed100(),
             ],
             'Cannot resend already sent webhook' => [
                 'WEBHMVAL09',
-                fn() => self::stubErrorCannotResendAlreadySentWebhook(),
+                fn () => self::stubErrorCannotResendAlreadySentWebhook(),
             ],
-
 
         ];
     }

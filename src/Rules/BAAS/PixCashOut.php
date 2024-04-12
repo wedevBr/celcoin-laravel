@@ -14,8 +14,6 @@ class PixCashOut
     /**
      * @see https://developers.celcoin.com.br/docs/realizar-um-pix-cash-out-por-chaves-pix
      * @see https://developers.celcoin.com.br/docs/realizar-um-pix-cash-out
-     * @param string $initiationTypeEnum
-     * @return array
      */
     public static function rules(string $initiationTypeEnum): array
     {
@@ -64,8 +62,9 @@ class PixCashOut
             'creditParty.name' => ['sometimes', 'string'],
             'creditParty.accountType' => [
                 'sometimes',
-                Rule::in(array_column(CreditPartyAccountTypeEnum::cases(), 'value')
-                )
+                Rule::in(
+                    array_column(CreditPartyAccountTypeEnum::cases(), 'value')
+                ),
             ],
         ];
     }

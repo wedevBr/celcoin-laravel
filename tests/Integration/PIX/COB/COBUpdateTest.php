@@ -18,7 +18,6 @@ use WeDevBr\Celcoin\Types\PIX\Debtor;
 
 class COBUpdateTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */
@@ -109,6 +108,7 @@ class COBUpdateTest extends TestCase
         $cob->calendar = new Calendar([
             'expiration' => 84000,
         ]);
+
         return $cob;
     }
 
@@ -142,10 +142,11 @@ class COBUpdateTest extends TestCase
 
     private static function stubCOBError(): PromiseInterface
     {
-        return Http::response([
-            'message' => 'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
-            'errorCode' => 'PBE318',
-        ],
+        return Http::response(
+            [
+                'message' => 'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
+                'errorCode' => 'PBE318',
+            ],
             Response::HTTP_BAD_REQUEST,
         );
     }
@@ -169,9 +170,6 @@ class COBUpdateTest extends TestCase
         }
     }
 
-    /**
-     * @return array
-     */
     final public function cobObjectUpdate(): array
     {
         $transactionId = 123456;
@@ -184,6 +182,7 @@ class COBUpdateTest extends TestCase
         $pixCOB = new CelcoinPIXCOB();
 
         $cob = self::fakeCOBBody();
+
         return [$transactionId, $pixCOB, $cob];
     }
 

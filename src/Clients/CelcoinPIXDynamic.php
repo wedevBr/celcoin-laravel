@@ -13,15 +13,17 @@ use WeDevBr\Celcoin\Types\PIX\DynamicQRUpdate;
 
 class CelcoinPIXDynamic extends CelcoinBaseApi
 {
-    const GET_DYNAMIC_BASE64_ENDPOINT = '/pix/v1/brcode/dynamic/%d/base64';
-    const CREATE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic';
-    const UPDATE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic/%d';
-    const DELETE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic/%d';
-    const PAYLOAD_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic/payload';
+    public const GET_DYNAMIC_BASE64_ENDPOINT = '/pix/v1/brcode/dynamic/%d/base64';
+
+    public const CREATE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic';
+
+    public const UPDATE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic/%d';
+
+    public const DELETE_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic/%d';
+
+    public const PAYLOAD_DYNAMIC_QRCODE_ENDPOINT = '/pix/v1/brcode/dynamic/payload';
 
     /**
-     * @param int $transactionId
-     * @return array|null
      * @throws RequestException
      */
     final public function getDynamicImage(int $transactionId): ?array
@@ -32,33 +34,29 @@ class CelcoinPIXDynamic extends CelcoinBaseApi
     }
 
     /**
-     * @param DynamicQRCreate $data
-     * @return array|null
      * @throws RequestException
      */
     final public function createDynamicQRCode(DynamicQRCreate $data): ?array
     {
         $body = Validator::validate($data->toArray(), DynamicQRCreateRule::rules());
+
         return $this->post(self::CREATE_DYNAMIC_QRCODE_ENDPOINT, $body);
     }
 
     /**
-     * @param int $transactionId
-     * @param DynamicQRUpdate $data
-     * @return array|null
      * @throws RequestException
      */
     final public function updateDynamicQRCode(int $transactionId, DynamicQRUpdate $data): ?array
     {
         $body = Validator::validate($data->toArray(), DynamicQRUpdateRule::rules());
+
         return $this->put(
-            sprintf(self::UPDATE_DYNAMIC_QRCODE_ENDPOINT, $transactionId), $body
+            sprintf(self::UPDATE_DYNAMIC_QRCODE_ENDPOINT, $transactionId),
+            $body
         );
     }
 
     /**
-     * @param int $transactionId
-     * @return array|null
      * @throws RequestException
      */
     final public function deleteDynamicQRCode(int $transactionId): ?array
@@ -69,13 +67,12 @@ class CelcoinPIXDynamic extends CelcoinBaseApi
     }
 
     /**
-     * @param string $url
-     * @return array|null
      * @throws RequestException
      */
     final public function payload(string $url): ?array
     {
         Validator::validate(compact('url'), DynamicQRPayloadRule::rules());
+
         return $this->post(
             sprintf(
                 '%s?%s',

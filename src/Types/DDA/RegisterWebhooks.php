@@ -8,8 +8,11 @@ use WeDevBr\Celcoin\Types\Data;
 class RegisterWebhooks extends Data
 {
     public DDAWebhooksTypeEventEnum $typeEventWebhook;
+
     public string $url;
+
     public ?BasicAuthentication $basicAuthentication;
+
     public ?OAuthTwo $oAuthTwo;
 
     public function __construct(array $data = [])

@@ -13,12 +13,17 @@ use WeDevBr\Celcoin\Types\PIX\COBV;
 
 class CelcoinPIXCOBV extends CelcoinBaseApi
 {
-    const CREATE_COBV_PIX = '/pix/v1/collection/duedate';
-    const GET_COBV_PIX = '/pix/v1/collection/duedate';
-    const PAYLOAD_COBV_PIX = '/pix/v1/collection/duedate/payload/%s';
-    const UPDATE_COBV_PIX = '/pix/v1/collection/duedate/%d';
-    const DELETE_COB_PIX_URL = '/pix/v1/collection/duedate/%d';
-    const UNLINK_COB_PIX_URL = '/pix/v1/collection/duedate/%d/unlink';
+    public const CREATE_COBV_PIX = '/pix/v1/collection/duedate';
+
+    public const GET_COBV_PIX = '/pix/v1/collection/duedate';
+
+    public const PAYLOAD_COBV_PIX = '/pix/v1/collection/duedate/payload/%s';
+
+    public const UPDATE_COBV_PIX = '/pix/v1/collection/duedate/%d';
+
+    public const DELETE_COB_PIX_URL = '/pix/v1/collection/duedate/%d';
+
+    public const UNLINK_COB_PIX_URL = '/pix/v1/collection/duedate/%d/unlink';
 
     /**
      * @throws RequestException
@@ -26,6 +31,7 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
     final public function createCOBVPIX(COBV $cobv): ?array
     {
         $body = Validator::validate($cobv->toArray(), COBVCreate::rules());
+
         return $this->post(
             self::CREATE_COBV_PIX,
             $body
@@ -38,6 +44,7 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
     final public function getCOBVPIX(array $data): ?array
     {
         $params = Validator::validate($data, COBVGet::rules());
+
         return $this->get(
             sprintf(
                 '%s?%s',
@@ -53,20 +60,19 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
     final public function payloadCOBVPIX(string $url): ?array
     {
         Validator::validate(compact('url'), COBVPayload::rules());
+
         return $this->get(
             sprintf(self::PAYLOAD_COBV_PIX, urlencode($url))
         );
     }
 
     /**
-     * @param int $transactionId
-     * @param array $body
-     * @return array|null
      * @throws RequestException
      */
     final public function updateCOBVPIX(int $transactionId, array $body): ?array
     {
         $params = Validator::validate($body, COBVUpdateRules::rules());
+
         return $this->put(
             sprintf(self::UPDATE_COBV_PIX, $transactionId),
             $params

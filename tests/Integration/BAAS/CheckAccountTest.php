@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class CheckAccountTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -35,22 +34,22 @@ class CheckAccountTest extends TestCase
         $this->assertEquals('CONFIRMED', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "version" => "1.0.0",
-                "status" => "CONFIRMED",
-                "body" => [
-                    "onboardingId" => "39c8e322-9192-498d-947e-2daa4dfc749e",
-                    "clientCode" => "123456",
-                    "createDate" => "2022-12-31T00:00:00.0000000+00:00",
-                    "entity" => "account-create",
-                    "account" => [
-                        "branch" => "1234",
-                        "account" => "123456",
-                        "name" => "Fernanda Aparecida da Silva",
-                        "documentNumber" => "47855748778",
+                'version' => '1.0.0',
+                'status' => 'CONFIRMED',
+                'body' => [
+                    'onboardingId' => '39c8e322-9192-498d-947e-2daa4dfc749e',
+                    'clientCode' => '123456',
+                    'createDate' => '2022-12-31T00:00:00.0000000+00:00',
+                    'entity' => 'account-create',
+                    'account' => [
+                        'branch' => '1234',
+                        'account' => '123456',
+                        'name' => 'Fernanda Aparecida da Silva',
+                        'documentNumber' => '47855748778',
                     ],
                 ],
             ],
