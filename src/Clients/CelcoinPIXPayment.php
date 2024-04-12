@@ -16,20 +16,21 @@ use WeDevBr\Celcoin\Types\PIX\PaymentStatus;
 
 class CelcoinPIXPayment extends CelcoinBaseApi
 {
-    const END_TO_END_PAYMENT_ENDPOINT = '/pix/v1/payment/endToEnd';
-    const EMV_PAYMENT_ENDPOINT = '/pix/v1/emv';
-    const STATUS_PAYMENT_ENDPOINT = '/pix/v1/payment/pi/status';
-    const INIT_PAYMENT_ENDPOINT = '/pix/v1/payment';
+    public const END_TO_END_PAYMENT_ENDPOINT = '/pix/v1/payment/endToEnd';
+
+    public const EMV_PAYMENT_ENDPOINT = '/pix/v1/emv';
+
+    public const STATUS_PAYMENT_ENDPOINT = '/pix/v1/payment/pi/status';
+
+    public const INIT_PAYMENT_ENDPOINT = '/pix/v1/payment';
 
     /**
-     * @param PaymentEndToEnd $params
-     * @return array|null
      * @throws RequestException
      */
     final public function endToEndPayment(PaymentEndToEnd $params): ?array
     {
         $body = Validator::validate($params->toArray(), PaymentEndToEndRules::rules());
-        
+
         return $this->post(
             self::END_TO_END_PAYMENT_ENDPOINT,
             $body
@@ -42,6 +43,7 @@ class CelcoinPIXPayment extends CelcoinBaseApi
     final public function emvPayment(PaymentEmv $params): ?array
     {
         $body = Validator::validate($params->toArray(), PaymentEmvRules::rules());
+
         return $this->post(
             self::EMV_PAYMENT_ENDPOINT,
             $body
@@ -54,6 +56,7 @@ class CelcoinPIXPayment extends CelcoinBaseApi
     final public function statusPayment(PaymentStatus $params): ?array
     {
         $params = Validator::validate($params->toArray(), PaymentStatusRules::rules());
+
         return $this->get(
             sprintf(
                 '%s?%s',
@@ -69,6 +72,7 @@ class CelcoinPIXPayment extends CelcoinBaseApi
     final public function initPayment(PaymentInit $params): ?array
     {
         $body = Validator::validate($params->toArray(), PaymentInitRules::rules());
+
         return $this->post(
             self::INIT_PAYMENT_ENDPOINT,
             $body

@@ -14,13 +14,12 @@ use WeDevBr\Celcoin\Types\BAAS\GetPaymentStatusRequest;
  * Class CelcoinBAASBillPayment
  * Essa funcionalidade permite realizar pagamentos das mais diversas modalidades, incluindo contas de água, luz, gás,
  * telefone, internet, multas, tributos e boletos de contas BAAS.
- * @package WeDevBr\Celcoin
  */
 class CelcoinBAASBillPayment extends CelcoinBaseApi
 {
+    public const MAKE_PAYMENT_ENDPOINT = '/baas/v2/billpayment';
 
-    const MAKE_PAYMENT_ENDPOINT = '/baas/v2/billpayment';
-    const GET_PAYMENT_STATUS = self::MAKE_PAYMENT_ENDPOINT . '/status';
+    public const GET_PAYMENT_STATUS = self::MAKE_PAYMENT_ENDPOINT.'/status';
 
     /**
      * @throws RequestException
@@ -28,6 +27,7 @@ class CelcoinBAASBillPayment extends CelcoinBaseApi
     public function makePayment(BillPayment $data): mixed
     {
         $body = Validator::validate($data->toArray(), BillPaymentRule::rules());
+
         return $this->post(
             self::MAKE_PAYMENT_ENDPOINT,
             $body

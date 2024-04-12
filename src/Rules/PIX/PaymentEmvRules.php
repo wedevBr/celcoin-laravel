@@ -10,7 +10,7 @@ class PaymentEmvRules
     public static function rules(): array
     {
         return [
-            'emv' => ['required', 'string']
+            'emv' => ['required', 'string'],
         ];
     }
 }

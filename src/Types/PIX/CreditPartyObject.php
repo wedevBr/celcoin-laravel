@@ -6,9 +6,6 @@ class CreditPartyObject extends DebitPartyObject
 {
     public string $Key;
 
-    /**
-     * @param array $data
-     */
     public function __construct(array $data = [])
     {
         parent::__construct($data);

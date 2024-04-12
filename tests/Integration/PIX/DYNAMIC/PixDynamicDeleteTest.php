@@ -12,9 +12,7 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixDynamicDeleteTest extends TestCase
 {
-
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testDynamicPixDeleteSuccess(): void
@@ -44,7 +42,6 @@ class PixDynamicDeleteTest extends TestCase
     }
 
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testDynamicPixDeleteNotFoundError(): void

@@ -13,13 +13,7 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class PixParticipantsListTest extends TestCase
 {
-
-    /**
-     * @param int $status
-     *
-     * @return PromiseInterface
-     */
-    static private function stubGenericError(int $status): PromiseInterface
+    private static function stubGenericError(int $status): PromiseInterface
     {
         return Http::response(
             [
@@ -30,7 +24,6 @@ class PixParticipantsListTest extends TestCase
     }
 
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testSuccess(): void
@@ -52,10 +45,7 @@ class PixParticipantsListTest extends TestCase
         $this->assertCount(3, $response);
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
@@ -86,11 +76,10 @@ class PixParticipantsListTest extends TestCase
     }
 
     /**
-     * @param Closure $response
-     * @param string $status
+     * @param  string  $status
      *
-     * @return void
      * @dataProvider errorDataProvider
+     *
      * @throws RequestException
      */
     final public function testErrors(Closure $response, mixed $status): void
@@ -123,7 +112,7 @@ class PixParticipantsListTest extends TestCase
     {
         return [
             'status·code·500' => [
-                fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR),
+                fn () => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR),
                 Response::HTTP_INTERNAL_SERVER_ERROR,
             ],
         ];

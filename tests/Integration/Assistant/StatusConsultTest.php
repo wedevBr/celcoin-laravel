@@ -32,23 +32,23 @@ class StatusConsultTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "transaction" => [
-                    "authentication" => 0,
-                    "errorCode" => "061",
-                    "createDate" => "0001-01-01T00:00:00",
-                    "message" => "Transacao nao encontrada",
-                    "externalNSU" => 1234,
-                    "transactionId" => 1,
-                    "status" => 1,
-                    "externalTerminal" => null,
+                'transaction' => [
+                    'authentication' => 0,
+                    'errorCode' => '061',
+                    'createDate' => '0001-01-01T00:00:00',
+                    'message' => 'Transacao nao encontrada',
+                    'externalNSU' => 1234,
+                    'transactionId' => 1,
+                    'status' => 1,
+                    'externalTerminal' => null,
                 ],
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

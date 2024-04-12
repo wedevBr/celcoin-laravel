@@ -15,7 +15,6 @@ use WeDevBr\Celcoin\Types\PIX\QRStaticPayment;
 
 class PixCreateStaticPaymentTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */
@@ -41,10 +40,7 @@ class PixCreateStaticPaymentTest extends TestCase
         $this->assertArrayHasKey('transactionIdentification', $response);
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
@@ -74,16 +70,12 @@ class PixCreateStaticPaymentTest extends TestCase
             'tag 1',
         ];
 
-
         return $staticPayment;
     }
 
     /**
-     * @param Closure $response
-     * @param int $status
-     *
-     * @return void
      * @throws RequestException
+     *
      * @dataProvider errorDataProvider
      */
     final public function testConvertingValueError(Closure $response, int $status): void
@@ -119,10 +111,9 @@ class PixCreateStaticPaymentTest extends TestCase
         return [
             // Status 500 - Internal server error return empty array
             'status·code·500' => [
-                fn() => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR),
+                fn () => Http::response([], Response::HTTP_INTERNAL_SERVER_ERROR),
                 Response::HTTP_INTERNAL_SERVER_ERROR,
             ],
         ];
     }
-
 }

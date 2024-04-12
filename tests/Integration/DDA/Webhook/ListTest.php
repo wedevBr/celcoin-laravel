@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class ListTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -34,23 +33,23 @@ class ListTest extends TestCase
         $this->assertEquals(200, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => 200,
-                "body" => [
+                'status' => 200,
+                'body' => [
                     [
-                        "typeEventWebhook" => "Invoice",
-                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab",
+                        'typeEventWebhook' => 'Invoice',
+                        'url' => 'https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab',
                     ],
                     [
-                        "typeEventWebhook" => "Deletion",
-                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab",
+                        'typeEventWebhook' => 'Deletion',
+                        'url' => 'https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab',
                     ],
                     [
-                        "typeEventWebhook" => "Subscription",
-                        "url" => "https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab",
+                        'typeEventWebhook' => 'Subscription',
+                        'url' => 'https://webhook.site/adf0d812-3e2d-43cc-91be-3d84128d27ab',
                     ],
                 ],
             ],

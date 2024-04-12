@@ -14,7 +14,6 @@ use WeDevBr\Celcoin\Types\Topups\Providers;
 
 class GetProvidersTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -34,36 +33,36 @@ class GetProvidersTest extends TestCase
         $topups = new CelcoinTopups();
         $response = $topups->getProviders(
             new Providers([
-                "stateCode" => 13,
-                "type" => TopupProvidersTypeEnum::ALL,
-                "category" => TopupProvidersCategoryEnum::ALL,
+                'stateCode' => 13,
+                'type' => TopupProvidersTypeEnum::ALL,
+                'category' => TopupProvidersCategoryEnum::ALL,
             ]),
         );
         $this->assertArrayHasKey('providers', $response);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "providers" => [
+                'providers' => [
                     [
-                        "category" => 2,
-                        "name" => "Blizzard",
-                        "providerId" => 2139,
-                        "RegionaisnameProvider" => [],
-                        "TipoRecarganameProvider" => 1,
-                        "maxValue" => 0,
-                        "minValue" => 0,
+                        'category' => 2,
+                        'name' => 'Blizzard',
+                        'providerId' => 2139,
+                        'RegionaisnameProvider' => [],
+                        'TipoRecarganameProvider' => 1,
+                        'maxValue' => 0,
+                        'minValue' => 0,
                     ],
                     [
-                        "category" => 2,
-                        "name" => "Boa Compra",
-                        "providerId" => 2107,
-                        "RegionaisnameProvider" => [],
-                        "TipoRecarganameProvider" => 1,
-                        "maxValue" => 0,
-                        "minValue" => 0,
+                        'category' => 2,
+                        'name' => 'Boa Compra',
+                        'providerId' => 2107,
+                        'RegionaisnameProvider' => [],
+                        'TipoRecarganameProvider' => 1,
+                        'maxValue' => 0,
+                        'minValue' => 0,
                     ],
                 ],
             ],

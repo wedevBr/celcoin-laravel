@@ -26,7 +26,7 @@ class PixReactivateAndResendAllPendingMessagesTest extends TestCase
          * @var Types\PixReactivateAndResendAllPendingMessages $params
          * @var WebhookEventEnum $webhookEventEnum
          */
-        [$params, $webhookEventEnum] = $this->callWebhookBase(fn() => self::stubSuccess());
+        [$params, $webhookEventEnum] = $this->callWebhookBase(fn () => self::stubSuccess());
 
         $pix = new Clients\CelcoinPixWebhooks();
         $response = $pix->reactivateAndResendAllPendingMessages($webhookEventEnum, $params);
@@ -34,9 +34,7 @@ class PixReactivateAndResendAllPendingMessagesTest extends TestCase
     }
 
     /**
-     * @param Closure<PromiseInterface> $stub
-     * @param WebhookEventEnum $webhookEventEnum
-     *
+     * @param  Closure<PromiseInterface>  $stub
      * @return array<Types\PixReactivateAndResendAllPendingMessages, WebhookEventEnum>
      */
     private function callWebhookBase(
@@ -47,8 +45,8 @@ class PixReactivateAndResendAllPendingMessagesTest extends TestCase
 
         $url = sprintf(Clients\CelcoinPixWebhooks::PIX_REACTIVATE_RESEND_PENDING_ENDPOINT, $webhookEventEnum->value);
 
-        if (sizeof($params->toArray()) > 1) {
-            $url .= '?' . http_build_query($params->toArray());
+        if (count($params->toArray()) > 1) {
+            $url .= '?'.http_build_query($params->toArray());
         }
 
         Http::fake(
@@ -61,6 +59,7 @@ class PixReactivateAndResendAllPendingMessagesTest extends TestCase
                 ) => $stub,
             ],
         );
+
         return [$params, $webhookEventEnum];
     }
 
@@ -80,6 +79,7 @@ class PixReactivateAndResendAllPendingMessagesTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider notFoundErrorProvider
      */
     final public function testWebhookErrorNotFound(string $returnCode, Closure $stub): void

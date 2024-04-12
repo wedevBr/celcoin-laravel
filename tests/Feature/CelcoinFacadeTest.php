@@ -8,7 +8,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class CelcoinFacadeTest extends TestCase
 {
-
     public function testSuccess()
     {
         $instance = App::make('celcoin');

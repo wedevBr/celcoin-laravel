@@ -15,6 +15,7 @@ class COBVGetTest extends TestCase
 {
     /**
      * @throws RequestException
+     *
      * @dataProvider getCobvSuccessProvider
      */
     final public function testGetCobvSuccess(array $search): void
@@ -135,9 +136,6 @@ class COBVGetTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
     private static function stubNotFoundError(): PromiseInterface
     {
         return Http::response(
@@ -151,6 +149,7 @@ class COBVGetTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider getCobvValidationKeysProvider
      */
     final public function getCobvValidationError(string $key): void
@@ -186,7 +185,6 @@ class COBVGetTest extends TestCase
             'transactionIdentification' => ['transactionIdentification'],
         ];
     }
-
 
     public static function getCobvSuccessProvider(): array
     {

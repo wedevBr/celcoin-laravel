@@ -7,8 +7,8 @@ class Confirm
     public static function rules()
     {
         return [
-            "externalNSU" => ['nullable', 'numeric'],
-            "externalTerminal" => ['nullable', 'string'],
+            'externalNSU' => ['nullable', 'numeric'],
+            'externalTerminal' => ['nullable', 'string'],
         ];
     }
 }

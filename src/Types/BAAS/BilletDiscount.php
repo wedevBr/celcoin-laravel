@@ -6,9 +6,10 @@ use WeDevBr\Celcoin\Types\Data;
 
 class BilletDiscount extends Data
 {
-
     public float $amount;
+
     public string $modality;
+
     public string $limitDate;
 
     public function __construct(array $data = [])

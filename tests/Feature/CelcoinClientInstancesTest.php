@@ -29,7 +29,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class CelcoinClientInstancesTest extends TestCase
 {
-
     public function testSuccessCreateInstanceAssistant()
     {
         $instance = Celcoin::clientAssistant();

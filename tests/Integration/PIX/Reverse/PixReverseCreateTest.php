@@ -2,7 +2,6 @@
 
 namespace WeDevBr\Celcoin\Tests\Integration\PIX\Reverse;
 
-
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
@@ -14,7 +13,6 @@ use WeDevBr\Celcoin\Types\PIX as Types;
 
 class PixReverseCreateTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */

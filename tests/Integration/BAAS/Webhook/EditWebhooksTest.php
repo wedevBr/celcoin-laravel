@@ -13,7 +13,6 @@ use WeDevBr\Celcoin\Types\BAAS\EditWebhooks;
 
 class EditWebhooksTest extends TestCase
 {
-
     final public function testSuccess(): void
     {
         Http::fake(
@@ -30,14 +29,14 @@ class EditWebhooksTest extends TestCase
         $webhook = new CelcoinBAASWebhooks();
         $response = $webhook->edit(
             new EditWebhooks([
-                "entity" => EntityWebhookBAASEnum::SPB_REVERSAL_OUT_TED,
-                "webhookUrl" => "https://www.celcoin.com.br/baas",
-                "auth" => [
-                    "login" => "giovanni",
-                    "pwd" => "string",
-                    "type" => "basic",
+                'entity' => EntityWebhookBAASEnum::SPB_REVERSAL_OUT_TED,
+                'webhookUrl' => 'https://www.celcoin.com.br/baas',
+                'auth' => [
+                    'login' => 'giovanni',
+                    'pwd' => 'string',
+                    'type' => 'basic',
                 ],
-                "active" => true,
+                'active' => true,
             ]),
             EntityWebhookBAASEnum::SPB_TRANSFER_OUT_TED,
         );
@@ -45,12 +44,12 @@ class EditWebhooksTest extends TestCase
         $this->assertEquals('SUCCESS', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "version" => "1.0.0",
-                "status" => "SUCCESS",
+                'version' => '1.0.0',
+                'status' => 'SUCCESS',
             ],
             Response::HTTP_OK,
         );

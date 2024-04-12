@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBVDeleteTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */

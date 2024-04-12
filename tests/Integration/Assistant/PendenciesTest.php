@@ -32,25 +32,25 @@ class PendenciesTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "pendings" => [
-                    "transactions" => [
+                'pendings' => [
+                    'transactions' => [
                         [
-                            "authentication" => 3470,
-                            "createDate" => "2021-06-24T11:31:10",
-                            "externalNSU" => 1234,
-                            "transactionId" => 7061967,
-                            "status" => 4,
-                            "externalTerminal" => "11122233344",
+                            'authentication' => 3470,
+                            'createDate' => '2021-06-24T11:31:10',
+                            'externalNSU' => 1234,
+                            'transactionId' => 7061967,
+                            'status' => 4,
+                            'externalTerminal' => '11122233344',
                         ],
                     ],
                 ],
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => "0",
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => '0',
             ],
             Response::HTTP_OK,
         );

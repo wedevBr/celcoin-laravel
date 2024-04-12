@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class COBUnlinkTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */
@@ -32,9 +31,6 @@ class COBUnlinkTest extends TestCase
         $this->assertEquals(15.01, $result['amount']['original']);
     }
 
-    /**
-     * @return array
-     */
     private static function stubSuccess(): array
     {
         return
@@ -90,9 +86,6 @@ class COBUnlinkTest extends TestCase
         }
     }
 
-    /**
-     * @return PromiseInterface
-     */
     private static function stubNotFoundError(): PromiseInterface
     {
         return Http::response(

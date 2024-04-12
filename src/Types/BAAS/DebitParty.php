@@ -6,7 +6,6 @@ use WeDevBr\Celcoin\Types\Data;
 
 class DebitParty extends Data
 {
-
     public string $account;
 
     public function __construct(array $data = [])

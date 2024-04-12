@@ -9,7 +9,9 @@ use WeDevBr\Celcoin\Types\Data;
 class Providers extends Data
 {
     public int $stateCode;
+
     public TopupProvidersTypeEnum $type;
+
     public TopupProvidersCategoryEnum $category;
 
     public function __construct(array $data = [])

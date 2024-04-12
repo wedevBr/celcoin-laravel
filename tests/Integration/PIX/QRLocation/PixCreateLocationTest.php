@@ -15,9 +15,7 @@ use WeDevBr\Celcoin\Types\PIX\QRLocation;
 
 class PixCreateLocationTest extends TestCase
 {
-
     /**
-     * @return void
      * @throws RequestException
      */
     final public function testSuccess(): void
@@ -40,10 +38,7 @@ class PixCreateLocationTest extends TestCase
         $this->assertEquals('CREATED', $response['status']);
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
@@ -64,9 +59,6 @@ class PixCreateLocationTest extends TestCase
         );
     }
 
-    /**
-     * @return QRLocation
-     */
     private function fakeLocationBody(): QRLocation
     {
         $merchant = new Merchant();
@@ -79,15 +71,13 @@ class PixCreateLocationTest extends TestCase
         $location->merchant = $merchant;
         $location->type = 'COBV';
         $location->clientRequestId = '9b26edb7cf254db09f5449c94bf13abc';
+
         return $location;
     }
 
     /**
-     * @param Closure $response
-     * @param string $errorCode
-     *
-     * @return void
      * @throws RequestException
+     *
      * @dataProvider errorDataProvider
      */
     final public function testConvertingValueError(Closure $response, string $errorCode): void
@@ -118,20 +108,18 @@ class PixCreateLocationTest extends TestCase
 
     /**
      * @uses https://developers.celcoin.com.br/reference/criar-um-qrcode-location
+     *
      * @return array[]
      */
     public static function errorDataProvider(): array
     {
         return [
-            'status code 400' => [fn() => self::stubConvertingError(), '400'],
-            'status code CR001' => [fn() => self::stubValueCannotBeNull(), 'CR001'],
+            'status code 400' => [fn () => self::stubConvertingError(), '400'],
+            'status code CR001' => [fn () => self::stubValueCannotBeNull(), 'CR001'],
         ];
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubConvertingError(): PromiseInterface
+    private static function stubConvertingError(): PromiseInterface
     {
         return Http::response(
             [
@@ -142,10 +130,7 @@ class PixCreateLocationTest extends TestCase
         );
     }
 
-    /**
-     * @return PromiseInterface
-     */
-    static private function stubValueCannotBeNull(): PromiseInterface
+    private static function stubValueCannotBeNull(): PromiseInterface
     {
         return Http::response(
             [

@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class GetValuesTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -33,30 +32,30 @@ class GetValuesTest extends TestCase
         $this->assertEquals(0, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "data" => [
-                    "quotation" => [
-                        "purchase" => "5.2468",
-                        "quotationId" => "206353",
-                        "quotationDateTime" => "2021-08-13T13:04:27.62",
-                        "description" => "PTAX (Banco Central)",
-                        "spread" => "10",
-                        "sale" => "5.2474",
+                'data' => [
+                    'quotation' => [
+                        'purchase' => '5.2468',
+                        'quotationId' => '206353',
+                        'quotationDateTime' => '2021-08-13T13:04:27.62',
+                        'description' => 'PTAX (Banco Central)',
+                        'spread' => '10',
+                        'sale' => '5.2474',
                     ],
-                    "baseCurrency" => "BRL",
-                    "destinyCurrency" => "BRL",
-                    "localCurrency" => "HTG",
-                    "number" => "50948227030",
-                    "nameProvider" => "Digicel Haiti BRL",
-                    "country" => "Haiti",
-                    "products" => [],
+                    'baseCurrency' => 'BRL',
+                    'destinyCurrency' => 'BRL',
+                    'localCurrency' => 'HTG',
+                    'number' => '50948227030',
+                    'nameProvider' => 'Digicel Haiti BRL',
+                    'country' => 'Haiti',
+                    'products' => [],
                 ],
-                "errorCode" => "000",
-                "message" => "SUCESSO",
-                "status" => 0,
+                'errorCode' => '000',
+                'message' => 'SUCESSO',
+                'status' => 0,
             ],
             Response::HTTP_OK,
         );

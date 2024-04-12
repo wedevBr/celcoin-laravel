@@ -2,7 +2,6 @@
 
 namespace WeDevBr\Celcoin\Tests\Integration\PIX\Reverse;
 
-
 use Closure;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
@@ -15,15 +14,14 @@ use WeDevBr\Celcoin\Types\PIX as Types;
 
 class PixReverseGetStatusTest extends TestCase
 {
-
     final public static function notFoundErrorProvider(): array
     {
         return [
-            'Original transaction not found' => ['11', fn() => self::stubErrorOriginalTransactionNotFound()],
-            'Transaction exceeded' => ['12', fn() => self::stubErrorTransactionExceededNotFound()],
-            'Receivement transaction not found' => ['99', fn() => self::stubErrorReceivementTransactionNotFound()],
-            'Uncatchable error not found' => ['999', fn() => self::stubUnwatchableErrorNotFound()],
-            'Insufficient funds' => ['40', fn() => self::stubInsufficientFunds()],
+            'Original transaction not found' => ['11', fn () => self::stubErrorOriginalTransactionNotFound()],
+            'Transaction exceeded' => ['12', fn () => self::stubErrorTransactionExceededNotFound()],
+            'Receivement transaction not found' => ['99', fn () => self::stubErrorReceivementTransactionNotFound()],
+            'Uncatchable error not found' => ['999', fn () => self::stubUnwatchableErrorNotFound()],
+            'Insufficient funds' => ['40', fn () => self::stubInsufficientFunds()],
         ];
     }
 
@@ -134,6 +132,7 @@ class PixReverseGetStatusTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider notFoundErrorProvider
      */
     final public function testReverseGetStatusErrorNotFound(string $returnCode, Closure $stub): void

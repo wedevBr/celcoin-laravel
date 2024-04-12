@@ -7,12 +7,13 @@ use WeDevBr\Celcoin\Types\Data;
 class Calendar extends Data
 {
     public string $key;
+
     public string $value;
+
     public int $expiration;
 
     public function __construct(array $data = [])
     {
         parent::__construct($data);
     }
-
 }

@@ -17,7 +17,6 @@ use WeDevBr\Celcoin\Types\PIX\Debtor;
 
 class COBVUpdateTest extends TestCase
 {
-
     /**
      * @throws RequestException
      */
@@ -106,6 +105,7 @@ class COBVUpdateTest extends TestCase
         $cobv->calendar = new Calendar([
             'expiration' => 84000,
         ]);
+
         return $cobv;
     }
 
@@ -137,17 +137,17 @@ class COBVUpdateTest extends TestCase
     {
         return [
             'wrong calendar due date' => [
-                fn() => self::getCalendarDueDateErrorResponse(),
+                fn () => self::getCalendarDueDateErrorResponse(),
                 'PCE003',
                 'errorCode',
             ],
             'wrong discount amount perc' => [
-                fn() => self::getDiscountAmountPercErrorResponse(),
+                fn () => self::getDiscountAmountPercErrorResponse(),
                 'PCE003',
                 'errorCode',
             ],
             'wrong pix collection error' => [
-                fn() => self::getCanNotCreateNewPixCollectionDueDateErrorResponse(),
+                fn () => self::getCanNotCreateNewPixCollectionDueDateErrorResponse(),
                 'PBE318',
                 'errorCode',
             ],
@@ -183,5 +183,4 @@ class COBVUpdateTest extends TestCase
 
         return Http::response($data, Response::HTTP_BAD_REQUEST);
     }
-
 }

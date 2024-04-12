@@ -7,6 +7,7 @@ use WeDevBr\Celcoin\Types\Data;
 class Cancel extends Data
 {
     public ?int $externalNsu;
+
     public ?string $externalTerminal;
 
     public function __construct(array $data = [])

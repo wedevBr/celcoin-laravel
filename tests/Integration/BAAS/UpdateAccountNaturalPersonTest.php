@@ -12,7 +12,6 @@ use WeDevBr\Celcoin\Types\BAAS\AccountManagerNaturalPerson;
 
 class UpdateAccountNaturalPersonTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -39,22 +38,22 @@ class UpdateAccountNaturalPersonTest extends TestCase
             '34335125070',
             new AccountManagerNaturalPerson(
                 [
-                    "phoneNumber" => sprintf('+5511%s', $fake->cellphone(false)),
-                    "email" => $fake->email(),
-                    "socialName" => $firstName,
-                    "birthDate" => '15-01-1981',
-                    "address" => [
-                        "postalCode" => '01153000',
-                        "street" => $fake->streetName(),
-                        "number" => $fake->buildingNumber(),
-                        "addressComplement" => "Em frente ao parque.",
-                        "neighborhood" => 'Centro',
-                        "city" => $fake->city(),
-                        "state" => $fake->stateAbbr(),
-                        "longitude" => $fake->longitude(-23, -24),
-                        "latitude" => $fake->latitude(-46, -47),
+                    'phoneNumber' => sprintf('+5511%s', $fake->cellphone(false)),
+                    'email' => $fake->email(),
+                    'socialName' => $firstName,
+                    'birthDate' => '15-01-1981',
+                    'address' => [
+                        'postalCode' => '01153000',
+                        'street' => $fake->streetName(),
+                        'number' => $fake->buildingNumber(),
+                        'addressComplement' => 'Em frente ao parque.',
+                        'neighborhood' => 'Centro',
+                        'city' => $fake->city(),
+                        'state' => $fake->stateAbbr(),
+                        'longitude' => $fake->longitude(-23, -24),
+                        'latitude' => $fake->latitude(-46, -47),
                     ],
-                    "isPoliticallyExposedPerson" => false,
+                    'isPoliticallyExposedPerson' => false,
                 ],
             ),
         );
@@ -62,12 +61,12 @@ class UpdateAccountNaturalPersonTest extends TestCase
         $this->assertEquals('SUCCESS', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "version" => "1.0.0",
-                "status" => "SUCCESS",
+                'version' => '1.0.0',
+                'status' => 'SUCCESS',
             ],
             Response::HTTP_OK,
         );

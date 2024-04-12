@@ -11,7 +11,6 @@ use WeDevBr\Celcoin\Tests\TestCase;
 
 class ReverseTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -33,13 +32,13 @@ class ReverseTest extends TestCase
         $this->assertEquals('0', $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "errorCode" => "000",
-                "message" => "Pedido de estorno registrado com sucesso.",
-                "status" => "0",
+                'errorCode' => '000',
+                'message' => 'Pedido de estorno registrado com sucesso.',
+                'status' => '0',
             ],
             Response::HTTP_OK,
         );

@@ -7,8 +7,8 @@ class ProvidersValues
     public static function rules()
     {
         return [
-            "stateCode" => ['required', 'integer'],
-            "providerId" => ['required', 'string'],
+            'stateCode' => ['required', 'integer'],
+            'providerId' => ['required', 'string'],
         ];
     }
 }

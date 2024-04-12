@@ -7,13 +7,18 @@ use WeDevBr\Celcoin\Types\Data;
 
 class CreditParty extends Data
 {
-
     public string $bank;
+
     public ?string $key;
+
     public string $account;
+
     public string $branch;
+
     public string $taxId;
+
     public string $name;
+
     public CreditPartyAccountTypeEnum $accountType;
 
     public function __construct(array $data = [])

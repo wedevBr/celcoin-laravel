@@ -26,7 +26,7 @@ class PixWebhookLisGetListTest extends TestCase
          * @var Types\PixWebhookGetList $params
          * @var WebhookEventEnum $webhookEventEnum
          */
-        [$params, $webhookEventEnum] = $this->callWebhookBase(fn() => self::stubSuccess());
+        [$params, $webhookEventEnum] = $this->callWebhookBase(fn () => self::stubSuccess());
 
         $pix = new Clients\CelcoinPixWebhooks();
         $response = $pix->getList($webhookEventEnum, $params);
@@ -34,8 +34,7 @@ class PixWebhookLisGetListTest extends TestCase
     }
 
     /**
-     * @param Closure<PromiseInterface> $stub
-     *
+     * @param  Closure<PromiseInterface>  $stub
      * @return array<Types\PixWebhookGetList, WebhookEventEnum>
      */
     private function callWebhookBase(Closure $stub): array
@@ -45,8 +44,8 @@ class PixWebhookLisGetListTest extends TestCase
         $webhookEventEnum = WebhookEventEnum::ERROR;
         $url = sprintf(Clients\CelcoinPixWebhooks::PIX_WEBHOOK_GET_LIST_ENDPOINT, $webhookEventEnum->value);
 
-        if (sizeof($params->toArray()) > 1) {
-            $url .= '?' . http_build_query($params->toArray());
+        if (count($params->toArray()) > 1) {
+            $url .= '?'.http_build_query($params->toArray());
         }
 
         Http::fake(
@@ -59,6 +58,7 @@ class PixWebhookLisGetListTest extends TestCase
                 ) => $stub,
             ],
         );
+
         return [$params, $webhookEventEnum];
     }
 
@@ -91,6 +91,7 @@ class PixWebhookLisGetListTest extends TestCase
 
     /**
      * @throws RequestException
+     *
      * @dataProvider notFoundErrorProvider
      */
     final public function testWebhookErrorNotFound(string $returnCode, Closure $stub): void

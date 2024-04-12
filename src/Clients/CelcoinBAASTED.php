@@ -6,24 +6,24 @@ use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Validator;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\BAAS\BAASGetTEFTransfer;
-use WeDevBr\Celcoin\Rules\BAAS\TEDTransfer as BAASTEDTransfer;
 use WeDevBr\Celcoin\Rules\BAAS\BAASTEFTransfer;
+use WeDevBr\Celcoin\Rules\BAAS\TEDTransfer as BAASTEDTransfer;
 use WeDevBr\Celcoin\Types\BAAS\TEDTransfer;
 use WeDevBr\Celcoin\Types\BAAS\TEFTransfer;
 
 /**
  * Class CelcoinBAASTED
  * API de BaaS possui o modulo de TED, esse modulo contempla os seguintes serviços Transferência via TED e Consultar Status de uma Transferência TED
- * @package WeDevBr\Celcoin
  */
 class CelcoinBAASTED extends CelcoinBaseApi
 {
-    const TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/spb/transfer';
-    const GET_STATUS_TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/spb/transfer/status';
+    public const TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/spb/transfer';
 
-    const INTERNAL_TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/wallet/internal/transfer';
+    public const GET_STATUS_TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/spb/transfer/status';
 
-    const GET_STATUS_INTERNAL_TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/wallet/internal/transfer/status';
+    public const INTERNAL_TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/wallet/internal/transfer';
+
+    public const GET_STATUS_INTERNAL_TRANSFER_ENDPOINT = '/baas-wallet-transactions-webservice/v1/wallet/internal/transfer/status';
 
     /**
      * @throws RequestException
@@ -31,6 +31,7 @@ class CelcoinBAASTED extends CelcoinBaseApi
     public function transfer(TEDTransfer $data): mixed
     {
         $body = Validator::validate($data->toArray(), BAASTEDTransfer::rules());
+
         return $this->post(
             self::TRANSFER_ENDPOINT,
             $body
@@ -76,7 +77,9 @@ class CelcoinBAASTED extends CelcoinBaseApi
                     'ClientRequestId' => $clientRequestId,
                     'EndToEndId' => $endToEndId,
                 ]
-            ), BAASGetTEFTransfer::rules());
+            ),
+            BAASGetTEFTransfer::rules()
+        );
 
         return $this->get(
             self::GET_STATUS_INTERNAL_TRANSFER_ENDPOINT,

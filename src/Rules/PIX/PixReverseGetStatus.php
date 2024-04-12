@@ -4,7 +4,6 @@ namespace WeDevBr\Celcoin\Rules\PIX;
 
 class PixReverseGetStatus
 {
-
     public static function rules(): array
     {
         return [

@@ -7,10 +7,9 @@ use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 
 class CelcoinPIXParticipants extends CelcoinBaseApi
 {
-    const GET_PARTICIPANTS_ENDPOINT = '/pix/v1/participants';
+    public const GET_PARTICIPANTS_ENDPOINT = '/pix/v1/participants';
 
     /**
-     * @return array|null
      * @throws RequestException
      */
     final public function getParticipants(): ?array

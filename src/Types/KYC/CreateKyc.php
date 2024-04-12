@@ -3,7 +3,6 @@
 namespace WeDevBr\Celcoin\Types\KYC;
 
 use WeDevBr\Celcoin\Enums\KycDocumentEnum;
-use WeDevBr\Celcoin\Interfaces\Attachable;
 use WeDevBr\Celcoin\Types\Data;
 
 class CreateKyc extends Data

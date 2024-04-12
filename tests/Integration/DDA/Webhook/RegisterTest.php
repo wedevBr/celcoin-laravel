@@ -13,7 +13,6 @@ use WeDevBr\Celcoin\Types\DDA\RegisterWebhooks;
 
 class RegisterTest extends TestCase
 {
-
     /**
      * @return void
      */
@@ -33,11 +32,11 @@ class RegisterTest extends TestCase
         $dda = new CelcoinDDAWebhooks();
         $response = $dda->register(
             new RegisterWebhooks([
-                "typeEventWebhook" => DDAWebhooksTypeEventEnum::INVOICE,
-                "url" => "https://webhook.site/d24aa98f-1837-4698-8825-688f94390cfe",
-                "basicAuthentication" => [
-                    "identification" => "João",
-                    "password" => "Um@Pro7ec@o",
+                'typeEventWebhook' => DDAWebhooksTypeEventEnum::INVOICE,
+                'url' => 'https://webhook.site/d24aa98f-1837-4698-8825-688f94390cfe',
+                'basicAuthentication' => [
+                    'identification' => 'João',
+                    'password' => 'Um@Pro7ec@o',
                 ],
             ]),
         );
@@ -45,19 +44,19 @@ class RegisterTest extends TestCase
         $this->assertEquals(201, $response['status']);
     }
 
-    static private function stubSuccess(): PromiseInterface
+    private static function stubSuccess(): PromiseInterface
     {
         return Http::response(
             [
-                "status" => 201,
-                "body" => [
-                    "typeEventWebhook" => "Invoice",
-                    "url" => "https://webhook.site/d24aa98f-1837-4698-8825-688f94390cfe",
-                    "basicAuthentication" => [
-                        "identification" => "João",
-                        "password" => "Um@Pro7ec@o",
+                'status' => 201,
+                'body' => [
+                    'typeEventWebhook' => 'Invoice',
+                    'url' => 'https://webhook.site/d24aa98f-1837-4698-8825-688f94390cfe',
+                    'basicAuthentication' => [
+                        'identification' => 'João',
+                        'password' => 'Um@Pro7ec@o',
                     ],
-                    "oAuthTwo" => null,
+                    'oAuthTwo' => null,
                 ],
             ],
             Response::HTTP_OK,
