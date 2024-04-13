@@ -5,6 +5,7 @@ namespace WeDevBr\Celcoin\Tests\Integration\PIX\COBV;
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
@@ -31,7 +32,7 @@ class COBVPayloadTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXCOBV::PAYLOAD_COBV_PIX, urlencode($fetchUrl)) => self::stubSuccess(),
+                config('celcoin.api_url') . sprintf(CelcoinPIXCOBV::PAYLOAD_COBV_PIX, urlencode(Str::replace('https://', '', $fetchUrl))) => self::stubSuccess(),
             ],
         );
 
@@ -103,10 +104,14 @@ class COBVPayloadTest extends TestCase
                 http_build_query(compact('transactionId')),
             ),
         );
+
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                sprintf(CelcoinPIXCOBV::PAYLOAD_COBV_PIX, urlencode($fetchUrl)) => self::stubNotFound(),
+                config('celcoin.api_url') . sprintf(
+                    CelcoinPIXCOBV::PAYLOAD_COBV_PIX,
+                    urlencode(Str::replace('https://', '', $fetchUrl))
+                ) => self::stubNotFound(),
             ],
         );
 
