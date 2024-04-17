@@ -1,16 +1,15 @@
 <?php
 
-namespace WeDevBr\Celcoin\Tests\Integration\PIX\DICT;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PixClaim;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use WeDevBr\Celcoin\Clients\CelcoinPIXDICT;
+use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Tests\GlobalStubs;
 use WeDevBr\Celcoin\Tests\TestCase;
-
 use function PHPUnit\Framework\assertEquals;
 
 class PixKeyClaimConsultTest extends TestCase
@@ -33,11 +32,11 @@ class PixKeyClaimConsultTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDICT::CLAIM_DICT.'/*' => self::stubSuccess(),
+                CelcoinBAASPIX::CLAIM_DICT.'/*' => self::stubSuccess(),
             ],
         );
 
-        $pixDict = new CelcoinPIXDICT();
+        $pixDict = new CelcoinBAASPIX();
         $result = $pixDict->claimConsult($this->uuid);
 
         assertEquals('SUCCESS', $result['status']);
@@ -91,13 +90,13 @@ class PixKeyClaimConsultTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDICT::CLAIM_DICT.'/*' => self::stubBadRequest(),
+                CelcoinBAASPIX::CLAIM_DICT.'/*' => self::stubBadRequest(),
             ],
         );
 
         $this->expectException(RequestException::class);
 
-        $pixDict = new CelcoinPIXDICT();
+        $pixDict = new CelcoinBAASPIX();
         $result = $pixDict->claimConsult($this->uuid);
         assertEquals('ERROR', $result['status']);
         assertEquals('CBE320', $result['error']['errorCode']);
