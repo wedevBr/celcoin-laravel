@@ -1,44 +1,35 @@
 <?php
 
-namespace WeDevBr\Celcoin\Tests\Integration\PIX\DICT;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PixClaim;
 
 use GuzzleHttp\Promise\PromiseInterface;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use WeDevBr\Celcoin\Clients\CelcoinPIXDICT;
+use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Tests\GlobalStubs;
 use WeDevBr\Celcoin\Tests\TestCase;
-
+use WeDevBr\Celcoin\Types\PIX\Claim;
 use function PHPUnit\Framework\assertEquals;
 
-class PixKeyClaimConsultTest extends TestCase
+class PixKeyClaimTest extends TestCase
 {
-    use WithFaker;
-
-    private string $uuid;
-
-    public function setUp(): void
-    {
-        parent::setUp();
-        $this->uuid = '8bbc0ba5-2aee-44a0-a3c9-b897802a9f66';
-    }
-
-    public function testClaimConsult()
+    /**
+     * @throws RequestException
+     */
+    public function testClaimPixKey()
     {
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDICT::CLAIM_DICT.'/*' => self::stubSuccess(),
+                CelcoinBAASPIX::CLAIM_DICT => self::stubSuccess(),
             ],
         );
 
-        $pixDict = new CelcoinPIXDICT();
-        $result = $pixDict->claimConsult($this->uuid);
+        $pixDict = new CelcoinBAASPIX();
+        $result = $pixDict->claim($this->fakeClaimBody());
 
-        assertEquals('SUCCESS', $result['status']);
-        assertEquals($this->uuid, $result['body']['id']);
+        assertEquals('OPEN', $result['status']);
     }
 
     private static function stubSuccess(): PromiseInterface
@@ -46,7 +37,7 @@ class PixKeyClaimConsultTest extends TestCase
         return Http::response(
             [
                 'version' => '1.0.0',
-                'status' => 'SUCCESS',
+                'status' => 'OPEN',
                 'body' => [
                     'id' => '8bbc0ba5-2aee-44a0-a3c9-b897802a9f66',
                     'claimType' => 'OWNERSHIP',
@@ -83,21 +74,31 @@ class PixKeyClaimConsultTest extends TestCase
         );
     }
 
+    private function fakeClaimBody(): Claim
+    {
+        return new Claim([
+            'key' => 'key@email.com',
+            'keyType' => 'EMAIL',
+            'account' => '3005913742139',
+            'claimType' => 'PORTABILITY',
+        ]);
+    }
+
     public function testClaimBadRequest()
     {
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDICT::POST_VERIFY_DICT.'/*' => self::stubBadRequest(),
+                CelcoinBAASPIX::CLAIM_CANCEL => self::stubBadRequest(),
             ],
         );
 
         $this->expectException(RequestException::class);
 
-        $pixDict = new CelcoinPIXDICT();
-        $result = $pixDict->claimConsult($this->uuid);
+        $pixDict = new CelcoinBAASPIX();
+        $result = $pixDict->claim($this->fakeClaimBody());
         assertEquals('ERROR', $result['status']);
-        assertEquals('CBE320', $result['error']['errorCode']);
+        assertEquals('CBE039', $result['error']['errorCode']);
     }
 
     private static function stubBadRequest(): PromiseInterface
@@ -106,8 +107,8 @@ class PixKeyClaimConsultTest extends TestCase
             'version' => '1.0.0',
             'status' => 'ERROR',
             'error' => [
-                'errorCode' => 'CBE320',
-                'message' => 'Claim não encontrada.',
+                'errorCode' => 'CBE039',
+                'message' => 'Account invalido..',
             ],
         ], Response::HTTP_BAD_REQUEST);
     }

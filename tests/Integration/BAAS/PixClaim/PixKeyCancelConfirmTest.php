@@ -1,20 +1,19 @@
 <?php
 
-namespace WeDevBr\Celcoin\Tests\Integration\PIX\DICT;
+namespace WeDevBr\Celcoin\Tests\Integration\BAAS\PixClaim;
 
 use GuzzleHttp\Promise\PromiseInterface;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
-use WeDevBr\Celcoin\Clients\CelcoinPIXDICT;
+use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Tests\GlobalStubs;
 use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\ClaimAnswer;
-
 use function PHPUnit\Framework\assertEquals;
 
-class PixKeyClaimConfirmTest extends TestCase
+class PixKeyCancelConfirmTest extends TestCase
 {
     use WithFaker;
 
@@ -26,14 +25,14 @@ class PixKeyClaimConfirmTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDICT::CLAIM_CONFIRM => self::stubSuccess(),
+                CelcoinBAASPIX::CLAIM_CANCEL => self::stubSuccess(),
             ],
         );
 
-        $pixDict = new CelcoinPIXDICT();
-        $result = $pixDict->claimConfirm($this->fakeClaimConfirmBody());
+        $pixDict = new CelcoinBAASPIX();
+        $result = $pixDict->claimCancel($this->fakeClaimCancelBody());
 
-        assertEquals('CONFIRMED', $result['status']);
+        assertEquals('CANCELED', $result['status']);
     }
 
     private static function stubSuccess(): PromiseInterface
@@ -41,7 +40,7 @@ class PixKeyClaimConfirmTest extends TestCase
         return Http::response(
             [
                 'version' => '1.0.0',
-                'status' => 'CONFIRMED',
+                'status' => 'CANCELED',
                 'body' => [
                     'id' => '8bbc0ba5-2aee-44a0-a3c9-b897802a9f66',
                     'claimType' => 'OWNERSHIP',
@@ -56,20 +55,22 @@ class PixKeyClaimConfirmTest extends TestCase
                     'claimer' => [
                         'personType' => 'NATURAL_PERSON',
                         'taxId' => '34335125070',
-                        'name' => 'João da Silva Junior',
+                        'name' => 'João da Silva Juniors',
                     ],
                     'donorParticipant' => '30306294',
                     'createTimestamp' => '2023-05-01T13:05:09',
                     'completionPeriodEnd' => '2023-05-01T13:05:09',
                     'resolutionPeriodEnd' => '2023-08-10T17',
                     'lastModified' => '2023-08-11T17:11:33',
+                    'cancelledBy' => 'CLAIMER',
+                    'cancelReason' => 'FRAUD',
                 ],
             ],
             Response::HTTP_OK,
         );
     }
 
-    private function fakeClaimConfirmBody(): ClaimAnswer
+    private function fakeClaimCancelBody(): ClaimAnswer
     {
         return new ClaimAnswer([
             'id' => $this->faker()->uuid,
@@ -77,19 +78,19 @@ class PixKeyClaimConfirmTest extends TestCase
         ]);
     }
 
-    public function testClaimBadRequest()
+    public function testClaimCancelBadRequest()
     {
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDICT::CLAIM_CONFIRM => self::stubBadRequest(),
+                CelcoinBAASPIX::CLAIM_CANCEL => self::stubBadRequest(),
             ],
         );
 
         $this->expectException(RequestException::class);
 
-        $pixDict = new CelcoinPIXDICT();
-        $result = $pixDict->claimConfirm($this->fakeClaimConfirmBody());
+        $pixDict = new CelcoinBAASPIX();
+        $result = $pixDict->claimCancel($this->fakeClaimCancelBody());
         assertEquals('ERROR', $result['status']);
         assertEquals('CBE307', $result['error']['errorCode']);
     }
