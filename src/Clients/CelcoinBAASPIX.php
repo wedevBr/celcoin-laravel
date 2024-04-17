@@ -4,7 +4,10 @@ namespace WeDevBr\Celcoin\Clients;
 
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
+use WeDevBr\Celcoin\Enums\ClaimStatusEnum;
+use WeDevBr\Celcoin\Enums\ClaimTypeEnum;
 use WeDevBr\Celcoin\Rules\BAAS\PixCashOut as BAASPixCashOut;
 use WeDevBr\Celcoin\Rules\BAAS\RefundPix as BAASRefundPix;
 use WeDevBr\Celcoin\Rules\BAAS\RegisterPixKey as BAASRegisterPixKey;
@@ -45,6 +48,8 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     public const CLAIM_CONFIRM = '/celcoin-baas-pix-dict-webservice/pix/v1/dict/claim/confirm';
 
     public const CLAIM_CANCEL = '/celcoin-baas-pix-dict-webservice/pix/v1/dict/claim/cancel';
+
+    public const CLAIM_LIST = '/celcoin-baas-pix-dict-webservice/v1/pix/dict/claim/list';
 
     /**
      * @throws RequestException
@@ -185,11 +190,33 @@ class CelcoinBAASPIX extends CelcoinBaseApi
      */
     public function claimConsult(string $claimId): ?array
     {
-        $body = Validator::validate(['claimId' => $claimId], ['claimId' => ['string', 'uuid']]);
+        $validatedClaim = Validator::validate(['claimId' => $claimId], ['claimId' => ['string', 'uuid']]);
 
         return $this->get(
-            self::CLAIM_CANCEL.'/'.$claimId,
-            $body
+            self::CLAIM_CANCEL.'/'.$validatedClaim['claimId']
         );
     }
+
+    /**
+     * @throws RequestException
+     */
+    public function claimList(array $params = []): ?array
+    {
+        $validatedParams = Validator::validate($params,
+            [
+                'DateFrom' => ['sometimes', 'date'],
+                'DateTo' => ['sometimes', 'date'],
+                'LimitPerPage' => ['sometimes', 'int'],
+                'Page' => ['sometimes', 'int'],
+                'Status' => ['sometimes', Rule::enum(ClaimStatusEnum::class)],
+                'claimType' => ['sometimes', Rule::enum(ClaimTypeEnum::class)],
+            ]
+        );
+
+        return $this->get(
+            self::CLAIM_LIST,
+            $validatedParams
+        );
+    }
+
 }

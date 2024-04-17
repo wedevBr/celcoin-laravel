@@ -89,7 +89,7 @@ class PixKeyClaimTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinBAASPIX::CLAIM_CANCEL => self::stubBadRequest(),
+                CelcoinBAASPIX::CLAIM_DICT => self::stubBadRequest(),
             ],
         );
 

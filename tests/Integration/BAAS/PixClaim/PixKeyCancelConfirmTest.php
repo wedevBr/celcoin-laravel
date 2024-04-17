@@ -32,7 +32,7 @@ class PixKeyCancelConfirmTest extends TestCase
         $pixDict = new CelcoinBAASPIX();
         $result = $pixDict->claimCancel($this->fakeClaimCancelBody());
 
-        assertEquals('CANCELED', $result['status']);
+        assertEquals('CANCELLED', $result['status']);
     }
 
     private static function stubSuccess(): PromiseInterface
@@ -40,7 +40,7 @@ class PixKeyCancelConfirmTest extends TestCase
         return Http::response(
             [
                 'version' => '1.0.0',
-                'status' => 'CANCELED',
+                'status' => 'CANCELLED',
                 'body' => [
                     'id' => '8bbc0ba5-2aee-44a0-a3c9-b897802a9f66',
                     'claimType' => 'OWNERSHIP',

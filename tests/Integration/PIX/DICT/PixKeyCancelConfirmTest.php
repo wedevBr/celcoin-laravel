@@ -18,6 +18,9 @@ class PixKeyCancelConfirmTest extends TestCase
 {
     use WithFaker;
 
+    /**
+     * @throws RequestException
+     */
     public function testClaimPixKey()
     {
         Http::fake(

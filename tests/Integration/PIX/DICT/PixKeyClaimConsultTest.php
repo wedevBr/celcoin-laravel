@@ -25,6 +25,9 @@ class PixKeyClaimConsultTest extends TestCase
         $this->uuid = '8bbc0ba5-2aee-44a0-a3c9-b897802a9f66';
     }
 
+    /**
+     * @throws RequestException
+     */
     public function testClaimConsult()
     {
         Http::fake(
@@ -88,7 +91,7 @@ class PixKeyClaimConsultTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                CelcoinPIXDICT::POST_VERIFY_DICT.'/*' => self::stubBadRequest(),
+                CelcoinPIXDICT::CLAIM_DICT.'/*' => self::stubBadRequest(),
             ],
         );
 
