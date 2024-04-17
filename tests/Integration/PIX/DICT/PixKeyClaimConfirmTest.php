@@ -19,7 +19,6 @@ class PixKeyClaimConfirmTest extends TestCase
     use WithFaker;
 
     /**
-     * @throws RequestException
      */
     public function testClaimPixKey()
     {
