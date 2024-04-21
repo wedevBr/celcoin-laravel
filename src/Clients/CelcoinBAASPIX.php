@@ -193,7 +193,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
         $validatedClaim = Validator::validate(['claimId' => $claimId], ['claimId' => ['string', 'uuid']]);
 
         return $this->get(
-            self::CLAIM_CANCEL.'/'.$validatedClaim['claimId']
+            self::CLAIM_DICT.'/'.$validatedClaim['claimId']
         );
     }
 
