@@ -43,8 +43,8 @@ class BAASTEDTransferTest extends TestCase
                     'accountType' => 'CC',
                     'personType' => 'J',
                 ],
-                'clientFinality' => ClientFinalityEnum::ACCOUNT_CREDIT,
-                'description' => '',
+                'clientFinality' => ClientFinalityEnum::OTHERS,
+                'description' => 'description string',
             ]),
         );
 

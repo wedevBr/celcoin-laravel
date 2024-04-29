@@ -218,5 +218,4 @@ class CelcoinBAASPIX extends CelcoinBaseApi
             $validatedParams
         );
     }
-
 }

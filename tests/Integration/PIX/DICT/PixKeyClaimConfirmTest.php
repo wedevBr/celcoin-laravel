@@ -18,8 +18,6 @@ class PixKeyClaimConfirmTest extends TestCase
 {
     use WithFaker;
 
-    /**
-     */
     public function testClaimPixKey()
     {
         Http::fake(

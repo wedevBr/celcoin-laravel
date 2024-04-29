@@ -10,6 +10,7 @@ use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Tests\GlobalStubs;
 use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\Claim;
+
 use function PHPUnit\Framework\assertEquals;
 
 class PixKeyClaimTest extends TestCase
