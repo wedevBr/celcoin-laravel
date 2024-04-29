@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Tests\GlobalStubs;
 use WeDevBr\Celcoin\Tests\TestCase;
+
 use function PHPUnit\Framework\assertEquals;
 
 class PixKeyClaimConsultTest extends TestCase

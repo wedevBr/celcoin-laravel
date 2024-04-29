@@ -32,7 +32,7 @@ class COBVPayloadTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                config('celcoin.api_url') . sprintf(CelcoinPIXCOBV::PAYLOAD_COBV_PIX, urlencode(Str::replace('https://', '', $fetchUrl))) => self::stubSuccess(),
+                config('celcoin.api_url').sprintf(CelcoinPIXCOBV::PAYLOAD_COBV_PIX, urlencode(Str::replace('https://', '', $fetchUrl))) => self::stubSuccess(),
             ],
         );
 
@@ -108,7 +108,7 @@ class COBVPayloadTest extends TestCase
         Http::fake(
             [
                 config('celcoin.login_url') => GlobalStubs::loginResponse(),
-                config('celcoin.api_url') . sprintf(
+                config('celcoin.api_url').sprintf(
                     CelcoinPIXCOBV::PAYLOAD_COBV_PIX,
                     urlencode(Str::replace('https://', '', $fetchUrl))
                 ) => self::stubNotFound(),

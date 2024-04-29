@@ -11,5 +11,4 @@ interface Attachable
     public function getFileName();
 
     public function getHeaders(): array;
-
 }

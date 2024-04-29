@@ -11,14 +11,13 @@ use WeDevBr\Celcoin\Clients\CelcoinBAASPIX;
 use WeDevBr\Celcoin\Tests\GlobalStubs;
 use WeDevBr\Celcoin\Tests\TestCase;
 use WeDevBr\Celcoin\Types\PIX\ClaimAnswer;
+
 use function PHPUnit\Framework\assertEquals;
 
 class PixKeyClaimConfirmTest extends TestCase
 {
     use WithFaker;
 
-    /**
-     */
     public function testClaimPixKey()
     {
         Http::fake(
