@@ -41,9 +41,10 @@ class CelcoinBAASWebhooks extends CelcoinBaseApi
         $parameters = [
             'Entity' => $entity?->value,
         ];
-        if (!is_null($active)) {
+        if (! is_null($active)) {
             $parameters['Active'] = $active ? 'true' : 'false';
         }
+
         return $this->get(self::GET_ENDPOINT, array_filter($parameters));
     }
 

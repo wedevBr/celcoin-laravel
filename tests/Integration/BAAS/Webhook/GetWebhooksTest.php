@@ -49,7 +49,7 @@ class GetWebhooksTest extends TestCase
         $webhook = new CelcoinBAASWebhooks();
         $response = $webhook->getWebhook();
 
-        Http::assertSent(function(Request $request) use ($dispatchUrl) {
+        Http::assertSent(function (Request $request) use ($dispatchUrl) {
             return $request->url() === $dispatchUrl;
         });
 
