@@ -31,6 +31,10 @@ use Illuminate\Support\Facades\Facade;
  * @uses Celcoin::clientPIXReverse
  * @uses Celcoin::clientPixWebhooks
  * @uses Celcoin::clientKyc
+ * @uses Celcoin::clientBAASWebhook
+ * @uses Celcoin::clientInternationalTopup
+ * @uses Celcoin::clientBAASBillPayment
+ * @uses Celcoin::clientBAASBillet
  */
 class CelcoinFacade extends Facade
 {
