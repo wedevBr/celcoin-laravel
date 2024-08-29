@@ -38,10 +38,13 @@ class CelcoinBAASWebhooks extends CelcoinBaseApi
 
     public function getWebhook(?EntityWebhookBAASEnum $entity = null, ?bool $active = null)
     {
-        return $this->get(self::GET_ENDPOINT, array_filter([
+        $parameters = [
             'Entity' => $entity?->value,
-            'Active' => $active ? 'true' : 'false',
-        ]));
+        ];
+        if (!is_null($active)) {
+            $parameters['Active'] = $active ? 'true' : 'false';
+        }
+        return $this->get(self::GET_ENDPOINT, array_filter($parameters));
     }
 
     public function edit(EditWebhooks $data, EntityWebhookBAASEnum $entity)
