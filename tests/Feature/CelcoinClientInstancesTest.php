@@ -160,4 +160,10 @@ class CelcoinClientInstancesTest extends TestCase
         $instance = Celcoin::clientBAASBillPayment();
         $this->assertInstanceOf(CelcoinBAASBillPayment::class, $instance);
     }
+
+    public function testSuccessCreteBaasWebhooks()
+    {
+        $instance = Celcoin::clientBAASWebhooks();
+        $this->assertInstanceOf(CelcoinBAASWebhooks::class, $instance);
+    }
 }
