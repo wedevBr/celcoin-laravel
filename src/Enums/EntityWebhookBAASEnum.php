@@ -19,7 +19,7 @@ enum EntityWebhookBAASEnum: string
     case TOPUP = 'topup';
     case SLC_PAYMENT_IN = 'slc-payment-in';
     case PIX_REVERSAL_OUT_GALAX = 'pix-reversal-out-galax';
-    case PIX_PAYMENT_IN_GALAX = 'pix-reversal-in-galax';
+    case PIX_PAYMENT_IN_GALAX = 'pix-payment-in-galax';
     case PIX_DICT_CLAIM_WAITING = 'pix-dict-claim-waiting';
     case PIX_DICT_CLAIM_OPEN = 'pix-dict-claim-open';
     case PIX_DICT_CLAIM_CONFIRMED = 'pix-dict-claim-confirmed';
