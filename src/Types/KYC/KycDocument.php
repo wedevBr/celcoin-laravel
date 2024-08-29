@@ -42,4 +42,9 @@ class KycDocument extends Data implements Attachable
     {
         return $this->field;
     }
+
+    public function getHeaders(): array
+    {
+        return ['Content-Type' => $this->file->getMimeType()];
+    }
 }

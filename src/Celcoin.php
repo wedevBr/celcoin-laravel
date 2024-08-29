@@ -15,6 +15,7 @@ use WeDevBr\Celcoin\Clients\CelcoinDDAInvoice;
 use WeDevBr\Celcoin\Clients\CelcoinDDAUser;
 use WeDevBr\Celcoin\Clients\CelcoinDDAWebhooks;
 use WeDevBr\Celcoin\Clients\CelcoinElectronicTransactions;
+use WeDevBr\Celcoin\Clients\CelcoinInternationalTopups;
 use WeDevBr\Celcoin\Clients\CelcoinKyc;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOB;
 use WeDevBr\Celcoin\Clients\CelcoinPIXCOBV;
@@ -168,5 +169,15 @@ class Celcoin
     public static function clientBAASBillet(): CelcoinBAASBillet
     {
         return new CelcoinBAASBillet();
+    }
+
+    public static function clientBAASWebhook(): CelcoinBAASWebhooks
+    {
+        return new CelcoinBAASWebhooks();
+    }
+
+    public static function clientInternationalTopup(): CelcoinInternationalTopups
+    {
+        return new CelcoinInternationalTopups();
     }
 }

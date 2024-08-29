@@ -10,7 +10,7 @@ use WeDevBr\Celcoin\Types\BAAS\Billet;
 
 class CelcoinBAASBillet extends CelcoinBaseApi
 {
-    public const BILLET_URL = '/api-integration-baas-webservice/v1/charge';
+    public const BILLET_URL = '/baas/v2/Charge';
 
     /**
      * @throws RequestException
@@ -41,5 +41,10 @@ class CelcoinBAASBillet extends CelcoinBaseApi
     public function cancelBillet($transactionId)
     {
         return $this->delete(sprintf('%s/%s', self::BILLET_URL, $transactionId));
+    }
+
+    public function printBillet(string $billetId)
+    {
+        return $this->get(sprintf('%s/pdf/%s', self::BILLET_URL, $billetId));
     }
 }

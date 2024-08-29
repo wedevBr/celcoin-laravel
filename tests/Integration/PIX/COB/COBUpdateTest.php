@@ -144,9 +144,9 @@ class COBUpdateTest extends TestCase
     {
         return Http::response(
             [
-            'message' => 'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
-            'errorCode' => 'PBE318',
-        ],
+                'message' => 'Can\'t create a new Pix Collection when there is another Pix Collection active with the same location.',
+                'errorCode' => 'PBE318',
+            ],
             Response::HTTP_BAD_REQUEST,
         );
     }

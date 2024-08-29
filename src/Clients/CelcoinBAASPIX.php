@@ -68,10 +68,10 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     {
         return $this->get(
             self::GET_PARTICIPANT_ENDPOINT,
-            [
+            array_filter([
                 'ISPB' => $ISPB,
                 'Name' => $name,
-            ]
+            ])
         );
     }
 
@@ -89,17 +89,17 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     {
         return $this->get(
             self::STATUS_PIX_ENDPOINT,
-            [
+            array_filter([
                 'id' => $id,
                 'clientCode' => $clientCode,
                 'endToEndId' => $endToEndId,
-            ]
+            ])
         );
     }
 
     public function registerPixKey(RegisterPixKey $data)
     {
-        $body = Validator::validate($data->toArray(), BAASRegisterPixKey::rules());
+        $body = Validator::validate(array_filter($data->toArray()), BAASRegisterPixKey::rules());
 
         return $this->post(
             self::REGISTER_PIX_KEY_ENDPOINT,
@@ -138,11 +138,11 @@ class CelcoinBAASPIX extends CelcoinBaseApi
     {
         return $this->get(
             self::STATUS_REFUND_PIX_ENDPOINT,
-            [
+            array_filter([
                 'id' => $id,
                 'clientCode' => $clientCode,
                 'returnIdentification' => $returnIdentification,
-            ]
+            ])
         );
     }
 
@@ -193,7 +193,7 @@ class CelcoinBAASPIX extends CelcoinBaseApi
         $validatedClaim = Validator::validate(['claimId' => $claimId], ['claimId' => ['string', 'uuid']]);
 
         return $this->get(
-            self::CLAIM_CANCEL.'/'.$validatedClaim['claimId']
+            self::CLAIM_DICT.'/'.$validatedClaim['claimId']
         );
     }
 
@@ -218,5 +218,4 @@ class CelcoinBAASPIX extends CelcoinBaseApi
             $validatedParams
         );
     }
-
 }

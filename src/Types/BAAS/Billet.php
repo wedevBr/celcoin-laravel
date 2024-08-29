@@ -8,15 +8,11 @@ class Billet extends Data
 {
     public string $externalId;
 
-    public ?string $merchantCategoryCode;
-
     public int $expirationAfterPayment;
 
-    public string $duedate;
+    public string $dueDate;
 
     public float $amount;
-
-    public ?string $key;
 
     public BilletDebtor $debtor;
 

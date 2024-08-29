@@ -4,6 +4,7 @@ namespace WeDevBr\Celcoin\Clients;
 
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use WeDevBr\Celcoin\Common\CelcoinBaseApi;
 use WeDevBr\Celcoin\Rules\PIX\COBVCreate;
 use WeDevBr\Celcoin\Rules\PIX\COBVGet;
@@ -62,7 +63,10 @@ class CelcoinPIXCOBV extends CelcoinBaseApi
         Validator::validate(compact('url'), COBVPayload::rules());
 
         return $this->get(
-            sprintf(self::PAYLOAD_COBV_PIX, urlencode($url))
+            sprintf(
+                self::PAYLOAD_COBV_PIX,
+                urlencode(Str::replace('https://', '', $url))
+            )
         );
     }
 
