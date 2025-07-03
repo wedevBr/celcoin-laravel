@@ -20,6 +20,8 @@ class CelcoinBAASWebhooks extends CelcoinBaseApi
 
     public const GET_ENDPOINT = '/baas-webhookmanager/v1/webhook/subscription';
 
+    public const LIST_ENTITY_ENDPOINT = '/baas-webhookmanager/v1/webhook/entity/list';
+
     public const EDIT_ENDPOINT = 'baas-webhookmanager/v1/webhook/subscription/%s';
 
     public const REMOVE_ENDPOINT = 'baas-webhookmanager/v1/webhook/subscription/%s';
@@ -34,12 +36,16 @@ class CelcoinBAASWebhooks extends CelcoinBaseApi
         );
     }
 
-    public function getWebhook(EntityWebhookBAASEnum $entity, bool $active)
+    public function getWebhook(?EntityWebhookBAASEnum $entity = null, ?bool $active = null)
     {
-        return $this->get(self::GET_ENDPOINT, [
-            'Entity' => $entity->value,
-            'Active' => $active ? 'true' : 'false',
-        ]);
+        $parameters = [
+            'Entity' => $entity?->value,
+        ];
+        if (! is_null($active)) {
+            $parameters['Active'] = $active ? 'true' : 'false';
+        }
+
+        return $this->get(self::GET_ENDPOINT, array_filter($parameters));
     }
 
     public function edit(EditWebhooks $data, EntityWebhookBAASEnum $entity)
@@ -57,5 +63,10 @@ class CelcoinBAASWebhooks extends CelcoinBaseApi
         return $this->delete(
             sprintf(self::REMOVE_ENDPOINT, $entity->value),
         );
+    }
+
+    public function listEntities()
+    {
+        return $this->get(self::LIST_ENTITY_ENDPOINT);
     }
 }
