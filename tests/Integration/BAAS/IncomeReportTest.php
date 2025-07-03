@@ -24,7 +24,7 @@ class IncomeReportTest extends TestCase
         );
 
         $baas = new CelcoinBAAS();
-        $response = $baas->getIncomeReport('300541976902', Carbon::parse('2024'));
+        $response = $baas->getIncomeReport('300541976902', Carbon::createFromFormat('Y', '2024'));
 
         $this->assertEquals('SUCCESS', $response['status']);
     }
